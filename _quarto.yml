@@ -1,0 +1,30 @@
+project:
+  type: book
+
+book:
+  title: "Data Analytics and Visualization"
+  author: Piotr Jastrzębski
+  date: today
+  cover-image: aiwd.jpg
+  chapters:
+    - part: Wprowadzenie
+      chapters: 
+      - index.qmd
+  downloads: pdf
+
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: solar
+    lang: en
+  pdf:
+    lang: en
+    header-includes: |
+      \titlehead{\includegraphics[width=6in]{aiwd.jpg}}
+    keep-tex: true
+
+
+
+

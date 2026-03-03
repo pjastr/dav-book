@@ -1,0 +1,55 @@
+Year,Country,Indicator,Value
+2018,USA,GDP Growth,2.9
+2018,USA,Inflation,2.4
+2018,USA,Unemployment,3.9
+2018,Germany,GDP Growth,1.1
+2018,Germany,Inflation,1.9
+2018,Germany,Unemployment,3.4
+2018,Japan,GDP Growth,0.6
+2018,Japan,Inflation,1.0
+2018,Japan,Unemployment,2.4
+2019,USA,GDP Growth,2.3
+2019,USA,Inflation,1.8
+2019,USA,Unemployment,3.7
+2019,Germany,GDP Growth,0.6
+2019,Germany,Inflation,1.4
+2019,Germany,Unemployment,3.2
+2019,Japan,GDP Growth,0.3
+2019,Japan,Inflation,0.5
+2019,Japan,Unemployment,2.4
+2020,USA,GDP Growth,-3.4
+2020,USA,Inflation,1.2
+2020,USA,Unemployment,8.1
+2020,Germany,GDP Growth,-4.6
+2020,Germany,Inflation,0.5
+2020,Germany,Unemployment,4.2
+2020,Japan,GDP Growth,-4.5
+2020,Japan,Inflation,0.0
+2020,Japan,Unemployment,2.8
+2021,USA,GDP Growth,5.7
+2021,USA,Inflation,4.7
+2021,USA,Unemployment,5.4
+2021,Germany,GDP Growth,2.9
+2021,Germany,Inflation,3.1
+2021,Germany,Unemployment,3.6
+2021,Japan,GDP Growth,1.6
+2021,Japan,Inflation,0.3
+2021,Japan,Unemployment,2.8
+2022,USA,GDP Growth,2.1
+2022,USA,Inflation,8.0
+2022,USA,Unemployment,3.6
+2022,Germany,GDP Growth,1.8
+2022,Germany,Inflation,6.9
+2022,Germany,Unemployment,3.0
+2022,Japan,GDP Growth,1.0
+2022,Japan,Inflation,2.5
+2022,Japan,Unemployment,2.6
+2023,USA,GDP Growth,2.5
+2023,USA,Inflation,4.1
+2023,USA,Unemployment,3.7
+2023,Germany,GDP Growth,0.3
+2023,Germany,Inflation,5.9
+2023,Germany,Unemployment,3.1
+2023,Japan,GDP Growth,1.9
+2023,Japan,Inflation,3.1
+2023,Japan,Unemployment,2.5
