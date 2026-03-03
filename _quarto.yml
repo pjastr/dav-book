@@ -7,9 +7,10 @@ book:
   date: today
   cover-image: aiwd.jpg
   chapters:
-    - part: Wprowadzenie
+    - part: Introduction
       chapters: 
       - index.qmd
+      - a_bit_of_theory.qmd
   downloads: pdf
 
 

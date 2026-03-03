@@ -6,8 +6,162 @@
     "section": "",
     "text": "1 Data Analysis and Visualization\nThe current version pertains to classes held in the 2025/26 academic year.\nSome of the texts have been machine-translated into English. In case of any ambiguities, please get in touch via email.",
     "crumbs": [
-      "Wprowadzenie",
+      "Introduction",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Data Analysis and Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html",
+    "href": "a_bit_of_theory.html",
+    "title": "2  A bit of theory…",
+    "section": "",
+    "text": "2.1 Rational thinking test",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#rational-thinking-test",
+    "href": "a_bit_of_theory.html#rational-thinking-test",
+    "title": "2  A bit of theory…",
+    "section": "",
+    "text": "If 5 machines produce 5 devices in 5 minutes, how long will it take 100 machines to make 100 devices?\nA patch of water lilies is growing on a pond. Every day the patch doubles in size. If it takes 48 days for the lilies to cover the entire pond, how many days does it take for them to cover half the pond?\nA baseball bat and a ball cost $1.10 together. The bat costs one dollar more than the ball. How much does the ball cost?",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#data-analysis",
+    "href": "a_bit_of_theory.html#data-analysis",
+    "title": "2  A bit of theory…",
+    "section": "2.2 Data analysis",
+    "text": "2.2 Data analysis\nData analysis is the process of examining, cleaning, transforming, and modeling data in order to discover useful information, draw conclusions, and support decision-making. It is a multi-stage process that includes:\n\nCollecting data from various sources\nCleaning data by removing errors, missing values, and inconsistencies\nExploring data to understand its structure and characteristics\nTransforming data into the appropriate format\nApplying statistical methods and machine learning algorithms\nInterpreting results in the context of a specific business or scientific problem\n\nData analysis is used in nearly every field, from business and finance to social sciences, medicine, and scientific research. The goal of data analysis is to transform raw data into knowledge that can be used to make better decisions.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#data-visualization",
+    "href": "a_bit_of_theory.html#data-visualization",
+    "title": "2  A bit of theory…",
+    "section": "2.3 Data visualization",
+    "text": "2.3 Data visualization\nData visualization is the graphical representation of information and data. It uses visual elements such as charts, maps, and dashboards to present relationships between data in a way that is easy to understand and interpret. Good data visualization:\n\nPresents complex information in an accessible and intuitive way\nReveals patterns, trends, and outliers that may be difficult to notice in raw data\nSupports the data analysis process by enabling quick review of large datasets\nFacilitates communication of analysis results to various audiences, including non-technical individuals\nHelps tell stories contained in data (data storytelling)\n\nThe most popular types of data visualization include bar charts, line charts, pie charts, heatmaps, hierarchical trees, word clouds, and interactive dashboards. The choice of the appropriate visualization form depends on the type of data, the purpose of the presentation, and the target audience.\nData visualization is a key element of the data analysis process because it allows for quick drawing of conclusions and making decisions based on data. It is a bridge between complex data and human understanding.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#data-analysis---basic-concepts",
+    "href": "a_bit_of_theory.html#data-analysis---basic-concepts",
+    "title": "2  A bit of theory…",
+    "section": "2.4 Data analysis - basic concepts",
+    "text": "2.4 Data analysis - basic concepts\n\n2.4.1 Modern meanings of the word “statistics”:\n\na set of numerical data showing the development of processes and phenomena, e.g. population statistics.\nall activities related to collecting and processing numerical data, e.g. statistics on a certain problem conducted by the Central Statistical Office.\nnumerical characteristics, e.g. sample statistics such as arithmetic mean, standard deviation, etc.\na scientific discipline - the science of methods for studying mass phenomena.\n\n\n\n2.4.2 “Massiveness”\nMass phenomena/processes - a large number of units are subject to study. They are divided into:\n\neconomic (e.g. production, consumption, services, advertising),\nsocial (e.g. traffic accidents, political views),\ndemographic (e.g. births, aging, migrations).\n\n\n\n2.4.3 Division of statistics\nStatistics - a scientific discipline - division:\n\ndescriptive statistics - deals with matters related to collecting, presenting, analyzing, and interpreting numerical data. Observation covers the entire population under study.\nmathematical statistics - generalization of the results of studying a part of the population (sample) to the entire population.\n\n\n\n2.4.4 Population\nStatistical population: a set of objects subject to statistical study. It consists of units that are similar to each other, logically related, but not identical. They share certain common features and certain properties that allow them to be differentiated.\n\nexamples:\n\nstudy of the height of Polish citizens - inhabitants of Poland\nlevel of education in schools of the Warmian-Masurian Voivodeship - schools of the Warmian-Masurian Voivodeship.\n\ndivision:\n\ngeneral population - covers the entirety,\nsample population (sample) - covers a part of the population.\n\n\n\n\n2.4.5 Statistical unit\nStatistical unit: each element of a statistical population.\n\nexamples:\n\nUWM students - a UWM student\ninhabitants of Poland - every person living in Poland\nmachines produced in a factory - every machine\n\n\n\n\n2.4.6 Statistical features\nStatistical features\n\nproperties characterizing statistical units in a given statistical population.\nthey are divided into constant and variable.\n\nConstant features\n\nproperties that are common to all units of a given statistical population.\ndivision:\n\nsubstantive - who or what is the subject of the statistical study,\ntemporal - when the study was conducted or what time period the study covers,\nspatial - what territory (place or area) the study concerns.\n\nexample: students of the Faculty of Mathematics and Computer Science (WMiI) at UWM in Olsztyn in the academic year 2017/2018:\n\nsubstantive feature: possession of a student ID card,\ntemporal feature - students studying in the academic year 2017/2018,\nspatial feature - location: WMiI UWM in Olsztyn.\n\n\nVariable features\n\nproperties that differentiate statistical units in a given population.\nexample: UWM students - variable features: age, sex, type of secondary school completed, eye color, height.\n\nImportant:\n\nonly variable features are subject to observation,\na constant feature in one population may be a variable feature in another population.\n\nExample: UWM students have an ID card issued by UWM. Students of all universities in Poland have ID cards issued by different institutions.\nDivision of variable features:\n\nmeasurable (quantitative) features - can be expressed as a number with a specific unit of measurement.\nnon-measurable (qualitative) features - described verbally, representing certain categories.\n\nExample: student population. Measurable features: age, weight, height, number of absences. Non-measurable features: sex, eye color, field of study.\nFor practical reasons, numerical codes are often assigned to non-measurable features. However, they should not be confused with measurable features. E.g. 1 - primary education, 2 - vocational education, etc.\nDivision of measurable features:\n\ncontinuous - can take any value within a defined interval, e.g. height, age, apartment area.\ndiscrete - can take specific (discrete) numerical values without intermediate values, e.g. number of people in a household, number of employees in a given company.\n\nDiscrete features usually have integer values, although this is not always required, e.g. the number of full-time positions in a company (including part-time positions).\n\n\n2.4.7 Scales\nMeasurement scale\n\na system that allows the results of statistical measurements to be organized in a certain way.\ndivision:\n\nnominal scale,\nordinal scale,\ninterval scale,\nratio scale.\n\n\nNominal scale\n\na scale in which a statistical unit is classified into a specific category.\nvalues in this scale have no ordering.\nexample:\n\n\n\n\nReligion\nCode\n\n\n\n\nChristianity\n1\n\n\nIslam\n2\n\n\nBuddhism\n3\n\n\n\nOrdinal scale\n\nvalues have a clearly defined order, but distances between them are not given,\nallows elements to be ranked.\nexamples:\n\n\n\n\nEducation\nCode\n\n\n\n\nPrimary\n1\n\n\nSecondary\n2\n\n\nHigher\n3\n\n\n\n\n\n\nIncome\nCode\n\n\n\n\nLow\n1\n\n\nMedium\n2\n\n\nHigh\n3\n\n\n\nInterval scale\n\nfeature values are expressed through specific numerical values,\nallows comparison of units (something is larger or smaller),\nit is not possible to examine ratios (determining how many times a given value is larger or smaller than another).\nexample:\n\n\n\n\nCity\nTemperature in \\(^{\\circ}C\\)\nTemperature in \\(^{\\circ}F\\)\n\n\n\n\nWarsaw\n15\n59\n\n\nOlsztyn\n10\n50\n\n\nGdańsk\n5\n41\n\n\nSzczecin\n20\n68\n\n\n\nRatio scale\n\nvalues are expressed through numerical values,\nit is possible to determine the smaller or larger relationship between values,\nit is possible to determine the ratio (quotient) between values,\nan absolute zero exists.\nexample:\n\n\n\n\nProduct\nPrice in PLN\n\n\n\n\nBread\n3\n\n\nButter\n8\n\n\nPears\n5",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#types-of-statistical-studies",
+    "href": "a_bit_of_theory.html#types-of-statistical-studies",
+    "title": "2  A bit of theory…",
+    "section": "2.5 Types of statistical studies",
+    "text": "2.5 Types of statistical studies\n\ncomplete study - covers all units of the statistical population.\n\nstatistical census,\nongoing registration,\nstatistical reporting.\n\npartial studies - only a part of the population is observed. Conducted when a complete study is impractical or impossible.\n\nmonographic method,\nrepresentative method.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#stages-of-a-statistical-study",
+    "href": "a_bit_of_theory.html#stages-of-a-statistical-study",
+    "title": "2  A bit of theory…",
+    "section": "2.6 Stages of a statistical study",
+    "text": "2.6 Stages of a statistical study\n\ndesigning and organizing the study: establishing the purpose, subject, object, scope, source, and duration of the study;\nstatistical observation;\nprocessing statistical material: quality control of statistical material, grouping of obtained data, presentation of data results;\nstatistical analysis.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#analysis-of-existing-data",
+    "href": "a_bit_of_theory.html#analysis-of-existing-data",
+    "title": "2  A bit of theory…",
+    "section": "2.7 Analysis of existing data",
+    "text": "2.7 Analysis of existing data\nAnalysis of existing data - the process of processing data in order to obtain useful information and conclusions from them. Depending on the type of data and the problems posed, this may involve the use of statistical, exploratory, and other methods.\nUsing existing data is an example of non-reactive research - methods of studying social behavior that do not influence those behaviors. Such data include: documents, archives, reports, chronicles, censuses, parish records, diaries, memoirs, internet blogs, audio memoirs, oral history archives, and others. (Wikipedia)\nExisting data can be classified according to (Makowska ed. 2013):\n\nNature: Quantitative, Qualitative\nForm: Processed data, Raw data\nMethod of creation: Primary, Secondary\nDynamics: Continuous event registration, Registration at time intervals, One-time registration\nLevel of objectivity: Objective, Subjective\nSource of origin: Public data, Private data\n\nData analysis is a process of inspecting, organizing, transforming, and modeling data in order to obtain useful information, draw conclusions, and support the decision-making process. Data analysis has many aspects and approaches, encompassing various techniques under different names, in different business, scientific, and social domains. A practical approach to defining data is that data are numbers, characters, images, or other recording methods, in a form that can be evaluated to determine or make a decision about a specific action. Many people believe that data in itself has no meaning - only processed and interpreted data becomes information.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#data-analysis-process",
+    "href": "a_bit_of_theory.html#data-analysis-process",
+    "title": "2  A bit of theory…",
+    "section": "2.8 Data analysis process",
+    "text": "2.8 Data analysis process\nAnalysis refers to breaking down the entirety of information into its distinct components for individual examination. Data analysis is the process of obtaining raw data and transforming it into information useful for decision-making by users. Data is collected and analyzed to answer questions, test hypotheses, or disprove theories. There are several phases that can be distinguished in the data analysis process. The phases are iterative, as feedback from subsequent phases may cause additional work in earlier phases.\n\n2.8.1 Defining requirements\nBefore proceeding with data analysis, the quality requirements for data must be precisely defined. The input data to be analyzed are determined based on the requirements of those directing the analysis or clients (who will use the final product of the analysis). The general type of entity from which data will be collected is referred to as the experimental unit (e.g. a person or a population of people). Data can be numerical or categorical (i.e. text labels). The requirements definition phase should answer 2 fundamental questions:\n\nwhat do we want to measure?\nhow do we want to measure it?\n\n\n\n2.8.2 Data collection\nData is collected from various sources. Requirements regarding the type and quality of data may be communicated by analysts to “data custodians,” such as information technology staff within an organization. Data may also be collected automatically from various types of sensors in the environment - such as traffic cameras, satellites, and devices recording images, sound, and physical parameters. Another method is obtaining data through interviews, gathering from online sources, or directly from documentation.\n\n\n2.8.3 Data processing\nCollected data must be processed or organized in a logical manner for analysis. For example, they may be placed in tables for further analysis - in a spreadsheet or other software. Data cleaning: After the processing and organizing phase, data may be incomplete, contain duplicates, or contain errors. The need for data cleaning arises from problems related to data entry and storage. Data cleaning is the process of preventing and correcting detected errors. Common tasks include record matching, identifying inaccuracies, overall review of existing data quality, removing duplicates, and column segmentation. It is also extremely important to pay attention to data whose values are above or below previously established thresholds (extremes).\n\n\n2.8.4 Proper data analysis\nThere are several methods that can be used for this purpose, for example data mining, business intelligence, data visualization, or exploratory research. The latter method is a way of analyzing datasets to determine their distinct characteristics. In this way, data can be used to test the original hypothesis. Descriptive statistics is another method for analyzing collected information. Data is examined to find its most important features. In descriptive statistics, analysts use several basic tools - the mean or average of a set of numbers can be used. This helps determine the overall trend, although it does not provide great accuracy when assessing the overall picture of collected data. In this phase, modeling and the creation of mathematical formulas also take place - they are applied to identify relationships between variables, such as correlation or causation.\n\n\n2.8.5 Reporting and distribution of results\nThis phase involves determining in what form to communicate results. The analyst may consider various data visualization techniques to clearly and effectively convey the findings of the analysis to the audience. Data visualization uses graphical forms such as charts and tables. Tables are useful for users who can search for specific records, while charts (e.g. bar charts or line charts) provide a quantitative view of the analyzed dataset.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#where-to-get-data",
+    "href": "a_bit_of_theory.html#where-to-get-data",
+    "title": "2  A bit of theory…",
+    "section": "2.9 Where to get data?",
+    "text": "2.9 Where to get data?\nFree data repositories:\n\nLocal Data Bank of the Central Statistical Office (GUS) - link\nOpen Data - link\nWorld Bank - link\n\nUseful websites:\n\nhttps://www.kaggle.com/\nhttps://archive.ics.uci.edu/ml/index.php\nhttps://huggingface.co/datasets\nhttps://github.com/awesomedata/awesome-public-datasets",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#tidy-data-concept",
+    "href": "a_bit_of_theory.html#tidy-data-concept",
+    "title": "2  A bit of theory…",
+    "section": "2.10 “Tidy data” concept",
+    "text": "2.10 “Tidy data” concept\nThe tidy data concept:\n\nWICKHAM, Hadley . Tidy Data. Journal of Statistical Software, [S.l.], v. 59, Issue 10, p. 1 - 23, sep. 2014. ISSN 1548-7660. Available at: https://www.jstatsoft.org/v059/i10. Date accessed: 25 oct. 2018. doi:http://dx.doi.org/10.18637/jss.v059.i10.\n\n\n2.10.1 “Tidy data” principles\nIdeal data is presented in a table:\n\n\n\nName\nAge\nHeight\nEye color\n\n\n\n\nAdam\n26\n167\nBrown\n\n\nSylwia\n34\n164\nHazel\n\n\nTomasz\n42\n183\nBlue\n\n\n\nWhat should we pay attention to?\n\none observation (statistical unit) = one row in the table/matrix/data frame\nvalues of a given feature are found in columns\none type/kind of observation in one table/matrix/data frame\n\n\n\n2.10.2 Examples of untidy data\n\n\n\nName\nAge\nHeight\nBrown\nBlue\nHazel\n\n\n\n\nAdam\n26\n167\n1\n0\n0\n\n\nSylwia\n34\n164\n0\n0\n1\n\n\nTomasz\n42\n183\n0\n1\n0\n\n\n\nColumn headers must correspond to features, not to variable values.\n\n\n2.10.3 Long or wide data?\nhttps://seaborn.pydata.org/tutorial/data_structure.html#long-form-vs-wide-form-data",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#a-few-tips-for-good-presentations",
+    "href": "a_bit_of_theory.html#a-few-tips-for-good-presentations",
+    "title": "2  A bit of theory…",
+    "section": "2.11 A few tips for good presentations",
+    "text": "2.11 A few tips for good presentations\nEdward Tufte, professor at Yale, https://www.edwardtufte.com/\n\nPresent data richly.\nDo not hide data, show the truth.\nDo not use junk charts.\nShow the variability of data, do not design it.\nA chart should have the lowest possible lie factor.\nPowerPoint is evil!\n\n\n2.11.1 Lie factor\nhttps://www.facebook.com/janinadaily/photos/a.1524649467770881/2836063543296127/?paipv=0&eav=AfbVIDx5un8ZOklKI9c-B1jP4nOoNa2QMmJmjoA-291JNNgM1L_NmoCGMS_mJOy4xjo&_rdr\n\nthe ratio of the effect visible on the chart to the effect indicated by the data on which the chart was drawn.\n\nhttps://infovis-wiki.net/wiki/Lie_Factor\n\n\n2.11.2 Lie factor\n\n[Tufte, 1991] Edward Tufte, The Visual Display of Quantitative Information, Second Edition, Graphics Press, USA, 1991, p. 57 – 69.\n\\[\\operatorname{LieFactor} = \\frac{\\text{size of the effect visible on the chart}}{\\text{size of the effect resulting from the data}}\\]\n\\[\\text{effect size} = \\frac{|\\text{second value}-\\text{first value}|}{\\text{first value}}\\]\n\n\\[\\operatorname{LieFactor} = \\frac{\\frac{5.3-0.6}{0.6}}{\\frac{27.5-18}{18}} \\approx 14.8\\]",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#how-to-create",
+    "href": "a_bit_of_theory.html#how-to-create",
+    "title": "2  A bit of theory…",
+    "section": "2.12 How to create?",
+    "text": "2.12 How to create?\n\nhttps://bookdown.org/rudolf_von_ems/jak_sie_nie_dac/stats_graphs.html\nhttps://www.data-to-viz.com/\nhttps://100.datavizproject.com/",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
+    ]
+  },
+  {
+    "objectID": "a_bit_of_theory.html#references",
+    "href": "a_bit_of_theory.html#references",
+    "title": "2  A bit of theory…",
+    "section": "2.13 References",
+    "text": "2.13 References\n\nhttps://pl.wikipedia.org/wiki/Wizualizacja\nhttps://mfiles.pl/pl/index.php/Analiza_danych, accessed online 1.04.2019.\nWalesiak M., Gatnar E., Statystyczna analiza danych z wykorzystaniem programu R, PWN, Warszawa, 2009.\nWasilewska E., Statystyka opisowa od podstaw, Podręcznik z zadaniami, Wydawnictwo SGGW, Warszawa, 2009.\nhttps://en.wikipedia.org/wiki/Cognitive_reflection_test, accessed online 20.03.2023.\nhttps://qlikblog.pl/edward-tufte-dobre-praktyki-prezentacji-danych/, accessed online 20.03.2023.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>A bit of theory...</span>"
     ]
   }
 ]
