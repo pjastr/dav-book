@@ -24,6 +24,9 @@ book:
       - numpy-broadcasting.qmd
       - numpy-ufunc.qmd
       - numpy-strings.qmd
+      - numpy-linear-algebra.qmd
+      - numpy-conditions.qmd
+      - numpy-miscellaneous.qmd
   downloads: [pdf, epub]
   
 execute:
@@ -46,6 +49,7 @@ format:
     lang: en
     cover-image: aiwd.jpg
     toc: true
+    
 
 
 

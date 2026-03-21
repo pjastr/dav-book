@@ -2844,6 +2844,1161 @@ We can also specify custom characters to remove:
 ['data' 'science']
 \end{verbatim}
 
+\chapter{Linear Algebra}\label{linear-algebra}
+
+\section{Dot Product}\label{dot-product}
+
+For two vectors, \texttt{dot} computes their dot product.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Dot product of two vectors}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.dot(a, b)  }\CommentTok{\# 1*4 + 2*5 + 3*6}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# Result: 32}
+
+\CommentTok{\# Alternative notation using the @ operator}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ a }\OperatorTok{@}\NormalTok{ b}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# Result: 32}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+32
+32
+\end{verbatim}
+
+\section{Matrix Multiplication}\label{matrix-multiplication}
+
+For matrices (two-dimensional arrays), \texttt{dot} performs standard
+matrix multiplication.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Matrix multiplication}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{B }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{]])}
+\NormalTok{C }\OperatorTok{=}\NormalTok{ np.dot(A, B)}
+\BuiltInTok{print}\NormalTok{(C)}
+\CommentTok{\# Result:}
+\CommentTok{\# [[19 22]}
+\CommentTok{\#  [43 50]]}
+
+\CommentTok{\# The same using the @ operator}
+\NormalTok{C }\OperatorTok{=}\NormalTok{ A }\OperatorTok{@}\NormalTok{ B}
+\BuiltInTok{print}\NormalTok{(C)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[19 22]
+ [43 50]]
+[[19 22]
+ [43 50]]
+\end{verbatim}
+
+\section{Matrix-Vector
+Multiplication}\label{matrix-vector-multiplication}
+
+We can also multiply a matrix by a vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Matrix{-}vector multiplication}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{v }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.dot(A, v)}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# Result: [17 39]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[17 39]
+\end{verbatim}
+
+\section{Solving Systems of Linear
+Equations}\label{solving-systems-of-linear-equations}
+
+The \texttt{numpy.linalg.solve} function solves systems of linear
+equations of the form Ax = b:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Solving a system of linear equations}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{], [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{9}\NormalTok{, }\DecValTok{8}\NormalTok{])}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linalg.solve(A, b)}
+\BuiltInTok{print}\NormalTok{(x)  }\CommentTok{\# Result: [2. 3.]}
+
+\CommentTok{\# Verifying the solution}
+\NormalTok{np.dot(A, x)  }\CommentTok{\# Should be equal to b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[2. 3.]
+\end{verbatim}
+
+\begin{verbatim}
+array([9., 8.])
+\end{verbatim}
+
+\section{Matrix Determinant}\label{matrix-determinant}
+
+The \texttt{numpy.linalg.det} function computes the determinant of a
+matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Computing the determinant}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{det\_A }\OperatorTok{=}\NormalTok{ np.linalg.det(A)}
+\BuiltInTok{print}\NormalTok{(det\_A)  }\CommentTok{\# Result: {-}2.0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+-2.0000000000000004
+\end{verbatim}
+
+\section{Eigenvalues and
+Eigenvectors}\label{eigenvalues-and-eigenvectors}
+
+The \texttt{numpy.linalg.eig} function computes the eigenvalues and
+eigenvectors of a matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Computing eigenvalues and eigenvectors}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{], [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{]])}
+\NormalTok{eigenvalues, eigenvectors }\OperatorTok{=}\NormalTok{ np.linalg.eig(A)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvalues:"}\NormalTok{, eigenvalues)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Eigenvectors:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(eigenvectors)}
+
+\CommentTok{\# Verification: A * v = lambda * v}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(eigenvalues)):}
+\NormalTok{    lambda\_i }\OperatorTok{=}\NormalTok{ eigenvalues[i]}
+\NormalTok{    v\_i }\OperatorTok{=}\NormalTok{ eigenvectors[:, i]}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"λ\_}\SpecialCharTok{\{}\NormalTok{i}\SpecialCharTok{\}}\SpecialStringTok{ = }\SpecialCharTok{\{}\NormalTok{lambda\_i}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"A * v ="}\NormalTok{, np.dot(A, v\_i))}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"λ * v ="}\NormalTok{, lambda\_i }\OperatorTok{*}\NormalTok{ v\_i)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Eigenvalues: [3. 2.]
+Eigenvectors:
+[[0.89442719 0.70710678]
+ [0.4472136  0.70710678]]
+λ_0 = 3.0
+A * v = [2.68328157 1.34164079]
+λ * v = [2.68328157 1.34164079]
+λ_1 = 2.0
+A * v = [1.41421356 1.41421356]
+λ * v = [1.41421356 1.41421356]
+\end{verbatim}
+
+\section{Singular Value Decomposition
+(SVD)}\label{singular-value-decomposition-svd}
+
+SVD is one of the key methods used in data analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# SVD decomposition}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]])}
+\NormalTok{U, s, Vh }\OperatorTok{=}\NormalTok{ np.linalg.svd(A)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Matrix U:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(U)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Singular values:"}\NormalTok{, s)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Matrix V\^{}H:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(Vh)}
+
+\CommentTok{\# Reconstructing matrix A}
+\NormalTok{S }\OperatorTok{=}\NormalTok{ np.zeros((A.shape[}\DecValTok{0}\NormalTok{], A.shape[}\DecValTok{1}\NormalTok{]))}
+\NormalTok{S[:}\BuiltInTok{len}\NormalTok{(s), :}\BuiltInTok{len}\NormalTok{(s)] }\OperatorTok{=}\NormalTok{ np.diag(s)}
+\NormalTok{A\_reconstructed }\OperatorTok{=}\NormalTok{ U }\OperatorTok{@}\NormalTok{ S }\OperatorTok{@}\NormalTok{ Vh}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Reconstructed matrix A:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(A\_reconstructed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Matrix U:
+[[-0.2298477   0.88346102  0.40824829]
+ [-0.52474482  0.24078249 -0.81649658]
+ [-0.81964194 -0.40189603  0.40824829]]
+Singular values: [9.52551809 0.51430058]
+Matrix V^H:
+[[-0.61962948 -0.78489445]
+ [-0.78489445  0.61962948]]
+Reconstructed matrix A:
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]]
+\end{verbatim}
+
+\section{Matrix/Vector Norm}\label{matrixvector-norm}
+
+NumPy offers various types of vector and matrix norms:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{v }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\CommentTok{\# L1 (sum of absolute values): |3| + |4| = 7}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"L1 norm:"}\NormalTok{, np.linalg.norm(v, }\DecValTok{1}\NormalTok{))}
+\CommentTok{\# L2 / Euclidean (square root of sum of squares): sqrt(9+16) = 5}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"L2 norm (Euclidean):"}\NormalTok{, np.linalg.norm(v))}
+\CommentTok{\# Maximum norm (largest absolute value): max(3,4) = 4}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Maximum norm:"}\NormalTok{, np.linalg.norm(v, np.inf))}
+
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\CommentTok{\# Frobenius (like L2, but for matrices): sqrt(1+4+9+16) ≈ 5.477}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Frobenius norm:"}\NormalTok{, np.linalg.norm(A, }\StringTok{\textquotesingle{}fro\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+L1 norm: 7.0
+L2 norm (Euclidean): 5.0
+Maximum norm: 4.0
+Frobenius norm: 5.477225575051661
+\end{verbatim}
+
+\section{Inverse Matrix}\label{inverse-matrix}
+
+The \texttt{numpy.linalg.inv} function computes the inverse of a matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Inverse matrix}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{A\_inv }\OperatorTok{=}\NormalTok{ np.linalg.inv(A)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Inverse matrix:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(A\_inv)}
+
+\CommentTok{\# Verification: A * A\^{}({-}1) = I}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"A * A\^{}({-}1):"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(np.dot(A, A\_inv))  }\CommentTok{\# Should be close to the identity matrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Inverse matrix:
+[[-2.   1. ]
+ [ 1.5 -0.5]]
+A * A^(-1):
+[[1.0000000e+00 0.0000000e+00]
+ [8.8817842e-16 1.0000000e+00]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{numpy.inner} Function - Inner
+Product}{The numpy.inner Function - Inner Product}}\label{the-numpy.inner-function---inner-product}
+
+The \texttt{inner} function computes the inner product of two arrays:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Inner product}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.inner(a, b)}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# 1*4 + 2*5 + 3*6 = 32}
+
+\CommentTok{\# For 2D arrays: inner(A, B) computes A @ B.T (not A @ B!)}
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{B }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{]])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.inner(A, B)}
+\BuiltInTok{print}\NormalTok{(result)}
+\CommentTok{\# [[1*5+2*6, 1*7+2*8],   = [[17, 23],}
+\CommentTok{\#  [3*5+4*6, 3*7+4*8]]      [39, 53]]}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Comparison with A @ B.T:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(A }\OperatorTok{@}\NormalTok{ B.T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+32
+[[17 23]
+ [39 53]]
+Comparison with A @ B.T:
+[[17 23]
+ [39 53]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{numpy.outer} Function - Outer
+Product}{The numpy.outer Function - Outer Product}}\label{the-numpy.outer-function---outer-product}
+
+The \texttt{outer} function computes the outer product of two vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Outer product}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.outer(a, b)}
+\BuiltInTok{print}\NormalTok{(result)}
+\CommentTok{\# Result:}
+\CommentTok{\# [[ 4  5  6]}
+\CommentTok{\#  [ 8 10 12]}
+\CommentTok{\#  [12 15 18]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[ 4  5  6]
+ [ 8 10 12]
+ [12 15 18]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{numpy.matmul} Function - Matrix
+Multiplication}{The numpy.matmul Function - Matrix Multiplication}}\label{the-numpy.matmul-function---matrix-multiplication}
+
+The \texttt{matmul} function (and the equivalent \texttt{@} operator) is
+the recommended way to multiply matrices. For 2D arrays, it works
+identically to \texttt{dot}. Differences appear for 3D+ arrays (matmul
+treats them as stacks of matrices) and for scalars (matmul does not
+accept scalars, dot does).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# For 2D {-}{-} identical results}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{]])}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"dot:"}\NormalTok{, np.dot(a, b)[}\DecValTok{0}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"matmul:"}\NormalTok{, np.matmul(a, b)[}\DecValTok{0}\NormalTok{])}
+
+\CommentTok{\# Difference: matmul does not accept scalars}
+\ControlFlowTok{try}\NormalTok{:}
+\NormalTok{    np.matmul(a, }\DecValTok{3}\NormalTok{)}
+\ControlFlowTok{except} \PreprocessorTok{ValueError} \ImportTok{as}\NormalTok{ e:}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"matmul with scalar:"}\NormalTok{, e)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"dot with scalar:"}\NormalTok{, np.dot(a, }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+dot: [19 22]
+matmul: [19 22]
+matmul with scalar: matmul: Input operand 1 does not have enough dimensions (has 0, gufunc core with signature (n?,k),(k,m?)->(n?,m?) requires 1)
+dot with scalar: [[ 3  6]
+ [ 9 12]]
+\end{verbatim}
+
+\chapter{Advanced Filtering}\label{advanced-filtering}
+
+\section{\texorpdfstring{The \texttt{nonzero()}
+Function}{The nonzero() Function}}\label{the-nonzero-function}
+
+Returns the indices of non-zero elements in an array. The result is
+returned as a tuple of arrays, one for each dimension of the array.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{], [}\DecValTok{0}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{], [}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{0}\NormalTok{]])}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ np.nonzero(arr)}
+\BuiltInTok{print}\NormalTok{(indices)  }\CommentTok{\# (array([0, 1, 2, 2]), array([0, 1, 0, 1]))}
+
+\CommentTok{\# Extracting non{-}zero values}
+\NormalTok{values }\OperatorTok{=}\NormalTok{ arr[indices]}
+\BuiltInTok{print}\NormalTok{(values)  }\CommentTok{\# [3 4 5 6]}
+
+\CommentTok{\# Alternatively, you can use:}
+\NormalTok{position\_indices }\OperatorTok{=}\NormalTok{ np.argwhere(arr }\OperatorTok{!=} \DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(position\_indices)}
+\CommentTok{\# [[0 0]}
+\CommentTok{\#  [1 1]}
+\CommentTok{\#  [2 0]}
+\CommentTok{\#  [2 1]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(array([0, 1, 2, 2]), array([0, 1, 0, 1]))
+[3 4 5 6]
+[[0 0]
+ [1 1]
+ [2 0]
+ [2 1]]
+\end{verbatim}
+
+The \texttt{np.nonzero()} function returns the indices of all non-zero
+elements in an array. The result is a tuple of arrays, one per
+dimension: the first array contains the row indices and the second
+contains the column indices. For example, given
+\texttt{arr\ =\ np.array({[}{[}3,\ 0,\ 0{]},\ {[}0,\ 4,\ 0{]},\ {[}5,\ 6,\ 0{]}{]})},
+calling \texttt{np.nonzero(arr)} returns
+\texttt{(array({[}0,\ 1,\ 2,\ 2{]}),\ array({[}0,\ 1,\ 0,\ 1{]}))}. This
+means the non-zero elements are located at positions (0,0), (1,1),
+(2,0), and (2,1), corresponding to the values 3, 4, 5, and 6
+respectively.
+
+\section{\texorpdfstring{The \texttt{where()}
+Function}{The where() Function}}\label{the-where-function}
+
+Returns elements chosen from \texttt{x} or \texttt{y} depending on a
+condition. It works like a conditional element selection (equivalent to
+a ternary expression).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Replace non{-}positive values with 0 (zero effectively unchanged)}
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.where(arr }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{, arr, }\DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# [1 0 3 0 5]}
+
+\CommentTok{\# In a 2D array {-}{-} replace negative values with {-}1}
+\NormalTok{arr\_2d }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\OperatorTok{{-}}\DecValTok{6}\NormalTok{]])}
+\NormalTok{result\_2d }\OperatorTok{=}\NormalTok{ np.where(arr\_2d }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{, arr\_2d)}
+\BuiltInTok{print}\NormalTok{(result\_2d)}
+\CommentTok{\# [[ 1 {-}1  3]}
+\CommentTok{\#  [{-}1  5 {-}1]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1 0 3 0 5]
+[[ 1 -1  3]
+ [-1  5 -1]]
+\end{verbatim}
+
+The \texttt{np.where(condition,\ x,\ y)} function takes three arguments:
+a condition, a value to use when the condition is true, and a value to
+use when the condition is false. For each element, it evaluates the
+condition and returns the corresponding value from \texttt{x} if the
+result is true, or from \texttt{y} if the result is false. It acts as an
+element-wise ternary operator for NumPy arrays.
+
+\section{\texorpdfstring{The \texttt{indices()} and \texttt{ix\_()}
+Functions}{The indices() and ix\_() Functions}}\label{the-indices-and-ix_-functions}
+
+\subsection{\texorpdfstring{\texttt{indices()}}{indices()}}\label{indices}
+
+Creates an array representing grid indices.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Creating a 3x4 index grid}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ np.indices((}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(grid.shape)  }\CommentTok{\# (2, 3, 4)}
+\BuiltInTok{print}\NormalTok{(grid[}\DecValTok{0}\NormalTok{])  }\CommentTok{\# row indices}
+\CommentTok{\# [[0 0 0 0]}
+\CommentTok{\#  [1 1 1 1]}
+\CommentTok{\#  [2 2 2 2]]}
+\BuiltInTok{print}\NormalTok{(grid[}\DecValTok{1}\NormalTok{])  }\CommentTok{\# column indices}
+\CommentTok{\# [[0 1 2 3]}
+\CommentTok{\#  [0 1 2 3]}
+\CommentTok{\#  [0 1 2 3]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(2, 3, 4)
+[[0 0 0 0]
+ [1 1 1 1]
+ [2 2 2 2]]
+[[0 1 2 3]
+ [0 1 2 3]
+ [0 1 2 3]]
+\end{verbatim}
+
+The \texttt{np.indices()} function generates an array representing the
+index grid for a given shape. For a 3×4 grid,
+\texttt{np.indices((3,\ 4))} returns a result of shape (2, 3, 4), where
+the first component (\texttt{grid{[}0{]}}) contains the row indices and
+the second component (\texttt{grid{[}1{]}}) contains the column indices.
+In \texttt{grid{[}0{]}}, each row is filled with its own row number (all
+zeros in the first row, all ones in the second, all twos in the third),
+while in \texttt{grid{[}1{]}}, each row contains the sequence of column
+numbers 0, 1, 2, 3 repeated identically across all rows. Together, these
+two arrays allow you to reference every position in the grid by its
+(row, column) pair.
+
+\subsection{\texorpdfstring{\texttt{ix\_()}}{ix\_()}}\label{ix_}
+
+Constructs an open mesh from multiple sequences, which is useful for
+multidimensional indexing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{])}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ np.ix\_(x, y)}
+
+\CommentTok{\# Creates an open index grid for broadcasting}
+\BuiltInTok{print}\NormalTok{(indices[}\DecValTok{0}\NormalTok{].shape, indices[}\DecValTok{1}\NormalTok{].shape)  }\CommentTok{\# (3, 1) (1, 4)}
+
+\CommentTok{\# Using it to select a subarray}
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{16}\NormalTok{).reshape(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(arr)}
+\CommentTok{\# [[ 0  1  2  3]}
+\CommentTok{\#  [ 4  5  6  7]}
+\CommentTok{\#  [ 8  9 10 11]}
+\CommentTok{\#  [12 13 14 15]]}
+
+\NormalTok{subarray }\OperatorTok{=}\NormalTok{ arr[np.ix\_([}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{])]}
+\BuiltInTok{print}\NormalTok{(subarray)}
+\CommentTok{\# [[ 0  2]}
+\CommentTok{\#  [ 8 10]}
+\CommentTok{\#  [12 14]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(3, 1) (1, 4)
+[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]
+ [12 13 14 15]]
+[[ 0  2]
+ [ 8 10]
+ [12 14]]
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{ogrid} and Grid
+Operations}{ogrid and Grid Operations}}\label{ogrid-and-grid-operations}
+
+\texttt{ogrid} allows creating open grids, which is more
+memory-efficient than full grids.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Grid of points in the range from {-}2 to 2 with step 0.1}
+\NormalTok{x, y }\OperatorTok{=}\NormalTok{ np.ogrid[}\OperatorTok{{-}}\DecValTok{2}\NormalTok{:}\DecValTok{2}\NormalTok{:}\FloatTok{0.1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{:}\DecValTok{2}\NormalTok{:}\FloatTok{0.1}\NormalTok{]}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ x}\OperatorTok{**}\DecValTok{2} \OperatorTok{+}\NormalTok{ y}\OperatorTok{**}\DecValTok{2} \OperatorTok{\textless{}=} \DecValTok{1}  \CommentTok{\# Circle with radius 1}
+\BuiltInTok{print}\NormalTok{(mask.shape)  }\CommentTok{\# (40, 40)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(40, 40)
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{ravel\_multi\_index()} and
+\texttt{unravel\_index()}
+Functions}{The ravel\_multi\_index() and unravel\_index() Functions}}\label{the-ravel_multi_index-and-unravel_index-functions}
+
+These functions convert between multidimensional and flat indices.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Converting multidimensional indices to flat indices}
+\NormalTok{multi\_indices }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{], [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{], [}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{]])}
+\NormalTok{dimensions }\OperatorTok{=}\NormalTok{ (}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{flat\_indices }\OperatorTok{=}\NormalTok{ np.ravel\_multi\_index(multi\_indices.T, dimensions)}
+\BuiltInTok{print}\NormalTok{(flat\_indices)  }\CommentTok{\# [0 4 7]}
+
+\CommentTok{\# Converting flat indices to multidimensional indices}
+\NormalTok{flat\_indices }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{8}\NormalTok{])}
+\NormalTok{shape }\OperatorTok{=}\NormalTok{ (}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{multi\_indices }\OperatorTok{=}\NormalTok{ np.unravel\_index(flat\_indices, shape)}
+\BuiltInTok{print}\NormalTok{(multi\_indices)  }\CommentTok{\# (array([0, 1, 2]), array([0, 0, 2]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[0 4 7]
+(array([0, 1, 2]), array([0, 0, 2]))
+\end{verbatim}
+
+\section{Diagonal Indices}\label{diagonal-indices}
+
+NumPy offers many functions for working with matrix diagonals.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\CommentTok{\# Getting the main diagonal indices}
+\NormalTok{n }\OperatorTok{=} \DecValTok{4}
+\NormalTok{diag\_indices }\OperatorTok{=}\NormalTok{ np.diag\_indices(n)}
+\BuiltInTok{print}\NormalTok{(diag\_indices)  }\CommentTok{\# (array([0, 1, 2, 3]), array([0, 1, 2, 3]))}
+
+\CommentTok{\# Using them to set the main diagonal}
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.zeros((}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{arr[diag\_indices] }\OperatorTok{=} \DecValTok{1}  \CommentTok{\# Setting ones on the main diagonal}
+\BuiltInTok{print}\NormalTok{(arr)}
+\CommentTok{\# [[1. 0. 0. 0.]}
+\CommentTok{\#  [0. 1. 0. 0.]}
+\CommentTok{\#  [0. 0. 1. 0.]}
+\CommentTok{\#  [0. 0. 0. 1.]]}
+
+\CommentTok{\# Getting indices from an existing array}
+\NormalTok{arr2 }\OperatorTok{=}\NormalTok{ np.ones((}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\NormalTok{diag\_indices2 }\OperatorTok{=}\NormalTok{ np.diag\_indices\_from(arr2)}
+\BuiltInTok{print}\NormalTok{(diag\_indices2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(array([0, 1, 2, 3]), array([0, 1, 2, 3]))
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+(array([0, 1, 2]), array([0, 1, 2]))
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{take()}
+Function}{The take() Function}}\label{the-take-function}
+
+Retrieves elements from an array along a specified axis based on
+indices.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{])}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.take(arr, indices)}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# [10 30 50]}
+
+\CommentTok{\# In multidimensional arrays, we can choose the axis}
+\NormalTok{arr\_2d }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{row\_indices }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{])}
+\NormalTok{result\_2d }\OperatorTok{=}\NormalTok{ np.take(arr\_2d, row\_indices, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(result\_2d)}
+\CommentTok{\# [[1 2 3]}
+\CommentTok{\#  [7 8 9]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[10 30 50]
+[[1 2 3]
+ [7 8 9]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{take\_along\_axis()}
+Function}{The take\_along\_axis() Function}}\label{the-take_along_axis-function}
+
+Retrieves values from an array along a specified axis, using an index
+array with a compatible shape. Useful, for example, for applying results
+from \texttt{argsort()} or \texttt{argmin()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{10}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{20}\NormalTok{], [}\DecValTok{60}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{]])}
+\NormalTok{sort\_indices }\OperatorTok{=}\NormalTok{ np.argsort(arr, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.take\_along\_axis(arr, sort\_indices, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(result)}
+\CommentTok{\# [[10 20 30]}
+\CommentTok{\#  [40 50 60]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[10 20 30]
+ [40 50 60]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{choose()}
+Function}{The choose() Function}}\label{the-choose-function}
+
+Constructs an array by selecting elements from a list of arrays.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{choices }\OperatorTok{=}\NormalTok{ [np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{]),}
+\NormalTok{         np.array([}\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{13}\NormalTok{]),}
+\NormalTok{         np.array([}\DecValTok{20}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{23}\NormalTok{])]}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{])  }\CommentTok{\# Selects which choice array to take the element from}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.choose(indices, choices)}
+\BuiltInTok{print}\NormalTok{(result)  }\CommentTok{\# [ 0 21 12  3]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[ 0 21 12  3]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{compress()}
+Function}{The compress() Function}}\label{the-compress-function}
+
+Returns selected elements of an array along a specified axis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]])}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.array([}\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{, }\VariableTok{True}\NormalTok{])}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.compress(mask, arr, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(result)}
+\CommentTok{\# [[1 3]}
+\CommentTok{\#  [4 6]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[1 3]
+ [4 6]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{diag()} and \texttt{diagonal()}
+Functions}{The diag() and diagonal() Functions}}\label{the-diag-and-diagonal-functions}
+
+Functions for working with diagonals.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Creating a diagonal array}
+\NormalTok{diag\_arr }\OperatorTok{=}\NormalTok{ np.diag([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(diag\_arr)}
+\CommentTok{\# [[1 0 0 0]}
+\CommentTok{\#  [0 2 0 0]}
+\CommentTok{\#  [0 0 3 0]}
+\CommentTok{\#  [0 0 0 4]]}
+
+\CommentTok{\# Extracting the diagonal from an array}
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{diag }\OperatorTok{=}\NormalTok{ np.diag(arr)}
+\BuiltInTok{print}\NormalTok{(diag)  }\CommentTok{\# [1 5 9]}
+
+\CommentTok{\# Extracting a diagonal shifted by 1}
+\NormalTok{diag\_offset }\OperatorTok{=}\NormalTok{ np.diagonal(arr, offset}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(diag\_offset)  }\CommentTok{\# [2 6]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[1 0 0 0]
+ [0 2 0 0]
+ [0 0 3 0]
+ [0 0 0 4]]
+[1 5 9]
+[2 6]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{select()}
+Function}{The select() Function}}\label{the-select-function}
+
+Returns an array built from elements of a list of choices, depending on
+conditions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{conditions }\OperatorTok{=}\NormalTok{ [arr }\OperatorTok{\textless{}} \DecValTok{3}\NormalTok{, arr }\OperatorTok{\textless{}} \DecValTok{6}\NormalTok{, arr }\OperatorTok{\textless{}} \DecValTok{9}\NormalTok{]}
+\NormalTok{choices }\OperatorTok{=}\NormalTok{ [}\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{300}\NormalTok{]}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ np.select(conditions, choices, default}\OperatorTok{=}\DecValTok{400}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(result)}
+\CommentTok{\# [[100 100 200]}
+\CommentTok{\#  [200 200 300]}
+\CommentTok{\#  [300 300 400]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[100 100 200]
+ [200 200 300]
+ [300 300 400]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{place()}
+Function}{The place() Function}}\label{the-place-function}
+
+Changes elements of an array based on a mask and provided values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{5}\NormalTok{)}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.array([}\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{, }\VariableTok{True}\NormalTok{])}
+\NormalTok{np.place(arr, mask, [}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{])  }\CommentTok{\# Cyclically uses values [{-}1, {-}2, {-}3]}
+\BuiltInTok{print}\NormalTok{(arr)  }\CommentTok{\# [{-}1  1 {-}2  3 {-}3]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[-1  1 -2  3 -3]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{put()}
+Function}{The put() Function}}\label{the-put-function}
+
+Replaces specified elements of an array with given values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{5}\NormalTok{)}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{]}
+\NormalTok{np.put(arr, indices, [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(arr)  }\CommentTok{\# [10  1 20  3 30]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[10  1 20  3 30]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{put\_along\_axis()}
+Function}{The put\_along\_axis() Function}}\label{the-put_along_axis-function}
+
+Inserts values into a target array along a specified axis, using an
+index array with a compatible shape.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{10}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{20}\NormalTok{], [}\DecValTok{60}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{]])}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ np.argmin(arr, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{indices }\OperatorTok{=}\NormalTok{ np.expand\_dims(indices, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)  }\CommentTok{\# Reshape to shape (2, 1)}
+\NormalTok{np.put\_along\_axis(arr, indices, }\DecValTok{99}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(arr)}
+\CommentTok{\# [[99 30 20]}
+\CommentTok{\#  [60 99 50]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[99 30 20]
+ [60 99 50]]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{putmask()}
+Function}{The putmask() Function}}\label{the-putmask-function}
+
+Changes elements of an array based on a mask. Unlike \texttt{place()},
+values are assigned positionally (with cyclic extension to the array
+size), not sequentially to elements satisfying the mask.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{5}\NormalTok{)}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.array([}\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{, }\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{, }\VariableTok{True}\NormalTok{])}
+\NormalTok{np.putmask(arr, mask, [}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{])  }\CommentTok{\# Values assigned positionally (cyclically)}
+\BuiltInTok{print}\NormalTok{(arr)  }\CommentTok{\# [{-}1  1 {-}3  3 {-}2]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[-1  1 -3  3 -2]
+\end{verbatim}
+
+\section{\texorpdfstring{The \texttt{fill\_diagonal()}
+Function}{The fill\_diagonal() Function}}\label{the-fill_diagonal-function}
+
+Fills the main diagonal of an array with a given value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.zeros((}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{np.fill\_diagonal(arr, }\DecValTok{5}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(arr)}
+\CommentTok{\# [[5. 0. 0. 0.]}
+\CommentTok{\#  [0. 5. 0. 0.]}
+\CommentTok{\#  [0. 0. 5. 0.]}
+\CommentTok{\#  [0. 0. 0. 5.]]}
+
+\NormalTok{arr\_rect }\OperatorTok{=}\NormalTok{ np.zeros((}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{np.fill\_diagonal(arr\_rect, }\DecValTok{9}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(arr\_rect[}\DecValTok{0}\NormalTok{])  }\CommentTok{\# Only element [0][0] set to 9 (super{-}diagonal i,i,i)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[5. 0. 0. 0.]
+ [0. 5. 0. 0.]
+ [0. 0. 5. 0.]
+ [0. 0. 0. 5.]]
+[[9. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+\end{verbatim}
+
+\chapter{NumPy - Miscellaneous}\label{numpy---miscellaneous}
+
+\section{Constants}\label{constants}
+
+\texttt{NumPy} provides several well-known mathematical constants that
+can be useful in scientific and engineering computations. Built-in
+constants such as the number Pi or the base of the natural logarithm
+\texttt{e} make it easier to write readable and concise code.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{numpy.pi}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Represents the number Pi (π) with high precision.\\
+  \item
+    Pi is the ratio of a circle's circumference to its diameter.\\
+  \item
+    Approximately: \texttt{3.141592653589793}
+  \end{itemize}
+\item
+  \textbf{\texttt{numpy.e}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Represents the base of the natural logarithm, \texttt{e}.\\
+  \item
+    \texttt{e} is used in many fields, such as mathematical analysis,
+    probability theory, and statistics.\\
+  \item
+    Approximately: \texttt{2.718281828459045}
+  \end{itemize}
+\item
+  \textbf{\texttt{numpy.eulergamma}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Represents the Euler-Mascheroni constant, usually denoted as γ
+    (gamma).
+  \item
+    It appears in mathematical analysis, particularly in number theory
+    and the study of harmonic series.
+  \item
+    Approximately: \texttt{0.5772156649015329}
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Circle radius}
+\NormalTok{r }\OperatorTok{=} \FloatTok{5.0}
+
+\CommentTok{\# Circle circumference: 2 * π * r}
+\NormalTok{circumference }\OperatorTok{=} \DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi }\OperatorTok{*}\NormalTok{ r}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Circle circumference:"}\NormalTok{, circumference)}
+
+\CommentTok{\# Circle area: π * r\^{}2}
+\NormalTok{area }\OperatorTok{=}\NormalTok{ np.pi }\OperatorTok{*}\NormalTok{ r}\OperatorTok{**}\DecValTok{2}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Circle area:"}\NormalTok{, area)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Circle circumference: 31.41592653589793
+Circle area: 78.53981633974483
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Sample point x}
+\NormalTok{x }\OperatorTok{=} \FloatTok{1.0}
+
+\CommentTok{\# Value of the function e\^{}x}
+\NormalTok{exp\_value }\OperatorTok{=}\NormalTok{ np.e}\OperatorTok{**}\NormalTok{x}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"e\^{}x for x=1:"}\NormalTok{, exp\_value)}
+
+\CommentTok{\# Comparison with the np.exp function}
+\NormalTok{exp\_compare }\OperatorTok{=}\NormalTok{ np.exp(x)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Comparison with np.exp(1):"}\NormalTok{, exp\_compare)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+e^x for x=1: 2.718281828459045
+Comparison with np.exp(1): 2.718281828459045
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{numpy.inf}}{numpy.inf}}\label{numpy.inf}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Description}: \texttt{np.inf} represents an infinite value
+  (∞).\\
+\item
+  It often appears in computations when the value of an expression tends
+  to infinity (e.g., division by zero, certain limits, etc.).\\
+\item
+  For example, \texttt{1.0\ /\ 0.0} will return a warning and may
+  consequently yield the value \texttt{inf}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Using it to create boolean masks}
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, np.inf, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{])}
+\NormalTok{mask }\OperatorTok{=}\NormalTok{ np.isinf(arr)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Mask of elements with value inf:"}\NormalTok{, mask)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Mask of elements with value inf: [False False  True False False]
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{numpy.nan}}{numpy.nan}}\label{numpy.nan}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Description}: \texttt{np.nan} stands for ``Not a Number''
+  (NaN), meaning an undefined or unrepresentable value in the number
+  system.\\
+\item
+  It appears when the result of a numerical operation is undefined,
+  e.g., \texttt{0.0/0.0}, \texttt{inf\ -\ inf}, or when data loading
+  errors occur.\\
+\item
+  Arithmetic operations with \texttt{nan} typically also return
+  \texttt{nan}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Replacing nan values in an array}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, np.nan, }\DecValTok{4}\NormalTok{, np.nan])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Original data:"}\NormalTok{, data)}
+
+\CommentTok{\# Filling nan values with zero}
+\NormalTok{data\_no\_nan }\OperatorTok{=}\NormalTok{ np.nan\_to\_num(data, nan}\OperatorTok{=}\FloatTok{0.0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Data without nan:"}\NormalTok{, data\_no\_nan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Original data: [ 1.  2. nan  4. nan]
+Data without nan: [1. 2. 0. 4. 0.]
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{numpy.newaxis}}{numpy.newaxis}}\label{numpy.newaxis}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Description}: \texttt{np.newaxis} is a special
+  ``constant''/object used to change array dimensions by increasing the
+  number of dimensions by 1.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# We have a 1D array}
+\NormalTok{vec }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Original array:"}\NormalTok{, vec, }\StringTok{"Shape:"}\NormalTok{, vec.shape)}
+
+\CommentTok{\# Adding a new dimension as the row dimension}
+\NormalTok{vec\_as\_col }\OperatorTok{=}\NormalTok{ vec[:, np.newaxis]}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Array as column:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, vec\_as\_col, }\StringTok{"Shape:"}\NormalTok{, vec\_as\_col.shape)}
+
+\CommentTok{\# Adding a dimension at the beginning}
+\NormalTok{vec\_as\_row }\OperatorTok{=}\NormalTok{ vec[np.newaxis, :]}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Array as row:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, vec\_as\_row, }\StringTok{"Shape:"}\NormalTok{, vec\_as\_row.shape)}
+
+\CommentTok{\# Another example: adding a dimension to easily broadcast operations}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{])}
+\CommentTok{\# Without a new dimension, trying to add a to b would fail,}
+\CommentTok{\# because the shapes are not compatible.}
+\CommentTok{\# With a new dimension, a has shape (3,1) and b (2,), which allows broadcasting}
+\NormalTok{sum\_matrix }\OperatorTok{=}\NormalTok{ a[:, np.newaxis] }\OperatorTok{+}\NormalTok{ b}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Operation with broadcasting:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, sum\_matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Original array: [1 2 3 4] Shape: (4,)
+Array as column:
+ [[1]
+ [2]
+ [3]
+ [4]] Shape: (4, 1)
+Array as row:
+ [[1 2 3 4]] Shape: (1, 4)
+Operation with broadcasting:
+ [[11 12]
+ [21 22]
+ [31 32]]
+\end{verbatim}
+
+\section{Statistics and Aggregation}\label{statistics-and-aggregation}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.2558}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.7442}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+np.mean & Mean of all values in the array. \\
+np.std & Standard deviation. \\
+np.var & Variance. \\
+np.sum & Sum of all elements. \\
+np.prod & Product of all elements. \\
+np.cumsum & Cumulative sum of all elements. \\
+np.cumprod & Cumulative product of all elements. \\
+np.min, np.max & Minimum/maximum value in the array. \\
+np.argmin, np.argmax & Index of the minimum/maximum value in the
+array. \\
+np.all & Checks whether all elements are non-zero. \\
+np.any & Checks whether at least one element is non-zero. \\
+\end{longtable}
+}
+
 
 
 

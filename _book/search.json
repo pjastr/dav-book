@@ -394,5 +394,445 @@
       "NumPy",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>String operations</span>"
     ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html",
+    "href": "numpy-linear-algebra.html",
+    "title": "14  Linear Algebra",
+    "section": "",
+    "text": "14.1 Dot Product\nFor two vectors, dot computes their dot product.\nimport numpy as np\n\n# Dot product of two vectors\na = np.array([1, 2, 3])\nb = np.array([4, 5, 6])\nresult = np.dot(a, b)  # 1*4 + 2*5 + 3*6\nprint(result)  # Result: 32\n\n# Alternative notation using the @ operator\nresult = a @ b\nprint(result)  # Result: 32\n\n32\n32",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#matrix-multiplication",
+    "href": "numpy-linear-algebra.html#matrix-multiplication",
+    "title": "14  Linear Algebra",
+    "section": "14.2 Matrix Multiplication",
+    "text": "14.2 Matrix Multiplication\nFor matrices (two-dimensional arrays), dot performs standard matrix multiplication.\n\nimport numpy as np\n# Matrix multiplication\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nC = np.dot(A, B)\nprint(C)\n# Result:\n# [[19 22]\n#  [43 50]]\n\n# The same using the @ operator\nC = A @ B\nprint(C)\n\n[[19 22]\n [43 50]]\n[[19 22]\n [43 50]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#matrix-vector-multiplication",
+    "href": "numpy-linear-algebra.html#matrix-vector-multiplication",
+    "title": "14  Linear Algebra",
+    "section": "14.3 Matrix-Vector Multiplication",
+    "text": "14.3 Matrix-Vector Multiplication\nWe can also multiply a matrix by a vector:\n\nimport numpy as np\n# Matrix-vector multiplication\nA = np.array([[1, 2], [3, 4]])\nv = np.array([5, 6])\nresult = np.dot(A, v)\nprint(result)  # Result: [17 39]\n\n[17 39]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#solving-systems-of-linear-equations",
+    "href": "numpy-linear-algebra.html#solving-systems-of-linear-equations",
+    "title": "14  Linear Algebra",
+    "section": "14.4 Solving Systems of Linear Equations",
+    "text": "14.4 Solving Systems of Linear Equations\nThe numpy.linalg.solve function solves systems of linear equations of the form Ax = b:\n\nimport numpy as np\n# Solving a system of linear equations\nA = np.array([[3, 1], [1, 2]])\nb = np.array([9, 8])\nx = np.linalg.solve(A, b)\nprint(x)  # Result: [2. 3.]\n\n# Verifying the solution\nnp.dot(A, x)  # Should be equal to b\n\n[2. 3.]\n\n\narray([9., 8.])",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#matrix-determinant",
+    "href": "numpy-linear-algebra.html#matrix-determinant",
+    "title": "14  Linear Algebra",
+    "section": "14.5 Matrix Determinant",
+    "text": "14.5 Matrix Determinant\nThe numpy.linalg.det function computes the determinant of a matrix:\n\nimport numpy as np\n# Computing the determinant\nA = np.array([[1, 2], [3, 4]])\ndet_A = np.linalg.det(A)\nprint(det_A)  # Result: -2.0\n\n-2.0000000000000004",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#eigenvalues-and-eigenvectors",
+    "href": "numpy-linear-algebra.html#eigenvalues-and-eigenvectors",
+    "title": "14  Linear Algebra",
+    "section": "14.6 Eigenvalues and Eigenvectors",
+    "text": "14.6 Eigenvalues and Eigenvectors\nThe numpy.linalg.eig function computes the eigenvalues and eigenvectors of a matrix:\n\nimport numpy as np\n# Computing eigenvalues and eigenvectors\nA = np.array([[4, -2], [1, 1]])\neigenvalues, eigenvectors = np.linalg.eig(A)\nprint(\"Eigenvalues:\", eigenvalues)\nprint(\"Eigenvectors:\")\nprint(eigenvectors)\n\n# Verification: A * v = lambda * v\nfor i in range(len(eigenvalues)):\n    lambda_i = eigenvalues[i]\n    v_i = eigenvectors[:, i]\n    print(f\"λ_{i} = {lambda_i}\")\n    print(\"A * v =\", np.dot(A, v_i))\n    print(\"λ * v =\", lambda_i * v_i)\n\nEigenvalues: [3. 2.]\nEigenvectors:\n[[0.89442719 0.70710678]\n [0.4472136  0.70710678]]\nλ_0 = 3.0\nA * v = [2.68328157 1.34164079]\nλ * v = [2.68328157 1.34164079]\nλ_1 = 2.0\nA * v = [1.41421356 1.41421356]\nλ * v = [1.41421356 1.41421356]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#singular-value-decomposition-svd",
+    "href": "numpy-linear-algebra.html#singular-value-decomposition-svd",
+    "title": "14  Linear Algebra",
+    "section": "14.7 Singular Value Decomposition (SVD)",
+    "text": "14.7 Singular Value Decomposition (SVD)\nSVD is one of the key methods used in data analysis:\n\nimport numpy as np\n# SVD decomposition\nA = np.array([[1, 2], [3, 4], [5, 6]])\nU, s, Vh = np.linalg.svd(A)\nprint(\"Matrix U:\")\nprint(U)\nprint(\"Singular values:\", s)\nprint(\"Matrix V^H:\")\nprint(Vh)\n\n# Reconstructing matrix A\nS = np.zeros((A.shape[0], A.shape[1]))\nS[:len(s), :len(s)] = np.diag(s)\nA_reconstructed = U @ S @ Vh\nprint(\"Reconstructed matrix A:\")\nprint(A_reconstructed)\n\nMatrix U:\n[[-0.2298477   0.88346102  0.40824829]\n [-0.52474482  0.24078249 -0.81649658]\n [-0.81964194 -0.40189603  0.40824829]]\nSingular values: [9.52551809 0.51430058]\nMatrix V^H:\n[[-0.61962948 -0.78489445]\n [-0.78489445  0.61962948]]\nReconstructed matrix A:\n[[1. 2.]\n [3. 4.]\n [5. 6.]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#matrixvector-norm",
+    "href": "numpy-linear-algebra.html#matrixvector-norm",
+    "title": "14  Linear Algebra",
+    "section": "14.8 Matrix/Vector Norm",
+    "text": "14.8 Matrix/Vector Norm\nNumPy offers various types of vector and matrix norms:\n\nimport numpy as np\n\nv = np.array([3, 4])\n# L1 (sum of absolute values): |3| + |4| = 7\nprint(\"L1 norm:\", np.linalg.norm(v, 1))\n# L2 / Euclidean (square root of sum of squares): sqrt(9+16) = 5\nprint(\"L2 norm (Euclidean):\", np.linalg.norm(v))\n# Maximum norm (largest absolute value): max(3,4) = 4\nprint(\"Maximum norm:\", np.linalg.norm(v, np.inf))\n\nA = np.array([[1, 2], [3, 4]])\n# Frobenius (like L2, but for matrices): sqrt(1+4+9+16) ≈ 5.477\nprint(\"Frobenius norm:\", np.linalg.norm(A, 'fro'))\n\nL1 norm: 7.0\nL2 norm (Euclidean): 5.0\nMaximum norm: 4.0\nFrobenius norm: 5.477225575051661",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#inverse-matrix",
+    "href": "numpy-linear-algebra.html#inverse-matrix",
+    "title": "14  Linear Algebra",
+    "section": "14.9 Inverse Matrix",
+    "text": "14.9 Inverse Matrix\nThe numpy.linalg.inv function computes the inverse of a matrix:\n\nimport numpy as np\n# Inverse matrix\nA = np.array([[1, 2], [3, 4]])\nA_inv = np.linalg.inv(A)\nprint(\"Inverse matrix:\")\nprint(A_inv)\n\n# Verification: A * A^(-1) = I\nprint(\"A * A^(-1):\")\nprint(np.dot(A, A_inv))  # Should be close to the identity matrix\n\nInverse matrix:\n[[-2.   1. ]\n [ 1.5 -0.5]]\nA * A^(-1):\n[[1.0000000e+00 0.0000000e+00]\n [8.8817842e-16 1.0000000e+00]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#the-numpy.inner-function---inner-product",
+    "href": "numpy-linear-algebra.html#the-numpy.inner-function---inner-product",
+    "title": "14  Linear Algebra",
+    "section": "14.10 The numpy.inner Function - Inner Product",
+    "text": "14.10 The numpy.inner Function - Inner Product\nThe inner function computes the inner product of two arrays:\n\nimport numpy as np\n# Inner product\na = np.array([1, 2, 3])\nb = np.array([4, 5, 6])\nresult = np.inner(a, b)\nprint(result)  # 1*4 + 2*5 + 3*6 = 32\n\n# For 2D arrays: inner(A, B) computes A @ B.T (not A @ B!)\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nresult = np.inner(A, B)\nprint(result)\n# [[1*5+2*6, 1*7+2*8],   = [[17, 23],\n#  [3*5+4*6, 3*7+4*8]]      [39, 53]]\nprint(\"Comparison with A @ B.T:\")\nprint(A @ B.T)\n\n32\n[[17 23]\n [39 53]]\nComparison with A @ B.T:\n[[17 23]\n [39 53]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#the-numpy.outer-function---outer-product",
+    "href": "numpy-linear-algebra.html#the-numpy.outer-function---outer-product",
+    "title": "14  Linear Algebra",
+    "section": "14.11 The numpy.outer Function - Outer Product",
+    "text": "14.11 The numpy.outer Function - Outer Product\nThe outer function computes the outer product of two vectors:\n\nimport numpy as np\n# Outer product\na = np.array([1, 2, 3])\nb = np.array([4, 5, 6])\nresult = np.outer(a, b)\nprint(result)\n# Result:\n# [[ 4  5  6]\n#  [ 8 10 12]\n#  [12 15 18]]\n\n[[ 4  5  6]\n [ 8 10 12]\n [12 15 18]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-linear-algebra.html#the-numpy.matmul-function---matrix-multiplication",
+    "href": "numpy-linear-algebra.html#the-numpy.matmul-function---matrix-multiplication",
+    "title": "14  Linear Algebra",
+    "section": "14.12 The numpy.matmul Function - Matrix Multiplication",
+    "text": "14.12 The numpy.matmul Function - Matrix Multiplication\nThe matmul function (and the equivalent @ operator) is the recommended way to multiply matrices. For 2D arrays, it works identically to dot. Differences appear for 3D+ arrays (matmul treats them as stacks of matrices) and for scalars (matmul does not accept scalars, dot does).\n\nimport numpy as np\n\n# For 2D -- identical results\na = np.array([[1, 2], [3, 4]])\nb = np.array([[5, 6], [7, 8]])\n\nprint(\"dot:\", np.dot(a, b)[0])\nprint(\"matmul:\", np.matmul(a, b)[0])\n\n# Difference: matmul does not accept scalars\ntry:\n    np.matmul(a, 3)\nexcept ValueError as e:\n    print(\"matmul with scalar:\", e)\n\nprint(\"dot with scalar:\", np.dot(a, 3))\n\ndot: [19 22]\nmatmul: [19 22]\nmatmul with scalar: matmul: Input operand 1 does not have enough dimensions (has 0, gufunc core with signature (n?,k),(k,m?)-&gt;(n?,m?) requires 1)\ndot with scalar: [[ 3  6]\n [ 9 12]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Linear Algebra</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html",
+    "href": "numpy-conditions.html",
+    "title": "15  Advanced Filtering",
+    "section": "",
+    "text": "15.1 The nonzero() Function\nReturns the indices of non-zero elements in an array. The result is returned as a tuple of arrays, one for each dimension of the array.\nimport numpy as np\n\narr = np.array([[3, 0, 0], [0, 4, 0], [5, 6, 0]])\nindices = np.nonzero(arr)\nprint(indices)  # (array([0, 1, 2, 2]), array([0, 1, 0, 1]))\n\n# Extracting non-zero values\nvalues = arr[indices]\nprint(values)  # [3 4 5 6]\n\n# Alternatively, you can use:\nposition_indices = np.argwhere(arr != 0)\nprint(position_indices)\n# [[0 0]\n#  [1 1]\n#  [2 0]\n#  [2 1]]\n\n(array([0, 1, 2, 2]), array([0, 1, 0, 1]))\n[3 4 5 6]\n[[0 0]\n [1 1]\n [2 0]\n [2 1]]\nThe np.nonzero() function returns the indices of all non-zero elements in an array. The result is a tuple of arrays, one per dimension: the first array contains the row indices and the second contains the column indices. For example, given arr = np.array([[3, 0, 0], [0, 4, 0], [5, 6, 0]]), calling np.nonzero(arr) returns (array([0, 1, 2, 2]), array([0, 1, 0, 1])). This means the non-zero elements are located at positions (0,0), (1,1), (2,0), and (2,1), corresponding to the values 3, 4, 5, and 6 respectively.",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-where-function",
+    "href": "numpy-conditions.html#the-where-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.2 The where() Function",
+    "text": "15.2 The where() Function\nReturns elements chosen from x or y depending on a condition. It works like a conditional element selection (equivalent to a ternary expression).\n\nimport numpy as np\n\n# Replace non-positive values with 0 (zero effectively unchanged)\narr = np.array([1, -2, 3, -4, 5])\nresult = np.where(arr &gt; 0, arr, 0)\nprint(result)  # [1 0 3 0 5]\n\n# In a 2D array -- replace negative values with -1\narr_2d = np.array([[1, -2, 3], [-4, 5, -6]])\nresult_2d = np.where(arr_2d &lt; 0, -1, arr_2d)\nprint(result_2d)\n# [[ 1 -1  3]\n#  [-1  5 -1]]\n\n[1 0 3 0 5]\n[[ 1 -1  3]\n [-1  5 -1]]\n\n\nThe np.where(condition, x, y) function takes three arguments: a condition, a value to use when the condition is true, and a value to use when the condition is false. For each element, it evaluates the condition and returns the corresponding value from x if the result is true, or from y if the result is false. It acts as an element-wise ternary operator for NumPy arrays.",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-indices-and-ix_-functions",
+    "href": "numpy-conditions.html#the-indices-and-ix_-functions",
+    "title": "15  Advanced Filtering",
+    "section": "15.3 The indices() and ix_() Functions",
+    "text": "15.3 The indices() and ix_() Functions\n\n15.3.1 indices()\nCreates an array representing grid indices.\n\nimport numpy as np\n\n# Creating a 3x4 index grid\ngrid = np.indices((3, 4))\nprint(grid.shape)  # (2, 3, 4)\nprint(grid[0])  # row indices\n# [[0 0 0 0]\n#  [1 1 1 1]\n#  [2 2 2 2]]\nprint(grid[1])  # column indices\n# [[0 1 2 3]\n#  [0 1 2 3]\n#  [0 1 2 3]]\n\n(2, 3, 4)\n[[0 0 0 0]\n [1 1 1 1]\n [2 2 2 2]]\n[[0 1 2 3]\n [0 1 2 3]\n [0 1 2 3]]\n\n\nThe np.indices() function generates an array representing the index grid for a given shape. For a 3×4 grid, np.indices((3, 4)) returns a result of shape (2, 3, 4), where the first component (grid[0]) contains the row indices and the second component (grid[1]) contains the column indices. In grid[0], each row is filled with its own row number (all zeros in the first row, all ones in the second, all twos in the third), while in grid[1], each row contains the sequence of column numbers 0, 1, 2, 3 repeated identically across all rows. Together, these two arrays allow you to reference every position in the grid by its (row, column) pair.\n\n\n15.3.2 ix_()\nConstructs an open mesh from multiple sequences, which is useful for multidimensional indexing.\n\nimport numpy as np\nx = np.array([0, 1, 2])\ny = np.array([3, 4, 5, 6])\nindices = np.ix_(x, y)\n\n# Creates an open index grid for broadcasting\nprint(indices[0].shape, indices[1].shape)  # (3, 1) (1, 4)\n\n# Using it to select a subarray\narr = np.arange(16).reshape(4, 4)\nprint(arr)\n# [[ 0  1  2  3]\n#  [ 4  5  6  7]\n#  [ 8  9 10 11]\n#  [12 13 14 15]]\n\nsubarray = arr[np.ix_([0, 2, 3], [0, 2])]\nprint(subarray)\n# [[ 0  2]\n#  [ 8 10]\n#  [12 14]]\n\n(3, 1) (1, 4)\n[[ 0  1  2  3]\n [ 4  5  6  7]\n [ 8  9 10 11]\n [12 13 14 15]]\n[[ 0  2]\n [ 8 10]\n [12 14]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#ogrid-and-grid-operations",
+    "href": "numpy-conditions.html#ogrid-and-grid-operations",
+    "title": "15  Advanced Filtering",
+    "section": "15.4 ogrid and Grid Operations",
+    "text": "15.4 ogrid and Grid Operations\nogrid allows creating open grids, which is more memory-efficient than full grids.\n\nimport numpy as np\n\n# Grid of points in the range from -2 to 2 with step 0.1\nx, y = np.ogrid[-2:2:0.1, -2:2:0.1]\nmask = x**2 + y**2 &lt;= 1  # Circle with radius 1\nprint(mask.shape)  # (40, 40)\n\n(40, 40)",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-ravel_multi_index-and-unravel_index-functions",
+    "href": "numpy-conditions.html#the-ravel_multi_index-and-unravel_index-functions",
+    "title": "15  Advanced Filtering",
+    "section": "15.5 The ravel_multi_index() and unravel_index() Functions",
+    "text": "15.5 The ravel_multi_index() and unravel_index() Functions\nThese functions convert between multidimensional and flat indices.\n\nimport numpy as np\n\n# Converting multidimensional indices to flat indices\nmulti_indices = np.array([[0, 0], [1, 1], [2, 1]])\ndimensions = (3, 3)\nflat_indices = np.ravel_multi_index(multi_indices.T, dimensions)\nprint(flat_indices)  # [0 4 7]\n\n# Converting flat indices to multidimensional indices\nflat_indices = np.array([0, 3, 8])\nshape = (3, 3)\nmulti_indices = np.unravel_index(flat_indices, shape)\nprint(multi_indices)  # (array([0, 1, 2]), array([0, 0, 2]))\n\n[0 4 7]\n(array([0, 1, 2]), array([0, 0, 2]))",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#diagonal-indices",
+    "href": "numpy-conditions.html#diagonal-indices",
+    "title": "15  Advanced Filtering",
+    "section": "15.6 Diagonal Indices",
+    "text": "15.6 Diagonal Indices\nNumPy offers many functions for working with matrix diagonals.\n\nimport numpy as np\n# Getting the main diagonal indices\nn = 4\ndiag_indices = np.diag_indices(n)\nprint(diag_indices)  # (array([0, 1, 2, 3]), array([0, 1, 2, 3]))\n\n# Using them to set the main diagonal\narr = np.zeros((4, 4))\narr[diag_indices] = 1  # Setting ones on the main diagonal\nprint(arr)\n# [[1. 0. 0. 0.]\n#  [0. 1. 0. 0.]\n#  [0. 0. 1. 0.]\n#  [0. 0. 0. 1.]]\n\n# Getting indices from an existing array\narr2 = np.ones((3, 3))\ndiag_indices2 = np.diag_indices_from(arr2)\nprint(diag_indices2)\n\n(array([0, 1, 2, 3]), array([0, 1, 2, 3]))\n[[1. 0. 0. 0.]\n [0. 1. 0. 0.]\n [0. 0. 1. 0.]\n [0. 0. 0. 1.]]\n(array([0, 1, 2]), array([0, 1, 2]))",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-take-function",
+    "href": "numpy-conditions.html#the-take-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.7 The take() Function",
+    "text": "15.7 The take() Function\nRetrieves elements from an array along a specified axis based on indices.\n\nimport numpy as np\n\narr = np.array([10, 20, 30, 40, 50])\nindices = np.array([0, 2, 4])\nresult = np.take(arr, indices)\nprint(result)  # [10 30 50]\n\n# In multidimensional arrays, we can choose the axis\narr_2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\nrow_indices = np.array([0, 2])\nresult_2d = np.take(arr_2d, row_indices, axis=0)\nprint(result_2d)\n# [[1 2 3]\n#  [7 8 9]]\n\n[10 30 50]\n[[1 2 3]\n [7 8 9]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-take_along_axis-function",
+    "href": "numpy-conditions.html#the-take_along_axis-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.8 The take_along_axis() Function",
+    "text": "15.8 The take_along_axis() Function\nRetrieves values from an array along a specified axis, using an index array with a compatible shape. Useful, for example, for applying results from argsort() or argmin().\n\nimport numpy as np\n\narr = np.array([[10, 30, 20], [60, 40, 50]])\nsort_indices = np.argsort(arr, axis=1)\nresult = np.take_along_axis(arr, sort_indices, axis=1)\nprint(result)\n# [[10 20 30]\n#  [40 50 60]]\n\n[[10 20 30]\n [40 50 60]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-choose-function",
+    "href": "numpy-conditions.html#the-choose-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.9 The choose() Function",
+    "text": "15.9 The choose() Function\nConstructs an array by selecting elements from a list of arrays.\n\nimport numpy as np\n\nchoices = [np.array([0, 1, 2, 3]),\n         np.array([10, 11, 12, 13]),\n         np.array([20, 21, 22, 23])]\nindices = np.array([0, 2, 1, 0])  # Selects which choice array to take the element from\nresult = np.choose(indices, choices)\nprint(result)  # [ 0 21 12  3]\n\n[ 0 21 12  3]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-compress-function",
+    "href": "numpy-conditions.html#the-compress-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.10 The compress() Function",
+    "text": "15.10 The compress() Function\nReturns selected elements of an array along a specified axis.\n\nimport numpy as np\narr = np.array([[1, 2, 3], [4, 5, 6]])\nmask = np.array([True, False, True])\nresult = np.compress(mask, arr, axis=1)\nprint(result)\n# [[1 3]\n#  [4 6]]\n\n[[1 3]\n [4 6]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-diag-and-diagonal-functions",
+    "href": "numpy-conditions.html#the-diag-and-diagonal-functions",
+    "title": "15  Advanced Filtering",
+    "section": "15.11 The diag() and diagonal() Functions",
+    "text": "15.11 The diag() and diagonal() Functions\nFunctions for working with diagonals.\n\nimport numpy as np\n\n# Creating a diagonal array\ndiag_arr = np.diag([1, 2, 3, 4])\nprint(diag_arr)\n# [[1 0 0 0]\n#  [0 2 0 0]\n#  [0 0 3 0]\n#  [0 0 0 4]]\n\n# Extracting the diagonal from an array\narr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\ndiag = np.diag(arr)\nprint(diag)  # [1 5 9]\n\n# Extracting a diagonal shifted by 1\ndiag_offset = np.diagonal(arr, offset=1)\nprint(diag_offset)  # [2 6]\n\n[[1 0 0 0]\n [0 2 0 0]\n [0 0 3 0]\n [0 0 0 4]]\n[1 5 9]\n[2 6]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-select-function",
+    "href": "numpy-conditions.html#the-select-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.12 The select() Function",
+    "text": "15.12 The select() Function\nReturns an array built from elements of a list of choices, depending on conditions.\n\nimport numpy as np\n\narr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\nconditions = [arr &lt; 3, arr &lt; 6, arr &lt; 9]\nchoices = [100, 200, 300]\nresult = np.select(conditions, choices, default=400)\nprint(result)\n# [[100 100 200]\n#  [200 200 300]\n#  [300 300 400]]\n\n[[100 100 200]\n [200 200 300]\n [300 300 400]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-place-function",
+    "href": "numpy-conditions.html#the-place-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.13 The place() Function",
+    "text": "15.13 The place() Function\nChanges elements of an array based on a mask and provided values.\n\nimport numpy as np\n\narr = np.arange(5)\nmask = np.array([True, False, True, False, True])\nnp.place(arr, mask, [-1, -2, -3])  # Cyclically uses values [-1, -2, -3]\nprint(arr)  # [-1  1 -2  3 -3]\n\n[-1  1 -2  3 -3]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-put-function",
+    "href": "numpy-conditions.html#the-put-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.14 The put() Function",
+    "text": "15.14 The put() Function\nReplaces specified elements of an array with given values.\n\nimport numpy as np\n\narr = np.arange(5)\nindices = [0, 2, 4]\nnp.put(arr, indices, [10, 20, 30])\nprint(arr)  # [10  1 20  3 30]\n\n[10  1 20  3 30]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-put_along_axis-function",
+    "href": "numpy-conditions.html#the-put_along_axis-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.15 The put_along_axis() Function",
+    "text": "15.15 The put_along_axis() Function\nInserts values into a target array along a specified axis, using an index array with a compatible shape.\n\nimport numpy as np\n\narr = np.array([[10, 30, 20], [60, 40, 50]])\nindices = np.argmin(arr, axis=1)\nindices = np.expand_dims(indices, axis=1)  # Reshape to shape (2, 1)\nnp.put_along_axis(arr, indices, 99, axis=1)\nprint(arr)\n# [[99 30 20]\n#  [60 99 50]]\n\n[[99 30 20]\n [60 99 50]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-putmask-function",
+    "href": "numpy-conditions.html#the-putmask-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.16 The putmask() Function",
+    "text": "15.16 The putmask() Function\nChanges elements of an array based on a mask. Unlike place(), values are assigned positionally (with cyclic extension to the array size), not sequentially to elements satisfying the mask.\n\nimport numpy as np\n\narr = np.arange(5)\nmask = np.array([True, False, True, False, True])\nnp.putmask(arr, mask, [-1, -2, -3])  # Values assigned positionally (cyclically)\nprint(arr)  # [-1  1 -3  3 -2]\n\n[-1  1 -3  3 -2]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-conditions.html#the-fill_diagonal-function",
+    "href": "numpy-conditions.html#the-fill_diagonal-function",
+    "title": "15  Advanced Filtering",
+    "section": "15.17 The fill_diagonal() Function",
+    "text": "15.17 The fill_diagonal() Function\nFills the main diagonal of an array with a given value.\n\nimport numpy as np\n\narr = np.zeros((4, 4))\nnp.fill_diagonal(arr, 5)\nprint(arr)\n# [[5. 0. 0. 0.]\n#  [0. 5. 0. 0.]\n#  [0. 0. 5. 0.]\n#  [0. 0. 0. 5.]]\n\narr_rect = np.zeros((4, 4, 4))\nnp.fill_diagonal(arr_rect, 9)\nprint(arr_rect[0])  # Only element [0][0] set to 9 (super-diagonal i,i,i)\n\n[[5. 0. 0. 0.]\n [0. 5. 0. 0.]\n [0. 0. 5. 0.]\n [0. 0. 0. 5.]]\n[[9. 0. 0. 0.]\n [0. 0. 0. 0.]\n [0. 0. 0. 0.]\n [0. 0. 0. 0.]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Advanced Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html",
+    "href": "numpy-miscellaneous.html",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "",
+    "text": "16.1 Constants\nNumPy provides several well-known mathematical constants that can be useful in scientific and engineering computations. Built-in constants such as the number Pi or the base of the natural logarithm e make it easier to write readable and concise code.\nimport numpy as np\n\n# Circle radius\nr = 5.0\n\n# Circle circumference: 2 * π * r\ncircumference = 2 * np.pi * r\nprint(\"Circle circumference:\", circumference)\n\n# Circle area: π * r^2\narea = np.pi * r**2\nprint(\"Circle area:\", area)\n\nCircle circumference: 31.41592653589793\nCircle area: 78.53981633974483\nimport numpy as np\n\n# Sample point x\nx = 1.0\n\n# Value of the function e^x\nexp_value = np.e**x\nprint(\"e^x for x=1:\", exp_value)\n\n# Comparison with the np.exp function\nexp_compare = np.exp(x)\nprint(\"Comparison with np.exp(1):\", exp_compare)\n\ne^x for x=1: 2.718281828459045\nComparison with np.exp(1): 2.718281828459045",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#constants",
+    "href": "numpy-miscellaneous.html#constants",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "",
+    "text": "numpy.pi\n\nRepresents the number Pi (π) with high precision.\n\nPi is the ratio of a circle’s circumference to its diameter.\n\nApproximately: 3.141592653589793\n\nnumpy.e\n\nRepresents the base of the natural logarithm, e.\n\ne is used in many fields, such as mathematical analysis, probability theory, and statistics.\n\nApproximately: 2.718281828459045\n\nnumpy.eulergamma\n\nRepresents the Euler-Mascheroni constant, usually denoted as γ (gamma).\nIt appears in mathematical analysis, particularly in number theory and the study of harmonic series.\nApproximately: 0.5772156649015329",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#numpy.inf",
+    "href": "numpy-miscellaneous.html#numpy.inf",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.2 numpy.inf",
+    "text": "16.2 numpy.inf\n\nDescription: np.inf represents an infinite value (∞).\n\nIt often appears in computations when the value of an expression tends to infinity (e.g., division by zero, certain limits, etc.).\n\nFor example, 1.0 / 0.0 will return a warning and may consequently yield the value inf.\n\n\nimport numpy as np\n\n# Using it to create boolean masks\narr = np.array([1, 2, np.inf, 4, 5])\nmask = np.isinf(arr)\nprint(\"Mask of elements with value inf:\", mask)\n\nMask of elements with value inf: [False False  True False False]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#numpy.nan",
+    "href": "numpy-miscellaneous.html#numpy.nan",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.3 numpy.nan",
+    "text": "16.3 numpy.nan\n\nDescription: np.nan stands for “Not a Number” (NaN), meaning an undefined or unrepresentable value in the number system.\n\nIt appears when the result of a numerical operation is undefined, e.g., 0.0/0.0, inf - inf, or when data loading errors occur.\n\nArithmetic operations with nan typically also return nan.\n\n\nimport numpy as np\n\n# Replacing nan values in an array\ndata = np.array([1, 2, np.nan, 4, np.nan])\nprint(\"Original data:\", data)\n\n# Filling nan values with zero\ndata_no_nan = np.nan_to_num(data, nan=0.0)\nprint(\"Data without nan:\", data_no_nan)\n\nOriginal data: [ 1.  2. nan  4. nan]\nData without nan: [1. 2. 0. 4. 0.]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#numpy.newaxis",
+    "href": "numpy-miscellaneous.html#numpy.newaxis",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.4 numpy.newaxis",
+    "text": "16.4 numpy.newaxis\n\nDescription: np.newaxis is a special “constant”/object used to change array dimensions by increasing the number of dimensions by 1.\n\n\nimport numpy as np\n\n# We have a 1D array\nvec = np.array([1, 2, 3, 4])\nprint(\"Original array:\", vec, \"Shape:\", vec.shape)\n\n# Adding a new dimension as the row dimension\nvec_as_col = vec[:, np.newaxis]\nprint(\"Array as column:\\n\", vec_as_col, \"Shape:\", vec_as_col.shape)\n\n# Adding a dimension at the beginning\nvec_as_row = vec[np.newaxis, :]\nprint(\"Array as row:\\n\", vec_as_row, \"Shape:\", vec_as_row.shape)\n\n# Another example: adding a dimension to easily broadcast operations\na = np.array([10, 20, 30])\nb = np.array([1, 2])\n# Without a new dimension, trying to add a to b would fail,\n# because the shapes are not compatible.\n# With a new dimension, a has shape (3,1) and b (2,), which allows broadcasting\nsum_matrix = a[:, np.newaxis] + b\nprint(\"Operation with broadcasting:\\n\", sum_matrix)\n\nOriginal array: [1 2 3 4] Shape: (4,)\nArray as column:\n [[1]\n [2]\n [3]\n [4]] Shape: (4, 1)\nArray as row:\n [[1 2 3 4]] Shape: (1, 4)\nOperation with broadcasting:\n [[11 12]\n [21 22]\n [31 32]]",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#statistics-and-aggregation",
+    "href": "numpy-miscellaneous.html#statistics-and-aggregation",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.5 Statistics and Aggregation",
+    "text": "16.5 Statistics and Aggregation\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\nnp.mean\nMean of all values in the array.\n\n\nnp.std\nStandard deviation.\n\n\nnp.var\nVariance.\n\n\nnp.sum\nSum of all elements.\n\n\nnp.prod\nProduct of all elements.\n\n\nnp.cumsum\nCumulative sum of all elements.\n\n\nnp.cumprod\nCumulative product of all elements.\n\n\nnp.min, np.max\nMinimum/maximum value in the array.\n\n\nnp.argmin, np.argmax\nIndex of the minimum/maximum value in the array.\n\n\nnp.all\nChecks whether all elements are non-zero.\n\n\nnp.any\nChecks whether at least one element is non-zero.",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#conditional-expressions",
+    "href": "numpy-miscellaneous.html#conditional-expressions",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.6 Conditional Expressions",
+    "text": "16.6 Conditional Expressions\nhttps://numpy.org/doc/stable/reference/generated/numpy.where https://numpy.org/doc/stable/reference/generated/numpy.choose https://numpy.org/doc/stable/reference/generated/numpy.select https://numpy.org/doc/stable/reference/generated/numpy.nonzero",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#set-operations",
+    "href": "numpy-miscellaneous.html#set-operations",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.7 Set Operations",
+    "text": "16.7 Set Operations\nhttps://numpy.org/doc/stable/reference/routines.set.html",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#array-operations",
+    "href": "numpy-miscellaneous.html#array-operations",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.8 Array Operations",
+    "text": "16.8 Array Operations\nhttps://numpy.org/doc/stable/reference/generated/numpy.transpose\nhttps://numpy.org/doc/stable/reference/generated/numpy.flip https://numpy.org/doc/stable/reference/generated/numpy.fliplr https://numpy.org/doc/stable/reference/generated/numpy.flipud\nhttps://numpy.org/doc/stable/reference/generated/numpy.sort",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#date-and-time",
+    "href": "numpy-miscellaneous.html#date-and-time",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.9 Date and Time",
+    "text": "16.9 Date and Time\nhttps://numpy.org/doc/stable/reference/arrays.datetime.html",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-miscellaneous.html#pseudorandom-numbers",
+    "href": "numpy-miscellaneous.html#pseudorandom-numbers",
+    "title": "16  NumPy - Miscellaneous",
+    "section": "16.10 Pseudorandom Numbers",
+    "text": "16.10 Pseudorandom Numbers\nhttps://numpy.org/doc/stable/reference/random/index.html",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
   }
 ]

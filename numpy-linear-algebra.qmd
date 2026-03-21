@@ -1,0 +1,240 @@
+# Linear Algebra
+
+
+
+## Dot Product
+
+For two vectors, `dot` computes their dot product.
+
+```{python}
+#| echo: true
+import numpy as np
+
+# Dot product of two vectors
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+result = np.dot(a, b)  # 1*4 + 2*5 + 3*6
+print(result)  # Result: 32
+
+# Alternative notation using the @ operator
+result = a @ b
+print(result)  # Result: 32
+```
+
+## Matrix Multiplication
+
+For matrices (two-dimensional arrays), `dot` performs standard matrix multiplication.
+
+```{python}
+#| echo: true
+import numpy as np
+# Matrix multiplication
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+C = np.dot(A, B)
+print(C)
+# Result:
+# [[19 22]
+#  [43 50]]
+
+# The same using the @ operator
+C = A @ B
+print(C)
+```
+
+## Matrix-Vector Multiplication
+
+We can also multiply a matrix by a vector:
+
+```{python}
+#| echo: true
+import numpy as np
+# Matrix-vector multiplication
+A = np.array([[1, 2], [3, 4]])
+v = np.array([5, 6])
+result = np.dot(A, v)
+print(result)  # Result: [17 39]
+```
+
+
+## Solving Systems of Linear Equations
+
+The `numpy.linalg.solve` function solves systems of linear equations of the form Ax = b:
+
+```{python}
+#| echo: true
+import numpy as np
+# Solving a system of linear equations
+A = np.array([[3, 1], [1, 2]])
+b = np.array([9, 8])
+x = np.linalg.solve(A, b)
+print(x)  # Result: [2. 3.]
+
+# Verifying the solution
+np.dot(A, x)  # Should be equal to b
+```
+
+## Matrix Determinant
+
+The `numpy.linalg.det` function computes the determinant of a matrix:
+
+```{python}
+#| echo: true
+import numpy as np
+# Computing the determinant
+A = np.array([[1, 2], [3, 4]])
+det_A = np.linalg.det(A)
+print(det_A)  # Result: -2.0
+```
+
+## Eigenvalues and Eigenvectors
+
+The `numpy.linalg.eig` function computes the eigenvalues and eigenvectors of a matrix:
+
+```{python}
+#| echo: true
+import numpy as np
+# Computing eigenvalues and eigenvectors
+A = np.array([[4, -2], [1, 1]])
+eigenvalues, eigenvectors = np.linalg.eig(A)
+print("Eigenvalues:", eigenvalues)
+print("Eigenvectors:")
+print(eigenvectors)
+
+# Verification: A * v = lambda * v
+for i in range(len(eigenvalues)):
+    lambda_i = eigenvalues[i]
+    v_i = eigenvectors[:, i]
+    print(f"λ_{i} = {lambda_i}")
+    print("A * v =", np.dot(A, v_i))
+    print("λ * v =", lambda_i * v_i)
+```
+
+## Singular Value Decomposition (SVD)
+
+SVD is one of the key methods used in data analysis:
+
+```{python}
+#| echo: true
+import numpy as np
+# SVD decomposition
+A = np.array([[1, 2], [3, 4], [5, 6]])
+U, s, Vh = np.linalg.svd(A)
+print("Matrix U:")
+print(U)
+print("Singular values:", s)
+print("Matrix V^H:")
+print(Vh)
+
+# Reconstructing matrix A
+S = np.zeros((A.shape[0], A.shape[1]))
+S[:len(s), :len(s)] = np.diag(s)
+A_reconstructed = U @ S @ Vh
+print("Reconstructed matrix A:")
+print(A_reconstructed)
+```
+
+## Matrix/Vector Norm
+
+NumPy offers various types of vector and matrix norms:
+```{python}
+#| echo: true
+import numpy as np
+
+v = np.array([3, 4])
+# L1 (sum of absolute values): |3| + |4| = 7
+print("L1 norm:", np.linalg.norm(v, 1))
+# L2 / Euclidean (square root of sum of squares): sqrt(9+16) = 5
+print("L2 norm (Euclidean):", np.linalg.norm(v))
+# Maximum norm (largest absolute value): max(3,4) = 4
+print("Maximum norm:", np.linalg.norm(v, np.inf))
+
+A = np.array([[1, 2], [3, 4]])
+# Frobenius (like L2, but for matrices): sqrt(1+4+9+16) ≈ 5.477
+print("Frobenius norm:", np.linalg.norm(A, 'fro'))
+```
+
+## Inverse Matrix
+
+The `numpy.linalg.inv` function computes the inverse of a matrix:
+
+```{python}
+#| echo: true
+import numpy as np
+# Inverse matrix
+A = np.array([[1, 2], [3, 4]])
+A_inv = np.linalg.inv(A)
+print("Inverse matrix:")
+print(A_inv)
+
+# Verification: A * A^(-1) = I
+print("A * A^(-1):")
+print(np.dot(A, A_inv))  # Should be close to the identity matrix
+```
+
+
+## The `numpy.inner` Function - Inner Product
+
+The `inner` function computes the inner product of two arrays:
+
+```{python}
+#| echo: true
+import numpy as np
+# Inner product
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+result = np.inner(a, b)
+print(result)  # 1*4 + 2*5 + 3*6 = 32
+
+# For 2D arrays: inner(A, B) computes A @ B.T (not A @ B!)
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+result = np.inner(A, B)
+print(result)
+# [[1*5+2*6, 1*7+2*8],   = [[17, 23],
+#  [3*5+4*6, 3*7+4*8]]      [39, 53]]
+print("Comparison with A @ B.T:")
+print(A @ B.T)
+```
+
+## The `numpy.outer` Function - Outer Product
+
+The `outer` function computes the outer product of two vectors:
+
+```{python}
+#| echo: true
+import numpy as np
+# Outer product
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+result = np.outer(a, b)
+print(result)
+# Result:
+# [[ 4  5  6]
+#  [ 8 10 12]
+#  [12 15 18]]
+```
+
+## The `numpy.matmul` Function - Matrix Multiplication
+
+The `matmul` function (and the equivalent `@` operator) is the recommended way to multiply matrices. For 2D arrays, it works identically to `dot`. Differences appear for 3D+ arrays (matmul treats them as stacks of matrices) and for scalars (matmul does not accept scalars, dot does).
+
+```{python}
+#| echo: true
+import numpy as np
+
+# For 2D -- identical results
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
+
+print("dot:", np.dot(a, b)[0])
+print("matmul:", np.matmul(a, b)[0])
+
+# Difference: matmul does not accept scalars
+try:
+    np.matmul(a, 3)
+except ValueError as e:
+    print("matmul with scalar:", e)
+
+print("dot with scalar:", np.dot(a, 3))
+```

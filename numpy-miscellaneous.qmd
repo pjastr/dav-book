@@ -1,0 +1,176 @@
+# NumPy - Miscellaneous
+
+## Constants
+
+`NumPy` provides several well-known mathematical constants that can be useful in scientific and engineering computations. Built-in constants such as the number Pi or the base of the natural logarithm `e` make it easier to write readable and concise code.
+
+
+1. **`numpy.pi`**  
+   - Represents the number Pi (π) with high precision.  
+   - Pi is the ratio of a circle's circumference to its diameter.  
+   - Approximately: `3.141592653589793`
+
+2. **`numpy.e`**  
+   - Represents the base of the natural logarithm, `e`.  
+   - `e` is used in many fields, such as mathematical analysis, probability theory, and statistics.  
+   - Approximately: `2.718281828459045`
+
+3. **`numpy.eulergamma`**  
+   - Represents the Euler-Mascheroni constant, usually denoted as γ (gamma).
+   - It appears in mathematical analysis, particularly in number theory and the study of harmonic series.
+   - Approximately: `0.5772156649015329`
+
+```{python}
+#| echo: true
+import numpy as np
+
+# Circle radius
+r = 5.0
+
+# Circle circumference: 2 * π * r
+circumference = 2 * np.pi * r
+print("Circle circumference:", circumference)
+
+# Circle area: π * r^2
+area = np.pi * r**2
+print("Circle area:", area)
+```
+
+```{python}
+#| echo: true
+import numpy as np
+
+# Sample point x
+x = 1.0
+
+# Value of the function e^x
+exp_value = np.e**x
+print("e^x for x=1:", exp_value)
+
+# Comparison with the np.exp function
+exp_compare = np.exp(x)
+print("Comparison with np.exp(1):", exp_compare)
+```
+
+## `numpy.inf`  
+
+- **Description**: `np.inf` represents an infinite value (∞).  
+- It often appears in computations when the value of an expression tends to infinity (e.g., division by zero, certain limits, etc.).  
+- For example, `1.0 / 0.0` will return a warning and may consequently yield the value `inf`.
+
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+# Using it to create boolean masks
+arr = np.array([1, 2, np.inf, 4, 5])
+mask = np.isinf(arr)
+print("Mask of elements with value inf:", mask)
+```
+
+## `numpy.nan`  
+
+- **Description**: `np.nan` stands for "Not a Number" (NaN), meaning an undefined or unrepresentable value in the number system.  
+- It appears when the result of a numerical operation is undefined, e.g., `0.0/0.0`, `inf - inf`, or when data loading errors occur.  
+- Arithmetic operations with `nan` typically also return `nan`.
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+# Replacing nan values in an array
+data = np.array([1, 2, np.nan, 4, np.nan])
+print("Original data:", data)
+
+# Filling nan values with zero
+data_no_nan = np.nan_to_num(data, nan=0.0)
+print("Data without nan:", data_no_nan)
+```
+
+## `numpy.newaxis`  
+- **Description**: `np.newaxis` is a special "constant"/object used to change array dimensions by increasing the number of dimensions by 1.  
+
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+# We have a 1D array
+vec = np.array([1, 2, 3, 4])
+print("Original array:", vec, "Shape:", vec.shape)
+
+# Adding a new dimension as the row dimension
+vec_as_col = vec[:, np.newaxis]
+print("Array as column:\n", vec_as_col, "Shape:", vec_as_col.shape)
+
+# Adding a dimension at the beginning
+vec_as_row = vec[np.newaxis, :]
+print("Array as row:\n", vec_as_row, "Shape:", vec_as_row.shape)
+
+# Another example: adding a dimension to easily broadcast operations
+a = np.array([10, 20, 30])
+b = np.array([1, 2])
+# Without a new dimension, trying to add a to b would fail,
+# because the shapes are not compatible.
+# With a new dimension, a has shape (3,1) and b (2,), which allows broadcasting
+sum_matrix = a[:, np.newaxis] + b
+print("Operation with broadcasting:\n", sum_matrix)
+```
+
+## Statistics and Aggregation
+
+| Function             | Description                                                    |
+|----------------------|----------------------------------------------------------------|
+| np.mean              | Mean of all values in the array.                               |
+| np.std               | Standard deviation.                                            |
+| np.var               | Variance.                                                      |
+| np.sum               | Sum of all elements.                                           |
+| np.prod              | Product of all elements.                                       |
+| np.cumsum            | Cumulative sum of all elements.                                |
+| np.cumprod           | Cumulative product of all elements.                            |
+| np.min, np.max       | Minimum/maximum value in the array.                            |
+| np.argmin, np.argmax | Index of the minimum/maximum value in the array.               |
+| np.all               | Checks whether all elements are non-zero.                      |
+| np.any               | Checks whether at least one element is non-zero.               |
+
+::: {.content-visible when-format="html"}
+  
+## Conditional Expressions
+  
+<https://numpy.org/doc/stable/reference/generated/numpy.where>
+<https://numpy.org/doc/stable/reference/generated/numpy.choose>
+<https://numpy.org/doc/stable/reference/generated/numpy.select>
+<https://numpy.org/doc/stable/reference/generated/numpy.nonzero>
+
+## Set Operations
+
+<https://numpy.org/doc/stable/reference/routines.set.html>
+
+## Array Operations
+
+
+<https://numpy.org/doc/stable/reference/generated/numpy.transpose>
+
+<https://numpy.org/doc/stable/reference/generated/numpy.flip>
+<https://numpy.org/doc/stable/reference/generated/numpy.fliplr>
+<https://numpy.org/doc/stable/reference/generated/numpy.flipud>
+
+<https://numpy.org/doc/stable/reference/generated/numpy.sort>
+
+
+
+## Date and Time
+
+<https://numpy.org/doc/stable/reference/arrays.datetime.html>
+
+
+## Pseudorandom Numbers
+
+<https://numpy.org/doc/stable/reference/random/index.html>
+  
+  
+:::

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Indexing, “slicing” – Data Analytics and Visualization</title>
+<title>16&nbsp; NumPy - Miscellaneous – Data Analytics and Visualization</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./numpy-modifications.html" rel="next">
-<link href="./numpy-creating-arrays.html" rel="prev">
+<link href="./numpy-conditions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-indexing.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Indexing, “slicing”</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-miscellaneous.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">NumPy - Miscellaneous</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -401,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy-indexing.html" class="sidebar-item-text sidebar-link active">
+  <a href="./numpy-indexing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Indexing, “slicing”</span></span></a>
   </div>
 </li>
@@ -443,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy-miscellaneous.html" class="sidebar-item-text sidebar-link">
+  <a href="./numpy-miscellaneous.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">NumPy - Miscellaneous</span></span></a>
   </div>
 </li>
@@ -454,16 +453,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#constants" id="toc-constants" class="nav-link active" data-scroll-target="#constants"><span class="header-section-number">16.1</span> Constants</a></li>
+  <li><a href="#numpy.inf" id="toc-numpy.inf" class="nav-link" data-scroll-target="#numpy.inf"><span class="header-section-number">16.2</span> <code>numpy.inf</code></a></li>
+  <li><a href="#numpy.nan" id="toc-numpy.nan" class="nav-link" data-scroll-target="#numpy.nan"><span class="header-section-number">16.3</span> <code>numpy.nan</code></a></li>
+  <li><a href="#numpy.newaxis" id="toc-numpy.newaxis" class="nav-link" data-scroll-target="#numpy.newaxis"><span class="header-section-number">16.4</span> <code>numpy.newaxis</code></a></li>
+  <li><a href="#statistics-and-aggregation" id="toc-statistics-and-aggregation" class="nav-link" data-scroll-target="#statistics-and-aggregation"><span class="header-section-number">16.5</span> Statistics and Aggregation</a></li>
+  <li><a href="#conditional-expressions" id="toc-conditional-expressions" class="nav-link" data-scroll-target="#conditional-expressions"><span class="header-section-number">16.6</span> Conditional Expressions</a></li>
+  <li><a href="#set-operations" id="toc-set-operations" class="nav-link" data-scroll-target="#set-operations"><span class="header-section-number">16.7</span> Set Operations</a></li>
+  <li><a href="#array-operations" id="toc-array-operations" class="nav-link" data-scroll-target="#array-operations"><span class="header-section-number">16.8</span> Array Operations</a></li>
+  <li><a href="#date-and-time" id="toc-date-and-time" class="nav-link" data-scroll-target="#date-and-time"><span class="header-section-number">16.9</span> Date and Time</a></li>
+  <li><a href="#pseudorandom-numbers" id="toc-pseudorandom-numbers" class="nav-link" data-scroll-target="#pseudorandom-numbers"><span class="header-section-number">16.10</span> Pseudorandom Numbers</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-indexing.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Indexing, “slicing”</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-miscellaneous.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">NumPy - Miscellaneous</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Indexing, “slicing”</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">NumPy - Miscellaneous</span></h1>
 </div>
 
 
@@ -480,265 +494,245 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="13dd6ddd" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="op">-</span><span class="dv">23</span>, <span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">16</span>, <span class="dv">1</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1:"</span>, a[<span class="dv">5</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"2:"</span>, a[<span class="op">-</span><span class="dv">2</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"3:"</span>, a[<span class="dv">3</span>:<span class="dv">6</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-1-7" class="code-annotation-target"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"4:"</span>, a[:])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-1-8" class="code-annotation-target"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"5:"</span>, a[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-1-9" class="code-annotation-target"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"6:"</span>, a[:<span class="dv">5</span>])</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="1">Access the element at index 5.</span>
-</dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="2">Access the second element from the end.</span>
-</dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="3">Access elements with indices from 3 to 5 (inclusive) — the principle of half-open intervals (closed on the left, open on the right).</span>
-</dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="7" data-code-annotation="4">Access all elements.</span>
-</dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="8" data-code-annotation="5">Access all elements except the last one.</span>
-</dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="9" data-code-annotation="6">Access from the beginning up to the element at index 4.</span>
-</dd>
-</dl>
-</div>
+<section id="constants" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="constants"><span class="header-section-number">16.1</span> Constants</h2>
+<p><code>NumPy</code> provides several well-known mathematical constants that can be useful in scientific and engineering computations. Built-in constants such as the number Pi or the base of the natural logarithm <code>e</code> make it easier to write readable and concise code.</p>
+<ol type="1">
+<li><strong><code>numpy.pi</code></strong>
+<ul>
+<li>Represents the number Pi (π) with high precision.<br>
+</li>
+<li>Pi is the ratio of a circle’s circumference to its diameter.<br>
+</li>
+<li>Approximately: <code>3.141592653589793</code></li>
+</ul></li>
+<li><strong><code>numpy.e</code></strong>
+<ul>
+<li>Represents the base of the natural logarithm, <code>e</code>.<br>
+</li>
+<li><code>e</code> is used in many fields, such as mathematical analysis, probability theory, and statistics.<br>
+</li>
+<li>Approximately: <code>2.718281828459045</code></li>
+</ul></li>
+<li><strong><code>numpy.eulergamma</code></strong>
+<ul>
+<li>Represents the Euler-Mascheroni constant, usually denoted as γ (gamma).</li>
+<li>It appears in mathematical analysis, particularly in number theory and the study of harmonic series.</li>
+<li>Approximately: <code>0.5772156649015329</code></li>
+</ul></li>
+</ol>
+<div id="66ca1291" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Circle radius</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Circle circumference: 2 * π * r</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>circumference <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Circle circumference:"</span>, circumference)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Circle area: π * r^2</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> np.pi <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Circle area:"</span>, area)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1: 8
-2: 16
-3: [ 4 -7  8]
-4: [  2   5  -2   4  -7   8   9  11 -23  -4  -7  16   1]
-5: [  2   5  -2   4  -7   8   9  11 -23  -4  -7  16]
-6: [ 2  5 -2  4 -7]</code></pre>
+<pre><code>Circle circumference: 31.41592653589793
+Circle area: 78.53981633974483</code></pre>
 </div>
 </div>
-<div id="38c04727" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1:"</span>, a[<span class="dv">4</span>:])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"2:"</span>, a[<span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"3:"</span>, a[<span class="dv">4</span>:<span class="dv">10</span>:<span class="dv">2</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"4:"</span>, a[::<span class="op">-</span><span class="dv">1</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"5:"</span>, a[::<span class="dv">2</span>])</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-2-8" class="code-annotation-target"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"6:"</span>, a[::<span class="op">-</span><span class="dv">2</span>])</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="1">Access elements from index 4 to the end.</span>
-</dd>
-<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="2">Access elements from index 4 to the end, excluding the last one.</span>
-</dd>
-<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="3">Access elements whose indices form an arithmetic sequence from 4 to 10 (including 4, but excluding 10) with a step of 2.</span>
-</dd>
-<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="4">Access elements in reverse order (from end to beginning).</span>
-</dd>
-<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="5">Access elements at even indices from the beginning.</span>
-</dd>
-<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="8" data-code-annotation="6">Access every second element, counting from the end (reversed order).</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1: [ -7   8   9  11 -23  -4  -7  16   1]
-2: [ -7   8   9  11 -23  -4  -7  16]
-3: [ -7   9 -23]
-4: [  1  16  -7  -4 -23  11   9   8  -7   4  -2   5   2]
-5: [  2  -2  -7   9 -23  -7   1]
-6: [  1  -7 -23   9  -7  -2   2]</code></pre>
-</div>
-</div>
-<div id="71aa4242" class="cell" data-execution_count="3">
+<div id="d3b7ad29" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>], [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">9</span>]])</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a[:<span class="dv">2</span>, <span class="dv">1</span>:]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(b))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a[<span class="dv">1</span>]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(c))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a[<span class="dv">1</span>, :]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(d))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample point x</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Value of the function e^x</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>exp_value <span class="op">=</span> np.e<span class="op">**</span>x</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"e^x for x=1:"</span>, exp_value)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparison with the np.exp function</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>exp_compare <span class="op">=</span> np.exp(x)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Comparison with np.exp(1):"</span>, exp_compare)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[4 5]
- [4 8]]
-(2, 2)
-[-3  4  8]
-(3,)
-[-3  4  8]
-(3,)</code></pre>
+<pre><code>e^x for x=1: 2.718281828459045
+Comparison with np.exp(1): 2.718281828459045</code></pre>
 </div>
 </div>
-<div id="d5903e3e" class="cell" data-execution_count="4">
+</section>
+<section id="numpy.inf" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="numpy.inf"><span class="header-section-number">16.2</span> <code>numpy.inf</code></h2>
+<ul>
+<li><strong>Description</strong>: <code>np.inf</code> represents an infinite value (∞).<br>
+</li>
+<li>It often appears in computations when the value of an expression tends to infinity (e.g., division by zero, certain limits, etc.).<br>
+</li>
+<li>For example, <code>1.0 / 0.0</code> will return a warning and may consequently yield the value <code>inf</code>.</li>
+</ul>
+<div id="635f5cc9" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>], [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">9</span>]])</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> a[<span class="dv">1</span>:<span class="dv">2</span>, :]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(e))</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> a[:, :<span class="dv">2</span>]</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(f))</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> a[<span class="dv">1</span>, :<span class="dv">2</span>]</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(g)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(g))</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> a[<span class="dv">1</span>:<span class="dv">2</span>, :<span class="dv">2</span>]</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(h)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.shape(h))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Using it to create boolean masks</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, np.inf, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.isinf(arr)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mask of elements with value inf:"</span>, mask)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[-3  4  8]]
-(1, 3)
-[[ 3  4]
- [-3  4]
- [ 3  2]]
-(3, 2)
-[-3  4]
-(2,)
-[[-3  4]]
-(1, 2)</code></pre>
+<pre><code>Mask of elements with value inf: [False False  True False False]</code></pre>
 </div>
 </div>
-<p><strong>Note — “slicing” creates a so-called view, not a copy. Changes to the view affect the original array and vice versa.</strong></p>
-<div id="9fadc72f" class="cell" data-execution_count="5">
+</section>
+<section id="numpy.nan" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="numpy.nan"><span class="header-section-number">16.3</span> <code>numpy.nan</code></h2>
+<ul>
+<li><strong>Description</strong>: <code>np.nan</code> stands for “Not a Number” (NaN), meaning an undefined or unrepresentable value in the number system.<br>
+</li>
+<li>It appears when the result of a numerical operation is undefined, e.g., <code>0.0/0.0</code>, <code>inf - inf</code>, or when data loading errors occur.<br>
+</li>
+<li>Arithmetic operations with <code>nan</code> typically also return <code>nan</code>.</li>
+</ul>
+<div id="df686a40" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>], [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">9</span>]])</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a[<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>:]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">1</span>][<span class="dv">1</span>] <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>b[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">11</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replacing nan values in an array</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, np.nan, <span class="dv">4</span>, np.nan])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original data:"</span>, data)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filling nan values with zero</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>data_no_nan <span class="op">=</span> np.nan_to_num(data, nan<span class="op">=</span><span class="fl">0.0</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Data without nan:"</span>, data_no_nan)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[4 8]]
-[[ 3  4  5]
- [-3  9  8]
- [ 3  2  9]]
-[[9 8]]
-[[  3   4   5]
- [ -3 -11   8]
- [  3   2   9]]
-[[-11   8]]</code></pre>
+<pre><code>Original data: [ 1.  2. nan  4. nan]
+Data without nan: [1. 2. 0. 4. 0.]</code></pre>
 </div>
 </div>
-<p>Solution — use the <code>.copy()</code> method:</p>
-<div id="5bb4abb2" class="cell" data-execution_count="6">
+</section>
+<section id="numpy.newaxis" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="numpy.newaxis"><span class="header-section-number">16.4</span> <code>numpy.newaxis</code></h2>
+<ul>
+<li><strong>Description</strong>: <code>np.newaxis</code> is a special “constant”/object used to change array dimensions by increasing the number of dimensions by 1.</li>
+</ul>
+<div id="f12efb01" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>], [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">9</span>]])</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a[<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>:].copy()</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">1</span>][<span class="dv">1</span>] <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>b[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">11</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We have a 1D array</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>vec <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original array:"</span>, vec, <span class="st">"Shape:"</span>, vec.shape)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a new dimension as the row dimension</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>vec_as_col <span class="op">=</span> vec[:, np.newaxis]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Array as column:</span><span class="ch">\n</span><span class="st">"</span>, vec_as_col, <span class="st">"Shape:"</span>, vec_as_col.shape)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a dimension at the beginning</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>vec_as_row <span class="op">=</span> vec[np.newaxis, :]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Array as row:</span><span class="ch">\n</span><span class="st">"</span>, vec_as_row, <span class="st">"Shape:"</span>, vec_as_row.shape)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Another example: adding a dimension to easily broadcast operations</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>])</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a new dimension, trying to add a to b would fail,</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># because the shapes are not compatible.</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># With a new dimension, a has shape (3,1) and b (2,), which allows broadcasting</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>sum_matrix <span class="op">=</span> a[:, np.newaxis] <span class="op">+</span> b</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Operation with broadcasting:</span><span class="ch">\n</span><span class="st">"</span>, sum_matrix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[4 8]]
-[[ 3  4  5]
- [-3  9  8]
- [ 3  2  9]]
-[[4 8]]
-[[ 3  4  5]
- [-3  9  8]
- [ 3  2  9]]
-[[-11   8]]</code></pre>
+<pre><code>Original array: [1 2 3 4] Shape: (4,)
+Array as column:
+ [[1]
+ [2]
+ [3]
+ [4]] Shape: (4, 1)
+Array as row:
+ [[1 2 3 4]] Shape: (1, 4)
+Operation with broadcasting:
+ [[11 12]
+ [21 22]
+ [31 32]]</code></pre>
 </div>
 </div>
-<p>Fancy indexing (indexing with an array of indices)</p>
-<div id="3ed67277" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="op">-</span><span class="dv">23</span>, <span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">1</span>])</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a[np.array([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">7</span>])]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a[[<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">7</span>]]</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[ 5  4 11]
-[ 5  4 11]</code></pre>
-</div>
-</div>
-<p>Boolean indexing (boolean masks)</p>
-<div id="3fa22827" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="op">-</span><span class="dv">23</span>, <span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">1</span>])</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a <span class="op">&gt;</span> <span class="dv">0</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a[a <span class="op">&gt;</span> <span class="dv">0</span>]</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a[(a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="op">&amp;</span> (a<span class="op">%</span><span class="dv">2</span> <span class="op">!=</span><span class="dv">0</span>)] <span class="co"># the &amp; operator stands for AND</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> a[(a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="op">|</span> (a<span class="op">%</span><span class="dv">2</span> <span class="op">!=</span><span class="dv">0</span>)] <span class="co"># the | operator stands for OR</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> a[(a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="op">^</span> (a<span class="op">%</span><span class="dv">2</span> <span class="op">!=</span><span class="dv">0</span>)] <span class="co"># the ^ operator stands for XOR</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> a[<span class="op">~</span>(a <span class="op">&gt;</span> <span class="dv">0</span>)]</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[ True  True False  True False  True  True  True False False False  True
-  True]
-[ 2  5  4  8  9 11  8  1]
-[ 9 11]
-[  5  -7   8   9  11 -23  -7   8   1]
-[  5  -7   8 -23  -7   8   1]
-[ -2  -7 -23  -4  -7]</code></pre>
-</div>
-</div>
-<p><strong>Note — fancy and boolean indexing return a copy, not a view (unlike “slicing”).</strong></p>
-<div id="9580ad0e" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="op">-</span><span class="dv">23</span>, <span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">1</span>])</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a[a <span class="op">&gt;</span> <span class="dv">0</span>]</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>b[<span class="dv">0</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[ 2  5  4  8  9 11  8  1]
-[  2   5  -2   4  -7   8   9  11 -23  -4  -7   8   1]
-[-5  5  4  8  9 11  8  1]
-[  2  20  -2   4  -7   8   9  11 -23  -4  -7   8   1]
-[-5  5  4  8  9 11  8  1]</code></pre>
-</div>
-</div>
+</section>
+<section id="statistics-and-aggregation" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="statistics-and-aggregation"><span class="header-section-number">16.5</span> Statistics and Aggregation</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 74%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>np.mean</td>
+<td>Mean of all values in the array.</td>
+</tr>
+<tr class="even">
+<td>np.std</td>
+<td>Standard deviation.</td>
+</tr>
+<tr class="odd">
+<td>np.var</td>
+<td>Variance.</td>
+</tr>
+<tr class="even">
+<td>np.sum</td>
+<td>Sum of all elements.</td>
+</tr>
+<tr class="odd">
+<td>np.prod</td>
+<td>Product of all elements.</td>
+</tr>
+<tr class="even">
+<td>np.cumsum</td>
+<td>Cumulative sum of all elements.</td>
+</tr>
+<tr class="odd">
+<td>np.cumprod</td>
+<td>Cumulative product of all elements.</td>
+</tr>
+<tr class="even">
+<td>np.min, np.max</td>
+<td>Minimum/maximum value in the array.</td>
+</tr>
+<tr class="odd">
+<td>np.argmin, np.argmax</td>
+<td>Index of the minimum/maximum value in the array.</td>
+</tr>
+<tr class="even">
+<td>np.all</td>
+<td>Checks whether all elements are non-zero.</td>
+</tr>
+<tr class="odd">
+<td>np.any</td>
+<td>Checks whether at least one element is non-zero.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conditional-expressions" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="conditional-expressions"><span class="header-section-number">16.6</span> Conditional Expressions</h2>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.where" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.where</a> <a href="https://numpy.org/doc/stable/reference/generated/numpy.choose" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.choose</a> <a href="https://numpy.org/doc/stable/reference/generated/numpy.select" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.select</a> <a href="https://numpy.org/doc/stable/reference/generated/numpy.nonzero" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.nonzero</a></p>
+</section>
+<section id="set-operations" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="set-operations"><span class="header-section-number">16.7</span> Set Operations</h2>
+<p><a href="https://numpy.org/doc/stable/reference/routines.set.html" class="uri">https://numpy.org/doc/stable/reference/routines.set.html</a></p>
+</section>
+<section id="array-operations" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="array-operations"><span class="header-section-number">16.8</span> Array Operations</h2>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.transpose" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.transpose</a></p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.flip" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.flip</a> <a href="https://numpy.org/doc/stable/reference/generated/numpy.fliplr" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.fliplr</a> <a href="https://numpy.org/doc/stable/reference/generated/numpy.flipud" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.flipud</a></p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.sort" class="uri">https://numpy.org/doc/stable/reference/generated/numpy.sort</a></p>
+</section>
+<section id="date-and-time" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="date-and-time"><span class="header-section-number">16.9</span> Date and Time</h2>
+<p><a href="https://numpy.org/doc/stable/reference/arrays.datetime.html" class="uri">https://numpy.org/doc/stable/reference/arrays.datetime.html</a></p>
+</section>
+<section id="pseudorandom-numbers" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="pseudorandom-numbers"><span class="header-section-number">16.10</span> Pseudorandom Numbers</h2>
+<p><a href="https://numpy.org/doc/stable/reference/random/index.html" class="uri">https://numpy.org/doc/stable/reference/random/index.html</a></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1156,14 +1150,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./numpy-creating-arrays.html" class="pagination-link" aria-label="Creating Arrays">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Arrays</span></span>
+      <a href="./numpy-conditions.html" class="pagination-link" aria-label="Advanced Filtering">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Advanced Filtering</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./numpy-modifications.html" class="pagination-link" aria-label="Modifying shape and size">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Modifying shape and size</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
