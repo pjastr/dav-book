@@ -1,14 +1,13 @@
-# NumPy - start
+# NumPy - Getting Started
 
 NumPy is a Python library for scientific computing.
 
 Applications:
   
-  * linear algebra
-* advanced mathematical (numerical) computations 
-* integration
+* linear algebra
+* advanced mathematical (numerical) computations
+* numerical integration
 * solving equations
-* ...
 
 
 
@@ -18,19 +17,22 @@ Applications:
 import numpy as np
 ```
 
-The fundamental entity in the NumPy library is the N-dimensional array called `ndarray`. Each element in the array is treated as a `dtype` type.
+The fundamental object in the NumPy library is an N-dimensional array called `ndarray`. Each element of the array is treated as a `dtype` type.
+
 
 ```python
-numpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)
+np.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)
 ```
 
-* object - what is to be placed into the array
+* object - an object (or sequence) to be converted into an array
 * dtype - type
-* copy - whether objects should be copied, default `True`
+* copy - whether objects should be copied, default is `True`
 * order - memory layout: C (rows), F (columns), A, K
-* subok - handled by subclasses (if `True`), default `False`
-* ndmin - minimum size (dimension) of the array
+* subok - handled by subclasses (if `True`), default is `False`
+* ndmin - minimum number of dimensions of the array
 * like - creation based on a reference array
+
+
 
 ```{python}
 #| echo: true
@@ -55,11 +57,11 @@ print(type(g))
 
 ```
 
-1. Standard defaults.
-2. Type check.
-3. One of the elements is of a different type. Therefore, upcasting to the "largest" type occurs here.
+1. Creating an array with default settings.
+2. Checking the type.
+3. One of the elements is of a different type. Therefore, upcasting to the "largest" type occurs.
 4. Here we get a 2x2 array.
-5. In this line, a 2x1 array will be obtained.
-6. Setting a different - larger type.
+5. In this line we get an array with dimensions 1x3 (shape `(1, 3)`).
+6. Forcing the `complex` type — a type with a wider range.
 7. Using the matrix subtype.
 8. Preserving the matrix type.

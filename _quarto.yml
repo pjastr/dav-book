@@ -11,9 +11,11 @@ book:
       chapters: 
       - index.qmd
       - a_bit_of_theory.qmd
+      - configuration.qmd
     - part: NumPy
       chapters:
       - numpy_getting_started.qmd
+      - list_array.qmd
   downloads: pdf
   
 execute:

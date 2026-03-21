@@ -165,25 +165,47 @@
     ]
   },
   {
+    "objectID": "configuration.html",
+    "href": "configuration.html",
+    "title": "3  Configuration",
+    "section": "",
+    "text": "In the first step, we create a new project in the chosen location. We select venv and one of the Python versions, e.g. 3.13. Finally, click the Create button.\n\n\n\nWe add the requirements file https://piojas.pl/wp-content/uploads/2026/02/requirements.txt to the project’s root directory. The file name is important.\n\n\n\nWe open the terminal in PyCharm and type the command: pip install -r requirements.txt",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configuration</span>"
+    ]
+  },
+  {
     "objectID": "numpy_getting_started.html",
     "href": "numpy_getting_started.html",
-    "title": "3  NumPy - start",
+    "title": "4  NumPy - Getting Started",
     "section": "",
-    "text": "3.1 Importing the NumPy library\nNumPy is a Python library for scientific computing.\nApplications:\nThe fundamental entity in the NumPy library is the N-dimensional array called ndarray. Each element in the array is treated as a dtype type.\nimport numpy as np\n\n1a = np.array([1, 2, 3])\nprint(\"a:\", a) \n2print(\"type of a:\", type(a))\n3b = np.array([1, 2, 3.0])\nprint(\"b:\", b)\n4c = np.array([[1, 2], [3, 4]])\nprint(\"c:\", c)\n5d = np.array([1, 2, 3], ndmin=2)\nprint(\"d:\", d)\n6e = np.array([1, 2, 3], dtype=complex)\nprint(\"e:\", e)\n7f = np.array(np.asmatrix('1 2; 3 4'))\nprint(\"f:\", f)\n8g = np.array(np.asmatrix('1 2; 3 4'), subok=True)\nprint(\"g:\", g)\nprint(type(g))\n\n\n1\n\nStandard defaults.\n\n2\n\nType check.\n\n3\n\nOne of the elements is of a different type. Therefore, upcasting to the “largest” type occurs here.\n\n4\n\nHere we get a 2x2 array.\n\n5\n\nIn this line, a 2x1 array will be obtained.\n\n6\n\nSetting a different - larger type.\n\n7\n\nUsing the matrix subtype.\n\n8\n\nPreserving the matrix type.\n\n\n\n\na: [1 2 3]\ntype of a: &lt;class 'numpy.ndarray'&gt;\nb: [1. 2. 3.]\nc: [[1 2]\n [3 4]]\nd: [[1 2 3]]\ne: [1.+0.j 2.+0.j 3.+0.j]\nf: [[1 2]\n [3 4]]\ng: [[1 2]\n [3 4]]\n&lt;class 'numpy.matrix'&gt;",
+    "text": "4.1 Importing the NumPy library\nNumPy is a Python library for scientific computing.\nApplications:\nThe fundamental object in the NumPy library is an N-dimensional array called ndarray. Each element of the array is treated as a dtype type.\nimport numpy as np\n\n1a = np.array([1, 2, 3])\nprint(\"a:\", a) \n2print(\"type of a:\", type(a))\n3b = np.array([1, 2, 3.0])\nprint(\"b:\", b)\n4c = np.array([[1, 2], [3, 4]])\nprint(\"c:\", c)\n5d = np.array([1, 2, 3], ndmin=2)\nprint(\"d:\", d)\n6e = np.array([1, 2, 3], dtype=complex)\nprint(\"e:\", e)\n7f = np.array(np.asmatrix('1 2; 3 4'))\nprint(\"f:\", f)\n8g = np.array(np.asmatrix('1 2; 3 4'), subok=True)\nprint(\"g:\", g)\nprint(type(g))\n\n\n1\n\nCreating an array with default settings.\n\n2\n\nChecking the type.\n\n3\n\nOne of the elements is of a different type. Therefore, upcasting to the “largest” type occurs.\n\n4\n\nHere we get a 2x2 array.\n\n5\n\nIn this line we get an array with dimensions 1x3 (shape (1, 3)).\n\n6\n\nForcing the complex type — a type with a wider range.\n\n7\n\nUsing the matrix subtype.\n\n8\n\nPreserving the matrix type.\n\n\n\n\na: [1 2 3]\ntype of a: &lt;class 'numpy.ndarray'&gt;\nb: [1. 2. 3.]\nc: [[1 2]\n [3 4]]\nd: [[1 2 3]]\ne: [1.+0.j 2.+0.j 3.+0.j]\nf: [[1 2]\n [3 4]]\ng: [[1 2]\n [3 4]]\n&lt;class 'numpy.matrix'&gt;",
     "crumbs": [
       "NumPy",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>NumPy - start</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>NumPy - Getting Started</span>"
     ]
   },
   {
     "objectID": "numpy_getting_started.html#importing-the-numpy-library",
     "href": "numpy_getting_started.html#importing-the-numpy-library",
-    "title": "3  NumPy - start",
+    "title": "4  NumPy - Getting Started",
     "section": "",
-    "text": "import numpy as np\n\nnumpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)\n\nobject - what is to be placed into the array\ndtype - type\ncopy - whether objects should be copied, default True\norder - memory layout: C (rows), F (columns), A, K\nsubok - handled by subclasses (if True), default False\nndmin - minimum size (dimension) of the array\nlike - creation based on a reference array",
+    "text": "import numpy as np\n\nnp.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)\n\nobject - an object (or sequence) to be converted into an array\ndtype - type\ncopy - whether objects should be copied, default is True\norder - memory layout: C (rows), F (columns), A, K\nsubok - handled by subclasses (if True), default is False\nndmin - minimum number of dimensions of the array\nlike - creation based on a reference array",
     "crumbs": [
       "NumPy",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>NumPy - start</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>NumPy - Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "list_array.html",
+    "href": "list_array.html",
+    "title": "5  List vs Array",
+    "section": "",
+    "text": "import numpy as np\nimport time\n\nstart_time = time.time()\nmy_arr = np.arange(1000000)\nmy_list = list(range(1000000))\nstart_time = time.time()\nmy_arr2 = my_arr * 2\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\nstart_time = time.time()\nmy_list2 = [x * 2 for x in my_list]\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\n\n--- 0.0020279884338378906 seconds ---\n--- 0.04769158363342285 seconds ---",
+    "crumbs": [
+      "NumPy",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>List vs Array</span>"
     ]
   }
 ]

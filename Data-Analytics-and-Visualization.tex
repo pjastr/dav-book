@@ -1012,9 +1012,45 @@ Information, Second Edition, Graphics Press, USA, 1991, p.~57 -- 69.
   accessed online 20.03.2023.
 \end{itemize}
 
+\chapter{Configuration}\label{configuration}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In the first step, we create a new project in the chosen location. We
+  select venv and one of the Python versions, e.g.~3.13. Finally, click
+  the Create button.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{konf1.png}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  We add the requirements file
+  https://piojas.pl/wp-content/uploads/2026/02/requirements.txt to the
+  project's root directory. The file name is important.
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{konf2.png}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  We open the terminal in PyCharm and type the command:
+  \texttt{pip\ install\ -r\ requirements.txt}
+\end{enumerate}
+
+\pandocbounded{\includegraphics[keepaspectratio]{konf3.png}}
+
 \part{NumPy}
 
-\chapter{NumPy - start}\label{numpy---start}
+\chapter{NumPy - Getting Started}\label{numpy---getting-started}
 
 NumPy is a Python library for scientific computing.
 
@@ -1027,11 +1063,9 @@ Applications:
 \item
   advanced mathematical (numerical) computations
 \item
-  integration
+  numerical integration
 \item
   solving equations
-\item
-  \ldots{}
 \end{itemize}
 
 \section{Importing the NumPy library}\label{importing-the-numpy-library}
@@ -1042,31 +1076,31 @@ Applications:
 \end{Highlighting}
 \end{Shaded}
 
-The fundamental entity in the NumPy library is the N-dimensional array
-called \texttt{ndarray}. Each element in the array is treated as a
+The fundamental object in the NumPy library is an N-dimensional array
+called \texttt{ndarray}. Each element of the array is treated as a
 \texttt{dtype} type.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{numpy.array(}\BuiltInTok{object}\NormalTok{, dtype}\OperatorTok{=}\VariableTok{None}\NormalTok{, }\OperatorTok{*}\NormalTok{, copy}\OperatorTok{=}\VariableTok{True}\NormalTok{, order}\OperatorTok{=}\StringTok{\textquotesingle{}K\textquotesingle{}}\NormalTok{, subok}\OperatorTok{=}\VariableTok{False}\NormalTok{, ndmin}\OperatorTok{=}\DecValTok{0}\NormalTok{, like}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\NormalTok{np.array(}\BuiltInTok{object}\NormalTok{, dtype}\OperatorTok{=}\VariableTok{None}\NormalTok{, }\OperatorTok{*}\NormalTok{, copy}\OperatorTok{=}\VariableTok{True}\NormalTok{, order}\OperatorTok{=}\StringTok{\textquotesingle{}K\textquotesingle{}}\NormalTok{, subok}\OperatorTok{=}\VariableTok{False}\NormalTok{, ndmin}\OperatorTok{=}\DecValTok{0}\NormalTok{, like}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{itemize}
 \tightlist
 \item
-  object - what is to be placed into the array
+  object - an object (or sequence) to be converted into an array
 \item
   dtype - type
 \item
-  copy - whether objects should be copied, default \texttt{True}
+  copy - whether objects should be copied, default is \texttt{True}
 \item
   order - memory layout: C (rows), F (columns), A, K
 \item
-  subok - handled by subclasses (if \texttt{True}), default
+  subok - handled by subclasses (if \texttt{True}), default is
   \texttt{False}
 \item
-  ndmin - minimum size (dimension) of the array
+  ndmin - minimum number of dimensions of the array
 \item
   like - creation based on a reference array
 \end{itemize}
@@ -1098,18 +1132,19 @@ called \texttt{ndarray}. Each element in the array is treated as a
 \begin{description}
 \tightlist
 \item[\circled{1}]
-Standard defaults.
+Creating an array with default settings.
 \item[\circled{2}]
-Type check.
+Checking the type.
 \item[\circled{3}]
 One of the elements is of a different type. Therefore, upcasting to the
-``largest'' type occurs here.
+``largest'' type occurs.
 \item[\circled{4}]
 Here we get a 2x2 array.
 \item[\circled{5}]
-In this line, a 2x1 array will be obtained.
+In this line we get an array with dimensions 1x3 (shape
+\texttt{(1,\ 3)}).
 \item[\circled{6}]
-Setting a different - larger type.
+Forcing the \texttt{complex} type --- a type with a wider range.
 \item[\circled{7}]
 Using the matrix subtype.
 \item[\circled{8}]
@@ -1129,6 +1164,30 @@ f: [[1 2]
 g: [[1 2]
  [3 4]]
 <class 'numpy.matrix'>
+\end{verbatim}
+
+\chapter{List vs Array}\label{list-vs-array}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ time}
+
+\NormalTok{start\_time }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{my\_arr }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{1000000}\NormalTok{)}
+\NormalTok{my\_list }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(}\BuiltInTok{range}\NormalTok{(}\DecValTok{1000000}\NormalTok{))}
+\NormalTok{start\_time }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{my\_arr2 }\OperatorTok{=}\NormalTok{ my\_arr }\OperatorTok{*} \DecValTok{2}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}{-} }\SpecialCharTok{\%s}\StringTok{ seconds {-}{-}{-}"} \OperatorTok{\%}\NormalTok{ (time.time() }\OperatorTok{{-}}\NormalTok{ start\_time))}
+\NormalTok{start\_time }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{my\_list2 }\OperatorTok{=}\NormalTok{ [x }\OperatorTok{*} \DecValTok{2} \ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ my\_list]}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}{-} }\SpecialCharTok{\%s}\StringTok{ seconds {-}{-}{-}"} \OperatorTok{\%}\NormalTok{ (time.time() }\OperatorTok{{-}}\NormalTok{ start\_time))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+--- 0.0020012855529785156 seconds ---
+--- 0.036900997161865234 seconds ---
 \end{verbatim}
 
 
