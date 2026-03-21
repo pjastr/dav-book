@@ -171,7 +171,7 @@
     "section": "",
     "text": "3.1 Importing the NumPy library\nNumPy is a Python library for scientific computing.\nApplications:\nThe fundamental entity in the NumPy library is the N-dimensional array called ndarray. Each element in the array is treated as a dtype type.\nimport numpy as np\n\n1a = np.array([1, 2, 3])\nprint(\"a:\", a) \n2print(\"type of a:\", type(a))\n3b = np.array([1, 2, 3.0])\nprint(\"b:\", b)\n4c = np.array([[1, 2], [3, 4]])\nprint(\"c:\", c)\n5d = np.array([1, 2, 3], ndmin=2)\nprint(\"d:\", d)\n6e = np.array([1, 2, 3], dtype=complex)\nprint(\"e:\", e)\n7f = np.array(np.asmatrix('1 2; 3 4'))\nprint(\"f:\", f)\n8g = np.array(np.asmatrix('1 2; 3 4'), subok=True)\nprint(\"g:\", g)\nprint(type(g))\n\n\n1\n\nStandard defaults.\n\n2\n\nType check.\n\n3\n\nOne of the elements is of a different type. Therefore, upcasting to the “largest” type occurs here.\n\n4\n\nHere we get a 2x2 array.\n\n5\n\nIn this line, a 2x1 array will be obtained.\n\n6\n\nSetting a different - larger type.\n\n7\n\nUsing the matrix subtype.\n\n8\n\nPreserving the matrix type.\n\n\n\n\na: [1 2 3]\ntype of a: &lt;class 'numpy.ndarray'&gt;\nb: [1. 2. 3.]\nc: [[1 2]\n [3 4]]\nd: [[1 2 3]]\ne: [1.+0.j 2.+0.j 3.+0.j]\nf: [[1 2]\n [3 4]]\ng: [[1 2]\n [3 4]]\n&lt;class 'numpy.matrix'&gt;",
     "crumbs": [
-      "Introduction",
+      "NumPy",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>NumPy - start</span>"
     ]
   },
@@ -182,7 +182,7 @@
     "section": "",
     "text": "import numpy as np\n\nnumpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)\n\nobject - what is to be placed into the array\ndtype - type\ncopy - whether objects should be copied, default True\norder - memory layout: C (rows), F (columns), A, K\nsubok - handled by subclasses (if True), default False\nndmin - minimum size (dimension) of the array\nlike - creation based on a reference array",
     "crumbs": [
-      "Introduction",
+      "NumPy",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>NumPy - start</span>"
     ]
   }

@@ -11,8 +11,14 @@ book:
       chapters: 
       - index.qmd
       - a_bit_of_theory.qmd
+    - part: NumPy
+      chapters:
       - numpy_getting_started.qmd
   downloads: pdf
+  
+execute:
+  freeze: auto
+
 
 
 format:

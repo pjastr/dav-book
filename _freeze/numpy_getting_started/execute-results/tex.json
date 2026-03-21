@@ -1,0 +1,11 @@
+{
+  "hash": "eb911b9c2b6a387794e30d8a3de0fcd3",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# NumPy - start\n\nNumPy is a Python library for scientific computing.\n\nApplications:\n  \n  * linear algebra\n* advanced mathematical (numerical) computations \n* integration\n* solving equations\n* ...\n\n\n\n## Importing the NumPy library\n\n```python\nimport numpy as np\n```\n\nThe fundamental entity in the NumPy library is the N-dimensional array called `ndarray`. Each element in the array is treated as a `dtype` type.\n\n```python\nnumpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)\n```\n\n* object - what is to be placed into the array\n* dtype - type\n* copy - whether objects should be copied, default `True`\n* order - memory layout: C (rows), F (columns), A, K\n* subok - handled by subclasses (if `True`), default `False`\n* ndmin - minimum size (dimension) of the array\n* like - creation based on a reference array\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n\na = np.array([1, 2, 3])    # <1>                           \nprint(\"a:\", a) \nprint(\"type of a:\", type(a))  # <2>\nb = np.array([1, 2, 3.0]) # <3>\nprint(\"b:\", b)\nc = np.array([[1, 2], [3, 4]]) # <4>\nprint(\"c:\", c)\nd = np.array([1, 2, 3], ndmin=2) # <5>\nprint(\"d:\", d)\ne = np.array([1, 2, 3], dtype=complex) # <6>\nprint(\"e:\", e)\nf = np.array(np.asmatrix('1 2; 3 4')) # <7>\nprint(\"f:\", f)\ng = np.array(np.asmatrix('1 2; 3 4'), subok=True) # <8>\nprint(\"g:\", g)\nprint(type(g))\n```\n\n::: {.cell-output .cell-output-stdout}\n```\na: [1 2 3]\ntype of a: <class 'numpy.ndarray'>\nb: [1. 2. 3.]\nc: [[1 2]\n [3 4]]\nd: [[1 2 3]]\ne: [1.+0.j 2.+0.j 3.+0.j]\nf: [[1 2]\n [3 4]]\ng: [[1 2]\n [3 4]]\n<class 'numpy.matrix'>\n```\n:::\n:::\n\n\n1. Standard defaults.\n2. Type check.\n3. One of the elements is of a different type. Therefore, upcasting to the \"largest\" type occurs here.\n4. Here we get a 2x2 array.\n5. In this line, a 2x1 array will be obtained.\n6. Setting a different - larger type.\n7. Using the matrix subtype.\n8. Preserving the matrix type.\n\n",
+    "supporting": [
+      "numpy_getting_started_files\\figure-pdf"
+    ],
+    "filters": []
+  }
+}

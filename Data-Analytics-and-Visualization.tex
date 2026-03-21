@@ -108,6 +108,7 @@
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -136,15 +137,12 @@
 
 
 \ifLuaTeX
-\usepackage[bidi=basic]{babel}
+\usepackage[bidi=basic,shorthands=off]{babel}
 \else
-\usepackage[bidi=default]{babel}
+\usepackage[bidi=default,shorthands=off]{babel}
 \fi
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
 \ifLuaTeX
-  \usepackage[english]{selnolig} % disable illegal ligatures
+  \usepackage{selnolig} % disable illegal ligatures
 \fi
 
 
@@ -230,7 +228,6 @@
 
 \renewcommand*\contentsname{Table of contents}
 {
-\hypersetup{linkcolor=}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
@@ -581,6 +578,7 @@ always required, e.g.~the number of full-time positions in a company
   example:
 \end{itemize}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}ll@{}}
 \toprule\noalign{}
 Religion & Code \\
@@ -592,6 +590,7 @@ Christianity & 1 \\
 Islam & 2 \\
 Buddhism & 3 \\
 \end{longtable}
+}
 
 \textbf{Ordinal scale}
 
@@ -606,6 +605,7 @@ Buddhism & 3 \\
   examples:
 \end{itemize}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}ll@{}}
 \toprule\noalign{}
 Education & Code \\
@@ -617,7 +617,9 @@ Primary & 1 \\
 Secondary & 2 \\
 Higher & 3 \\
 \end{longtable}
+}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}ll@{}}
 \toprule\noalign{}
 Income & Code \\
@@ -629,6 +631,7 @@ Low & 1 \\
 Medium & 2 \\
 High & 3 \\
 \end{longtable}
+}
 
 \textbf{Interval scale}
 
@@ -645,6 +648,7 @@ High & 3 \\
   example:
 \end{itemize}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lll@{}}
 \toprule\noalign{}
 City & Temperature in \(^{\circ}C\) & Temperature in \(^{\circ}F\) \\
@@ -657,6 +661,7 @@ Olsztyn & 10 & 50 \\
 Gdańsk & 5 & 41 \\
 Szczecin & 20 & 68 \\
 \end{longtable}
+}
 
 \textbf{Ratio scale}
 
@@ -675,6 +680,7 @@ Szczecin & 20 & 68 \\
   example:
 \end{itemize}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}ll@{}}
 \toprule\noalign{}
 Product & Price in PLN \\
@@ -686,6 +692,7 @@ Bread & 3 \\
 Butter & 8 \\
 Pears & 5 \\
 \end{longtable}
+}
 
 \section{Types of statistical
 studies}\label{types-of-statistical-studies}
@@ -891,6 +898,7 @@ The tidy data concept:
 
 Ideal data is presented in a table:
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}llll@{}}
 \toprule\noalign{}
 Name & Age & Height & Eye color \\
@@ -902,6 +910,7 @@ Adam & 26 & 167 & Brown \\
 Sylwia & 34 & 164 & Hazel \\
 Tomasz & 42 & 183 & Blue \\
 \end{longtable}
+}
 
 What should we pay attention to?
 
@@ -918,6 +927,7 @@ What should we pay attention to?
 
 \subsection{Examples of untidy data}\label{examples-of-untidy-data}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}llllll@{}}
 \toprule\noalign{}
 Name & Age & Height & Brown & Blue & Hazel \\
@@ -929,6 +939,7 @@ Adam & 26 & 167 & 1 & 0 & 0 \\
 Sylwia & 34 & 164 & 0 & 0 & 1 \\
 Tomasz & 42 & 183 & 0 & 1 & 0 \\
 \end{longtable}
+}
 
 \textbf{Column headers must correspond to features, not to variable
 values.}
@@ -1001,6 +1012,8 @@ Information, Second Edition, Graphics Press, USA, 1991, p.~57 -- 69.
   accessed online 20.03.2023.
 \end{itemize}
 
+\part{NumPy}
+
 \chapter{NumPy - start}\label{numpy---start}
 
 NumPy is a Python library for scientific computing.
@@ -1058,7 +1071,7 @@ called \texttt{ndarray}. Each element in the array is treated as a
   like - creation based on a reference array
 \end{itemize}
 
-\phantomsection\label{annotated-cell-3}%
+\protect\phantomsection\label{annotated-cell-3}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
