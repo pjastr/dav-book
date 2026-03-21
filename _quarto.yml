@@ -11,6 +11,7 @@ book:
       chapters: 
       - index.qmd
       - a_bit_of_theory.qmd
+      - numpy_getting_started.qmd
   downloads: pdf
 
 

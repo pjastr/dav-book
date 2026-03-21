@@ -1,0 +1,65 @@
+# NumPy - start
+
+NumPy is a Python library for scientific computing.
+
+Applications:
+  
+  * linear algebra
+* advanced mathematical (numerical) computations 
+* integration
+* solving equations
+* ...
+
+
+
+## Importing the NumPy library
+
+```python
+import numpy as np
+```
+
+The fundamental entity in the NumPy library is the N-dimensional array called `ndarray`. Each element in the array is treated as a `dtype` type.
+
+```python
+numpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)
+```
+
+* object - what is to be placed into the array
+* dtype - type
+* copy - whether objects should be copied, default `True`
+* order - memory layout: C (rows), F (columns), A, K
+* subok - handled by subclasses (if `True`), default `False`
+* ndmin - minimum size (dimension) of the array
+* like - creation based on a reference array
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.array([1, 2, 3])    # <1>                           
+print("a:", a) 
+print("type of a:", type(a))  # <2>
+b = np.array([1, 2, 3.0]) # <3>
+print("b:", b)
+c = np.array([[1, 2], [3, 4]]) # <4>
+print("c:", c)
+d = np.array([1, 2, 3], ndmin=2) # <5>
+print("d:", d)
+e = np.array([1, 2, 3], dtype=complex) # <6>
+print("e:", e)
+f = np.array(np.asmatrix('1 2; 3 4')) # <7>
+print("f:", f)
+g = np.array(np.asmatrix('1 2; 3 4'), subok=True) # <8>
+print("g:", g)
+print(type(g))
+
+```
+
+1. Standard defaults.
+2. Type check.
+3. One of the elements is of a different type. Therefore, upcasting to the "largest" type occurs here.
+4. Here we get a 2x2 array.
+5. In this line, a 2x1 array will be obtained.
+6. Setting a different - larger type.
+7. Using the matrix subtype.
+8. Preserving the matrix type.

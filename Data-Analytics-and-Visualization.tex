@@ -66,6 +66,46 @@
 \fi
 \makeatother
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
@@ -161,6 +201,12 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
+\makeatletter
+\@ifpackageloaded{tikz}{}{\usepackage{tikz}}
+\makeatother
+        \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+          \node[shape=circle,draw,inner sep=1pt] (char) {{\scriptsize#1}};}}  
+                  
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -178,7 +224,7 @@
 
 \title{Data Analytics and Visualization}
 \author{Piotr Jastrzębski}
-\date{2026-03-03}
+\date{2026-03-21}
 \begin{document}
 \maketitle
 
@@ -954,6 +1000,123 @@ Information, Second Edition, Graphics Press, USA, 1991, p.~57 -- 69.
   https://qlikblog.pl/edward-tufte-dobre-praktyki-prezentacji-danych/,
   accessed online 20.03.2023.
 \end{itemize}
+
+\chapter{NumPy - start}\label{numpy---start}
+
+NumPy is a Python library for scientific computing.
+
+Applications:
+
+\begin{itemize}
+\tightlist
+\item
+  linear algebra
+\item
+  advanced mathematical (numerical) computations
+\item
+  integration
+\item
+  solving equations
+\item
+  \ldots{}
+\end{itemize}
+
+\section{Importing the NumPy library}\label{importing-the-numpy-library}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\end{Highlighting}
+\end{Shaded}
+
+The fundamental entity in the NumPy library is the N-dimensional array
+called \texttt{ndarray}. Each element in the array is treated as a
+\texttt{dtype} type.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{numpy.array(}\BuiltInTok{object}\NormalTok{, dtype}\OperatorTok{=}\VariableTok{None}\NormalTok{, }\OperatorTok{*}\NormalTok{, copy}\OperatorTok{=}\VariableTok{True}\NormalTok{, order}\OperatorTok{=}\StringTok{\textquotesingle{}K\textquotesingle{}}\NormalTok{, subok}\OperatorTok{=}\VariableTok{False}\NormalTok{, ndmin}\OperatorTok{=}\DecValTok{0}\NormalTok{, like}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  object - what is to be placed into the array
+\item
+  dtype - type
+\item
+  copy - whether objects should be copied, default \texttt{True}
+\item
+  order - memory layout: C (rows), F (columns), A, K
+\item
+  subok - handled by subclasses (if \texttt{True}), default
+  \texttt{False}
+\item
+  ndmin - minimum size (dimension) of the array
+\item
+  like - creation based on a reference array
+\end{itemize}
+
+\phantomsection\label{annotated-cell-3}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{1}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"a:"}\NormalTok{, a) }
+\BuiltInTok{print}\NormalTok{(}\StringTok{"type of a:"}\NormalTok{, }\BuiltInTok{type}\NormalTok{(a)) }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{3.0}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{3}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"b:"}\NormalTok{, b)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]]) }\hspace*{\fill}\NormalTok{\circled{4}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"c:"}\NormalTok{, c)}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], ndmin}\OperatorTok{=}\DecValTok{2}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{5}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"d:"}\NormalTok{, d)}
+\NormalTok{e }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], dtype}\OperatorTok{=}\BuiltInTok{complex}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{6}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"e:"}\NormalTok{, e)}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ np.array(np.asmatrix(}\StringTok{\textquotesingle{}1 2; 3 4\textquotesingle{}}\NormalTok{)) }\hspace*{\fill}\NormalTok{\circled{7}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"f:"}\NormalTok{, f)}
+\NormalTok{g }\OperatorTok{=}\NormalTok{ np.array(np.asmatrix(}\StringTok{\textquotesingle{}1 2; 3 4\textquotesingle{}}\NormalTok{), subok}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{8}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"g:"}\NormalTok{, g)}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{type}\NormalTok{(g))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+Standard defaults.
+\item[\circled{2}]
+Type check.
+\item[\circled{3}]
+One of the elements is of a different type. Therefore, upcasting to the
+``largest'' type occurs here.
+\item[\circled{4}]
+Here we get a 2x2 array.
+\item[\circled{5}]
+In this line, a 2x1 array will be obtained.
+\item[\circled{6}]
+Setting a different - larger type.
+\item[\circled{7}]
+Using the matrix subtype.
+\item[\circled{8}]
+Preserving the matrix type.
+\end{description}
+
+\begin{verbatim}
+a: [1 2 3]
+type of a: <class 'numpy.ndarray'>
+b: [1. 2. 3.]
+c: [[1 2]
+ [3 4]]
+d: [[1 2 3]]
+e: [1.+0.j 2.+0.j 3.+0.j]
+f: [[1 2]
+ [3 4]]
+g: [[1 2]
+ [3 4]]
+<class 'numpy.matrix'>
+\end{verbatim}
 
 
 
