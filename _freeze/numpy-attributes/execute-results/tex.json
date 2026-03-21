@@ -1,0 +1,11 @@
+{
+  "hash": "a8afea8171aaca953efb2261e98a5bce",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# Array Attributes\n\n| Attribute |  Description |\n|---|---|\n| `shape` | tuple with information about the number of elements for each dimension |\n| `size` | total number of elements in the array |\n| `ndim` | number of dimensions of the array |\n| `nbytes` | number of bytes the array occupies in memory |\n| `dtype` | data type stored in the array (e.g. `int64`, `float64`) |\n\n  \n::: {.content-visible when-format=\"html\"}\n  \n<https://numpy.org/doc/stable/reference/arrays.ndarray.html#array-attributes>\n\n:::\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n\ntab1 = np.array([2, -3, 4, -8, 1])\nprint(\"type:\", type(tab1))\nprint(\"shape:\", tab1.shape)\nprint(\"size:\", tab1.size)\nprint(\"ndim:\", tab1.ndim)\nprint(\"nbytes:\", tab1.nbytes)\nprint(\"dtype:\", tab1.dtype)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\ntype: <class 'numpy.ndarray'>\nshape: (5,)\nsize: 5\nndim: 1\nnbytes: 40\ndtype: int64\n```\n:::\n:::\n\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\nimport numpy as np\n\ntab2 = np.array([[2, -3], [4, -8]])\nprint(\"type:\", type(tab2))\nprint(\"shape:\", tab2.shape)\nprint(\"size:\", tab2.size)\nprint(\"ndim:\", tab2.ndim)\nprint(\"nbytes:\", tab2.nbytes)\nprint(\"dtype:\", tab2.dtype)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\ntype: <class 'numpy.ndarray'>\nshape: (2, 2)\nsize: 4\nndim: 2\nnbytes: 32\ndtype: int64\n```\n:::\n:::\n\n\nNumPy does not support ragged arrays. The following code will produce an error:\n  \n```python\nimport numpy as np\n\ntab3 = np.array([[2, -3], [4, -8, 5], [3]])\n```\n\n",
+    "supporting": [
+      "numpy-attributes_files\\figure-pdf"
+    ],
+    "filters": []
+  }
+}

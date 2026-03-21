@@ -16,6 +16,9 @@ book:
       chapters:
       - numpy_getting_started.qmd
       - list_array.qmd
+      - numpy-attributes.qmd
+      - numpy-datatypes.qmd
+      - numpy-creating-arrays.qmd
   downloads: pdf
   
 execute:

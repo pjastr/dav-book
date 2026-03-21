@@ -1,0 +1,32 @@
+# Data Types
+
+::: {.content-visible when-format="html"}
+
+<https://numpy.org/doc/stable/reference/arrays.scalars.html>
+  
+<https://numpy.org/doc/stable/reference/arrays.dtypes.html#arrays-dtypes-constructing>
+
+:::
+
+|||
+|---|---|
+| Integer types | `int`,`int8`,`int16`,`int32`,`int64` |
+| Unsigned integer types | `uint`,`uint8`,`uint16`,`uint32`,`uint64` |
+| Boolean type | `bool` |
+| Floating-point types | `float`, `float16`, `float32`, `float64`, `float128` |
+| Complex floating-point types | `complex`, `complex64`, `complex128`, `complex256` |
+| String | `str` |
+  
+```{python}
+#| echo: true
+import numpy as np
+
+tab = np.array([[2, -3], [4, -8]])
+print(tab)
+tab2 = np.array([[2, -3], [4, -8]], dtype=int)
+print(tab2)
+tab3 = np.array([[2, -3], [4, -8]], dtype=float)
+print(tab3)
+tab4 = np.array([[2, -3], [4, -8]], dtype=complex)
+print(tab4)
+```

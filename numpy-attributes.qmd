@@ -1,0 +1,52 @@
+# Array Attributes
+
+| Attribute |  Description |
+|---|---|
+| `shape` | tuple with information about the number of elements for each dimension |
+| `size` | total number of elements in the array |
+| `ndim` | number of dimensions of the array |
+| `nbytes` | number of bytes the array occupies in memory |
+| `dtype` | data type stored in the array (e.g. `int64`, `float64`) |
+
+  
+::: {.content-visible when-format="html"}
+  
+<https://numpy.org/doc/stable/reference/arrays.ndarray.html#array-attributes>
+
+:::
+
+```{python}
+#| echo: true
+import numpy as np
+
+tab1 = np.array([2, -3, 4, -8, 1])
+print("type:", type(tab1))
+print("shape:", tab1.shape)
+print("size:", tab1.size)
+print("ndim:", tab1.ndim)
+print("nbytes:", tab1.nbytes)
+print("dtype:", tab1.dtype)
+
+```
+
+```{python}
+#| echo: true
+import numpy as np
+
+tab2 = np.array([[2, -3], [4, -8]])
+print("type:", type(tab2))
+print("shape:", tab2.shape)
+print("size:", tab2.size)
+print("ndim:", tab2.ndim)
+print("nbytes:", tab2.nbytes)
+print("dtype:", tab2.dtype)
+
+```
+
+NumPy does not support ragged arrays. The following code will produce an error:
+  
+```python
+import numpy as np
+
+tab3 = np.array([[2, -3], [4, -8, 5], [3]])
+```

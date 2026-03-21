@@ -1190,6 +1190,467 @@ g: [[1 2]
 --- 0.036900997161865234 seconds ---
 \end{verbatim}
 
+\chapter{Array Attributes}\label{array-attributes}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Attribute
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{shape} & tuple with information about the number of elements for
+each dimension \\
+\texttt{size} & total number of elements in the array \\
+\texttt{ndim} & number of dimensions of the array \\
+\texttt{nbytes} & number of bytes the array occupies in memory \\
+\texttt{dtype} & data type stored in the array (e.g.~\texttt{int64},
+\texttt{float64}) \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab1 }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"type:"}\NormalTok{, }\BuiltInTok{type}\NormalTok{(tab1))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"shape:"}\NormalTok{, tab1.shape)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"size:"}\NormalTok{, tab1.size)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"ndim:"}\NormalTok{, tab1.ndim)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"nbytes:"}\NormalTok{, tab1.nbytes)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"dtype:"}\NormalTok{, tab1.dtype)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+type: <class 'numpy.ndarray'>
+shape: (5,)
+size: 5
+ndim: 1
+nbytes: 40
+dtype: int64
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab2 }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"type:"}\NormalTok{, }\BuiltInTok{type}\NormalTok{(tab2))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"shape:"}\NormalTok{, tab2.shape)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"size:"}\NormalTok{, tab2.size)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"ndim:"}\NormalTok{, tab2.ndim)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"nbytes:"}\NormalTok{, tab2.nbytes)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"dtype:"}\NormalTok{, tab2.dtype)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+type: <class 'numpy.ndarray'>
+shape: (2, 2)
+size: 4
+ndim: 2
+nbytes: 32
+dtype: int64
+\end{verbatim}
+
+NumPy does not support ragged arrays. The following code will produce an
+error:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab3 }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\DecValTok{3}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Data Types}\label{data-types}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Integer types &
+\texttt{int},\texttt{int8},\texttt{int16},\texttt{int32},\texttt{int64} \\
+Unsigned integer types &
+\texttt{uint},\texttt{uint8},\texttt{uint16},\texttt{uint32},\texttt{uint64} \\
+Boolean type & \texttt{bool} \\
+Floating-point types & \texttt{float}, \texttt{float16},
+\texttt{float32}, \texttt{float64}, \texttt{float128} \\
+Complex floating-point types & \texttt{complex}, \texttt{complex64},
+\texttt{complex128}, \texttt{complex256} \\
+String & \texttt{str} \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(tab)}
+\NormalTok{tab2 }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{]], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab2)}
+\NormalTok{tab3 }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{]], dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab3)}
+\NormalTok{tab4 }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{]], dtype}\OperatorTok{=}\BuiltInTok{complex}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[ 2 -3]
+ [ 4 -8]]
+[[ 2 -3]
+ [ 4 -8]]
+[[ 2. -3.]
+ [ 4. -8.]]
+[[ 2.+0.j -3.+0.j]
+ [ 4.+0.j -8.+0.j]]
+\end{verbatim}
+
+\chapter{Creating Arrays}\label{creating-arrays}
+
+\texttt{np.array} - arguments are cast to an array (anything iterable) -
+it's worth checking the size/shape
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(tab)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"size:"}\NormalTok{, tab.size)}
+\NormalTok{tab2 }\OperatorTok{=}\NormalTok{ np.array((}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(tab2)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"size:"}\NormalTok{, tab2.size)}
+\NormalTok{tab3 }\OperatorTok{=}\NormalTok{ np.array(\{}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{\})}
+\BuiltInTok{print}\NormalTok{(tab3)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"size:"}\NormalTok{, tab3.size)}
+\NormalTok{tab4 }\OperatorTok{=}\NormalTok{ np.array(\{}\StringTok{"pl"}\NormalTok{: }\DecValTok{344}\NormalTok{, }\StringTok{"en"}\NormalTok{: }\DecValTok{22}\NormalTok{\})}
+\BuiltInTok{print}\NormalTok{(tab4)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"size:"}\NormalTok{, tab4.size)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[ 2 -3  4]
+size: 3
+[ 4 -3  3  2]
+size: 4
+{2, 3, 5}
+size: 1
+{'pl': 344, 'en': 22}
+size: 1
+\end{verbatim}
+
+\texttt{np.zeros} - creates an array filled with zeros
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab }\OperatorTok{=}\NormalTok{ np.zeros(}\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab)}
+\BuiltInTok{print}\NormalTok{(tab.shape)}
+\NormalTok{tab2 }\OperatorTok{=}\NormalTok{ np.zeros([}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(tab2)}
+\BuiltInTok{print}\NormalTok{(tab2.shape)}
+\NormalTok{tab3 }\OperatorTok{=}\NormalTok{ np.zeros([}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(tab3)}
+\BuiltInTok{print}\NormalTok{(tab3.shape)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[0. 0. 0. 0.]
+(4,)
+[[0. 0. 0.]
+ [0. 0. 0.]]
+(2, 3)
+[[[0. 0. 0. 0.]
+  [0. 0. 0. 0.]
+  [0. 0. 0. 0.]]
+
+ [[0. 0. 0. 0.]
+  [0. 0. 0. 0.]
+  [0. 0. 0. 0.]]]
+(2, 3, 4)
+\end{verbatim}
+
+\texttt{np.ones} - creates an array filled with ones (this is not the
+equivalent of an identity matrix!)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{tab }\OperatorTok{=}\NormalTok{ np.ones(}\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab)}
+\BuiltInTok{print}\NormalTok{(tab.shape)}
+\NormalTok{tab2 }\OperatorTok{=}\NormalTok{ np.ones([}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(tab2)}
+\BuiltInTok{print}\NormalTok{(tab2.shape)}
+\NormalTok{tab3 }\OperatorTok{=}\NormalTok{ np.ones([}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(tab3)}
+\BuiltInTok{print}\NormalTok{(tab3.shape)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1. 1. 1. 1.]
+(4,)
+[[1. 1. 1.]
+ [1. 1. 1.]]
+(2, 3)
+[[[1. 1. 1. 1.]
+  [1. 1. 1. 1.]
+  [1. 1. 1. 1.]]
+
+ [[1. 1. 1. 1.]
+  [1. 1. 1. 1.]
+  [1. 1. 1. 1.]]]
+(2, 3, 4)
+\end{verbatim}
+
+\texttt{np.diag} - creates an array corresponding to a diagonal matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"tab0"}\NormalTok{)}
+\NormalTok{tab0 }\OperatorTok{=}\NormalTok{ np.diag([}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(tab0)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"tab1"}\NormalTok{)}
+\NormalTok{tab1 }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{5}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(tab1)}
+\NormalTok{tab2 }\OperatorTok{=}\NormalTok{ np.diag(tab1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"tab2"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab2)}
+\NormalTok{tab3 }\OperatorTok{=}\NormalTok{ np.diag(tab1, k}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"tab3"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab3)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"tab4"}\NormalTok{)}
+\NormalTok{tab4 }\OperatorTok{=}\NormalTok{ np.diag(tab1, k}\OperatorTok{={-}}\DecValTok{2}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tab4)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"tab5"}\NormalTok{)}
+\NormalTok{tab5 }\OperatorTok{=}\NormalTok{ np.diag(np.diag(tab1))}
+\BuiltInTok{print}\NormalTok{(tab5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+tab0
+[[3 0 0]
+ [0 4 0]
+ [0 0 5]]
+tab1
+[[ 2  3  4]
+ [ 3 -4  5]
+ [ 3  4 -5]]
+tab2
+[ 2 -4 -5]
+tab3
+[3 5]
+tab4
+[3]
+tab5
+[[ 2  0  0]
+ [ 0 -4  0]
+ [ 0  0 -5]]
+\end{verbatim}
+
+\texttt{np.arange} - array filled with evenly spaced values
+
+Syntax:
+\texttt{numpy.arange({[}start,\ {]}stop,\ {[}step,\ {]}dtype=None)}
+
+Works similarly to the \texttt{range} function, but allows fractional
+numbers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{3}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(a)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.arange(}\FloatTok{3.0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(c)}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{3}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(d)}
+\NormalTok{e }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(e)}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{3}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{2}\NormalTok{, dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(f)}
+\NormalTok{g }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{3}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[0 1 2]
+[0. 1. 2.]
+[3 4 5 6]
+[3 5 7 9]
+[0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
+[3. 5. 7. 9.]
+[3 5 7 9]
+\end{verbatim}
+
+\texttt{np.linspace} - array filled with evenly spaced values on a
+linear scale
+
+\texttt{np.linspace(start,\ stop,\ num)} generates an array of evenly
+spaced values. For example, \texttt{np.linspace(2.0,\ 3.0,\ num=5)}
+produces \texttt{2,\ 2.25,\ 2.5,\ 2.75,\ 3} --- the interval is divided
+into \texttt{num\ -\ 1} equal parts. Setting \texttt{endpoint=False}
+removes the last point (from the right side), and the interval is then
+divided into \texttt{num} equal parts instead. The \texttt{dtype}
+parameter forces the output type --- typically set to \texttt{int}, in
+which case the results may have the fractional part truncated.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.linspace(}\FloatTok{2.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{, num}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(a)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.linspace(}\FloatTok{2.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{, num}\OperatorTok{=}\DecValTok{5}\NormalTok{, endpoint}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, num}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(c)}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, num}\OperatorTok{=}\DecValTok{4}\NormalTok{, dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[2.   2.25 2.5  2.75 3.  ]
+[2.  2.2 2.4 2.6 2.8]
+[10.         13.33333333 16.66666667 20.        ]
+[10 13 16 20]
+\end{verbatim}
+
+\texttt{np.logspace} - array filled with values on a logarithmic scale
+
+Syntax:
+\texttt{numpy.logspace(start,\ stop,\ num=50,\ endpoint=True,\ base=10.0,\ dtype=None,\ axis=0)}
+
+The function \texttt{np.logspace(2.0,\ 3.0,\ num=4)} generates 4 numbers
+spaced evenly on a logarithmic scale between 10\^{}2 and 10\^{}3. The
+default base is 10. First, the exponents are computed as equally spaced
+points in the interval {[}2.0, 3.0{]}, which gives approximately 2,
+2.33, 2.66, and 3.0. Then each exponent is used as the power of 10,
+producing the output values 10\^{}2 = 100, 10\^{}2.33 ≈ 215.44,
+10\^{}2.66 ≈ 464.16, and 10\^{}3 = 1000. An important consequence is
+that while the exponents are uniformly distributed, the resulting values
+are not --- the distances between consecutive output numbers grow larger
+as the values increase. This is the key distinction between
+\texttt{np.logspace} and \texttt{np.linspace}: the former creates equal
+spacing in log-scale (i.e.~between the exponents), not in the actual
+output values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.logspace(}\FloatTok{2.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{, num}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(a)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.logspace(}\FloatTok{2.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{, num}\OperatorTok{=}\DecValTok{4}\NormalTok{, endpoint}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ np.logspace(}\FloatTok{2.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{, num}\OperatorTok{=}\DecValTok{4}\NormalTok{, base}\OperatorTok{=}\FloatTok{2.0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[ 100.          215.443469    464.15888336 1000.        ]
+[100.         177.827941   316.22776602 562.34132519]
+[4.         5.0396842  6.34960421 8.        ]
+\end{verbatim}
+
+\texttt{np.empty} - empty (uninitialized) array - specific values are
+not ``guaranteed''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.empty(}\DecValTok{3}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(a)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.empty(}\DecValTok{3}\NormalTok{, dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[0. 1. 2.]
+[                  0 4607182418800017408 4611686018427387904]
+\end{verbatim}
+
+\texttt{np.identity} - array resembling an identity matrix
+
+\texttt{np.eye} - array with ones on the diagonal (remaining values are
+zeros)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.identity(}\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"b"}\NormalTok{)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.eye(}\DecValTok{4}\NormalTok{, k}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(b)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"c"}\NormalTok{)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ np.eye(}\DecValTok{4}\NormalTok{, k}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(c)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"d"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ np.eye(}\DecValTok{4}\NormalTok{, k}\OperatorTok{={-}}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+b
+[[0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]
+ [0. 0. 0. 0.]]
+c
+[[0. 0. 1. 0.]
+ [0. 0. 0. 1.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+d
+[[0. 0. 0. 0.]
+ [1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]]
+\end{verbatim}
+
 
 
 

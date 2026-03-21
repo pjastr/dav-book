@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; List vs Array – Data Analytics and Visualization</title>
+<title>8&nbsp; Creating Arrays – Data Analytics and Visualization</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./numpy-attributes.html" rel="next">
-<link href="./numpy_getting_started.html" rel="prev">
+<link href="./numpy-datatypes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./list_array.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-creating-arrays.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Arrays</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -361,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./list_array.html" class="sidebar-item-text sidebar-link active">
+  <a href="./list_array.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></span></a>
   </div>
 </li>
@@ -379,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy-creating-arrays.html" class="sidebar-item-text sidebar-link">
+  <a href="./numpy-creating-arrays.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Arrays</span></span></a>
   </div>
 </li>
@@ -397,9 +396,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./list_array.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-creating-arrays.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Arrays</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Arrays</span></h1>
 </div>
 
 
@@ -416,22 +415,253 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="f015b66b" class="cell" data-execution_count="1">
+<p><code>np.array</code> - arguments are cast to an array (anything iterable) - it’s worth checking the size/shape</p>
+<div id="98a1118b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>my_arr <span class="op">=</span> np.arange(<span class="dv">1000000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1000000</span>))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>my_arr2 <span class="op">=</span> my_arr <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- </span><span class="sc">%s</span><span class="st"> seconds ---"</span> <span class="op">%</span> (time.time() <span class="op">-</span> start_time))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>my_list2 <span class="op">=</span> [x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> my_list]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- </span><span class="sc">%s</span><span class="st"> seconds ---"</span> <span class="op">%</span> (time.time() <span class="op">-</span> start_time))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"size:"</span>, tab.size)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>tab2 <span class="op">=</span> np.array((<span class="dv">4</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab2)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"size:"</span>, tab2.size)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>tab3 <span class="op">=</span> np.array({<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">2</span>})</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab3)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"size:"</span>, tab3.size)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>tab4 <span class="op">=</span> np.array({<span class="st">"pl"</span>: <span class="dv">344</span>, <span class="st">"en"</span>: <span class="dv">22</span>})</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab4)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"size:"</span>, tab4.size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--- 0.0020279884338378906 seconds ---
---- 0.04769158363342285 seconds ---</code></pre>
+<pre><code>[ 2 -3  4]
+size: 3
+[ 4 -3  3  2]
+size: 4
+{2, 3, 5}
+size: 1
+{'pl': 344, 'en': 22}
+size: 1</code></pre>
+</div>
+</div>
+<p><code>np.zeros</code> - creates an array filled with zeros</p>
+<div id="f61af27e" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> np.zeros(<span class="dv">4</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab.shape)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tab2 <span class="op">=</span> np.zeros([<span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab2)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab2.shape)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>tab3 <span class="op">=</span> np.zeros([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab3)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab3.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0. 0. 0. 0.]
+(4,)
+[[0. 0. 0.]
+ [0. 0. 0.]]
+(2, 3)
+[[[0. 0. 0. 0.]
+  [0. 0. 0. 0.]
+  [0. 0. 0. 0.]]
+
+ [[0. 0. 0. 0.]
+  [0. 0. 0. 0.]
+  [0. 0. 0. 0.]]]
+(2, 3, 4)</code></pre>
+</div>
+</div>
+<p><code>np.ones</code> - creates an array filled with ones (this is not the equivalent of an identity matrix!)</p>
+<div id="14273b96" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tab <span class="op">=</span> np.ones(<span class="dv">4</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab.shape)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>tab2 <span class="op">=</span> np.ones([<span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab2)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab2.shape)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>tab3 <span class="op">=</span> np.ones([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab3)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab3.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1. 1. 1. 1.]
+(4,)
+[[1. 1. 1.]
+ [1. 1. 1.]]
+(2, 3)
+[[[1. 1. 1. 1.]
+  [1. 1. 1. 1.]
+  [1. 1. 1. 1.]]
+
+ [[1. 1. 1. 1.]
+  [1. 1. 1. 1.]
+  [1. 1. 1. 1.]]]
+(2, 3, 4)</code></pre>
+</div>
+</div>
+<p><code>np.diag</code> - creates an array corresponding to a diagonal matrix</p>
+<div id="cd210cdc" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tab0"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tab0 <span class="op">=</span> np.diag([<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab0)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tab1"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>tab1 <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>]])</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab1)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>tab2 <span class="op">=</span> np.diag(tab1)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tab2"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab2)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>tab3 <span class="op">=</span> np.diag(tab1, k<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tab3"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab3)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tab4"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>tab4 <span class="op">=</span> np.diag(tab1, k<span class="op">=-</span><span class="dv">2</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab4)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"tab5"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>tab5 <span class="op">=</span> np.diag(np.diag(tab1))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tab5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tab0
+[[3 0 0]
+ [0 4 0]
+ [0 0 5]]
+tab1
+[[ 2  3  4]
+ [ 3 -4  5]
+ [ 3  4 -5]]
+tab2
+[ 2 -4 -5]
+tab3
+[3 5]
+tab4
+[3]
+tab5
+[[ 2  0  0]
+ [ 0 -4  0]
+ [ 0  0 -5]]</code></pre>
+</div>
+</div>
+<p><code>np.arange</code> - array filled with evenly spaced values</p>
+<p>Syntax: <code>numpy.arange([start, ]stop, [step, ]dtype=None)</code></p>
+<p>Works similarly to the <code>range</code> function, but allows fractional numbers.</p>
+<div id="bdc6acc3" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.arange(<span class="dv">3</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.arange(<span class="fl">3.0</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.arange(<span class="dv">3</span>, <span class="dv">7</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.arange(<span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">2</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.arange(<span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">2</span>, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> np.arange(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">2</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(g)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0 1 2]
+[0. 1. 2.]
+[3 4 5 6]
+[3 5 7 9]
+[0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
+[3. 5. 7. 9.]
+[3 5 7 9]</code></pre>
+</div>
+</div>
+<p><code>np.linspace</code> - array filled with evenly spaced values on a linear scale</p>
+<p><code>np.linspace(start, stop, num)</code> generates an array of evenly spaced values. For example, <code>np.linspace(2.0, 3.0, num=5)</code> produces <code>2, 2.25, 2.5, 2.75, 3</code> — the interval is divided into <code>num - 1</code> equal parts. Setting <code>endpoint=False</code> removes the last point (from the right side), and the interval is then divided into <code>num</code> equal parts instead. The <code>dtype</code> parameter forces the output type — typically set to <code>int</code>, in which case the results may have the fractional part truncated.</p>
+<div id="71feccd0" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.linspace(<span class="fl">2.0</span>, <span class="fl">3.0</span>, num<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.linspace(<span class="fl">2.0</span>, <span class="fl">3.0</span>, num<span class="op">=</span><span class="dv">5</span>, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.linspace(<span class="dv">10</span>, <span class="dv">20</span>, num<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.linspace(<span class="dv">10</span>, <span class="dv">20</span>, num<span class="op">=</span><span class="dv">4</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2.   2.25 2.5  2.75 3.  ]
+[2.  2.2 2.4 2.6 2.8]
+[10.         13.33333333 16.66666667 20.        ]
+[10 13 16 20]</code></pre>
+</div>
+</div>
+<p><code>np.logspace</code> - array filled with values on a logarithmic scale</p>
+<p>Syntax: <code>numpy.logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None, axis=0)</code></p>
+<p>The function <code>np.logspace(2.0, 3.0, num=4)</code> generates 4 numbers spaced evenly on a logarithmic scale between 10^2 and 10^3. The default base is 10. First, the exponents are computed as equally spaced points in the interval [2.0, 3.0], which gives approximately 2, 2.33, 2.66, and 3.0. Then each exponent is used as the power of 10, producing the output values 10^2 = 100, 10^2.33 ≈ 215.44, 10^2.66 ≈ 464.16, and 10^3 = 1000. An important consequence is that while the exponents are uniformly distributed, the resulting values are not — the distances between consecutive output numbers grow larger as the values increase. This is the key distinction between <code>np.logspace</code> and <code>np.linspace</code>: the former creates equal spacing in log-scale (i.e.&nbsp;between the exponents), not in the actual output values.</p>
+<div id="fbb693b7" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.logspace(<span class="fl">2.0</span>, <span class="fl">3.0</span>, num<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.logspace(<span class="fl">2.0</span>, <span class="fl">3.0</span>, num<span class="op">=</span><span class="dv">4</span>, endpoint<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.logspace(<span class="fl">2.0</span>, <span class="fl">3.0</span>, num<span class="op">=</span><span class="dv">4</span>, base<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 100.          215.443469    464.15888336 1000.        ]
+[100.         177.827941   316.22776602 562.34132519]
+[4.         5.0396842  6.34960421 8.        ]</code></pre>
+</div>
+</div>
+<p><code>np.empty</code> - empty (uninitialized) array - specific values are not “guaranteed”</p>
+<div id="f7e701c5" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.empty(<span class="dv">3</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.empty(<span class="dv">3</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0. 1. 2.]
+[                  0 4607182418800017408 4611686018427387904]</code></pre>
+</div>
+</div>
+<p><code>np.identity</code> - array resembling an identity matrix</p>
+<p><code>np.eye</code> - array with ones on the diagonal (remaining values are zeros)</p>
+<div id="e9864265" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.identity(<span class="dv">4</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.eye(<span class="dv">4</span>, k<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.eye(<span class="dv">4</span>, k<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"d"</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.eye(<span class="dv">4</span>, k<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+b
+[[0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]
+ [0. 0. 0. 0.]]
+c
+[[0. 0. 1. 0.]
+ [0. 0. 0. 1.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+d
+[[0. 0. 0. 0.]
+ [1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]]</code></pre>
 </div>
 </div>
 
@@ -853,14 +1083,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./numpy_getting_started.html" class="pagination-link" aria-label="NumPy - Getting Started">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></span>
+      <a href="./numpy-datatypes.html" class="pagination-link" aria-label="Data Types">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Types</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./numpy-attributes.html" class="pagination-link" aria-label="Array Attributes">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Array Attributes</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

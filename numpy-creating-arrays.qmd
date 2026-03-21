@@ -1,0 +1,190 @@
+# Creating Arrays
+
+`np.array` - arguments are cast to an array (anything iterable) - it's worth checking the size/shape
+
+```{python}
+#| echo: true
+import numpy as np
+
+tab = np.array([2, -3, 4])
+print(tab)
+print("size:", tab.size)
+tab2 = np.array((4, -3, 3, 2))
+print(tab2)
+print("size:", tab2.size)
+tab3 = np.array({3, 3, 2, 5, 2})
+print(tab3)
+print("size:", tab3.size)
+tab4 = np.array({"pl": 344, "en": 22})
+print(tab4)
+print("size:", tab4.size)
+
+```
+
+`np.zeros` - creates an array filled with zeros
+
+```{python}
+#| echo: true
+import numpy as np
+
+tab = np.zeros(4)
+print(tab)
+print(tab.shape)
+tab2 = np.zeros([2, 3])
+print(tab2)
+print(tab2.shape)
+tab3 = np.zeros([2, 3, 4])
+print(tab3)
+print(tab3.shape)
+```
+
+`np.ones` - creates an array filled with ones (this is not the equivalent of an identity matrix!)
+
+```{python}
+#| echo: true
+import numpy as np
+
+tab = np.ones(4)
+print(tab)
+print(tab.shape)
+tab2 = np.ones([2, 3])
+print(tab2)
+print(tab2.shape)
+tab3 = np.ones([2, 3, 4])
+print(tab3)
+print(tab3.shape)
+```
+
+`np.diag` - creates an array corresponding to a diagonal matrix
+
+```{python}
+#| echo: true
+import numpy as np
+
+print("tab0")
+tab0 = np.diag([3, 4, 5])
+print(tab0)
+print("tab1")
+tab1 = np.array([[2, 3, 4], [3, -4, 5], [3, 4, -5]])
+print(tab1)
+tab2 = np.diag(tab1)
+print("tab2")
+print(tab2)
+tab3 = np.diag(tab1, k=1)
+print("tab3")
+print(tab3)
+print("tab4")
+tab4 = np.diag(tab1, k=-2)
+print(tab4)
+print("tab5")
+tab5 = np.diag(np.diag(tab1))
+print(tab5)
+```
+
+`np.arange` - array filled with evenly spaced values
+
+Syntax: `numpy.arange([start, ]stop, [step, ]dtype=None)`
+
+Works similarly to the `range` function, but allows fractional numbers.
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.arange(3)
+print(a)
+b = np.arange(3.0)
+print(b)
+c = np.arange(3, 7)
+print(c)
+d = np.arange(3, 11, 2)
+print(d)
+e = np.arange(0, 1, 0.1)
+print(e)
+f = np.arange(3, 11, 2, dtype=float)
+print(f)
+g = np.arange(3, 10, 2)
+print(g)
+
+```
+
+`np.linspace` - array filled with evenly spaced values on a linear scale
+
+`np.linspace(start, stop, num)` generates an array of evenly spaced values. For example, `np.linspace(2.0, 3.0, num=5)` produces `2, 2.25, 2.5, 2.75, 3` — the interval is divided into `num - 1` equal parts. Setting `endpoint=False` removes the last point (from the right side), and the interval is then divided into `num` equal parts instead. The `dtype` parameter forces the output type — typically set to `int`, in which case the results may have the fractional part truncated.
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.linspace(2.0, 3.0, num=5)
+print(a)
+b = np.linspace(2.0, 3.0, num=5, endpoint=False)
+print(b)
+c = np.linspace(10, 20, num=4)
+print(c)
+d = np.linspace(10, 20, num=4, dtype=int)
+print(d)
+
+
+```
+
+
+
+`np.logspace` - array filled with values on a logarithmic scale
+
+Syntax: `numpy.logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None, axis=0)`
+
+The function `np.logspace(2.0, 3.0, num=4)` generates 4 numbers spaced evenly on a logarithmic scale between 10^2 and 10^3. The default base is 10. First, the exponents are computed as equally spaced points in the interval [2.0, 3.0], which gives approximately 2, 2.33, 2.66, and 3.0. Then each exponent is used as the power of 10, producing the output values 10^2 = 100, 10^2.33 ≈ 215.44, 10^2.66 ≈ 464.16, and 10^3 = 1000. An important consequence is that while the exponents are uniformly distributed, the resulting values are not — the distances between consecutive output numbers grow larger as the values increase. This is the key distinction between `np.logspace` and `np.linspace`: the former creates equal spacing in log-scale (i.e. between the exponents), not in the actual output values.
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.logspace(2.0, 3.0, num=4)
+print(a)
+b = np.logspace(2.0, 3.0, num=4, endpoint=False)
+print(b)
+c = np.logspace(2.0, 3.0, num=4, base=2.0)
+print(c)
+
+```
+
+
+
+`np.empty` - empty (uninitialized) array - specific values are not "guaranteed"
+
+```{python}
+#| echo: true
+import numpy as np
+
+a = np.empty(3)
+print(a)
+b = np.empty(3, dtype=int)
+print(b)
+
+```
+
+`np.identity` - array resembling an identity matrix
+
+`np.eye` - array with ones on the diagonal (remaining values are zeros)
+
+```{python}
+#| echo: true
+import numpy as np
+
+print("a")
+a = np.identity(4)
+print(a)
+print("b")
+b = np.eye(4, k=1)
+print(b)
+print("c")
+c = np.eye(4, k=2)
+print(c)
+print("d")
+d = np.eye(4, k=-1)
+print(d)
+
+```
