@@ -19,7 +19,12 @@ book:
       - numpy-attributes.qmd
       - numpy-datatypes.qmd
       - numpy-creating-arrays.qmd
-  downloads: pdf
+      - numpy-indexing.qmd
+      - numpy-modifications.qmd
+      - numpy-broadcasting.qmd
+      - numpy-ufunc.qmd
+      - numpy-strings.qmd
+  downloads: [pdf, epub]
   
 execute:
   freeze: auto
@@ -37,6 +42,10 @@ format:
     header-includes: |
       \titlehead{\includegraphics[width=6in]{aiwd.jpg}}
     keep-tex: true
+  epub:
+    lang: en
+    cover-image: aiwd.jpg
+    toc: true
 
 
 

@@ -1,0 +1,20 @@
+{
+  "hash": "934fe14cdbc3881df24d51d0def00b9f",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# List vs Array\n\n::: {#52e03c4e .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport time\n\nstart_time = time.time()\nmy_arr = np.arange(1000000)\nmy_list = list(range(1000000))\nstart_time = time.time()\nmy_arr2 = my_arr * 2\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\nstart_time = time.time()\nmy_list2 = [x * 2 for x in my_list]\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n--- 0.002348184585571289 seconds ---\n--- 0.047899484634399414 seconds ---\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "list_array_files\\figure-epub"
+    ],
+    "filters": [],
+    "engineDependencies": {
+      "jupyter": [
+        {
+          "jsWidgets": false,
+          "jupyterWidgets": false,
+          "htmlLibraries": []
+        }
+      ]
+    }
+  }
+}

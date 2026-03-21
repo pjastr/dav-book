@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; NumPy - Getting Started – Data Analytics and Visualization</title>
+<title>13&nbsp; String operations – Data Analytics and Visualization</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./list_array.html" rel="next">
-<link href="./configuration.html" rel="prev">
+<link href="./numpy-ufunc.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy_getting_started.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-strings.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">String operations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy_getting_started.html" class="sidebar-item-text sidebar-link active">
+  <a href="./numpy_getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></span></a>
   </div>
 </li>
@@ -409,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy-strings.html" class="sidebar-item-text sidebar-link">
+  <a href="./numpy-strings.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">String operations</span></span></a>
   </div>
 </li>
@@ -425,7 +424,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#importing-the-numpy-library" id="toc-importing-the-numpy-library" class="nav-link active" data-scroll-target="#importing-the-numpy-library"><span class="header-section-number">4.1</span> Importing the NumPy library</a></li>
+  <li><a href="#creating-arrays-with-strings" id="toc-creating-arrays-with-strings" class="nav-link active" data-scroll-target="#creating-arrays-with-strings"><span class="header-section-number">13.1</span> Creating arrays with strings</a></li>
+  <li><a href="#basic-text-modification-functions" id="toc-basic-text-modification-functions" class="nav-link" data-scroll-target="#basic-text-modification-functions"><span class="header-section-number">13.2</span> Basic text modification functions</a>
+  <ul class="collapse">
+  <li><a href="#numpy.strings.upper-and-numpy.strings.lower" id="toc-numpy.strings.upper-and-numpy.strings.lower" class="nav-link" data-scroll-target="#numpy.strings.upper-and-numpy.strings.lower"><span class="header-section-number">13.2.1</span> <code>numpy.strings.upper</code> and <code>numpy.strings.lower</code></a></li>
+  <li><a href="#numpy.strings.capitalize" id="toc-numpy.strings.capitalize" class="nav-link" data-scroll-target="#numpy.strings.capitalize"><span class="header-section-number">13.2.2</span> <code>numpy.strings.capitalize</code></a></li>
+  <li><a href="#numpy.strings.title" id="toc-numpy.strings.title" class="nav-link" data-scroll-target="#numpy.strings.title"><span class="header-section-number">13.2.3</span> <code>numpy.strings.title</code></a></li>
+  </ul></li>
+  <li><a href="#joining-and-splitting-text" id="toc-joining-and-splitting-text" class="nav-link" data-scroll-target="#joining-and-splitting-text"><span class="header-section-number">13.3</span> Joining and splitting text</a>
+  <ul class="collapse">
+  <li><a href="#numpy.strings.add" id="toc-numpy.strings.add" class="nav-link" data-scroll-target="#numpy.strings.add"><span class="header-section-number">13.3.1</span> <code>numpy.strings.add</code></a></li>
+  <li><a href="#numpy.char.join" id="toc-numpy.char.join" class="nav-link" data-scroll-target="#numpy.char.join"><span class="header-section-number">13.3.2</span> <code>numpy.char.join</code></a></li>
+  <li><a href="#numpy.char.split" id="toc-numpy.char.split" class="nav-link" data-scroll-target="#numpy.char.split"><span class="header-section-number">13.3.3</span> <code>numpy.char.split</code></a></li>
+  </ul></li>
+  <li><a href="#searching-and-replacing-substrings" id="toc-searching-and-replacing-substrings" class="nav-link" data-scroll-target="#searching-and-replacing-substrings"><span class="header-section-number">13.4</span> Searching and replacing substrings</a>
+  <ul class="collapse">
+  <li><a href="#numpy.strings.find-and-numpy.strings.rfind" id="toc-numpy.strings.find-and-numpy.strings.rfind" class="nav-link" data-scroll-target="#numpy.strings.find-and-numpy.strings.rfind"><span class="header-section-number">13.4.1</span> <code>numpy.strings.find</code> and <code>numpy.strings.rfind</code></a></li>
+  <li><a href="#numpy.strings.replace" id="toc-numpy.strings.replace" class="nav-link" data-scroll-target="#numpy.strings.replace"><span class="header-section-number">13.4.2</span> <code>numpy.strings.replace</code></a></li>
+  </ul></li>
+  <li><a href="#removing-unwanted-characters" id="toc-removing-unwanted-characters" class="nav-link" data-scroll-target="#removing-unwanted-characters"><span class="header-section-number">13.5</span> Removing unwanted characters</a>
+  <ul class="collapse">
+  <li><a href="#numpy.strings.strip-numpy.strings.lstrip-and-numpy.strings.rstrip" id="toc-numpy.strings.strip-numpy.strings.lstrip-and-numpy.strings.rstrip" class="nav-link" data-scroll-target="#numpy.strings.strip-numpy.strings.lstrip-and-numpy.strings.rstrip"><span class="header-section-number">13.5.1</span> <code>numpy.strings.strip</code>, <code>numpy.strings.lstrip</code> and <code>numpy.strings.rstrip</code></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -433,9 +453,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy_getting_started.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-strings.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">String operations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">String operations</span></h1>
 </div>
 
 
@@ -452,100 +472,199 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>NumPy is a Python library for scientific computing.</p>
-<p>Applications:</p>
-<ul>
-<li>linear algebra</li>
-<li>advanced mathematical (numerical) computations</li>
-<li>numerical integration</li>
-<li>solving equations</li>
-</ul>
-<section id="importing-the-numpy-library" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="importing-the-numpy-library"><span class="header-section-number">4.1</span> Importing the NumPy library</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The fundamental object in the NumPy library is an N-dimensional array called <code>ndarray</code>. Each element of the array is treated as a <code>dtype</code> type.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.array(<span class="bu">object</span>, dtype<span class="op">=</span><span class="va">None</span>, <span class="op">*</span>, copy<span class="op">=</span><span class="va">True</span>, order<span class="op">=</span><span class="st">'K'</span>, subok<span class="op">=</span><span class="va">False</span>, ndmin<span class="op">=</span><span class="dv">0</span>, like<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>object - an object (or sequence) to be converted into an array</li>
-<li>dtype - type</li>
-<li>copy - whether objects should be copied, default is <code>True</code></li>
-<li>order - memory layout: C (rows), F (columns), A, K</li>
-<li>subok - handled by subclasses (if <code>True</code>), default is <code>False</code></li>
-<li>ndmin - minimum number of dimensions of the array</li>
-<li>like - creation based on a reference array</li>
-</ul>
-<div id="b26e3f0c" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a:"</span>, a) </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"type of a:"</span>, <span class="bu">type</span>(a))</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">3.0</span>])</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b:"</span>, b)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c:"</span>, c)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], ndmin<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"d:"</span>, d)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-3-12" class="code-annotation-target"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], dtype<span class="op">=</span><span class="bu">complex</span>)</span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"e:"</span>, e)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-14" class="code-annotation-target"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.array(np.asmatrix(<span class="st">'1 2; 3 4'</span>))</span>
-<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f:"</span>, f)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-3-16" class="code-annotation-target"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> np.array(np.asmatrix(<span class="st">'1 2; 3 4'</span>), subok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"g:"</span>, g)</span>
-<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(g))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="1">Creating an array with default settings.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">Checking the type.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">One of the elements is of a different type. Therefore, upcasting to the “largest” type occurs.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="4">Here we get a 2x2 array.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="5">In this line we get an array with dimensions 1x3 (shape <code>(1, 3)</code>).</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="6">Forcing the <code>complex</code> type — a type with a wider range.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="14" data-code-annotation="7">Using the matrix subtype.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="16" data-code-annotation="8">Preserving the matrix type.</span>
-</dd>
-</dl>
-</div>
+<p>In <code>NumPy</code>, besides the well-known numerical arrays, there is also a set of functions that allow vectorized operations on strings.</p>
+<p><strong>Important:</strong> The functions below are typically available in the <code>numpy.char</code> module. In the documentation, they can be found in the <a href="https://numpy.org/doc/stable/reference/routines.strings.html">String operations</a> section, but in this material we will focus on how to use them via the <code>numpy.strings</code> module interface. This is analogous to using <code>numpy.char</code>, but is the newer approach.</p>
+<section id="creating-arrays-with-strings" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="creating-arrays-with-strings"><span class="header-section-number">13.1</span> Creating arrays with strings</h2>
+<p>NumPy allows storing text in arrays, for example:</p>
+<div id="1f4952fd" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="st">"python"</span>, <span class="st">"NumPy"</span>, <span class="st">"data"</span>, <span class="st">"Science"</span>])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(arr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>a: [1 2 3]
-type of a: &lt;class 'numpy.ndarray'&gt;
-b: [1. 2. 3.]
-c: [[1 2]
- [3 4]]
-d: [[1 2 3]]
-e: [1.+0.j 2.+0.j 3.+0.j]
-f: [[1 2]
- [3 4]]
-g: [[1 2]
- [3 4]]
-&lt;class 'numpy.matrix'&gt;</code></pre>
+<pre><code>['python' 'NumPy' 'data' 'Science']</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="basic-text-modification-functions" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="basic-text-modification-functions"><span class="header-section-number">13.2</span> Basic text modification functions</h2>
+<p>Below are popular functions for modifying text in string arrays:</p>
+<section id="numpy.strings.upper-and-numpy.strings.lower" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="numpy.strings.upper-and-numpy.strings.lower"><span class="header-section-number">13.2.1</span> <code>numpy.strings.upper</code> and <code>numpy.strings.lower</code></h3>
+<ul>
+<li><code>upper</code>: Converts all letters to uppercase.</li>
+<li><code>lower</code>: Converts all letters to lowercase.</li>
+</ul>
+<div id="a65baff2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="st">"python"</span>, <span class="st">"NumPy"</span>, <span class="st">"data"</span>, <span class="st">"Science"</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.upper(arr))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.lower(arr))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['PYTHON' 'NUMPY' 'DATA' 'SCIENCE']
+['python' 'numpy' 'data' 'science']</code></pre>
+</div>
+</div>
+</section>
+<section id="numpy.strings.capitalize" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="numpy.strings.capitalize"><span class="header-section-number">13.2.2</span> <code>numpy.strings.capitalize</code></h3>
+<p>The <code>capitalize</code> function converts the first letter of the entire string to uppercase and the rest to lowercase.</p>
+<div id="42f7ad3d" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> np.array([<span class="st">"python"</span>, <span class="st">"NumPy"</span>, <span class="st">"data"</span>, <span class="st">"Science"</span>])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.capitalize(arr))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Python' 'Numpy' 'Data' 'Science']</code></pre>
+</div>
+</div>
+</section>
+<section id="numpy.strings.title" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="numpy.strings.title"><span class="header-section-number">13.2.3</span> <code>numpy.strings.title</code></h3>
+<p>The <code>title</code> function converts the first letter of each word to uppercase and the remaining letters of each word to lowercase.</p>
+<div id="612158f1" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>arr2 <span class="op">=</span> np.array([<span class="st">"python data science"</span>, <span class="st">"machine learning"</span>, <span class="st">"deep learning"</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.title(arr2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Python Data Science' 'Machine Learning' 'Deep Learning']</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="joining-and-splitting-text" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="joining-and-splitting-text"><span class="header-section-number">13.3</span> Joining and splitting text</h2>
+<section id="numpy.strings.add" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="numpy.strings.add"><span class="header-section-number">13.3.1</span> <code>numpy.strings.add</code></h3>
+<p>The <code>add</code> function concatenates elements of text arrays pairwise, acting like the <code>+</code> operator on strings, but in a vectorized way. The concatenation is performed without any separator.</p>
+<div id="dd30355f" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>arr_a <span class="op">=</span> np.array([<span class="st">"Hello"</span>, <span class="st">"Data"</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>arr_b <span class="op">=</span> np.array([<span class="st">"World"</span>, <span class="st">"Science"</span>])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># without separator</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.add(arr_a, arr_b))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># with space -- it must be added manually</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.add(np.strings.add(arr_a, np.array([<span class="st">" "</span>, <span class="st">" "</span>])), arr_b))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['HelloWorld' 'DataScience']
+['Hello World' 'Data Science']</code></pre>
+</div>
+</div>
+</section>
+<section id="numpy.char.join" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="numpy.char.join"><span class="header-section-number">13.3.2</span> <code>numpy.char.join</code></h3>
+<p>The <code>join</code> function inserts a specified separator between individual characters within each element of the array.</p>
+<div id="2aeb29b3" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>arr3 <span class="op">=</span> np.array([<span class="st">"python"</span>, <span class="st">"numpy"</span>, <span class="st">"string"</span>])</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.char.join(<span class="st">"-"</span>, arr3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['p-y-t-h-o-n' 'n-u-m-p-y' 's-t-r-i-n-g']</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Note: <code>join</code> vectorizes the operation, treating each element of the array as a sequence of characters to be joined with the separator.</p>
+</blockquote>
+</section>
+<section id="numpy.char.split" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="numpy.char.split"><span class="header-section-number">13.3.3</span> <code>numpy.char.split</code></h3>
+<p>Allows splitting strings by a given separator. Returns an array containing lists of substrings.</p>
+<div id="ab7caad7" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>arr4 <span class="op">=</span> np.array([<span class="st">"python-data-science"</span>, <span class="st">"machine-learning"</span>])</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.char.split(arr4, sep<span class="op">=</span><span class="st">"-"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[list(['python', 'data', 'science']) list(['machine', 'learning'])]</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="searching-and-replacing-substrings" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="searching-and-replacing-substrings"><span class="header-section-number">13.4</span> Searching and replacing substrings</h2>
+<section id="numpy.strings.find-and-numpy.strings.rfind" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="numpy.strings.find-and-numpy.strings.rfind"><span class="header-section-number">13.4.1</span> <code>numpy.strings.find</code> and <code>numpy.strings.rfind</code></h3>
+<ul>
+<li><code>find</code>: Returns the index of the first occurrence of a substring (or -1 if not found).</li>
+<li><code>rfind</code>: Returns the index of the last occurrence of a substring (or -1 if not found).</li>
+</ul>
+<div id="efc9ce01" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>arr5 <span class="op">=</span> np.array([<span class="st">"banana"</span>, <span class="st">"data"</span>, <span class="st">"abracadabra"</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># find -- first occurrence</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.find(arr5, <span class="st">"a"</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># rfind -- last occurrence</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.rfind(arr5, <span class="st">"a"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1 1 0]
+[ 5  3 10]</code></pre>
+</div>
+</div>
+</section>
+<section id="numpy.strings.replace" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="numpy.strings.replace"><span class="header-section-number">13.4.2</span> <code>numpy.strings.replace</code></h3>
+<p><code>replace</code> substitutes all occurrences of a substring with a new string.</p>
+<div id="8cf5abfd" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>arr6 <span class="op">=</span> np.array([<span class="st">"python"</span>, <span class="st">"pydata"</span>, <span class="st">"pypy"</span>])</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.replace(arr6, <span class="st">"py"</span>, <span class="st">"PY"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['PYthon' 'PYdata' 'PYPY']</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="removing-unwanted-characters" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="removing-unwanted-characters"><span class="header-section-number">13.5</span> Removing unwanted characters</h2>
+<section id="numpy.strings.strip-numpy.strings.lstrip-and-numpy.strings.rstrip" class="level3" data-number="13.5.1">
+<h3 data-number="13.5.1" class="anchored" data-anchor-id="numpy.strings.strip-numpy.strings.lstrip-and-numpy.strings.rstrip"><span class="header-section-number">13.5.1</span> <code>numpy.strings.strip</code>, <code>numpy.strings.lstrip</code> and <code>numpy.strings.rstrip</code></h3>
+<ul>
+<li><code>strip</code>: Removes specified characters from the beginning and end.</li>
+<li><code>lstrip</code>: Removes specified characters from the left side (beginning).</li>
+<li><code>rstrip</code>: Removes specified characters from the right side (end).</li>
+</ul>
+<div id="58111cd0" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>arr7 <span class="op">=</span> np.array([<span class="st">"   python   "</span>, <span class="st">"  numpy  "</span>])</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># strip -- removes from both sides</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.strip(arr7))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># lstrip -- removes only from the left</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.lstrip(arr7))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rstrip -- removes only from the right</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.rstrip(arr7))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['python' 'numpy']
+['python   ' 'numpy  ']
+['   python' '  numpy']</code></pre>
+</div>
+</div>
+<p>We can also specify custom characters to remove:</p>
+<div id="f2aa332b" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>arr8 <span class="op">=</span> np.array([<span class="st">"###data###"</span>, <span class="st">"***science***"</span>])</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.strings.strip(arr8, <span class="st">"#*"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['data' 'science']</code></pre>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -964,14 +1083,11 @@ g: [[1 2]
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./configuration.html" class="pagination-link" aria-label="Configuration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Configuration</span></span>
+      <a href="./numpy-ufunc.html" class="pagination-link" aria-label="Universal functions (ufunc) and other mathematical functions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Universal functions (ufunc) and other mathematical functions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./list_array.html" class="pagination-link" aria-label="List vs Array">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

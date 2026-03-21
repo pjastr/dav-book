@@ -1,0 +1,123 @@
+# Universal functions (ufunc) and other mathematical functions
+
+Universal functions (known as *ufuncs*) are among the most important tools in NumPy. They are functions that operate element-by-element on arrays, often implemented in C, which ensures high computational performance. Thanks to *ufuncs*, you can perform arithmetic, trigonometric, statistical, and logical operations on entire arrays in a simple and readable way, without the need to write loops in Python.
+
+## Basic arithmetic operations
+
+NumPy automatically translates mathematical operators into the corresponding *ufuncs*.  
+For example:
+
+- `+` corresponds to `np.add`
+- `-` corresponds to `np.subtract`
+- `*` corresponds to `np.multiply`
+- `/` corresponds to `np.divide`
+- `**` corresponds to `np.power`
+
+Example:
+
+```{python}
+#| echo: true
+import numpy as np
+
+A = np.array([1, 2, 3, 4])
+B = np.array([10, 20, 30, 40])
+
+# Element-by-element operations
+sum_tab = np.add(A, B)       # same as A + B
+diff_tab = np.subtract(B, A) # same as B - A
+mul_tab = np.multiply(A, 2)  # same as A * 2
+pow_tab = np.power(A, 3)     # same as A ** 3
+
+print("Sum:", sum_tab)
+print("Difference:", diff_tab)
+print("Multiplication by 2:", mul_tab)
+print("Exponentiation:", pow_tab)
+```
+
+## Trigonometric and related functions
+
+NumPy offers a rich set of trigonometric functions:
+
+- `np.sin`, `np.cos`, `np.tan` — basic functions,
+- `np.arcsin`, `np.arccos`, `np.arctan` — inverse trigonometric functions,
+- `np.sinh`, `np.cosh`, `np.tanh` — hyperbolic functions.
+
+Example:
+
+```{python}
+#| echo: true
+import numpy as np
+
+x = np.linspace(0, np.pi, 5) # array [0, π/4, π/2, 3π/4, π]
+sin_values = np.sin(x)
+cos_values = np.cos(x)
+
+print("sin(x) values:", sin_values)
+print("cos(x) values:", cos_values)
+```
+
+## Exponential and logarithmic functions
+
+- `np.exp` — exponential function,
+- `np.log` — natural logarithm,
+- `np.log10` — base-10 logarithm.
+
+Example:
+
+```{python}
+#| echo: true
+import numpy as np
+
+A = np.array([1, np.e, np.e**2])
+print("A:", A)
+print("log(A):", np.log(A))
+print("exp(A):", np.exp([0, 1, 2]))  # exp(0)=1, exp(1)=e, exp(2)=e^2
+```
+
+## Rounding functions and absolute values
+
+- `np.round` — rounds to the nearest number,
+- `np.floor` — floor,
+- `np.ceil` — ceiling,
+- `np.trunc` — truncation to the integer part,
+- `np.abs` — absolute value.
+
+Example:
+
+```{python}
+#| echo: true
+import numpy as np
+
+B = np.array([1.7, -2.5, 3.5, 4.52, -4.1])
+print("B:", B)
+print("floor(B):", np.floor(B))
+print("ceil(B):", np.ceil(B))
+print("abs(B):", np.abs(B))
+print("round(B):", np.round(B))
+print("rint(B):", np.rint(B))
+print("round(B,1):", np.round(B,1))
+```
+
+## Statistical and aggregate functions
+
+Although many statistical functions are available as array methods (e.g. `A.mean()`, `A.std()`), there are also ufuncs that operate element-by-element or accept axis parameters:
+
+- `np.minimum`, `np.maximum` — return the element-by-element minimum/maximum of two arrays,
+- `np.fmin`, `np.fmax` — similar to the above, but ignore NaN values,
+- `np.sqrt` — square root,
+- `np.square` — squaring.
+
+Example:
+
+```{python}
+#| echo: true
+import numpy as np
+
+C1 = np.array([1, 4, 9, 16])
+C2 = np.array([2, 2, 5, 20])
+
+print("element-wise minimum of C1 and C2:", np.minimum(C1, C2))
+print("element-wise maximum of C1 and C2:", np.maximum(C1, C2))
+print("sqrt(C1):", np.sqrt(C1))
+print("square(C2):", np.square(C2))
+```

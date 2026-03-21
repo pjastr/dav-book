@@ -1,0 +1,20 @@
+{
+  "hash": "2a8a845ce8500cdab8f087ce0d380920",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# Data Types\n\n::: {.content-visible when-format=\"html\"}\n\n<https://numpy.org/doc/stable/reference/arrays.scalars.html>\n  \n<https://numpy.org/doc/stable/reference/arrays.dtypes.html#arrays-dtypes-constructing>\n\n:::\n\n|||\n|---|---|\n| Integer types | `int`,`int8`,`int16`,`int32`,`int64` |\n| Unsigned integer types | `uint`,`uint8`,`uint16`,`uint32`,`uint64` |\n| Boolean type | `bool` |\n| Floating-point types | `float`, `float16`, `float32`, `float64`, `float128` |\n| Complex floating-point types | `complex`, `complex64`, `complex128`, `complex256` |\n| String | `str` |\n\n::: {#8e1defbc .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n\ntab = np.array([[2, -3], [4, -8]])\nprint(tab)\ntab2 = np.array([[2, -3], [4, -8]], dtype=int)\nprint(tab2)\ntab3 = np.array([[2, -3], [4, -8]], dtype=float)\nprint(tab3)\ntab4 = np.array([[2, -3], [4, -8]], dtype=complex)\nprint(tab4)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[[ 2 -3]\n [ 4 -8]]\n[[ 2 -3]\n [ 4 -8]]\n[[ 2. -3.]\n [ 4. -8.]]\n[[ 2.+0.j -3.+0.j]\n [ 4.+0.j -8.+0.j]]\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "numpy-datatypes_files\\figure-epub"
+    ],
+    "filters": [],
+    "engineDependencies": {
+      "jupyter": [
+        {
+          "jsWidgets": false,
+          "jupyterWidgets": false,
+          "htmlLibraries": []
+        }
+      ]
+    }
+  }
+}

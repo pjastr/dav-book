@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; NumPy - Getting Started – Data Analytics and Visualization</title>
+<title>11&nbsp; Broadcasting – Data Analytics and Visualization</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./list_array.html" rel="next">
-<link href="./configuration.html" rel="prev">
+<link href="./numpy-ufunc.html" rel="next">
+<link href="./numpy-modifications.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy_getting_started.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-broadcasting.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Broadcasting</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy_getting_started.html" class="sidebar-item-text sidebar-link active">
+  <a href="./numpy_getting_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></span></a>
   </div>
 </li>
@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy-broadcasting.html" class="sidebar-item-text sidebar-link">
+  <a href="./numpy-broadcasting.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Broadcasting</span></span></a>
   </div>
 </li>
@@ -420,22 +420,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#importing-the-numpy-library" id="toc-importing-the-numpy-library" class="nav-link active" data-scroll-target="#importing-the-numpy-library"><span class="header-section-number">4.1</span> Importing the NumPy library</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy_getting_started.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-broadcasting.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Broadcasting</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Broadcasting</span></h1>
 </div>
 
 
@@ -452,101 +446,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>NumPy is a Python library for scientific computing.</p>
-<p>Applications:</p>
-<ul>
-<li>linear algebra</li>
-<li>advanced mathematical (numerical) computations</li>
-<li>numerical integration</li>
-<li>solving equations</li>
-</ul>
-<section id="importing-the-numpy-library" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="importing-the-numpy-library"><span class="header-section-number">4.1</span> Importing the NumPy library</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The fundamental object in the NumPy library is an N-dimensional array called <code>ndarray</code>. Each element of the array is treated as a <code>dtype</code> type.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.array(<span class="bu">object</span>, dtype<span class="op">=</span><span class="va">None</span>, <span class="op">*</span>, copy<span class="op">=</span><span class="va">True</span>, order<span class="op">=</span><span class="st">'K'</span>, subok<span class="op">=</span><span class="va">False</span>, ndmin<span class="op">=</span><span class="dv">0</span>, like<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>object - an object (or sequence) to be converted into an array</li>
-<li>dtype - type</li>
-<li>copy - whether objects should be copied, default is <code>True</code></li>
-<li>order - memory layout: C (rows), F (columns), A, K</li>
-<li>subok - handled by subclasses (if <code>True</code>), default is <code>False</code></li>
-<li>ndmin - minimum number of dimensions of the array</li>
-<li>like - creation based on a reference array</li>
-</ul>
-<div id="b26e3f0c" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a:"</span>, a) </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"type of a:"</span>, <span class="bu">type</span>(a))</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">3.0</span>])</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b:"</span>, b)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c:"</span>, c)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], ndmin<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"d:"</span>, d)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-3-12" class="code-annotation-target"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], dtype<span class="op">=</span><span class="bu">complex</span>)</span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"e:"</span>, e)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-3-14" class="code-annotation-target"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.array(np.asmatrix(<span class="st">'1 2; 3 4'</span>))</span>
-<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f:"</span>, f)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-3-16" class="code-annotation-target"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> np.array(np.asmatrix(<span class="st">'1 2; 3 4'</span>), subok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"g:"</span>, g)</span>
-<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(g))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="1">Creating an array with default settings.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">Checking the type.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">One of the elements is of a different type. Therefore, upcasting to the “largest” type occurs.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="4">Here we get a 2x2 array.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="5">In this line we get an array with dimensions 1x3 (shape <code>(1, 3)</code>).</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="6">Forcing the <code>complex</code> type — a type with a wider range.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="14" data-code-annotation="7">Using the matrix subtype.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="16" data-code-annotation="8">Preserving the matrix type.</span>
-</dd>
-</dl>
-</div>
+<p>The variants discussed below are illustrative examples.</p>
+<p>Variant 1 — scalar-array — performing an operation on every element of the array</p>
+<p>When a scalar is combined with an array, NumPy broadcasts the scalar to match the array’s shape, then performs the operation element-wise. In the code above, array <code>a</code> has shape 3×2 and contains [[1, 2], [5, 6], [9, 10]]. The expression <code>a + 4</code> conceptually expands the scalar 4 into a 3×2 array filled with 4s, so the result <code>b</code> is [[5, 6], [9, 10], [13, 14]]. The same principle applies to <code>2 ** a</code>, where the scalar 2 is broadcast across every element of <code>a</code>, producing [[2, 4], [32, 64], [512, 1024]] — each element is computed as 2 raised to the corresponding value in <code>a</code>.</p>
+<div id="bd6c1777" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">9</span>, <span class="dv">10</span>]])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a <span class="op">+</span> <span class="dv">4</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> a</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>a: [1 2 3]
-type of a: &lt;class 'numpy.ndarray'&gt;
-b: [1. 2. 3.]
-c: [[1 2]
+<pre><code>[[ 5  6]
+ [ 9 10]
+ [13 14]]
+[[   2    4]
+ [  32   64]
+ [ 512 1024]]</code></pre>
+</div>
+</div>
+<p>Variant 2 — two arrays — “when one of the arrays can be expanded” (both dimensions are equal or one of them is equal to 1)</p>
+<p>When two arrays of different but compatible shapes are combined, NumPy stretches the smaller one to match the larger. Array <code>a</code> has shape 2×2 and <code>b</code> is a 1D array of shape (2,), which NumPy treats as a single row. In <code>a + b</code>, the row [9, 2] is broadcast across both rows of <code>a</code>, giving [[10, 4], [14, 8]]. Similarly, <code>a / b</code> divides each row of <code>a</code> element-wise by [9, 2], producing [[1/9, 1], [5/9, 3]]. Array <code>c</code> has shape 2×1, meaning it acts as a column. In <code>a + c</code>, the value 4 is added across the entire first row and -2 across the second, yielding [[5, 6], [3, 4]]. Likewise, <code>c / a</code> divides the column values by each element in the corresponding row, so the first row becomes [4/1, 4/2] and the second [-2/5, -2/6]. The general rule is that dimensions are compatible when they are equal or one of them is 1 — the dimension of size 1 is then stretched to match the other.</p>
+<p><a href="https://numpy.org/doc/stable/user/basics.broadcasting.html" class="uri">https://numpy.org/doc/stable/user/basics.broadcasting.html</a></p>
+<div id="b111dcec" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">9</span>, <span class="dv">2</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>r1 <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r1)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> a <span class="op">/</span> b</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r2)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.array([[<span class="dv">4</span>], [<span class="op">-</span><span class="dv">2</span>]])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>r3 <span class="op">=</span> a <span class="op">+</span> c</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r3)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>r4 <span class="op">=</span> c <span class="op">/</span> a</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[10  4]
+ [14  8]]
+[[0.11111111 1.        ]
+ [0.55555556 3.        ]]
+[[5 6]
  [3 4]]
-d: [[1 2 3]]
-e: [1.+0.j 2.+0.j 3.+0.j]
-f: [[1 2]
- [3 4]]
-g: [[1 2]
- [3 4]]
-&lt;class 'numpy.matrix'&gt;</code></pre>
+[[ 4.          2.        ]
+ [-0.4        -0.33333333]]</code></pre>
+</div>
+</div>
+<p>Variant 3 — “column” and “row”</p>
+<p>Array <code>a</code> is created as a row [[5, 2, -3]] and then transposed with <code>.T</code>, turning it into a column of shape 3×1. Array <code>b</code> is a 1D array of shape (5,), treated by NumPy as a single row. When these two are combined, broadcasting stretches the column across 5 columns and the row across 3 rows, producing a 3×5 result in every case. In <code>a + b</code>, each value from the column [5, 2, -3] is added to every element of the row [3, -2, 1, 2, 4], giving [[8, 3, 6, 7, 9], [5, 0, 3, 4, 6], [0, -5, -2, -1, 1]]. The expression <code>b + a</code> yields the same result, since addition is commutative. For <code>a * b</code>, each column value is multiplied by every row value, producing [[15, -10, 5, 10, 20], [6, -4, 2, 4, 8], [-9, 6, -3, -6, -12]]. This column-times-row pattern is essentially an outer operation — every pair of elements from the two arrays is combined, and the result shape is determined by the lengths of the column and the row.</p>
+<div id="4c46e521" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>]]).T</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">+</span>b)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b<span class="op">+</span>a)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">*</span>b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 8  3  6  7  9]
+ [ 5  0  3  4  6]
+ [ 0 -5 -2 -1  1]]
+[[ 8  3  6  7  9]
+ [ 5  0  3  4  6]
+ [ 0 -5 -2 -1  1]]
+[[ 15 -10   5  10  20]
+ [  6  -4   2   4   8]
+ [ -9   6  -3  -6 -12]]</code></pre>
 </div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -964,13 +935,13 @@ g: [[1 2]
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./configuration.html" class="pagination-link" aria-label="Configuration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Configuration</span></span>
+      <a href="./numpy-modifications.html" class="pagination-link" aria-label="Modifying shape and size">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Modifying shape and size</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./list_array.html" class="pagination-link" aria-label="List vs Array">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./numpy-ufunc.html" class="pagination-link" aria-label="Universal functions (ufunc) and other mathematical functions">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Universal functions (ufunc) and other mathematical functions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

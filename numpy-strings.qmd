@@ -1,0 +1,184 @@
+# String operations
+
+In `NumPy`, besides the well-known numerical arrays, there is also a set of functions that allow vectorized operations on strings.
+
+
+**Important:** The functions below are typically available in the `numpy.char` module. In the documentation, they can be found in the [String operations](https://numpy.org/doc/stable/reference/routines.strings.html) section, but in this material we will focus on how to use them via the `numpy.strings` module interface. This is analogous to using `numpy.char`, but is the newer approach.
+
+
+## Creating arrays with strings
+
+NumPy allows storing text in arrays, for example:
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr = np.array(["python", "NumPy", "data", "Science"])
+print(arr)
+```
+
+---
+
+## Basic text modification functions
+
+Below are popular functions for modifying text in string arrays:
+
+### `numpy.strings.upper` and `numpy.strings.lower`
+
+- `upper`: Converts all letters to uppercase.
+- `lower`: Converts all letters to lowercase.
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr = np.array(["python", "NumPy", "data", "Science"])
+
+print(np.strings.upper(arr))
+print(np.strings.lower(arr))
+
+```
+
+### `numpy.strings.capitalize`
+
+The `capitalize` function converts the first letter of the entire string to uppercase and the rest to lowercase.
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr = np.array(["python", "NumPy", "data", "Science"])
+print(np.strings.capitalize(arr))
+
+```
+
+### `numpy.strings.title`
+
+The `title` function converts the first letter of each word to uppercase and the remaining letters of each word to lowercase.
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr2 = np.array(["python data science", "machine learning", "deep learning"])
+print(np.strings.title(arr2))
+```
+
+---
+
+## Joining and splitting text
+
+### `numpy.strings.add`
+
+The `add` function concatenates elements of text arrays pairwise, acting like the `+` operator on strings, but in a vectorized way. The concatenation is performed without any separator.
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr_a = np.array(["Hello", "Data"])
+arr_b = np.array(["World", "Science"])
+
+# without separator
+print(np.strings.add(arr_a, arr_b))
+# with space -- it must be added manually
+print(np.strings.add(np.strings.add(arr_a, np.array([" ", " "])), arr_b))
+```
+
+### `numpy.char.join`
+
+The `join` function inserts a specified separator between individual characters within each element of the array.
+
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr3 = np.array(["python", "numpy", "string"])
+print(np.char.join("-", arr3))
+
+```
+
+> Note: `join` vectorizes the operation, treating each element of the array as a sequence of characters to be joined with the separator.
+
+### `numpy.char.split`
+
+Allows splitting strings by a given separator. Returns an array containing lists of substrings.
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr4 = np.array(["python-data-science", "machine-learning"])
+print(np.char.split(arr4, sep="-"))
+```
+
+---
+
+## Searching and replacing substrings
+
+### `numpy.strings.find` and `numpy.strings.rfind`
+
+- `find`: Returns the index of the first occurrence of a substring (or -1 if not found).
+- `rfind`: Returns the index of the last occurrence of a substring (or -1 if not found).
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr5 = np.array(["banana", "data", "abracadabra"])
+# find -- first occurrence
+print(np.strings.find(arr5, "a"))
+# rfind -- last occurrence
+print(np.strings.rfind(arr5, "a"))
+```
+
+### `numpy.strings.replace`
+
+`replace` substitutes all occurrences of a substring with a new string.
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr6 = np.array(["python", "pydata", "pypy"])
+print(np.strings.replace(arr6, "py", "PY"))
+
+```
+
+---
+
+## Removing unwanted characters
+
+### `numpy.strings.strip`, `numpy.strings.lstrip` and `numpy.strings.rstrip`
+
+- `strip`: Removes specified characters from the beginning and end.
+- `lstrip`: Removes specified characters from the left side (beginning).
+- `rstrip`: Removes specified characters from the right side (end).
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr7 = np.array(["   python   ", "  numpy  "])
+# strip -- removes from both sides
+print(np.strings.strip(arr7))
+# lstrip -- removes only from the left
+print(np.strings.lstrip(arr7))
+# rstrip -- removes only from the right
+print(np.strings.rstrip(arr7))
+```
+
+We can also specify custom characters to remove:
+
+```{python}
+#| echo: true
+import numpy as np
+
+arr8 = np.array(["###data###", "***science***"])
+print(np.strings.strip(arr8, "#*"))
+
+```

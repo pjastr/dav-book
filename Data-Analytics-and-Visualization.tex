@@ -1651,6 +1651,1199 @@ d
  [0. 0. 1. 0.]]
 \end{verbatim}
 
+\chapter{Indexing, ``slicing''}\label{indexing-slicing}
+
+\protect\phantomsection\label{annotated-cell-18}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\OperatorTok{{-}}\DecValTok{23}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"1:"}\NormalTok{, a[}\DecValTok{5}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{1}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"2:"}\NormalTok{, a[}\OperatorTok{{-}}\DecValTok{2}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{2}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"3:"}\NormalTok{, a[}\DecValTok{3}\NormalTok{:}\DecValTok{6}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{3}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"4:"}\NormalTok{, a[:]) }\hspace*{\fill}\NormalTok{\circled{4}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"5:"}\NormalTok{, a[}\DecValTok{0}\NormalTok{:}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{5}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"6:"}\NormalTok{, a[:}\DecValTok{5}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{6}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+Access the element at index 5.
+\item[\circled{2}]
+Access the second element from the end.
+\item[\circled{3}]
+Access elements with indices from 3 to 5 (inclusive) --- the principle
+of half-open intervals (closed on the left, open on the right).
+\item[\circled{4}]
+Access all elements.
+\item[\circled{5}]
+Access all elements except the last one.
+\item[\circled{6}]
+Access from the beginning up to the element at index 4.
+\end{description}
+
+\begin{verbatim}
+1: 8
+2: 16
+3: [ 4 -7  8]
+4: [  2   5  -2   4  -7   8   9  11 -23  -4  -7  16   1]
+5: [  2   5  -2   4  -7   8   9  11 -23  -4  -7  16]
+6: [ 2  5 -2  4 -7]
+\end{verbatim}
+
+\protect\phantomsection\label{annotated-cell-19}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"1:"}\NormalTok{, a[}\DecValTok{4}\NormalTok{:]) }\hspace*{\fill}\NormalTok{\circled{1}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"2:"}\NormalTok{, a[}\DecValTok{4}\NormalTok{:}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{2}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"3:"}\NormalTok{, a[}\DecValTok{4}\NormalTok{:}\DecValTok{10}\NormalTok{:}\DecValTok{2}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{3}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"4:"}\NormalTok{, a[::}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{4}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"5:"}\NormalTok{, a[::}\DecValTok{2}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{5}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"6:"}\NormalTok{, a[::}\OperatorTok{{-}}\DecValTok{2}\NormalTok{]) }\hspace*{\fill}\NormalTok{\circled{6}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+Access elements from index 4 to the end.
+\item[\circled{2}]
+Access elements from index 4 to the end, excluding the last one.
+\item[\circled{3}]
+Access elements whose indices form an arithmetic sequence from 4 to 10
+(including 4, but excluding 10) with a step of 2.
+\item[\circled{4}]
+Access elements in reverse order (from end to beginning).
+\item[\circled{5}]
+Access elements at even indices from the beginning.
+\item[\circled{6}]
+Access every second element, counting from the end (reversed order).
+\end{description}
+
+\begin{verbatim}
+1: [ -7   8   9  11 -23  -4  -7  16   1]
+2: [ -7   8   9  11 -23  -4  -7  16]
+3: [ -7   9 -23]
+4: [  1  16  -7  -4 -23  11   9   8  -7   4  -2   5   2]
+5: [  2  -2  -7   9 -23  -7   1]
+6: [  1  -7 -23   9  -7  -2   2]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a[:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{:]}
+\BuiltInTok{print}\NormalTok{(b)}
+\BuiltInTok{print}\NormalTok{(np.shape(b))}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(c)}
+\BuiltInTok{print}\NormalTok{(np.shape(c))}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{, :]}
+\BuiltInTok{print}\NormalTok{(d)}
+\BuiltInTok{print}\NormalTok{(np.shape(d))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[4 5]
+ [4 8]]
+(2, 2)
+[-3  4  8]
+(3,)
+[-3  4  8]
+(3,)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{e }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{, :]}
+\BuiltInTok{print}\NormalTok{(e)}
+\BuiltInTok{print}\NormalTok{(np.shape(e))}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ a[:, :}\DecValTok{2}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(f)}
+\BuiltInTok{print}\NormalTok{(np.shape(f))}
+\NormalTok{g }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{, :}\DecValTok{2}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(g)}
+\BuiltInTok{print}\NormalTok{(np.shape(g))}
+\NormalTok{h }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{, :}\DecValTok{2}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(h)}
+\BuiltInTok{print}\NormalTok{(np.shape(h))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[-3  4  8]]
+(1, 3)
+[[ 3  4]
+ [-3  4]
+ [ 3  2]]
+(3, 2)
+[-3  4]
+(2,)
+[[-3  4]]
+(1, 2)
+\end{verbatim}
+
+\textbf{Note --- ``slicing'' creates a so-called view, not a copy.
+Changes to the view affect the original array and vice versa.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{:]}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{a[}\DecValTok{1}\NormalTok{][}\DecValTok{1}\NormalTok{] }\OperatorTok{=} \DecValTok{9}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{b[}\DecValTok{0}\NormalTok{][}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{11}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[4 8]]
+[[ 3  4  5]
+ [-3  9  8]
+ [ 3  2  9]]
+[[9 8]]
+[[  3   4   5]
+ [ -3 -11   8]
+ [  3   2   9]]
+[[-11   8]]
+\end{verbatim}
+
+Solution --- use the \texttt{.copy()} method:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{:].copy()}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{a[}\DecValTok{1}\NormalTok{][}\DecValTok{1}\NormalTok{] }\OperatorTok{=} \DecValTok{9}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{b[}\DecValTok{0}\NormalTok{][}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{11}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[4 8]]
+[[ 3  4  5]
+ [-3  9  8]
+ [ 3  2  9]]
+[[4 8]]
+[[ 3  4  5]
+ [-3  9  8]
+ [ 3  2  9]]
+[[-11   8]]
+\end{verbatim}
+
+Fancy indexing (indexing with an array of indices)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\OperatorTok{{-}}\DecValTok{23}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a[np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{])]}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ a[[}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{]]}
+\BuiltInTok{print}\NormalTok{(c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[ 5  4 11]
+[ 5  4 11]
+\end{verbatim}
+
+Boolean indexing (boolean masks)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\OperatorTok{{-}}\DecValTok{23}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a }\OperatorTok{\textgreater{}} \DecValTok{0}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ a[a }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(c)}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ a[(a }\OperatorTok{\textgreater{}} \DecValTok{5}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (a}\OperatorTok{\%}\DecValTok{2} \OperatorTok{!=}\DecValTok{0}\NormalTok{)] }\CommentTok{\# the \& operator stands for AND}
+\BuiltInTok{print}\NormalTok{(d)}
+\NormalTok{e }\OperatorTok{=}\NormalTok{ a[(a }\OperatorTok{\textgreater{}} \DecValTok{5}\NormalTok{) }\OperatorTok{|}\NormalTok{ (a}\OperatorTok{\%}\DecValTok{2} \OperatorTok{!=}\DecValTok{0}\NormalTok{)] }\CommentTok{\# the | operator stands for OR}
+\BuiltInTok{print}\NormalTok{(e)}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ a[(a }\OperatorTok{\textgreater{}} \DecValTok{5}\NormalTok{) }\OperatorTok{\^{}}\NormalTok{ (a}\OperatorTok{\%}\DecValTok{2} \OperatorTok{!=}\DecValTok{0}\NormalTok{)] }\CommentTok{\# the \^{} operator stands for XOR}
+\BuiltInTok{print}\NormalTok{(f)}
+\NormalTok{g }\OperatorTok{=}\NormalTok{ a[}\OperatorTok{\textasciitilde{}}\NormalTok{(a }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{)]}
+\BuiltInTok{print}\NormalTok{(g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[ True  True False  True False  True  True  True False False False  True
+  True]
+[ 2  5  4  8  9 11  8  1]
+[ 9 11]
+[  5  -7   8   9  11 -23  -7   8   1]
+[  5  -7   8 -23  -7   8   1]
+[ -2  -7 -23  -4  -7]
+\end{verbatim}
+
+\textbf{Note --- fancy and boolean indexing return a copy, not a view
+(unlike ``slicing'').}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\OperatorTok{{-}}\DecValTok{23}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a[a }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{b[}\DecValTok{0}\NormalTok{] }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{5}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{a[}\DecValTok{1}\NormalTok{] }\OperatorTok{=} \DecValTok{20}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[ 2  5  4  8  9 11  8  1]
+[  2   5  -2   4  -7   8   9  11 -23  -4  -7   8   1]
+[-5  5  4  8  9 11  8  1]
+[  2  20  -2   4  -7   8   9  11 -23  -4  -7   8   1]
+[-5  5  4  8  9 11  8  1]
+\end{verbatim}
+
+\chapter{Modifying shape and size}\label{modifying-shape-and-size}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"b"}\NormalTok{)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.reshape(a, (}\DecValTok{1}\NormalTok{, }\DecValTok{9}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(b)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"c"}\NormalTok{)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ a.reshape(}\DecValTok{9}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a
+[[ 3  4  5]
+ [-3  4  8]
+ [ 3  2  9]]
+b
+[[ 3  4  5 -3  4  8  3  2  9]]
+c
+[ 3  4  5 -3  4  8  3  2  9]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(a)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"d"}\NormalTok{)}
+\NormalTok{d }\OperatorTok{=}\NormalTok{ a.flatten()   }\CommentTok{\# always returns a copy}
+\BuiltInTok{print}\NormalTok{(d)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"e"}\NormalTok{)}
+\NormalTok{e }\OperatorTok{=}\NormalTok{ a.ravel()     }\CommentTok{\# returns a view (shared memory with original)}
+\BuiltInTok{print}\NormalTok{(e)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"f"}\NormalTok{)}
+\NormalTok{f }\OperatorTok{=}\NormalTok{ np.ravel(a)}
+\BuiltInTok{print}\NormalTok{(f)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a
+[[ 3  4  5]
+ [-3  4  8]
+ [ 3  2  9]]
+d
+[ 3  4  5 -3  4  8  3  2  9]
+e
+[ 3  4  5 -3  4  8  3  2  9]
+f
+[ 3  4  5 -3  4  8  3  2  9]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"g"}\NormalTok{)}
+\NormalTok{g }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(g)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"h"}\NormalTok{)}
+\NormalTok{h }\OperatorTok{=}\NormalTok{ np.squeeze(g)}
+\BuiltInTok{print}\NormalTok{(h)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"i"}\NormalTok{)}
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(a)}
+\NormalTok{i }\OperatorTok{=}\NormalTok{ a.T}
+\BuiltInTok{print}\NormalTok{(i)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"j"}\NormalTok{)}
+\NormalTok{j }\OperatorTok{=}\NormalTok{ np.transpose(a)}
+\BuiltInTok{print}\NormalTok{(j)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+g
+[[1 3 4]]
+h
+[1 3 4]
+i
+[[ 3  4  5]
+ [-3  4  8]
+ [ 3  2  9]]
+[[ 3 -3  3]
+ [ 4  4  2]
+ [ 5  8  9]]
+j
+[[ 3 -3  3]
+ [ 4  4  2]
+ [ 5  8  9]]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"n"}\NormalTok{)}
+\NormalTok{n }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(n)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"k"}\NormalTok{)}
+\NormalTok{k }\OperatorTok{=}\NormalTok{ np.hstack((n, n, n))}
+\BuiltInTok{print}\NormalTok{(k)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"l"}\NormalTok{)}
+\NormalTok{l }\OperatorTok{=}\NormalTok{ np.vstack((n, n, n))}
+\BuiltInTok{print}\NormalTok{(l)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"m"}\NormalTok{)}
+\NormalTok{m }\OperatorTok{=}\NormalTok{ np.dstack((n, n, n))}
+\BuiltInTok{print}\NormalTok{(m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+n
+[ 3 -4  5 -2]
+k
+[ 3 -4  5 -2  3 -4  5 -2  3 -4  5 -2]
+l
+[[ 3 -4  5 -2]
+ [ 3 -4  5 -2]
+ [ 3 -4  5 -2]]
+m
+[[[ 3  3  3]
+  [-4 -4 -4]
+  [ 5  5  5]
+  [-2 -2 -2]]]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r1"}\NormalTok{)}
+\NormalTok{r1 }\OperatorTok{=}\NormalTok{ np.concatenate((a, b))          }\CommentTok{\# axis=0 is the default}
+\BuiltInTok{print}\NormalTok{(r1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r2"}\NormalTok{)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ np.concatenate((a, b), axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)  }\CommentTok{\# same as above (explicit)}
+\BuiltInTok{print}\NormalTok{(r2)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r3"}\NormalTok{)}
+\NormalTok{r3 }\OperatorTok{=}\NormalTok{ np.concatenate((a, b.T), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r3)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r4"}\NormalTok{)}
+\NormalTok{r4 }\OperatorTok{=}\NormalTok{ np.concatenate((a, b), axis}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+r1
+[[1 2]
+ [3 4]
+ [5 6]]
+r2
+[[1 2]
+ [3 4]
+ [5 6]]
+r3
+[[1 2 5]
+ [3 4 6]]
+r4
+[1 2 3 4 5 6]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r1"}\NormalTok{)}
+\NormalTok{r1 }\OperatorTok{=}\NormalTok{ np.resize(a, (}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(r1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r2"}\NormalTok{)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ np.resize(a, (}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(r2)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r3"}\NormalTok{)}
+\NormalTok{r3 }\OperatorTok{=}\NormalTok{ np.resize(a, (}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(r3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+r1
+[[1 2 3]
+ [4 1 2]]
+r2
+[[1 2 3 4]]
+r3
+[[1 2 3 4]
+ [1 2 3 4]]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r1"}\NormalTok{)}
+\NormalTok{r1 }\OperatorTok{=}\NormalTok{ np.append(a, b)}
+\BuiltInTok{print}\NormalTok{(r1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r2"}\NormalTok{)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ np.append(a, b, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+r1
+[1 2 3 4 5 6]
+r2
+[[1 2]
+ [3 4]
+ [5 6]]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{3}\NormalTok{, }\DecValTok{7}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r1"}\NormalTok{)}
+\NormalTok{r1 }\OperatorTok{=}\NormalTok{ np.insert(a, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r2"}\NormalTok{)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ np.insert(a, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r2)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r3"}\NormalTok{)}
+\NormalTok{r3 }\OperatorTok{=}\NormalTok{ np.insert(a, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r3)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r4"}\NormalTok{)}
+\NormalTok{r4 }\OperatorTok{=}\NormalTok{ np.insert(a, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+r1
+[1 4 2 3 7]
+r2
+[1 2 4 3 7]
+r3
+[[1 2]
+ [4 4]
+ [3 7]]
+r4
+[[1 4 2]
+ [3 4 7]]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{], [}\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r1"}\NormalTok{)}
+\NormalTok{r1 }\OperatorTok{=}\NormalTok{ np.delete(a, }\DecValTok{1}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r1)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"r2"}\NormalTok{)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ np.delete(a, }\DecValTok{2}\NormalTok{, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(r2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+r1
+[[ 1  3  4]
+ [ 5  7  8]
+ [ 9 11 12]]
+r2
+[[1 2 3 4]
+ [5 6 7 8]]
+\end{verbatim}
+
+\chapter{Broadcasting}\label{broadcasting}
+
+The variants discussed below are illustrative examples.
+
+Variant 1 --- scalar-array --- performing an operation on every element
+of the array
+
+When a scalar is combined with an array, NumPy broadcasts the scalar to
+match the array's shape, then performs the operation element-wise. In
+the code above, array \texttt{a} has shape 3×2 and contains {[}{[}1,
+2{]}, {[}5, 6{]}, {[}9, 10{]}{]}. The expression \texttt{a\ +\ 4}
+conceptually expands the scalar 4 into a 3×2 array filled with 4s, so
+the result \texttt{b} is {[}{[}5, 6{]}, {[}9, 10{]}, {[}13, 14{]}{]}.
+The same principle applies to \texttt{2\ **\ a}, where the scalar 2 is
+broadcast across every element of \texttt{a}, producing {[}{[}2, 4{]},
+{[}32, 64{]}, {[}512, 1024{]}{]} --- each element is computed as 2
+raised to the corresponding value in \texttt{a}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{], [}\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ a }\OperatorTok{+} \DecValTok{4}
+\BuiltInTok{print}\NormalTok{(b)}
+\NormalTok{c }\OperatorTok{=} \DecValTok{2} \OperatorTok{**}\NormalTok{ a}
+\BuiltInTok{print}\NormalTok{(c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[ 5  6]
+ [ 9 10]
+ [13 14]]
+[[   2    4]
+ [  32   64]
+ [ 512 1024]]
+\end{verbatim}
+
+Variant 2 --- two arrays --- ``when one of the arrays can be expanded''
+(both dimensions are equal or one of them is equal to 1)
+
+When two arrays of different but compatible shapes are combined, NumPy
+stretches the smaller one to match the larger. Array \texttt{a} has
+shape 2×2 and \texttt{b} is a 1D array of shape (2,), which NumPy treats
+as a single row. In \texttt{a\ +\ b}, the row {[}9, 2{]} is broadcast
+across both rows of \texttt{a}, giving {[}{[}10, 4{]}, {[}14, 8{]}{]}.
+Similarly, \texttt{a\ /\ b} divides each row of \texttt{a} element-wise
+by {[}9, 2{]}, producing {[}{[}1/9, 1{]}, {[}5/9, 3{]}{]}. Array
+\texttt{c} has shape 2×1, meaning it acts as a column. In
+\texttt{a\ +\ c}, the value 4 is added across the entire first row and
+-2 across the second, yielding {[}{[}5, 6{]}, {[}3, 4{]}{]}. Likewise,
+\texttt{c\ /\ a} divides the column values by each element in the
+corresponding row, so the first row becomes {[}4/1, 4/2{]} and the
+second {[}-2/5, -2/6{]}. The general rule is that dimensions are
+compatible when they are equal or one of them is 1 --- the dimension of
+size 1 is then stretched to match the other.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], [}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]])}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{9}\NormalTok{, }\DecValTok{2}\NormalTok{])}
+\NormalTok{r1 }\OperatorTok{=}\NormalTok{ a }\OperatorTok{+}\NormalTok{ b}
+\BuiltInTok{print}\NormalTok{(r1)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ a }\OperatorTok{/}\NormalTok{ b}
+\BuiltInTok{print}\NormalTok{(r2)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{4}\NormalTok{], [}\OperatorTok{{-}}\DecValTok{2}\NormalTok{]])}
+\NormalTok{r3 }\OperatorTok{=}\NormalTok{ a }\OperatorTok{+}\NormalTok{ c}
+\BuiltInTok{print}\NormalTok{(r3)}
+\NormalTok{r4 }\OperatorTok{=}\NormalTok{ c }\OperatorTok{/}\NormalTok{ a}
+\BuiltInTok{print}\NormalTok{(r4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[10  4]
+ [14  8]]
+[[0.11111111 1.        ]
+ [0.55555556 3.        ]]
+[[5 6]
+ [3 4]]
+[[ 4.          2.        ]
+ [-0.4        -0.33333333]]
+\end{verbatim}
+
+Variant 3 --- ``column'' and ``row''
+
+Array \texttt{a} is created as a row {[}{[}5, 2, -3{]}{]} and then
+transposed with \texttt{.T}, turning it into a column of shape 3×1.
+Array \texttt{b} is a 1D array of shape (5,), treated by NumPy as a
+single row. When these two are combined, broadcasting stretches the
+column across 5 columns and the row across 3 rows, producing a 3×5
+result in every case. In \texttt{a\ +\ b}, each value from the column
+{[}5, 2, -3{]} is added to every element of the row {[}3, -2, 1, 2,
+4{]}, giving {[}{[}8, 3, 6, 7, 9{]}, {[}5, 0, 3, 4, 6{]}, {[}0, -5, -2,
+-1, 1{]}{]}. The expression \texttt{b\ +\ a} yields the same result,
+since addition is commutative. For \texttt{a\ *\ b}, each column value
+is multiplied by every row value, producing {[}{[}15, -10, 5, 10, 20{]},
+{[}6, -4, 2, 4, 8{]}, {[}-9, 6, -3, -6, -12{]}{]}. This column-times-row
+pattern is essentially an outer operation --- every pair of elements
+from the two arrays is combined, and the result shape is determined by
+the lengths of the column and the row.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{]]).T}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(a}\OperatorTok{+}\NormalTok{b)}
+\BuiltInTok{print}\NormalTok{(b}\OperatorTok{+}\NormalTok{a)}
+\BuiltInTok{print}\NormalTok{(a}\OperatorTok{*}\NormalTok{b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[ 8  3  6  7  9]
+ [ 5  0  3  4  6]
+ [ 0 -5 -2 -1  1]]
+[[ 8  3  6  7  9]
+ [ 5  0  3  4  6]
+ [ 0 -5 -2 -1  1]]
+[[ 15 -10   5  10  20]
+ [  6  -4   2   4   8]
+ [ -9   6  -3  -6 -12]]
+\end{verbatim}
+
+\chapter{Universal functions (ufunc) and other mathematical
+functions}\label{universal-functions-ufunc-and-other-mathematical-functions}
+
+Universal functions (known as \emph{ufuncs}) are among the most
+important tools in NumPy. They are functions that operate
+element-by-element on arrays, often implemented in C, which ensures high
+computational performance. Thanks to \emph{ufuncs}, you can perform
+arithmetic, trigonometric, statistical, and logical operations on entire
+arrays in a simple and readable way, without the need to write loops in
+Python.
+
+\section{Basic arithmetic operations}\label{basic-arithmetic-operations}
+
+NumPy automatically translates mathematical operators into the
+corresponding \emph{ufuncs}.\\
+For example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{+} corresponds to \texttt{np.add}
+\item
+  \texttt{-} corresponds to \texttt{np.subtract}
+\item
+  \texttt{*} corresponds to \texttt{np.multiply}
+\item
+  \texttt{/} corresponds to \texttt{np.divide}
+\item
+  \texttt{**} corresponds to \texttt{np.power}
+\end{itemize}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\NormalTok{B }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{])}
+
+\CommentTok{\# Element{-}by{-}element operations}
+\NormalTok{sum\_tab }\OperatorTok{=}\NormalTok{ np.add(A, B)       }\CommentTok{\# same as A + B}
+\NormalTok{diff\_tab }\OperatorTok{=}\NormalTok{ np.subtract(B, A) }\CommentTok{\# same as B {-} A}
+\NormalTok{mul\_tab }\OperatorTok{=}\NormalTok{ np.multiply(A, }\DecValTok{2}\NormalTok{)  }\CommentTok{\# same as A * 2}
+\NormalTok{pow\_tab }\OperatorTok{=}\NormalTok{ np.power(A, }\DecValTok{3}\NormalTok{)     }\CommentTok{\# same as A ** 3}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Sum:"}\NormalTok{, sum\_tab)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Difference:"}\NormalTok{, diff\_tab)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Multiplication by 2:"}\NormalTok{, mul\_tab)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Exponentiation:"}\NormalTok{, pow\_tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Sum: [11 22 33 44]
+Difference: [ 9 18 27 36]
+Multiplication by 2: [2 4 6 8]
+Exponentiation: [ 1  8 27 64]
+\end{verbatim}
+
+\section{Trigonometric and related
+functions}\label{trigonometric-and-related-functions}
+
+NumPy offers a rich set of trigonometric functions:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{np.sin}, \texttt{np.cos}, \texttt{np.tan} --- basic functions,
+\item
+  \texttt{np.arcsin}, \texttt{np.arccos}, \texttt{np.arctan} --- inverse
+  trigonometric functions,
+\item
+  \texttt{np.sinh}, \texttt{np.cosh}, \texttt{np.tanh} --- hyperbolic
+  functions.
+\end{itemize}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, np.pi, }\DecValTok{5}\NormalTok{) }\CommentTok{\# array [0, π/4, π/2, 3π/4, π]}
+\NormalTok{sin\_values }\OperatorTok{=}\NormalTok{ np.sin(x)}
+\NormalTok{cos\_values }\OperatorTok{=}\NormalTok{ np.cos(x)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"sin(x) values:"}\NormalTok{, sin\_values)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"cos(x) values:"}\NormalTok{, cos\_values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+sin(x) values: [0.00000000e+00 7.07106781e-01 1.00000000e+00 7.07106781e-01
+ 1.22464680e-16]
+cos(x) values: [ 1.00000000e+00  7.07106781e-01  6.12323400e-17 -7.07106781e-01
+ -1.00000000e+00]
+\end{verbatim}
+
+\section{Exponential and logarithmic
+functions}\label{exponential-and-logarithmic-functions}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{np.exp} --- exponential function,
+\item
+  \texttt{np.log} --- natural logarithm,
+\item
+  \texttt{np.log10} --- base-10 logarithm.
+\end{itemize}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, np.e, np.e}\OperatorTok{**}\DecValTok{2}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"A:"}\NormalTok{, A)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"log(A):"}\NormalTok{, np.log(A))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"exp(A):"}\NormalTok{, np.exp([}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]))  }\CommentTok{\# exp(0)=1, exp(1)=e, exp(2)=e\^{}2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+A: [1.         2.71828183 7.3890561 ]
+log(A): [0. 1. 2.]
+exp(A): [1.         2.71828183 7.3890561 ]
+\end{verbatim}
+
+\section{Rounding functions and absolute
+values}\label{rounding-functions-and-absolute-values}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{np.round} --- rounds to the nearest number,
+\item
+  \texttt{np.floor} --- floor,
+\item
+  \texttt{np.ceil} --- ceiling,
+\item
+  \texttt{np.trunc} --- truncation to the integer part,
+\item
+  \texttt{np.abs} --- absolute value.
+\end{itemize}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{B }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{1.7}\NormalTok{, }\OperatorTok{{-}}\FloatTok{2.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\FloatTok{4.52}\NormalTok{, }\OperatorTok{{-}}\FloatTok{4.1}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"B:"}\NormalTok{, B)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"floor(B):"}\NormalTok{, np.floor(B))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"ceil(B):"}\NormalTok{, np.ceil(B))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"abs(B):"}\NormalTok{, np.}\BuiltInTok{abs}\NormalTok{(B))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"round(B):"}\NormalTok{, np.}\BuiltInTok{round}\NormalTok{(B))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"rint(B):"}\NormalTok{, np.rint(B))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"round(B,1):"}\NormalTok{, np.}\BuiltInTok{round}\NormalTok{(B,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+B: [ 1.7  -2.5   3.5   4.52 -4.1 ]
+floor(B): [ 1. -3.  3.  4. -5.]
+ceil(B): [ 2. -2.  4.  5. -4.]
+abs(B): [1.7  2.5  3.5  4.52 4.1 ]
+round(B): [ 2. -2.  4.  5. -4.]
+rint(B): [ 2. -2.  4.  5. -4.]
+round(B,1): [ 1.7 -2.5  3.5  4.5 -4.1]
+\end{verbatim}
+
+\section{Statistical and aggregate
+functions}\label{statistical-and-aggregate-functions}
+
+Although many statistical functions are available as array methods
+(e.g.~\texttt{A.mean()}, \texttt{A.std()}), there are also ufuncs that
+operate element-by-element or accept axis parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{np.minimum}, \texttt{np.maximum} --- return the
+  element-by-element minimum/maximum of two arrays,
+\item
+  \texttt{np.fmin}, \texttt{np.fmax} --- similar to the above, but
+  ignore NaN values,
+\item
+  \texttt{np.sqrt} --- square root,
+\item
+  \texttt{np.square} --- squaring.
+\end{itemize}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{C1 }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{16}\NormalTok{])}
+\NormalTok{C2 }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{20}\NormalTok{])}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"element{-}wise minimum of C1 and C2:"}\NormalTok{, np.minimum(C1, C2))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"element{-}wise maximum of C1 and C2:"}\NormalTok{, np.maximum(C1, C2))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"sqrt(C1):"}\NormalTok{, np.sqrt(C1))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"square(C2):"}\NormalTok{, np.square(C2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+element-wise minimum of C1 and C2: [ 1  2  5 16]
+element-wise maximum of C1 and C2: [ 2  4  9 20]
+sqrt(C1): [1. 2. 3. 4.]
+square(C2): [  4   4  25 400]
+\end{verbatim}
+
+\chapter{String operations}\label{string-operations}
+
+In \texttt{NumPy}, besides the well-known numerical arrays, there is
+also a set of functions that allow vectorized operations on strings.
+
+\textbf{Important:} The functions below are typically available in the
+\texttt{numpy.char} module. In the documentation, they can be found in
+the
+\href{https://numpy.org/doc/stable/reference/routines.strings.html}{String
+operations} section, but in this material we will focus on how to use
+them via the \texttt{numpy.strings} module interface. This is analogous
+to using \texttt{numpy.char}, but is the newer approach.
+
+\section{Creating arrays with
+strings}\label{creating-arrays-with-strings}
+
+NumPy allows storing text in arrays, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python"}\NormalTok{, }\StringTok{"NumPy"}\NormalTok{, }\StringTok{"data"}\NormalTok{, }\StringTok{"Science"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(arr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['python' 'NumPy' 'data' 'Science']
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Basic text modification
+functions}\label{basic-text-modification-functions}
+
+Below are popular functions for modifying text in string arrays:
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.upper} and
+\texttt{numpy.strings.lower}}{numpy.strings.upper and numpy.strings.lower}}\label{numpy.strings.upper-and-numpy.strings.lower}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{upper}: Converts all letters to uppercase.
+\item
+  \texttt{lower}: Converts all letters to lowercase.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python"}\NormalTok{, }\StringTok{"NumPy"}\NormalTok{, }\StringTok{"data"}\NormalTok{, }\StringTok{"Science"}\NormalTok{])}
+
+\BuiltInTok{print}\NormalTok{(np.strings.upper(arr))}
+\BuiltInTok{print}\NormalTok{(np.strings.lower(arr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['PYTHON' 'NUMPY' 'DATA' 'SCIENCE']
+['python' 'numpy' 'data' 'science']
+\end{verbatim}
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.capitalize}}{numpy.strings.capitalize}}\label{numpy.strings.capitalize}
+
+The \texttt{capitalize} function converts the first letter of the entire
+string to uppercase and the rest to lowercase.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python"}\NormalTok{, }\StringTok{"NumPy"}\NormalTok{, }\StringTok{"data"}\NormalTok{, }\StringTok{"Science"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(np.strings.capitalize(arr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['Python' 'Numpy' 'Data' 'Science']
+\end{verbatim}
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.title}}{numpy.strings.title}}\label{numpy.strings.title}
+
+The \texttt{title} function converts the first letter of each word to
+uppercase and the remaining letters of each word to lowercase.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr2 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python data science"}\NormalTok{, }\StringTok{"machine learning"}\NormalTok{, }\StringTok{"deep learning"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(np.strings.title(arr2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['Python Data Science' 'Machine Learning' 'Deep Learning']
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Joining and splitting text}\label{joining-and-splitting-text}
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.add}}{numpy.strings.add}}\label{numpy.strings.add}
+
+The \texttt{add} function concatenates elements of text arrays pairwise,
+acting like the \texttt{+} operator on strings, but in a vectorized way.
+The concatenation is performed without any separator.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr\_a }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"Hello"}\NormalTok{, }\StringTok{"Data"}\NormalTok{])}
+\NormalTok{arr\_b }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"World"}\NormalTok{, }\StringTok{"Science"}\NormalTok{])}
+
+\CommentTok{\# without separator}
+\BuiltInTok{print}\NormalTok{(np.strings.add(arr\_a, arr\_b))}
+\CommentTok{\# with space {-}{-} it must be added manually}
+\BuiltInTok{print}\NormalTok{(np.strings.add(np.strings.add(arr\_a, np.array([}\StringTok{" "}\NormalTok{, }\StringTok{" "}\NormalTok{])), arr\_b))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['HelloWorld' 'DataScience']
+['Hello World' 'Data Science']
+\end{verbatim}
+
+\subsection{\texorpdfstring{\texttt{numpy.char.join}}{numpy.char.join}}\label{numpy.char.join}
+
+The \texttt{join} function inserts a specified separator between
+individual characters within each element of the array.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr3 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python"}\NormalTok{, }\StringTok{"numpy"}\NormalTok{, }\StringTok{"string"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(np.char.join(}\StringTok{"{-}"}\NormalTok{, arr3))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['p-y-t-h-o-n' 'n-u-m-p-y' 's-t-r-i-n-g']
+\end{verbatim}
+
+\begin{quote}
+Note: \texttt{join} vectorizes the operation, treating each element of
+the array as a sequence of characters to be joined with the separator.
+\end{quote}
+
+\subsection{\texorpdfstring{\texttt{numpy.char.split}}{numpy.char.split}}\label{numpy.char.split}
+
+Allows splitting strings by a given separator. Returns an array
+containing lists of substrings.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr4 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python{-}data{-}science"}\NormalTok{, }\StringTok{"machine{-}learning"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(np.char.split(arr4, sep}\OperatorTok{=}\StringTok{"{-}"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[list(['python', 'data', 'science']) list(['machine', 'learning'])]
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Searching and replacing
+substrings}\label{searching-and-replacing-substrings}
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.find} and
+\texttt{numpy.strings.rfind}}{numpy.strings.find and numpy.strings.rfind}}\label{numpy.strings.find-and-numpy.strings.rfind}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{find}: Returns the index of the first occurrence of a
+  substring (or -1 if not found).
+\item
+  \texttt{rfind}: Returns the index of the last occurrence of a
+  substring (or -1 if not found).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr5 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"banana"}\NormalTok{, }\StringTok{"data"}\NormalTok{, }\StringTok{"abracadabra"}\NormalTok{])}
+\CommentTok{\# find {-}{-} first occurrence}
+\BuiltInTok{print}\NormalTok{(np.strings.find(arr5, }\StringTok{"a"}\NormalTok{))}
+\CommentTok{\# rfind {-}{-} last occurrence}
+\BuiltInTok{print}\NormalTok{(np.strings.rfind(arr5, }\StringTok{"a"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1 1 0]
+[ 5  3 10]
+\end{verbatim}
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.replace}}{numpy.strings.replace}}\label{numpy.strings.replace}
+
+\texttt{replace} substitutes all occurrences of a substring with a new
+string.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr6 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"python"}\NormalTok{, }\StringTok{"pydata"}\NormalTok{, }\StringTok{"pypy"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(np.strings.replace(arr6, }\StringTok{"py"}\NormalTok{, }\StringTok{"PY"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['PYthon' 'PYdata' 'PYPY']
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Removing unwanted
+characters}\label{removing-unwanted-characters}
+
+\subsection{\texorpdfstring{\texttt{numpy.strings.strip},
+\texttt{numpy.strings.lstrip} and
+\texttt{numpy.strings.rstrip}}{numpy.strings.strip, numpy.strings.lstrip and numpy.strings.rstrip}}\label{numpy.strings.strip-numpy.strings.lstrip-and-numpy.strings.rstrip}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{strip}: Removes specified characters from the beginning and
+  end.
+\item
+  \texttt{lstrip}: Removes specified characters from the left side
+  (beginning).
+\item
+  \texttt{rstrip}: Removes specified characters from the right side
+  (end).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr7 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"   python   "}\NormalTok{, }\StringTok{"  numpy  "}\NormalTok{])}
+\CommentTok{\# strip {-}{-} removes from both sides}
+\BuiltInTok{print}\NormalTok{(np.strings.strip(arr7))}
+\CommentTok{\# lstrip {-}{-} removes only from the left}
+\BuiltInTok{print}\NormalTok{(np.strings.lstrip(arr7))}
+\CommentTok{\# rstrip {-}{-} removes only from the right}
+\BuiltInTok{print}\NormalTok{(np.strings.rstrip(arr7))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['python' 'numpy']
+['python   ' 'numpy  ']
+['   python' '  numpy']
+\end{verbatim}
+
+We can also specify custom characters to remove:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{arr8 }\OperatorTok{=}\NormalTok{ np.array([}\StringTok{"\#\#\#data\#\#\#"}\NormalTok{, }\StringTok{"***science***"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(np.strings.strip(arr8, }\StringTok{"\#*"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['data' 'science']
+\end{verbatim}
+
 
 
 
