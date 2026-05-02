@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Data Analytics and Visualization"
+  title: "Data analysis and visualisation"
   author: Piotr Jastrzębski
   date: today
   cover-image: aiwd.jpg
@@ -27,6 +27,9 @@ book:
       - numpy-linear-algebra.qmd
       - numpy-conditions.qmd
       - numpy-miscellaneous.qmd
+    - part: Data exploration
+      chapters:
+      - exploration.qmd
   downloads: [pdf, epub]
   
 execute:

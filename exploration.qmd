@@ -1,0 +1,15 @@
+# Stages of data exploration
+
+- **Data collection**:
+    - Gathering data from various sources (databases, CSV files, APIs, etc.).
+- **Data understanding**:
+    - Analysis of data structure, data types, and their meaning.
+    - Exploration of preliminary relationships and trends.
+- **Data cleaning**:
+    - Removing missing values, errors, and anomalies in the data.
+    - Handling missing values and duplicates.
+- **Data transformation**:
+    - Normalization, standardization, encoding of categorical variables.
+    - Creating new variables (features).
+- **Data reduction**:
+    - Selection of relevant features or reducing data dimensionality (e.g., PCA).

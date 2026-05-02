@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Data Analytics and Visualization",
+    "title": "Data analysis and visualisation",
     "section": "",
     "text": "1 Data Analysis and Visualization\nThe current version pertains to classes held in the 2025/26 academic year.\nSome of the texts have been machine-translated into English. In case of any ambiguities, please get in touch via email.",
     "crumbs": [
@@ -833,6 +833,17 @@
     "crumbs": [
       "NumPy",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>NumPy - Miscellaneous</span>"
+    ]
+  },
+  {
+    "objectID": "exploration.html",
+    "href": "exploration.html",
+    "title": "17  Stages of data exploration",
+    "section": "",
+    "text": "Data collection:\n\nGathering data from various sources (databases, CSV files, APIs, etc.).\n\nData understanding:\n\nAnalysis of data structure, data types, and their meaning.\nExploration of preliminary relationships and trends.\n\nData cleaning:\n\nRemoving missing values, errors, and anomalies in the data.\nHandling missing values and duplicates.\n\nData transformation:\n\nNormalization, standardization, encoding of categorical variables.\nCreating new variables (features).\n\nData reduction:\n\nSelection of relevant features or reducing data dimensionality (e.g., PCA).",
+    "crumbs": [
+      "Data exploration",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Stages of data exploration</span>"
     ]
   }
 ]
