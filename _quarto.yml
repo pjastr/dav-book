@@ -31,6 +31,8 @@ book:
       chapters:
       - exploration.qmd
   downloads: [pdf, epub]
+  repo-url: https://github.com/pjastr/dav-book
+  repo-actions: [issue]
   
 execute:
   freeze: auto
