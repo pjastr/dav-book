@@ -1,0 +1,55 @@
+# Loading data
+
+## Handling csv files
+
+
+The `pandas.read_csv` function
+
+Documentation: [link](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)
+
+Selected arguments:
+
+* `filepath` - access path
+* `sep=_NoDefault.no_default, delimiter=None` - separator
+* `header='infer'` - header - by default the column names, alternatively `header=None` means no header
+* `index_col=None` - sets a column as the index (row names)
+* `thousands=None` - thousands separator
+* `decimal='.'` - decimal separator
+
+Saving with `pandas.DataFrame.to_csv`
+
+Documentation: [link](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
+
+## Handling Excel files
+
+The `pandas.read_excel` function
+
+<https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html>
+
+** Important: you need to install the `openpyxl` library to import .xlsx files and `xlrd` to import .xls files (in most cases you don't need to import them explicitly in the code)
+
+Selected arguments:
+
+* `io` - access path
+* `sheet_name=0` - sheet name
+* `header='infer'` - header - by default the column names, alternatively `header=None` means no header
+* `index_col=None` - sets a column as the index (row names)
+* `thousands=None` - thousands separator
+* `decimal='.'` - decimal separator
+
+
+## Handling `sqllite3`
+
+```python
+import pandas as pd
+from sqlite3 import connect
+
+conn = connect('sales_data2.db')
+data = pd.read_sql("SELECT * FROM sales_data", con=conn)
+```
+
+## Sample files for exercises
+
+
+<https://github.com/pjastr/DAV-files>
+

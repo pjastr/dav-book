@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14&nbsp; Linear Algebra – Data analysis and visualisation</title>
+<title>20&nbsp; Loading data – Data analysis and visualisation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./numpy-conditions.html" rel="next">
-<link href="./numpy-strings.html" rel="prev">
+<link href="./pandas-indexing.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-linear-algebra.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pandas-start.html">Pandas</a></li><li class="breadcrumb-item"><a href="./pandas-reading_files.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Loading data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -432,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./numpy-linear-algebra.html" class="sidebar-item-text sidebar-link active">
+  <a href="./numpy-linear-algebra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
@@ -490,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pandas-reading_files.html" class="sidebar-item-text sidebar-link">
+  <a href="./pandas-reading_files.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Loading data</span></span></a>
   </div>
 </li>
@@ -506,18 +505,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dot-product" id="toc-dot-product" class="nav-link active" data-scroll-target="#dot-product"><span class="header-section-number">14.1</span> Dot Product</a></li>
-  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="header-section-number">14.2</span> Matrix Multiplication</a></li>
-  <li><a href="#matrix-vector-multiplication" id="toc-matrix-vector-multiplication" class="nav-link" data-scroll-target="#matrix-vector-multiplication"><span class="header-section-number">14.3</span> Matrix-Vector Multiplication</a></li>
-  <li><a href="#solving-systems-of-linear-equations" id="toc-solving-systems-of-linear-equations" class="nav-link" data-scroll-target="#solving-systems-of-linear-equations"><span class="header-section-number">14.4</span> Solving Systems of Linear Equations</a></li>
-  <li><a href="#matrix-determinant" id="toc-matrix-determinant" class="nav-link" data-scroll-target="#matrix-determinant"><span class="header-section-number">14.5</span> Matrix Determinant</a></li>
-  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#eigenvalues-and-eigenvectors"><span class="header-section-number">14.6</span> Eigenvalues and Eigenvectors</a></li>
-  <li><a href="#singular-value-decomposition-svd" id="toc-singular-value-decomposition-svd" class="nav-link" data-scroll-target="#singular-value-decomposition-svd"><span class="header-section-number">14.7</span> Singular Value Decomposition (SVD)</a></li>
-  <li><a href="#matrixvector-norm" id="toc-matrixvector-norm" class="nav-link" data-scroll-target="#matrixvector-norm"><span class="header-section-number">14.8</span> Matrix/Vector Norm</a></li>
-  <li><a href="#inverse-matrix" id="toc-inverse-matrix" class="nav-link" data-scroll-target="#inverse-matrix"><span class="header-section-number">14.9</span> Inverse Matrix</a></li>
-  <li><a href="#the-numpy.inner-function---inner-product" id="toc-the-numpy.inner-function---inner-product" class="nav-link" data-scroll-target="#the-numpy.inner-function---inner-product"><span class="header-section-number">14.10</span> The <code>numpy.inner</code> Function - Inner Product</a></li>
-  <li><a href="#the-numpy.outer-function---outer-product" id="toc-the-numpy.outer-function---outer-product" class="nav-link" data-scroll-target="#the-numpy.outer-function---outer-product"><span class="header-section-number">14.11</span> The <code>numpy.outer</code> Function - Outer Product</a></li>
-  <li><a href="#the-numpy.matmul-function---matrix-multiplication" id="toc-the-numpy.matmul-function---matrix-multiplication" class="nav-link" data-scroll-target="#the-numpy.matmul-function---matrix-multiplication"><span class="header-section-number">14.12</span> The <code>numpy.matmul</code> Function - Matrix Multiplication</a></li>
+  <li><a href="#handling-csv-files" id="toc-handling-csv-files" class="nav-link active" data-scroll-target="#handling-csv-files"><span class="header-section-number">20.1</span> Handling csv files</a></li>
+  <li><a href="#handling-excel-files" id="toc-handling-excel-files" class="nav-link" data-scroll-target="#handling-excel-files"><span class="header-section-number">20.2</span> Handling Excel files</a></li>
+  <li><a href="#handling-sqllite3" id="toc-handling-sqllite3" class="nav-link" data-scroll-target="#handling-sqllite3"><span class="header-section-number">20.3</span> Handling <code>sqllite3</code></a></li>
+  <li><a href="#sample-files-for-exercises" id="toc-sample-files-for-exercises" class="nav-link" data-scroll-target="#sample-files-for-exercises"><span class="header-section-number">20.4</span> Sample files for exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/pjastr/dav-book/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -525,9 +516,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./numpy-linear-algebra.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pandas-start.html">Pandas</a></li><li class="breadcrumb-item"><a href="./pandas-reading_files.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Loading data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Linear Algebra</span></h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Loading data</span></h1>
 </div>
 
 
@@ -544,299 +535,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="dot-product" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="dot-product"><span class="header-section-number">14.1</span> Dot Product</h2>
-<p>For two vectors, <code>dot</code> computes their dot product.</p>
-<div id="e6f54478" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Dot product of two vectors</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.dot(a, b)  <span class="co"># 1*4 + 2*5 + 3*6</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)  <span class="co"># Result: 32</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative notation using the @ operator</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> a <span class="op">@</span> b</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)  <span class="co"># Result: 32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>32
-32</code></pre>
-</div>
-</div>
+<section id="handling-csv-files" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="handling-csv-files"><span class="header-section-number">20.1</span> Handling csv files</h2>
+<p>The <code>pandas.read_csv</code> function</p>
+<p>Documentation: <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">link</a></p>
+<p>Selected arguments:</p>
+<ul>
+<li><code>filepath</code> - access path</li>
+<li><code>sep=_NoDefault.no_default, delimiter=None</code> - separator</li>
+<li><code>header='infer'</code> - header - by default the column names, alternatively <code>header=None</code> means no header</li>
+<li><code>index_col=None</code> - sets a column as the index (row names)</li>
+<li><code>thousands=None</code> - thousands separator</li>
+<li><code>decimal='.'</code> - decimal separator</li>
+</ul>
+<p>Saving with <code>pandas.DataFrame.to_csv</code></p>
+<p>Documentation: <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html">link</a></p>
 </section>
-<section id="matrix-multiplication" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">14.2</span> Matrix Multiplication</h2>
-<p>For matrices (two-dimensional arrays), <code>dot</code> performs standard matrix multiplication.</p>
-<div id="293a6870" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix multiplication</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.dot(A, B)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(C)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Result:</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># [[19 22]</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  [43 50]]</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The same using the @ operator</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">@</span> B</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(C)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[19 22]
- [43 50]]
-[[19 22]
- [43 50]]</code></pre>
-</div>
-</div>
+<section id="handling-excel-files" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="handling-excel-files"><span class="header-section-number">20.2</span> Handling Excel files</h2>
+<p>The <code>pandas.read_excel</code> function</p>
+<p><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html" class="uri">https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html</a></p>
+<p>** Important: you need to install the <code>openpyxl</code> library to import .xlsx files and <code>xlrd</code> to import .xls files (in most cases you don’t need to import them explicitly in the code)</p>
+<p>Selected arguments:</p>
+<ul>
+<li><code>io</code> - access path</li>
+<li><code>sheet_name=0</code> - sheet name</li>
+<li><code>header='infer'</code> - header - by default the column names, alternatively <code>header=None</code> means no header</li>
+<li><code>index_col=None</code> - sets a column as the index (row names)</li>
+<li><code>thousands=None</code> - thousands separator</li>
+<li><code>decimal='.'</code> - decimal separator</li>
+</ul>
 </section>
-<section id="matrix-vector-multiplication" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="matrix-vector-multiplication"><span class="header-section-number">14.3</span> Matrix-Vector Multiplication</h2>
-<p>We can also multiply a matrix by a vector:</p>
-<div id="451a90f8" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix-vector multiplication</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">6</span>])</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.dot(A, v)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)  <span class="co"># Result: [17 39]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[17 39]</code></pre>
-</div>
-</div>
+<section id="handling-sqllite3" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="handling-sqllite3"><span class="header-section-number">20.3</span> Handling <code>sqllite3</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlite3 <span class="im">import</span> <span class="ex">connect</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> <span class="ex">connect</span>(<span class="st">'sales_data2.db'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_sql(<span class="st">"SELECT * FROM sales_data"</span>, con<span class="op">=</span>conn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="solving-systems-of-linear-equations" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="solving-systems-of-linear-equations"><span class="header-section-number">14.4</span> Solving Systems of Linear Equations</h2>
-<p>The <code>numpy.linalg.solve</code> function solves systems of linear equations of the form Ax = b:</p>
-<div id="bf5533dd" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Solving a system of linear equations</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">3</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">2</span>]])</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">9</span>, <span class="dv">8</span>])</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linalg.solve(A, b)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)  <span class="co"># Result: [2. 3.]</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifying the solution</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>np.dot(A, x)  <span class="co"># Should be equal to b</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[2. 3.]</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>array([9., 8.])</code></pre>
-</div>
-</div>
-</section>
-<section id="matrix-determinant" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="matrix-determinant"><span class="header-section-number">14.5</span> Matrix Determinant</h2>
-<p>The <code>numpy.linalg.det</code> function computes the determinant of a matrix:</p>
-<div id="fedbfabd" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing the determinant</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>det_A <span class="op">=</span> np.linalg.det(A)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(det_A)  <span class="co"># Result: -2.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-2.0000000000000004</code></pre>
-</div>
-</div>
-</section>
-<section id="eigenvalues-and-eigenvectors" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="eigenvalues-and-eigenvectors"><span class="header-section-number">14.6</span> Eigenvalues and Eigenvectors</h2>
-<p>The <code>numpy.linalg.eig</code> function computes the eigenvalues and eigenvectors of a matrix:</p>
-<div id="f5eb5946" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing eigenvalues and eigenvectors</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">1</span>, <span class="dv">1</span>]])</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eig(A)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvalues:"</span>, eigenvalues)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eigenvectors:"</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eigenvectors)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Verification: A * v = lambda * v</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(eigenvalues)):</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    lambda_i <span class="op">=</span> eigenvalues[i]</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    v_i <span class="op">=</span> eigenvectors[:, i]</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"λ_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>lambda_i<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"A * v ="</span>, np.dot(A, v_i))</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"λ * v ="</span>, lambda_i <span class="op">*</span> v_i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Eigenvalues: [3. 2.]
-Eigenvectors:
-[[0.89442719 0.70710678]
- [0.4472136  0.70710678]]
-λ_0 = 3.0
-A * v = [2.68328157 1.34164079]
-λ * v = [2.68328157 1.34164079]
-λ_1 = 2.0
-A * v = [1.41421356 1.41421356]
-λ * v = [1.41421356 1.41421356]</code></pre>
-</div>
-</div>
-</section>
-<section id="singular-value-decomposition-svd" class="level2" data-number="14.7">
-<h2 data-number="14.7" class="anchored" data-anchor-id="singular-value-decomposition-svd"><span class="header-section-number">14.7</span> Singular Value Decomposition (SVD)</h2>
-<p>SVD is one of the key methods used in data analysis:</p>
-<div id="23f35530" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SVD decomposition</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>U, s, Vh <span class="op">=</span> np.linalg.svd(A)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix U:"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(U)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Singular values:"</span>, s)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix V^H:"</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Vh)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reconstructing matrix A</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.zeros((A.shape[<span class="dv">0</span>], A.shape[<span class="dv">1</span>]))</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>S[:<span class="bu">len</span>(s), :<span class="bu">len</span>(s)] <span class="op">=</span> np.diag(s)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>A_reconstructed <span class="op">=</span> U <span class="op">@</span> S <span class="op">@</span> Vh</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reconstructed matrix A:"</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_reconstructed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Matrix U:
-[[-0.2298477   0.88346102  0.40824829]
- [-0.52474482  0.24078249 -0.81649658]
- [-0.81964194 -0.40189603  0.40824829]]
-Singular values: [9.52551809 0.51430058]
-Matrix V^H:
-[[-0.61962948 -0.78489445]
- [-0.78489445  0.61962948]]
-Reconstructed matrix A:
-[[1. 2.]
- [3. 4.]
- [5. 6.]]</code></pre>
-</div>
-</div>
-</section>
-<section id="matrixvector-norm" class="level2" data-number="14.8">
-<h2 data-number="14.8" class="anchored" data-anchor-id="matrixvector-norm"><span class="header-section-number">14.8</span> Matrix/Vector Norm</h2>
-<p>NumPy offers various types of vector and matrix norms:</p>
-<div id="52811386" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">4</span>])</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># L1 (sum of absolute values): |3| + |4| = 7</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"L1 norm:"</span>, np.linalg.norm(v, <span class="dv">1</span>))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># L2 / Euclidean (square root of sum of squares): sqrt(9+16) = 5</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"L2 norm (Euclidean):"</span>, np.linalg.norm(v))</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Maximum norm (largest absolute value): max(3,4) = 4</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Maximum norm:"</span>, np.linalg.norm(v, np.inf))</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Frobenius (like L2, but for matrices): sqrt(1+4+9+16) ≈ 5.477</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Frobenius norm:"</span>, np.linalg.norm(A, <span class="st">'fro'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>L1 norm: 7.0
-L2 norm (Euclidean): 5.0
-Maximum norm: 4.0
-Frobenius norm: 5.477225575051661</code></pre>
-</div>
-</div>
-</section>
-<section id="inverse-matrix" class="level2" data-number="14.9">
-<h2 data-number="14.9" class="anchored" data-anchor-id="inverse-matrix"><span class="header-section-number">14.9</span> Inverse Matrix</h2>
-<p>The <code>numpy.linalg.inv</code> function computes the inverse of a matrix:</p>
-<div id="9119b2b3" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Inverse matrix</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>A_inv <span class="op">=</span> np.linalg.inv(A)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Inverse matrix:"</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A_inv)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Verification: A * A^(-1) = I</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A * A^(-1):"</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(A, A_inv))  <span class="co"># Should be close to the identity matrix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Inverse matrix:
-[[-2.   1. ]
- [ 1.5 -0.5]]
-A * A^(-1):
-[[1.0000000e+00 0.0000000e+00]
- [8.8817842e-16 1.0000000e+00]]</code></pre>
-</div>
-</div>
-</section>
-<section id="the-numpy.inner-function---inner-product" class="level2" data-number="14.10">
-<h2 data-number="14.10" class="anchored" data-anchor-id="the-numpy.inner-function---inner-product"><span class="header-section-number">14.10</span> The <code>numpy.inner</code> Function - Inner Product</h2>
-<p>The <code>inner</code> function computes the inner product of two arrays:</p>
-<div id="d18e7b39" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner product</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.inner(a, b)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)  <span class="co"># 1*4 + 2*5 + 3*6 = 32</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For 2D arrays: inner(A, B) computes A @ B.T (not A @ B!)</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.inner(A, B)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [[1*5+2*6, 1*7+2*8],   = [[17, 23],</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#  [3*5+4*6, 3*7+4*8]]      [39, 53]]</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Comparison with A @ B.T:"</span>)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A <span class="op">@</span> B.T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>32
-[[17 23]
- [39 53]]
-Comparison with A @ B.T:
-[[17 23]
- [39 53]]</code></pre>
-</div>
-</div>
-</section>
-<section id="the-numpy.outer-function---outer-product" class="level2" data-number="14.11">
-<h2 data-number="14.11" class="anchored" data-anchor-id="the-numpy.outer-function---outer-product"><span class="header-section-number">14.11</span> The <code>numpy.outer</code> Function - Outer Product</h2>
-<p>The <code>outer</code> function computes the outer product of two vectors:</p>
-<div id="e02208d7" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Outer product</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> np.outer(a, b)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Result:</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># [[ 4  5  6]</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  [ 8 10 12]</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  [12 15 18]]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[ 4  5  6]
- [ 8 10 12]
- [12 15 18]]</code></pre>
-</div>
-</div>
-</section>
-<section id="the-numpy.matmul-function---matrix-multiplication" class="level2" data-number="14.12">
-<h2 data-number="14.12" class="anchored" data-anchor-id="the-numpy.matmul-function---matrix-multiplication"><span class="header-section-number">14.12</span> The <code>numpy.matmul</code> Function - Matrix Multiplication</h2>
-<p>The <code>matmul</code> function (and the equivalent <code>@</code> operator) is the recommended way to multiply matrices. For 2D arrays, it works identically to <code>dot</code>. Differences appear for 3D+ arrays (matmul treats them as stacks of matrices) and for scalars (matmul does not accept scalars, dot does).</p>
-<div id="85295758" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For 2D -- identical results</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"dot:"</span>, np.dot(a, b)[<span class="dv">0</span>])</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"matmul:"</span>, np.matmul(a, b)[<span class="dv">0</span>])</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Difference: matmul does not accept scalars</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    np.matmul(a, <span class="dv">3</span>)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"matmul with scalar:"</span>, e)</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"dot with scalar:"</span>, np.dot(a, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>dot: [19 22]
-matmul: [19 22]
-matmul with scalar: matmul: Input operand 1 does not have enough dimensions (has 0, gufunc core with signature (n?,k),(k,m?)-&gt;(n?,m?) requires 1)
-dot with scalar: [[ 3  6]
- [ 9 12]]</code></pre>
-</div>
-</div>
+<section id="sample-files-for-exercises" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="sample-files-for-exercises"><span class="header-section-number">20.4</span> Sample files for exercises</h2>
+<p><a href="https://github.com/pjastr/DAV-files" class="uri">https://github.com/pjastr/DAV-files</a></p>
 
 
 </section>
@@ -1257,14 +997,11 @@ dot with scalar: [[ 3  6]
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./numpy-strings.html" class="pagination-link" aria-label="String operations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">String operations</span></span>
+      <a href="./pandas-indexing.html" class="pagination-link" aria-label="Pandas - indexing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Pandas - indexing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./numpy-conditions.html" class="pagination-link" aria-label="Advanced Filtering">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Advanced Filtering</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

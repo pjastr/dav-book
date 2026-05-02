@@ -889,5 +889,60 @@
       "Pandas",
       "<span class='chapter-number'>19</span>  <span class='chapter-title'>Pandas - indexing</span>"
     ]
+  },
+  {
+    "objectID": "pandas-reading_files.html",
+    "href": "pandas-reading_files.html",
+    "title": "20  Loading data",
+    "section": "",
+    "text": "20.1 Handling csv files\nThe pandas.read_csv function\nDocumentation: link\nSelected arguments:\nSaving with pandas.DataFrame.to_csv\nDocumentation: link",
+    "crumbs": [
+      "Pandas",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Loading data</span>"
+    ]
+  },
+  {
+    "objectID": "pandas-reading_files.html#handling-csv-files",
+    "href": "pandas-reading_files.html#handling-csv-files",
+    "title": "20  Loading data",
+    "section": "",
+    "text": "filepath - access path\nsep=_NoDefault.no_default, delimiter=None - separator\nheader='infer' - header - by default the column names, alternatively header=None means no header\nindex_col=None - sets a column as the index (row names)\nthousands=None - thousands separator\ndecimal='.' - decimal separator",
+    "crumbs": [
+      "Pandas",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Loading data</span>"
+    ]
+  },
+  {
+    "objectID": "pandas-reading_files.html#handling-excel-files",
+    "href": "pandas-reading_files.html#handling-excel-files",
+    "title": "20  Loading data",
+    "section": "20.2 Handling Excel files",
+    "text": "20.2 Handling Excel files\nThe pandas.read_excel function\nhttps://pandas.pydata.org/docs/reference/api/pandas.read_excel.html\n** Important: you need to install the openpyxl library to import .xlsx files and xlrd to import .xls files (in most cases you don’t need to import them explicitly in the code)\nSelected arguments:\n\nio - access path\nsheet_name=0 - sheet name\nheader='infer' - header - by default the column names, alternatively header=None means no header\nindex_col=None - sets a column as the index (row names)\nthousands=None - thousands separator\ndecimal='.' - decimal separator",
+    "crumbs": [
+      "Pandas",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Loading data</span>"
+    ]
+  },
+  {
+    "objectID": "pandas-reading_files.html#handling-sqllite3",
+    "href": "pandas-reading_files.html#handling-sqllite3",
+    "title": "20  Loading data",
+    "section": "20.3 Handling sqllite3",
+    "text": "20.3 Handling sqllite3\nimport pandas as pd\nfrom sqlite3 import connect\n\nconn = connect('sales_data2.db')\ndata = pd.read_sql(\"SELECT * FROM sales_data\", con=conn)",
+    "crumbs": [
+      "Pandas",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Loading data</span>"
+    ]
+  },
+  {
+    "objectID": "pandas-reading_files.html#sample-files-for-exercises",
+    "href": "pandas-reading_files.html#sample-files-for-exercises",
+    "title": "20  Loading data",
+    "section": "20.4 Sample files for exercises",
+    "text": "20.4 Sample files for exercises\nhttps://github.com/pjastr/DAV-files",
+    "crumbs": [
+      "Pandas",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Loading data</span>"
+    ]
   }
 ]

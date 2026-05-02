@@ -34,6 +34,7 @@ book:
       chapters:
       - pandas-start.qmd
       - pandas-indexing.qmd
+      - pandas-reading_files.qmd
   downloads: [pdf, epub]
   repo-url: https://github.com/pjastr/dav-book
   repo-actions: [issue]

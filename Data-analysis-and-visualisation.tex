@@ -4457,6 +4457,89 @@ South & Electronics & Retail & 130 & 75.0 & 22.0 \\
 \end{longtable}
 }
 
+\chapter{Loading data}\label{loading-data}
+
+\section{Handling csv files}\label{handling-csv-files}
+
+The \texttt{pandas.read\_csv} function
+
+Documentation:
+\href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html}{link}
+
+Selected arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{filepath} - access path
+\item
+  \texttt{sep=\_NoDefault.no\_default,\ delimiter=None} - separator
+\item
+  \texttt{header=\textquotesingle{}infer\textquotesingle{}} - header -
+  by default the column names, alternatively \texttt{header=None} means
+  no header
+\item
+  \texttt{index\_col=None} - sets a column as the index (row names)
+\item
+  \texttt{thousands=None} - thousands separator
+\item
+  \texttt{decimal=\textquotesingle{}.\textquotesingle{}} - decimal
+  separator
+\end{itemize}
+
+Saving with \texttt{pandas.DataFrame.to\_csv}
+
+Documentation:
+\href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html}{link}
+
+\section{Handling Excel files}\label{handling-excel-files}
+
+The \texttt{pandas.read\_excel} function
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html}
+
+** Important: you need to install the \texttt{openpyxl} library to
+import .xlsx files and \texttt{xlrd} to import .xls files (in most cases
+you don't need to import them explicitly in the code)
+
+Selected arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{io} - access path
+\item
+  \texttt{sheet\_name=0} - sheet name
+\item
+  \texttt{header=\textquotesingle{}infer\textquotesingle{}} - header -
+  by default the column names, alternatively \texttt{header=None} means
+  no header
+\item
+  \texttt{index\_col=None} - sets a column as the index (row names)
+\item
+  \texttt{thousands=None} - thousands separator
+\item
+  \texttt{decimal=\textquotesingle{}.\textquotesingle{}} - decimal
+  separator
+\end{itemize}
+
+\section{\texorpdfstring{Handling
+\texttt{sqllite3}}{Handling sqllite3}}\label{handling-sqllite3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{from}\NormalTok{ sqlite3 }\ImportTok{import} \ExtensionTok{connect}
+
+\NormalTok{conn }\OperatorTok{=} \ExtensionTok{connect}\NormalTok{(}\StringTok{\textquotesingle{}sales\_data2.db\textquotesingle{}}\NormalTok{)}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.read\_sql(}\StringTok{"SELECT * FROM sales\_data"}\NormalTok{, con}\OperatorTok{=}\NormalTok{conn)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Sample files for exercises}\label{sample-files-for-exercises}
+
+\url{https://github.com/pjastr/DAV-files}
+
 
 
 
