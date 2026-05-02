@@ -4055,6 +4055,408 @@ np.any & Checks whether at least one element is non-zero. \\
   \end{itemize}
 \end{itemize}
 
+\part{Pandas}
+
+\chapter{Pandas - getting started}\label{pandas---getting-started}
+
+Pandas is a Python library used for data analysis and manipulation
+
+\section{Import:}\label{import}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Basic objects}\label{basic-objects}
+
+Series
+
+\pandocbounded{\includegraphics[keepaspectratio]{51.png}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+DataFrame
+
+\pandocbounded{\includegraphics[keepaspectratio]{52.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{s }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(s)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"values"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s.to\_numpy())}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{type}\NormalTok{(s.to\_numpy()))}
+\BuiltInTok{print}\NormalTok{(s.index)}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{type}\NormalTok{(s.index))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+0    3
+1   -5
+2    7
+3    4
+dtype: int64
+values
+[ 3 -5  7  4]
+<class 'numpy.ndarray'>
+RangeIndex(start=0, stop=4, step=1)
+<class 'pandas.RangeIndex'>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{s }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{], index}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(s)}
+\BuiltInTok{print}\NormalTok{(s[}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{])}
+\NormalTok{s[}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{] }\OperatorTok{=} \DecValTok{8}
+\BuiltInTok{print}\NormalTok{(s)}
+\BuiltInTok{print}\NormalTok{(s[s }\OperatorTok{\textgreater{}} \DecValTok{5}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(s }\OperatorTok{*} \DecValTok{2}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(np.sin(s))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a    3
+b   -5
+c    7
+d    4
+dtype: int64
+-5
+a    3
+b    8
+c    7
+d    4
+dtype: int64
+b    8
+c    7
+dtype: int64
+a     6
+b    16
+c    14
+d     8
+dtype: int64
+a    0.141120
+b    0.989358
+c    0.656987
+d   -0.756802
+dtype: float64
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{d }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}key1\textquotesingle{}}\NormalTok{: }\DecValTok{350}\NormalTok{, }\StringTok{\textquotesingle{}key2\textquotesingle{}}\NormalTok{: }\DecValTok{700}\NormalTok{, }\StringTok{\textquotesingle{}key3\textquotesingle{}}\NormalTok{: }\DecValTok{70}\NormalTok{\}}
+\NormalTok{s }\OperatorTok{=}\NormalTok{ pd.Series(d)}
+\BuiltInTok{print}\NormalTok{(s)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+key1    350
+key2    700
+key3     70
+dtype: int64
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{d }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}key1\textquotesingle{}}\NormalTok{: }\DecValTok{350}\NormalTok{, }\StringTok{\textquotesingle{}key2\textquotesingle{}}\NormalTok{: }\DecValTok{700}\NormalTok{, }\StringTok{\textquotesingle{}key3\textquotesingle{}}\NormalTok{: }\DecValTok{70}\NormalTok{\}}
+\NormalTok{k }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}key0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}key2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}key3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}key1\textquotesingle{}}\NormalTok{]}
+\NormalTok{s }\OperatorTok{=}\NormalTok{ pd.Series(d, index}\OperatorTok{=}\NormalTok{k)}
+\BuiltInTok{print}\NormalTok{(s)}
+\NormalTok{s.name }\OperatorTok{=} \StringTok{"Value"}
+\NormalTok{s.index.name }\OperatorTok{=} \StringTok{"Key"}
+\BuiltInTok{print}\NormalTok{(s)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+key0      NaN
+key2    700.0
+key3     70.0
+key1    350.0
+dtype: float64
+Key
+key0      NaN
+key2    700.0
+key3     70.0
+key1    350.0
+Name: Value, dtype: float64
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Belgium\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}India\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brazil\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Brussels\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}New Delhi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brasília\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{: [}\DecValTok{11190846}\NormalTok{, }\DecValTok{1303171035}\NormalTok{, }\DecValTok{207847528}\NormalTok{]\}}
+\NormalTok{frame }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\BuiltInTok{print}\NormalTok{(frame)}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(data2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Country    Capital  Population
+0  Belgium   Brussels    11190846
+1    India  New Delhi  1303171035
+2   Brazil   Brasília   207847528
+   Country  Population    Capital
+0  Belgium    11190846   Brussels
+1    India  1303171035  New Delhi
+2   Brazil   207847528   Brasília
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Belgium\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}India\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brazil\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Brussels\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}New Delhi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brasília\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{: [}\DecValTok{11190846}\NormalTok{, }\DecValTok{1303171035}\NormalTok{, }\DecValTok{207847528}\NormalTok{]\}}
+\NormalTok{df\_data }\OperatorTok{=}\NormalTok{ pd.DataFrame(data, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Shape:"}\NormalTok{, df\_data.shape)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Index:"}\NormalTok{, df\_data.index)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"columns:"}\NormalTok{, df\_data.columns)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\NormalTok{df\_data.info()}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df\_data.count())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Shape: (3, 3)
+--
+Index: RangeIndex(start=0, stop=3, step=1)
+--
+columns: Index(['Country', 'Population', 'Capital'], dtype='str')
+--
+<class 'pandas.DataFrame'>
+RangeIndex: 3 entries, 0 to 2
+Data columns (total 3 columns):
+ #   Column      Non-Null Count  Dtype
+---  ------      --------------  -----
+ 0   Country     3 non-null      str  
+ 1   Population  3 non-null      int64
+ 2   Capital     3 non-null      str  
+dtypes: int64(1), str(2)
+memory usage: 204.0 bytes
+--
+Country       3
+Population    3
+Capital       3
+dtype: int64
+\end{verbatim}
+
+\chapter{Pandas - indexing}\label{pandas---indexing}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Belgium\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}India\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brazil\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Brussels\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}New Delhi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}BrasÃ­lia\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{: [}\DecValTok{11190846}\NormalTok{, }\DecValTok{1303171035}\NormalTok{, }\DecValTok{207847528}\NormalTok{]\}}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(data2.iloc[[}\DecValTok{0}\NormalTok{], [}\DecValTok{0}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2.loc[[}\DecValTok{0}\NormalTok{], [}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{]])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2.loc[}\DecValTok{2}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2.loc[:, }\StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2.loc[}\DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Country
+0  Belgium
+--
+   Country
+0  Belgium
+--
+Country          Brazil
+Population    207847528
+Capital       BrasÃ­lia
+Name: 2, dtype: object
+--
+0     Brussels
+1    New Delhi
+2    BrasÃ­lia
+Name: Capital, dtype: str
+--
+New Delhi
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{loc}:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  This is a label-based indexing method, meaning it uses column label
+  names and row indices to select data.
+\item
+  It works based on index labels and column labels, which allows for
+  more convenient data filtering.
+\item
+  It supports both individual labels and label ranges.
+\item
+  It also works with non-numeric labels.
+\item
+  Example usage:
+  \texttt{df.loc{[}1:3,\ {[}\textquotesingle{}A\textquotesingle{},\ \textquotesingle{}B\textquotesingle{}{]}{]}}
+  - returns rows from index 1 to 3 (inclusive) and columns `A' and `B'.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \texttt{iloc}:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  This is a position-based indexing method, meaning it uses numeric
+  column and row indices to select data.
+\item
+  It works based on numeric indices for both rows and columns.
+\item
+  It supports individual indices and index ranges.
+\item
+  When using index ranges, the range is half-open, meaning the right end
+  is not included.
+\item
+  Example usage: \texttt{df.iloc{[}1:3,\ 0:2{]}} - returns rows from
+  index 1 to 3 (excluding 3) and columns from index 0 to 2 (excluding
+  2).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Belgium\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}India\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Brazil\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Brussels\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}New Delhi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}BrasÃ­lia\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{: [}\DecValTok{11190846}\NormalTok{, }\DecValTok{1303171035}\NormalTok{, }\DecValTok{207847528}\NormalTok{]\}}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Country\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Capital\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(data2[}\StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2[data2[}\StringTok{\textquotesingle{}Population\textquotesingle{}}\NormalTok{] }\OperatorTok{\textgreater{}} \DecValTok{1200000000}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+0      11190846
+1    1303171035
+2     207847528
+Name: Population, dtype: int64
+--
+  Country  Population    Capital
+1   India  1303171035  New Delhi
+--
+\end{verbatim}
+
+\textbf{Exercises:} (\texttt{ex9.py})
+
+Practice indexing on the data frame below (you don't need to use all
+rows):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Categorical columns}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Region} -- sales region
+  \item
+    \texttt{Product} -- product type
+  \item
+    \texttt{Sales\_Channel} -- sales channel (online, retail store,
+    wholesale)
+  \end{itemize}
+\item
+  \textbf{Numeric columns}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Units\_Sold} -- number of units sold
+  \item
+    \texttt{Revenue} -- revenue in thousands of GBP
+  \item
+    \texttt{Profit} -- profit in thousands of GBP
+  \end{itemize}
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1733}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2133}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2267}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1067}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Region
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Product
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sales\_Channel
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Units\_Sold
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Revenue
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Profit
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+North & Electronics & Online & 120 & 60.5 & 15.2 \\
+South & Furniture & Retail & 80 & 45.0 & 12.0 \\
+East & Clothing & Online & 200 & 35.0 & 8.5 \\
+West & Electronics & Wholesale & 150 & 70.0 & 20.5 \\
+North & Furniture & Retail & 90 & 50.5 & 13.2 \\
+South & Clothing & Online & 300 & 55.0 & 10.0 \\
+East & Electronics & Retail & 110 & 62.0 & 16.0 \\
+West & Furniture & Online & 70 & 30.0 & 7.5 \\
+North & Clothing & Wholesale & 250 & 40.0 & 9.0 \\
+South & Electronics & Retail & 130 & 75.0 & 22.0 \\
+\end{longtable}
+}
+
 
 
 

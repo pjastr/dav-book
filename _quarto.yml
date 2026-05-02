@@ -30,6 +30,10 @@ book:
     - part: Data exploration
       chapters:
       - exploration.qmd
+    - part: "Pandas"
+      chapters:
+      - pandas-start.qmd
+      - pandas-indexing.qmd
   downloads: [pdf, epub]
   repo-url: https://github.com/pjastr/dav-book
   repo-actions: [issue]

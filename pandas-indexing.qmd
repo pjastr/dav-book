@@ -1,0 +1,79 @@
+# Pandas - indexing
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = {'Country': ['Belgium', 'India', 'Brazil'],
+        'Capital': ['Brussels', 'New Delhi', 'BrasÃ­lia'],
+        'Population': [11190846, 1303171035, 207847528]}
+data2 = pd.DataFrame(data, columns=['Country', 'Population', 'Capital'])
+print(data2.iloc[[0], [0]])
+print("--")
+print(data2.loc[[0], ['Country']])
+print("--")
+print(data2.loc[2])
+print("--")
+print(data2.loc[:, 'Capital'])
+print("--")
+print(data2.loc[1, 'Capital'])
+
+```
+
+1.  `loc`:
+
+*   This is a label-based indexing method, meaning it uses column label names and row indices to select data.
+*   It works based on index labels and column labels, which allows for more convenient data filtering.
+*   It supports both individual labels and label ranges.
+*   It also works with non-numeric labels.
+*   Example usage: `df.loc[1:3, ['A', 'B']]` - returns rows from index 1 to 3 (inclusive) and columns 'A' and 'B'.
+
+2.  `iloc`:
+
+*   This is a position-based indexing method, meaning it uses numeric column and row indices to select data.
+*   It works based on numeric indices for both rows and columns.
+*   It supports individual indices and index ranges.
+*   When using index ranges, the range is half-open, meaning the right end is not included.
+*   Example usage: `df.iloc[1:3, 0:2]` - returns rows from index 1 to 3 (excluding 3) and columns from index 0 to 2 (excluding 2).
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = {'Country': ['Belgium', 'India', 'Brazil'],
+        'Capital': ['Brussels', 'New Delhi', 'BrasÃ­lia'],
+        'Population': [11190846, 1303171035, 207847528]}
+data2 = pd.DataFrame(data, columns=['Country', 'Population', 'Capital'])
+print(data2['Population'])
+print("--")
+print(data2[data2['Population'] > 1200000000])
+print("--")
+```
+
+**Exercises:** (`ex9.py`)
+
+Practice indexing on the data frame below (you don't need to use all rows):
+
+- **Categorical columns**:
+  - `Region` – sales region
+  - `Product` – product type
+  - `Sales_Channel` – sales channel (online, retail store, wholesale)
+  
+- **Numeric columns**:
+  - `Units_Sold` – number of units sold
+  - `Revenue` – revenue in thousands of GBP
+  - `Profit` – profit in thousands of GBP
+
+
+| Region      | Product        | Sales_Channel   | Units_Sold | Revenue | Profit |
+|-------------|----------------|-----------------|------------|---------|--------|
+| North       | Electronics    | Online          | 120        | 60.5    | 15.2   |
+| South       | Furniture      | Retail          | 80         | 45.0    | 12.0   |
+| East        | Clothing       | Online          | 200        | 35.0    | 8.5    |
+| West        | Electronics    | Wholesale       | 150        | 70.0    | 20.5   |
+| North       | Furniture      | Retail          | 90         | 50.5    | 13.2   |
+| South       | Clothing       | Online          | 300        | 55.0    | 10.0   |
+| East        | Electronics    | Retail          | 110        | 62.0    | 16.0   |
+| West        | Furniture      | Online          | 70         | 30.0    | 7.5    |
+| North       | Clothing       | Wholesale       | 250        | 40.0    | 9.0    |
+| South       | Electronics    | Retail          | 130        | 75.0    | 22.0   |

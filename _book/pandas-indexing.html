@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; List vs Array – Data analysis and visualisation</title>
+<title>19&nbsp; Pandas - indexing – Data analysis and visualisation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./numpy-attributes.html" rel="next">
-<link href="./numpy_getting_started.html" rel="prev">
+<link href="./pandas-start.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./list_array.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pandas-start.html">Pandas</a></li><li class="breadcrumb-item"><a href="./pandas-indexing.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Pandas - indexing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -378,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./list_array.html" class="sidebar-item-text sidebar-link active">
+  <a href="./list_array.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></span></a>
   </div>
 </li>
@@ -484,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pandas-indexing.html" class="sidebar-item-text sidebar-link">
+  <a href="./pandas-indexing.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Pandas - indexing</span></span></a>
   </div>
 </li>
@@ -502,9 +501,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./numpy_getting_started.html">NumPy</a></li><li class="breadcrumb-item"><a href="./list_array.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pandas-start.html">Pandas</a></li><li class="breadcrumb-item"><a href="./pandas-indexing.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Pandas - indexing</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">List vs Array</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Pandas - indexing</span></h1>
 </div>
 
 
@@ -521,24 +520,202 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="f015b66b" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>my_arr <span class="op">=</span> np.arange(<span class="dv">1000000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1000000</span>))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>my_arr2 <span class="op">=</span> my_arr <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- </span><span class="sc">%s</span><span class="st"> seconds ---"</span> <span class="op">%</span> (time.time() <span class="op">-</span> start_time))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>my_list2 <span class="op">=</span> [x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> my_list]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- </span><span class="sc">%s</span><span class="st"> seconds ---"</span> <span class="op">%</span> (time.time() <span class="op">-</span> start_time))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7156108e" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'Country'</span>: [<span class="st">'Belgium'</span>, <span class="st">'India'</span>, <span class="st">'Brazil'</span>],</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Capital'</span>: [<span class="st">'Brussels'</span>, <span class="st">'New Delhi'</span>, <span class="st">'BrasÃ­lia'</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Population'</span>: [<span class="dv">11190846</span>, <span class="dv">1303171035</span>, <span class="dv">207847528</span>]}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>[<span class="st">'Country'</span>, <span class="st">'Population'</span>, <span class="st">'Capital'</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2.iloc[[<span class="dv">0</span>], [<span class="dv">0</span>]])</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2.loc[[<span class="dv">0</span>], [<span class="st">'Country'</span>]])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2.loc[<span class="dv">2</span>])</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2.loc[:, <span class="st">'Capital'</span>])</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2.loc[<span class="dv">1</span>, <span class="st">'Capital'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--- 0.0020279884338378906 seconds ---
---- 0.04769158363342285 seconds ---</code></pre>
+<pre><code>   Country
+0  Belgium
+--
+   Country
+0  Belgium
+--
+Country          Brazil
+Population    207847528
+Capital       BrasÃ­lia
+Name: 2, dtype: object
+--
+0     Brussels
+1    New Delhi
+2    BrasÃ­lia
+Name: Capital, dtype: str
+--
+New Delhi</code></pre>
 </div>
 </div>
+<ol type="1">
+<li><code>loc</code>:</li>
+</ol>
+<ul>
+<li>This is a label-based indexing method, meaning it uses column label names and row indices to select data.</li>
+<li>It works based on index labels and column labels, which allows for more convenient data filtering.</li>
+<li>It supports both individual labels and label ranges.</li>
+<li>It also works with non-numeric labels.</li>
+<li>Example usage: <code>df.loc[1:3, ['A', 'B']]</code> - returns rows from index 1 to 3 (inclusive) and columns ‘A’ and ‘B’.</li>
+</ul>
+<ol start="2" type="1">
+<li><code>iloc</code>:</li>
+</ol>
+<ul>
+<li>This is a position-based indexing method, meaning it uses numeric column and row indices to select data.</li>
+<li>It works based on numeric indices for both rows and columns.</li>
+<li>It supports individual indices and index ranges.</li>
+<li>When using index ranges, the range is half-open, meaning the right end is not included.</li>
+<li>Example usage: <code>df.iloc[1:3, 0:2]</code> - returns rows from index 1 to 3 (excluding 3) and columns from index 0 to 2 (excluding 2).</li>
+</ul>
+<div id="af5729f7" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'Country'</span>: [<span class="st">'Belgium'</span>, <span class="st">'India'</span>, <span class="st">'Brazil'</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Capital'</span>: [<span class="st">'Brussels'</span>, <span class="st">'New Delhi'</span>, <span class="st">'BrasÃ­lia'</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Population'</span>: [<span class="dv">11190846</span>, <span class="dv">1303171035</span>, <span class="dv">207847528</span>]}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>[<span class="st">'Country'</span>, <span class="st">'Population'</span>, <span class="st">'Capital'</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2[<span class="st">'Population'</span>])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data2[data2[<span class="st">'Population'</span>] <span class="op">&gt;</span> <span class="dv">1200000000</span>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0      11190846
+1    1303171035
+2     207847528
+Name: Population, dtype: int64
+--
+  Country  Population    Capital
+1   India  1303171035  New Delhi
+--</code></pre>
+</div>
+</div>
+<p><strong>Exercises:</strong> (<code>ex9.py</code>)</p>
+<p>Practice indexing on the data frame below (you don’t need to use all rows):</p>
+<ul>
+<li><strong>Categorical columns</strong>:
+<ul>
+<li><code>Region</code> – sales region</li>
+<li><code>Product</code> – product type</li>
+<li><code>Sales_Channel</code> – sales channel (online, retail store, wholesale)</li>
+</ul></li>
+<li><strong>Numeric columns</strong>:
+<ul>
+<li><code>Units_Sold</code> – number of units sold</li>
+<li><code>Revenue</code> – revenue in thousands of GBP</li>
+<li><code>Profit</code> – profit in thousands of GBP</li>
+</ul></li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 21%">
+<col style="width: 22%">
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Region</th>
+<th>Product</th>
+<th>Sales_Channel</th>
+<th>Units_Sold</th>
+<th>Revenue</th>
+<th>Profit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>North</td>
+<td>Electronics</td>
+<td>Online</td>
+<td>120</td>
+<td>60.5</td>
+<td>15.2</td>
+</tr>
+<tr class="even">
+<td>South</td>
+<td>Furniture</td>
+<td>Retail</td>
+<td>80</td>
+<td>45.0</td>
+<td>12.0</td>
+</tr>
+<tr class="odd">
+<td>East</td>
+<td>Clothing</td>
+<td>Online</td>
+<td>200</td>
+<td>35.0</td>
+<td>8.5</td>
+</tr>
+<tr class="even">
+<td>West</td>
+<td>Electronics</td>
+<td>Wholesale</td>
+<td>150</td>
+<td>70.0</td>
+<td>20.5</td>
+</tr>
+<tr class="odd">
+<td>North</td>
+<td>Furniture</td>
+<td>Retail</td>
+<td>90</td>
+<td>50.5</td>
+<td>13.2</td>
+</tr>
+<tr class="even">
+<td>South</td>
+<td>Clothing</td>
+<td>Online</td>
+<td>300</td>
+<td>55.0</td>
+<td>10.0</td>
+</tr>
+<tr class="odd">
+<td>East</td>
+<td>Electronics</td>
+<td>Retail</td>
+<td>110</td>
+<td>62.0</td>
+<td>16.0</td>
+</tr>
+<tr class="even">
+<td>West</td>
+<td>Furniture</td>
+<td>Online</td>
+<td>70</td>
+<td>30.0</td>
+<td>7.5</td>
+</tr>
+<tr class="odd">
+<td>North</td>
+<td>Clothing</td>
+<td>Wholesale</td>
+<td>250</td>
+<td>40.0</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td>South</td>
+<td>Electronics</td>
+<td>Retail</td>
+<td>130</td>
+<td>75.0</td>
+<td>22.0</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -958,14 +1135,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./numpy_getting_started.html" class="pagination-link" aria-label="NumPy - Getting Started">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">NumPy - Getting Started</span></span>
+      <a href="./pandas-start.html" class="pagination-link" aria-label="Pandas - getting started">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Pandas - getting started</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./numpy-attributes.html" class="pagination-link" aria-label="Array Attributes">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Array Attributes</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
