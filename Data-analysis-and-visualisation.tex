@@ -222,7 +222,7 @@
 
 \title{Data analysis and visualisation}
 \author{Piotr Jastrzębski}
-\date{2026-05-02}
+\date{2026-05-03}
 \begin{document}
 \maketitle
 
@@ -4539,6 +4539,312 @@ Selected arguments:
 \section{Sample files for exercises}\label{sample-files-for-exercises}
 
 \url{https://github.com/pjastr/DAV-files}
+
+\chapter{Pandas - sorting}\label{pandas---sorting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Sample data frame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Name\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Alice\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tom\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Charlie\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{: [}\DecValTok{25}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{35}\NormalTok{],}
+    \StringTok{\textquotesingle{}Salary\textquotesingle{}}\NormalTok{: [}\DecValTok{50000}\NormalTok{, }\DecValTok{60000}\NormalTok{, }\DecValTok{70000}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Sorting by the \textquotesingle{}Age\textquotesingle{} column}
+\NormalTok{s1 }\OperatorTok{=}\NormalTok{ data.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s1)}
+\CommentTok{\# Sorting in reverse order}
+\NormalTok{s2 }\OperatorTok{=}\NormalTok{ data.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Salary\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s2)}
+\CommentTok{\# Sorting by \textquotesingle{}Age\textquotesingle{} ascending, then \textquotesingle{}Salary\textquotesingle{} descending}
+\NormalTok{s3 }\OperatorTok{=}\NormalTok{ data.sort\_values(by}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Salary\textquotesingle{}}\NormalTok{], ascending}\OperatorTok{=}\NormalTok{[}\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(s3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Name  Age  Salary
+0    Alice   25   50000
+2  Charlie   35   70000
+1      Tom   42   60000
+      Name  Age  Salary
+2  Charlie   35   70000
+1      Tom   42   60000
+0    Alice   25   50000
+      Name  Age  Salary
+0    Alice   25   50000
+2  Charlie   35   70000
+1      Tom   42   60000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Sample data frame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Name\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Alice\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tom\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Charlie\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{: [}\DecValTok{25}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{35}\NormalTok{],}
+    \StringTok{\textquotesingle{}Salary\textquotesingle{}}\NormalTok{: [}\DecValTok{50000}\NormalTok{, }\DecValTok{60000}\NormalTok{, }\DecValTok{70000}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Inplace sorting (replacing the existing variable) {-} currently not recommended}
+\NormalTok{data.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{, inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Name  Age  Salary
+0    Alice   25   50000
+2  Charlie   35   70000
+1      Tom   41   60000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Name\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Alice\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bob\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Charlie\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Dave\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{: [}\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\VariableTok{None}\NormalTok{, }\DecValTok{35}\NormalTok{],}
+    \StringTok{\textquotesingle{}Salary\textquotesingle{}}\NormalTok{: [}\DecValTok{50000}\NormalTok{, }\VariableTok{None}\NormalTok{, }\DecValTok{70000}\NormalTok{, }\DecValTok{60000}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Sorting with NaN at the end}
+\NormalTok{s2 }\OperatorTok{=}\NormalTok{ df2.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{, na\_position}\OperatorTok{=}\StringTok{\textquotesingle{}last\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s2)}
+\CommentTok{\# Sorting with NaN at the beginning}
+\NormalTok{s3 }\OperatorTok{=}\NormalTok{ df2.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{, na\_position}\OperatorTok{=}\StringTok{\textquotesingle{}first\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Name   Age   Salary
+0    Alice  25.0  50000.0
+1      Bob  30.0      NaN
+3     Dave  35.0  60000.0
+2  Charlie   NaN  70000.0
+      Name   Age   Salary
+2  Charlie   NaN  70000.0
+0    Alice  25.0  50000.0
+1      Bob  30.0      NaN
+3     Dave  35.0  60000.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df3 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Name\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Alice\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Bob\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Charlie\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Dave\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{: [}\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\VariableTok{None}\NormalTok{, }\DecValTok{35}\NormalTok{],}
+    \StringTok{\textquotesingle{}Salary\textquotesingle{}}\NormalTok{: [}\DecValTok{50000}\NormalTok{, }\VariableTok{None}\NormalTok{, }\DecValTok{70000}\NormalTok{, }\DecValTok{60000}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{s3 }\OperatorTok{=}\NormalTok{ df3.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Name\textquotesingle{}}\NormalTok{, key}\OperatorTok{=}\KeywordTok{lambda}\NormalTok{ x: x.}\BuiltInTok{str}\NormalTok{.}\BuiltInTok{len}\NormalTok{())}
+\BuiltInTok{print}\NormalTok{(s3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Name   Age   Salary
+1      Bob  30.0      NaN
+3     Dave  35.0  60000.0
+0    Alice  25.0  50000.0
+2  Charlie   NaN  70000.0
+\end{verbatim}
+
+\chapter{Pandas - time series}\label{pandas---time-series}
+
+Converting a string to \texttt{datetime} format (date-time)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}date\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}2023{-}01{-}01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2023{-}01{-}02\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2023{-}01{-}03\textquotesingle{}}\NormalTok{], }\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{: [}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{]\}}
+\NormalTok{data\_frame }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\NormalTok{data\_frame[}\StringTok{\textquotesingle{}date\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(data\_frame[}\StringTok{\textquotesingle{}date\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+{'date': ['2023-01-01', '2023-01-02', '2023-01-03'], 'value': [10, 15, 20]}
+\end{verbatim}
+
+The \texttt{errors} argument in the \texttt{pd.to\_datetime} function
+controls how the function should behave when it encounters invalid data
+while attempting to convert values into \texttt{datetime} objects.
+Possible values for \texttt{errors} are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{\textquotesingle{}raise\textquotesingle{}}} (default):
+  Raises an exception if it encounters an invalid data format.
+\item
+  \textbf{\texttt{\textquotesingle{}coerce\textquotesingle{}}}: Replaces
+  invalid values with \texttt{NaT} (Not a Time).
+\item
+  \textbf{\texttt{\textquotesingle{}ignore\textquotesingle{}}}: Returns
+  the input data unchanged when it encounters an error (option
+  deprecated in later versions).
+\end{enumerate}
+
+Code to paste into the environment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}date\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}2023{-}01{-}01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}invalid\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2023{-}01{-}03\textquotesingle{}}\NormalTok{], }\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{: [}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{]\}}
+\NormalTok{data\_frame }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\NormalTok{data\_frame[}\StringTok{\textquotesingle{}date\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(data\_frame[}\StringTok{\textquotesingle{}date\textquotesingle{}}\NormalTok{], errors}\OperatorTok{=}\StringTok{\textquotesingle{}ignore\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{format} argument in the \texttt{pandas.to\_datetime}
+function allows you to specify the exact date and time format to be used
+for parsing input values. This is useful when input data has a fixed,
+specific format, which can speed up processing and reduce the risk of
+misinterpreting dates.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Sample input data with different formats}
+\NormalTok{data1 }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}01{-}01{-}2025\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}15{-}03{-}2025\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}30{-}12{-}2025\textquotesingle{}}\NormalTok{]  }\CommentTok{\# Format: DD{-}MM{-}YYYY}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}2025/01/01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2025/03/15\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2025/12/30\textquotesingle{}}\NormalTok{]  }\CommentTok{\# Format: YYYY/MM/DD}
+
+\CommentTok{\# Conversion with a specified format (DD{-}MM{-}YYYY)}
+\NormalTok{df1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data1)}
+\NormalTok{df1[}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(df1[}\DecValTok{0}\NormalTok{], }\BuiltInTok{format}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%d}\StringTok{{-}\%m{-}\%Y\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Conversion with format \textquotesingle{}}\SpecialCharTok{\%d}\StringTok{{-}\%m{-}\%Y\textquotesingle{}:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df1)}
+
+\CommentTok{\# Conversion with a specified format (YYYY/MM/DD)}
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data2)}
+\NormalTok{df2[}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(df2[}\DecValTok{0}\NormalTok{], }\BuiltInTok{format}\OperatorTok{=}\StringTok{\textquotesingle{}\%Y/\%m/}\SpecialCharTok{\%d}\StringTok{\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Conversion with format \textquotesingle{}\%Y/\%m/}\SpecialCharTok{\%d}\StringTok{\textquotesingle{}:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Conversion with format '%d-%m-%Y':
+           0
+0 2025-01-01
+1 2025-03-15
+2 2025-12-30
+
+Conversion with format '%Y/%m/%d':
+           0
+0 2025-01-01
+1 2025-03-15
+2 2025-12-30
+\end{verbatim}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1884}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4928}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3188}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Format code
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{\%Y} & Year in 4-digit format & 2025 \\
+\texttt{\%y} & Year in 2-digit format & 25 \\
+\texttt{\%m} & Month (digits, 2-digit) & 01 (January), 12 (December) \\
+\texttt{\%d} & Day of the month (2-digit) & 01, 15, 31 \\
+\texttt{\%B} & Full month name & January, December \\
+\texttt{\%b} & Abbreviated month name & Jan, Dec \\
+\texttt{\%A} & Full weekday name & Monday, Sunday \\
+\texttt{\%a} & Abbreviated weekday name & Mon, Sun \\
+\texttt{\%H} & Hour in 24-hour format & 00, 12, 23 \\
+\texttt{\%I} & Hour in 12-hour format & 01, 11 \\
+\texttt{\%p} & AM/PM & AM, PM \\
+\texttt{\%M} & Minutes & 00, 30, 59 \\
+\texttt{\%S} & Seconds & 00, 30, 59 \\
+\end{longtable}
+}
+
+Polish month names in nominative or abbreviated form.
+
+Note: That isn't grammatically correct. Traditional format (DMY):
+dd.mm.yyyy, often with dots as separators; the more official form is d
+yyyy, or, less frequently, d yyyy. Official format (YMD): the ISO 8601
+YYYY-MM-DD format is used in Poland in official documents, banks,
+computer systems, and on the internet.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ locale}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{locale.setlocale(locale.LC\_ALL, }\StringTok{\textquotesingle{}PL\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# locale.setlocale(locale.LC\_TIME, \textquotesingle{}pl\_PL.UTF{-}8\textquotesingle{})  \# On Linux/Mac systems}
+\CommentTok{\# locale.setlocale(locale.LC\_TIME, \textquotesingle{}Polish\_Poland.1250\textquotesingle{})  \# On Windows}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}10 styczeń 2025\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}15 grudzień 2025\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}5 marzec 2025\textquotesingle{}}\NormalTok{]}
+\NormalTok{data\_frame }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\NormalTok{data\_frame[}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(data\_frame[}\DecValTok{0}\NormalTok{], }\BuiltInTok{format}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%d}\StringTok{ \%B \%Y\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data\_frame)}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}10 sty 2025\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}15 gru 2025\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}5 mar 2025\textquotesingle{}}\NormalTok{]}
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data2)}
+\NormalTok{df2[}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.to\_datetime(df2[}\DecValTok{0}\NormalTok{], }\BuiltInTok{format}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%d}\StringTok{ \%b \%Y\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           0
+0 2025-01-10
+1 2025-12-15
+2 2025-03-05
+           0
+0 2025-01-10
+1 2025-12-15
+2 2025-03-05
+\end{verbatim}
+
+\textbf{Exercise:} (\texttt{extime.py})
+
+Load the following files and transform the date column:
+
+\begin{itemize}
+\item
+  date\_sale.csv
+\item
+  date\_temp.csv
+\end{itemize}
+
+Hint:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"date\_sale.csv"}\NormalTok{, parse\_dates}\OperatorTok{=}\NormalTok{[}\StringTok{"Sale\_Date"}\NormalTok{], date\_format}\OperatorTok{=}\StringTok{"}\SpecialCharTok{\%d}\StringTok{{-}\%m{-}\%Y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
 
 

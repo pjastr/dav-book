@@ -1,0 +1,74 @@
+# Pandas - sorting
+
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+# Sample data frame
+data = pd.DataFrame({
+    'Name': ['Alice', 'Tom', 'Charlie'],
+    'Age': [25, 42, 35],
+    'Salary': [50000, 60000, 70000]
+})
+
+# Sorting by the 'Age' column
+s1 = data.sort_values(by='Age')
+print(s1)
+# Sorting in reverse order
+s2 = data.sort_values(by='Salary', ascending=False)
+print(s2)
+# Sorting by 'Age' ascending, then 'Salary' descending
+s3 = data.sort_values(by=['Age', 'Salary'], ascending=[True, False])
+print(s3)
+
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+
+# Sample data frame
+data = pd.DataFrame({
+    'Name': ['Alice', 'Tom', 'Charlie'],
+    'Age': [25, 41, 35],
+    'Salary': [50000, 60000, 70000]
+})
+
+# Inplace sorting (replacing the existing variable) - currently not recommended
+data.sort_values(by='Age', inplace=True)
+print(data)
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df2 = pd.DataFrame({
+    'Name': ['Alice', 'Bob', 'Charlie', 'Dave'],
+    'Age': [25, 30, None, 35],
+    'Salary': [50000, None, 70000, 60000]
+})
+
+# Sorting with NaN at the end
+s2 = df2.sort_values(by='Age', na_position='last')
+print(s2)
+# Sorting with NaN at the beginning
+s3 = df2.sort_values(by='Age', na_position='first')
+print(s3)
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df3 = pd.DataFrame({
+    'Name': ['Alice', 'Bob', 'Charlie', 'Dave'],
+    'Age': [25, 30, None, 35],
+    'Salary': [50000, None, 70000, 60000]
+})
+
+s3 = df3.sort_values(by='Name', key=lambda x: x.str.len())
+print(s3)
+```

@@ -1,0 +1,108 @@
+# Pandas - time series
+
+Converting a string to `datetime` format (date-time)
+
+```{python}
+#| echo: true
+import pandas as pd
+
+data = {'date': ['2023-01-01', '2023-01-02', '2023-01-03'], 'value': [10, 15, 20]}
+data_frame = pd.DataFrame(data)
+data_frame['date'] = pd.to_datetime(data_frame['date'])
+print(data)
+```
+
+The `errors` argument in the `pd.to_datetime` function controls how the function should behave when it encounters invalid data while attempting to convert values into `datetime` objects. Possible values for `errors` are:
+
+1. **`'raise'`** (default): Raises an exception if it encounters an invalid data format.
+2. **`'coerce'`**: Replaces invalid values with `NaT` (Not a Time).
+3. **`'ignore'`**: Returns the input data unchanged when it encounters an error (option deprecated in later versions).
+
+Code to paste into the environment:
+
+```python
+import pandas as pd
+
+data = {'date': ['2023-01-01', 'invalid', '2023-01-03'], 'value': [10, 15, 20]}
+data_frame = pd.DataFrame(data)
+data_frame['date'] = pd.to_datetime(data_frame['date'], errors='ignore')
+```
+
+The `format` argument in the `pandas.to_datetime` function allows you to specify the exact date and time format to be used for parsing input values. This is useful when input data has a fixed, specific format, which can speed up processing and reduce the risk of misinterpreting dates.
+
+```{python}
+#| echo: true
+import pandas as pd
+
+# Sample input data with different formats
+data1 = ['01-01-2025', '15-03-2025', '30-12-2025']  # Format: DD-MM-YYYY
+data2 = ['2025/01/01', '2025/03/15', '2025/12/30']  # Format: YYYY/MM/DD
+
+# Conversion with a specified format (DD-MM-YYYY)
+df1 = pd.DataFrame(data1)
+df1[0] = pd.to_datetime(df1[0], format='%d-%m-%Y')
+print("Conversion with format '%d-%m-%Y':")
+print(df1)
+
+# Conversion with a specified format (YYYY/MM/DD)
+df2 = pd.DataFrame(data2)
+df2[0] = pd.to_datetime(df2[0], format='%Y/%m/%d')
+print("\nConversion with format '%Y/%m/%d':")
+print(df2)
+
+```
+
+| Format code | Description                     | Example              |
+|-------------|----------------------------------|----------------------|
+| `%Y`        | Year in 4-digit format          | 2025                |
+| `%y`        | Year in 2-digit format          | 25                  |
+| `%m`        | Month (digits, 2-digit)         | 01 (January), 12 (December) |
+| `%d`        | Day of the month (2-digit)      | 01, 15, 31          |
+| `%B`        | Full month name                 | January, December   |
+| `%b`        | Abbreviated month name          | Jan, Dec            |
+| `%A`        | Full weekday name               | Monday, Sunday      |
+| `%a`        | Abbreviated weekday name        | Mon, Sun            |
+| `%H`        | Hour in 24-hour format          | 00, 12, 23          |
+| `%I`        | Hour in 12-hour format          | 01, 11              |
+| `%p`        | AM/PM                           | AM, PM              |
+| `%M`        | Minutes                         | 00, 30, 59          |
+| `%S`        | Seconds                         | 00, 30, 59          |
+
+Polish month names in nominative or abbreviated form.
+
+Note: That isn't grammatically correct. Traditional format (DMY): dd.mm.yyyy, often with dots as separators; the more official form is d <month in genitive> yyyy, or, less frequently, d <month in Roman numerals> yyyy. Official format (YMD): the ISO 8601 YYYY-MM-DD format is used in Poland in official documents, banks, computer systems, and on the internet.
+
+```{python}
+#| echo: true
+import locale
+import pandas as pd
+
+locale.setlocale(locale.LC_ALL, 'PL')
+# locale.setlocale(locale.LC_TIME, 'pl_PL.UTF-8')  # On Linux/Mac systems
+# locale.setlocale(locale.LC_TIME, 'Polish_Poland.1250')  # On Windows
+
+data = ['10 styczeń 2025', '15 grudzień 2025', '5 marzec 2025']
+data_frame = pd.DataFrame(data)
+data_frame[0] = pd.to_datetime(data_frame[0], format='%d %B %Y')
+print(data_frame)
+data2 = ['10 sty 2025', '15 gru 2025', '5 mar 2025']
+df2 = pd.DataFrame(data2)
+df2[0] = pd.to_datetime(df2[0], format='%d %b %Y')
+print(df2)
+```
+
+**Exercise:** (`extime.py`)
+
+Load the following files and transform the date column:
+
+* date_sale.csv
+
+* date_temp.csv
+
+Hint:
+
+```python
+import pandas as pd
+
+data = pd.read_csv("date_sale.csv", parse_dates=["Sale_Date"], date_format="%d-%m-%Y")
+```
