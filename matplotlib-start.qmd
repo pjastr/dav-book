@@ -1,0 +1,29 @@
+# Matplotlib - start
+
+Loading the library:
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+```
+
+
+
+<https://matplotlib.org/>
+
+![](anatomy.png)
+
+
+Chart galleries
+
+<https://matplotlib.org/gallery/index.html>
+
+<https://python-graph-gallery.com/>
+
+<https://github.com/rasbt/matplotlib-gallery>
+
+<https://seaborn.pydata.org/examples/index.html>
+
+![](m1.jpg)
+

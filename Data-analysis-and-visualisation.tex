@@ -222,7 +222,7 @@
 
 \title{Data analysis and visualisation}
 \author{Piotr Jastrzębski}
-\date{2026-05-03}
+\date{2026-05-19}
 \begin{document}
 \maketitle
 
@@ -4845,6 +4845,522 @@ Hint:
 \end{Highlighting}
 \end{Shaded}
 
+\chapter{Pandas - regular
+expressions}\label{pandas---regular-expressions}
+
+\section{What are regular
+expressions?}\label{what-are-regular-expressions}
+
+Regular expressions (regex) are text patterns used for searching,
+matching, and manipulating strings. In Python, they are supported by the
+built-in \texttt{re} module, and Pandas integrates them directly into
+operations on text columns through the \texttt{.str} accessor.
+
+Before a regular expression, we always use the \texttt{r} prefix (raw
+string) so that the backslash \texttt{\textbackslash{}} is not
+interpreted as a Python escape character.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ re}
+
+\NormalTok{text }\OperatorTok{=} \StringTok{"Contact us at info@example.com or sales@example.com"}
+\NormalTok{emails }\OperatorTok{=}\NormalTok{ re.findall(}\VerbatimStringTok{r"}\PreprocessorTok{[a{-}zA{-}Z0{-}9.\_\%+{-}]}\OperatorTok{+}\VerbatimStringTok{@}\PreprocessorTok{[a{-}zA{-}Z0{-}9.{-}]}\OperatorTok{+}\CharTok{\textbackslash{}.}\PreprocessorTok{[a{-}zA{-}Z]}\OperatorTok{\{2,\}}\VerbatimStringTok{"}\NormalTok{, text)}
+\BuiltInTok{print}\NormalTok{(emails)}
+\CommentTok{\# [\textquotesingle{}info@example.com\textquotesingle{}, \textquotesingle{}sales@example.com\textquotesingle{}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['info@example.com', 'sales@example.com']
+\end{verbatim}
+
+\section{Basic regex syntax}\label{basic-regex-syntax}
+
+Here are the most important elements of regular expression syntax:
+
+\textbf{Metacharacters:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Metacharacter & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{.} & Any character (except \texttt{\textbackslash{}n}) \\
+\texttt{\^{}} & Start of string \\
+\texttt{\$} & End of string \\
+\texttt{*} & 0 or more repetitions \\
+\texttt{+} & 1 or more repetitions \\
+\texttt{?} & 0 or 1 repetition \\
+\texttt{\textbackslash{}\textbar{}} & Alternative (or) \\
+\texttt{()} & Capturing group \\
+\texttt{{[}{]}} & Character set \\
+\texttt{\{\}} & Exact number of repetitions \\
+\end{longtable}
+}
+
+\textbf{Character classes:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Shortcut & Meaning & ASCII equivalent \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{\textbackslash{}d} & Digit & \texttt{{[}0-9{]}} \\
+\texttt{\textbackslash{}D} & Non-digit & \texttt{{[}\^{}0-9{]}} \\
+\texttt{\textbackslash{}w} & ``Word'' character &
+\texttt{{[}a-zA-Z0-9\_{]}} \\
+\texttt{\textbackslash{}W} & Non-word character &
+\texttt{{[}\^{}a-zA-Z0-9\_{]}} \\
+\texttt{\textbackslash{}s} & Whitespace &
+\texttt{{[}\ \textbackslash{}t\textbackslash{}n\textbackslash{}r\textbackslash{}f\textbackslash{}v{]}} \\
+\texttt{\textbackslash{}S} & Non-whitespace &
+\texttt{{[}\^{}\ \textbackslash{}t\textbackslash{}n\textbackslash{}r\textbackslash{}f\textbackslash{}v{]}} \\
+\texttt{\textbackslash{}b} & Word boundary & --- \\
+\end{longtable}
+}
+
+\textbf{Quantifiers:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Pattern & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{a\{3\}} & Exactly 3 occurrences of \texttt{a} \\
+\texttt{a\{2,5\}} & Between 2 and 5 occurrences of \texttt{a} \\
+\texttt{a\{2,\}} & At least 2 occurrences of \texttt{a} \\
+\texttt{a*?} & 0 or more (lazy) \\
+\texttt{a+?} & 1 or more (lazy) \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ re}
+
+\NormalTok{text }\OperatorTok{=} \StringTok{"\textless{}b\textgreater{}bold\textless{}/b\textgreater{} and \textless{}i\textgreater{}italic\textless{}/i\textgreater{}"}
+
+\CommentTok{\# greedy — matches as much as possible}
+\NormalTok{greedy }\OperatorTok{=}\NormalTok{ re.findall(}\VerbatimStringTok{r"\textless{}}\DecValTok{.}\OperatorTok{+}\VerbatimStringTok{\textgreater{}"}\NormalTok{, text)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Greedy:"}\NormalTok{, greedy)}
+
+\CommentTok{\# lazy — matches as little as possible}
+\NormalTok{lazy }\OperatorTok{=}\NormalTok{ re.findall(}\VerbatimStringTok{r"\textless{}}\DecValTok{.}\OperatorTok{+?}\VerbatimStringTok{\textgreater{}"}\NormalTok{, text)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Lazy:"}\NormalTok{, lazy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Greedy: ['<b>bold</b> and <i>italic</i>']
+Lazy: ['<b>', '</b>', '<i>', '</i>']
+\end{verbatim}
+
+\section{\texorpdfstring{Key functions of the \texttt{re}
+module}{Key functions of the re module}}\label{key-functions-of-the-re-module}
+
+Here is a Markdown table explaining the key functions of the \texttt{re}
+module:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{\texttt{re.search()}} & Searches for the first match in the
+entire string. Returns a \texttt{Match} object or \texttt{None}. \\
+\textbf{\texttt{re.match()}} & Searches for a match only at the
+beginning of the string. \\
+\textbf{\texttt{re.findall()}} & Returns a list of all matches (as
+strings). \\
+\textbf{\texttt{re.finditer()}} & Like \texttt{findall}, but returns an
+iterator of \texttt{Match} objects. \\
+\textbf{\texttt{re.sub()}} & Replaces matches with a new string or the
+result of a function. \\
+\textbf{\texttt{re.split()}} & Splits a string by a pattern (more
+flexible than \texttt{str.split()}). \\
+\textbf{\texttt{re.fullmatch()}} & Checks whether the entire string
+matches the pattern --- ideal for validation. \\
+\textbf{\texttt{re.compile()}} & Compiles a pattern for repeated use ---
+speeds up execution. \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ re}
+
+\NormalTok{text }\OperatorTok{=} \StringTok{"Temperature is 36.6 degrees"}
+\NormalTok{match }\OperatorTok{=}\NormalTok{ re.search(}\VerbatimStringTok{r"}\DecValTok{\textbackslash{}d}\OperatorTok{+}\CharTok{\textbackslash{}.}\DecValTok{\textbackslash{}d}\OperatorTok{+}\VerbatimStringTok{"}\NormalTok{, text)}
+\ControlFlowTok{if}\NormalTok{ match:}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Found: }\SpecialCharTok{\{}\NormalTok{match}\SpecialCharTok{.}\NormalTok{group()}\SpecialCharTok{\}}\SpecialStringTok{ at position }\SpecialCharTok{\{}\NormalTok{match}\SpecialCharTok{.}\NormalTok{span()}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\NormalTok{log }\OperatorTok{=} \StringTok{"""}
+\StringTok{ERROR 2025{-}03{-}06 10:15:32 Connection timeout}
+\StringTok{INFO  2025{-}03{-}06 10:15:33 Retry attempt}
+\StringTok{ERROR 2025{-}03{-}06 10:15:35 Disk full}
+\StringTok{"""}
+\NormalTok{errors }\OperatorTok{=}\NormalTok{ re.findall(}\VerbatimStringTok{r"ERROR}\DecValTok{\textbackslash{}s}\OperatorTok{+}\DecValTok{\textbackslash{}S}\OperatorTok{+}\DecValTok{\textbackslash{}s}\OperatorTok{+}\DecValTok{\textbackslash{}S}\OperatorTok{+}\DecValTok{\textbackslash{}s}\OperatorTok{+}\KeywordTok{(}\DecValTok{.}\OperatorTok{+}\KeywordTok{)}\VerbatimStringTok{"}\NormalTok{, log)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Errors:"}\NormalTok{, errors)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Found: 36.6 at position (15, 19)
+Errors: ['Connection timeout', 'Disk full']
+\end{verbatim}
+
+\section{Groups and references}\label{groups-and-references}
+
+Parentheses create groups --- they make it possible to extract fragments
+of a match. Groups can be numbered, named
+(\texttt{(?P\textless{}name\textgreater{}...)}), or non-capturing
+(\texttt{(?:...)}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ re}
+
+\CommentTok{\# Numbered groups}
+\NormalTok{text }\OperatorTok{=} \StringTok{"2025{-}03{-}06"}
+\NormalTok{match }\OperatorTok{=}\NormalTok{ re.search(}\VerbatimStringTok{r"}\KeywordTok{(}\DecValTok{\textbackslash{}d}\OperatorTok{\{4\}}\KeywordTok{)}\VerbatimStringTok{{-}}\KeywordTok{(}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{{-}}\KeywordTok{(}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{"}\NormalTok{, text)}
+\ControlFlowTok{if}\NormalTok{ match:}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Year: }\SpecialCharTok{\{}\NormalTok{match}\SpecialCharTok{.}\NormalTok{group(}\DecValTok{1}\NormalTok{)}\SpecialCharTok{\}}\SpecialStringTok{, Month: }\SpecialCharTok{\{}\NormalTok{match}\SpecialCharTok{.}\NormalTok{group(}\DecValTok{2}\NormalTok{)}\SpecialCharTok{\}}\SpecialStringTok{, Day: }\SpecialCharTok{\{}\NormalTok{match}\SpecialCharTok{.}\NormalTok{group(}\DecValTok{3}\NormalTok{)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Named groups}
+\NormalTok{pattern }\OperatorTok{=} \VerbatimStringTok{r"}\KeywordTok{(}\FunctionTok{?P\textless{}year\textgreater{}}\DecValTok{\textbackslash{}d}\OperatorTok{\{4\}}\KeywordTok{)}\VerbatimStringTok{{-}}\KeywordTok{(}\FunctionTok{?P\textless{}month\textgreater{}}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{{-}}\KeywordTok{(}\FunctionTok{?P\textless{}day\textgreater{}}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{"}
+\NormalTok{match }\OperatorTok{=}\NormalTok{ re.search(pattern, }\StringTok{"Meeting on 2025{-}03{-}06 at noon"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ match:}
+    \BuiltInTok{print}\NormalTok{(match.groupdict())}
+
+\CommentTok{\# Non{-}capturing group}
+\NormalTok{result }\OperatorTok{=}\NormalTok{ re.findall(}\VerbatimStringTok{r"}\NormalTok{(?:}\VerbatimStringTok{https}\OperatorTok{?}\ControlFlowTok{|}\VerbatimStringTok{ftp}\NormalTok{)}\VerbatimStringTok{://}\DecValTok{\textbackslash{}S}\OperatorTok{+}\VerbatimStringTok{"}\NormalTok{, }\StringTok{"Visit https://example.com"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Year: 2025, Month: 03, Day: 06
+{'year': '2025', 'month': '03', 'day': '06'}
+['https://example.com']
+\end{verbatim}
+
+\section{Flags}\label{flags}
+
+Flags modify the behavior of regular expressions:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Flag & Shortcut & Action \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{re.IGNORECASE} & \texttt{re.I} & Ignores letter case \\
+\texttt{re.MULTILINE} & \texttt{re.M} & \texttt{\^{}}/\texttt{\$} apply
+to each line \\
+\texttt{re.DOTALL} & \texttt{re.S} & \texttt{.} also matches
+\texttt{\textbackslash{}n} \\
+\texttt{re.VERBOSE} & \texttt{re.X} & Allows comments within the
+pattern \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ re}
+
+\CommentTok{\# Combining flags with the | operator}
+\NormalTok{text }\OperatorTok{=} \StringTok{"First Line}\CharTok{\textbackslash{}n}\StringTok{Second Line}\CharTok{\textbackslash{}n}\StringTok{Third Line"}
+\NormalTok{matches }\OperatorTok{=}\NormalTok{ re.findall(}\VerbatimStringTok{r"}\DecValTok{\^{}\textbackslash{}w}\OperatorTok{+}\VerbatimStringTok{"}\NormalTok{, text, re.MULTILINE }\OperatorTok{|}\NormalTok{ re.IGNORECASE)}
+\BuiltInTok{print}\NormalTok{(matches)}
+
+\CommentTok{\# VERBOSE flag — readable patterns with comments}
+\NormalTok{email\_pattern }\OperatorTok{=}\NormalTok{ re.}\BuiltInTok{compile}\NormalTok{(}\VerbatimStringTok{r"""}
+\VerbatimStringTok{    }\DecValTok{\^{}}
+\VerbatimStringTok{    }\PreprocessorTok{[a{-}zA{-}Z0{-}9.\_\%+{-}]}\OperatorTok{+}\VerbatimStringTok{    }\CommentTok{\# username}
+\VerbatimStringTok{    @                     }\CommentTok{\# @ symbol}
+\VerbatimStringTok{    }\PreprocessorTok{[a{-}zA{-}Z0{-}9.{-}]}\OperatorTok{+}\VerbatimStringTok{       }\CommentTok{\# domain name}
+\VerbatimStringTok{    }\CharTok{\textbackslash{}.}\VerbatimStringTok{                    }\CommentTok{\# dot}
+\VerbatimStringTok{    }\PreprocessorTok{[a{-}zA{-}Z]}\OperatorTok{\{2,\}}\VerbatimStringTok{         }\CommentTok{\# domain extension}
+\VerbatimStringTok{    }\DecValTok{$}
+\VerbatimStringTok{"""}\NormalTok{, re.VERBOSE)}
+
+\BuiltInTok{print}\NormalTok{(email\_pattern.fullmatch(}\StringTok{"user@example.com"}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(email\_pattern.fullmatch(}\StringTok{"invalid@@mail"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+['First', 'Second', 'Third']
+<re.Match object; span=(0, 16), match='user@example.com'>
+None
+\end{verbatim}
+
+\section{Regular expressions in
+Pandas}\label{regular-expressions-in-pandas}
+
+Many \texttt{.str} accessor methods in Pandas support regular
+expressions via the \texttt{regex=True} parameter. This allows
+vectorized regex operations on entire columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Text\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}  Hello World  \textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Pandas  Library43\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}   Data   Science  \textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Removing special characters (regex in str.replace)}
+\NormalTok{data[}\StringTok{\textquotesingle{}Clean\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ data[}\StringTok{\textquotesingle{}Text\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.strip().}\BuiltInTok{str}\NormalTok{.replace(}\VerbatimStringTok{r\textquotesingle{}}\PreprocessorTok{[\^{}}\DecValTok{\textbackslash{}w\textbackslash{}s}\PreprocessorTok{]}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, regex}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data)}
+
+\CommentTok{\# Removing numbers}
+\NormalTok{data[}\StringTok{\textquotesingle{}NoDigits\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ data[}\StringTok{\textquotesingle{}Clean\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.replace(}\VerbatimStringTok{r\textquotesingle{}}\DecValTok{\textbackslash{}d}\OperatorTok{+}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, regex}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                  Text              Clean
+0        Hello World          Hello World
+1    Pandas  Library43  Pandas  Library43
+2     Data   Science       Data   Science
+                  Text              Clean         NoDigits
+0        Hello World          Hello World      Hello World
+1    Pandas  Library43  Pandas  Library43  Pandas  Library
+2     Data   Science       Data   Science   Data   Science
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{str.contains()} --- filtering with
+regex}{str.contains() --- filtering with regex}}\label{str.contains-filtering-with-regex}
+
+The \texttt{str.contains()} method allows filtering rows based on a
+regex pattern.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}email\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}jan@gmail.com\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}anna@wp.pl\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}piotr@firma.com\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}kasia@gmail.com\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bad{-}email@@\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Filtering emails from the gmail domain}
+\NormalTok{gmail\_users }\OperatorTok{=}\NormalTok{ df[df[}\StringTok{\textquotesingle{}email\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.contains(}\VerbatimStringTok{r\textquotesingle{}@gmail}\CharTok{\textbackslash{}.}\VerbatimStringTok{com}\DecValTok{$}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, regex}\OperatorTok{=}\VariableTok{True}\NormalTok{)]}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Gmail:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, gmail\_users)}
+
+\CommentTok{\# Email format validation}
+\NormalTok{df[}\StringTok{\textquotesingle{}valid\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}email\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.contains(}
+    \VerbatimStringTok{r\textquotesingle{}}\DecValTok{\^{}}\PreprocessorTok{[a{-}zA{-}Z0{-}9.\_\%+{-}]}\OperatorTok{+}\VerbatimStringTok{@}\PreprocessorTok{[a{-}zA{-}Z0{-}9.{-}]}\OperatorTok{+}\CharTok{\textbackslash{}.}\PreprocessorTok{[a{-}zA{-}Z]}\OperatorTok{\{2,\}}\DecValTok{$}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, regex}\OperatorTok{=}\VariableTok{True}
+\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Validation:}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Gmail:
+              email
+0    jan@gmail.com
+3  kasia@gmail.com
+
+Validation:
+              email  valid
+0    jan@gmail.com   True
+1       anna@wp.pl   True
+2  piotr@firma.com   True
+3  kasia@gmail.com   True
+4      bad-email@@  False
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{str.extract()} --- extracting
+groups}{str.extract() --- extracting groups}}\label{str.extract-extracting-groups}
+
+The \texttt{str.extract()} method extracts capturing groups from a
+regular expression into separate columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}date\_str\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}2025{-}03{-}06\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2024{-}12{-}25\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2023{-}01{-}15\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Extracting year, month, and day into separate columns}
+\NormalTok{extracted }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}date\_str\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.extract(}\VerbatimStringTok{r\textquotesingle{}}\KeywordTok{(}\FunctionTok{?P\textless{}year\textgreater{}}\DecValTok{\textbackslash{}d}\OperatorTok{\{4\}}\KeywordTok{)}\VerbatimStringTok{{-}}\KeywordTok{(}\FunctionTok{?P\textless{}month\textgreater{}}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{{-}}\KeywordTok{(}\FunctionTok{?P\textless{}day\textgreater{}}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(extracted)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   year month day
+0  2025    03  06
+1  2024    12  25
+2  2023    01  15
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{str.extractall()} --- all
+matches}{str.extractall() --- all matches}}\label{str.extractall-all-matches}
+
+The \texttt{str.extractall()} method extracts \textbf{all} occurrences
+of a pattern (not just the first one).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Prices: 19.99 PLN and 5.50 PLN\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Cost: 120.00 PLN\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}No prices\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Extracting all amounts}
+\NormalTok{amounts }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.extractall(}\VerbatimStringTok{r\textquotesingle{}}\KeywordTok{(}\DecValTok{\textbackslash{}d}\OperatorTok{+}\CharTok{\textbackslash{}.}\DecValTok{\textbackslash{}d}\OperatorTok{\{2\}}\KeywordTok{)}\VerbatimStringTok{\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(amounts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+              0
+  match        
+0 0       19.99
+  1        5.50
+1 0      120.00
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{str.replace()} with regex --- replacing
+patterns}{str.replace() with regex --- replacing patterns}}\label{str.replace-with-regex-replacing-patterns}
+
+The \texttt{regex=True} parameter in \texttt{str.replace()} enables
+replacements based on regular expressions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}phone\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}123{-}456{-}789\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}987 654 321\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}(48) 555{-}123{-}456\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Removing everything except digits}
+\NormalTok{df[}\StringTok{\textquotesingle{}digits\_only\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}phone\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.replace(}\VerbatimStringTok{r\textquotesingle{}}\PreprocessorTok{[\^{}}\DecValTok{\textbackslash{}d}\PreprocessorTok{]}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, regex}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+              phone  digits_only
+0       123-456-789    123456789
+1       987 654 321    987654321
+2  (48) 555-123-456  48555123456
+\end{verbatim}
+
+\section{\texorpdfstring{\texttt{str.findall()} --- list of
+matches}{str.findall() --- list of matches}}\label{str.findall-list-of-matches}
+
+The \texttt{str.findall()} method returns a list of all matches in each
+row.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Hashtags: \#python \#pandas \#regex\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}No tags here\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\#data is fun \#science\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Extracting hashtags}
+\NormalTok{df[}\StringTok{\textquotesingle{}hashtags\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.findall(}\VerbatimStringTok{r\textquotesingle{}\#}\DecValTok{\textbackslash{}w}\OperatorTok{+}\VerbatimStringTok{\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                               text                    hashtags
+0  Hashtags: #python #pandas #regex  [#python, #pandas, #regex]
+1                      No tags here                          []
+2             #data is fun #science           [#data, #science]
+\end{verbatim}
+
+\section{Polish characters in regex}\label{polish-characters-in-regex}
+
+Working with Polish characters requires explicitly including them in
+patterns or using Unicode classes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ re}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Zażółć gęślą jaźń\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Hello World\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Łódź jest piękna\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Checking which rows contain Polish characters}
+\NormalTok{polish\_pattern }\OperatorTok{=} \VerbatimStringTok{r\textquotesingle{}}\PreprocessorTok{[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]}\VerbatimStringTok{\textquotesingle{}}
+\NormalTok{df[}\StringTok{\textquotesingle{}has\_polish\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.contains(polish\_pattern, regex}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                text  has_polish
+0  Zażółć gęślą jaźń        True
+1        Hello World       False
+2   Łódź jest piękna        True
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ re}
+
+\CommentTok{\# Replacing Polish characters with Latin ones}
+\KeywordTok{def}\NormalTok{ replace\_polish(text):}
+\NormalTok{    mapping }\OperatorTok{=}\NormalTok{ \{}
+        \StringTok{"ą"}\NormalTok{: }\StringTok{"a"}\NormalTok{, }\StringTok{"ć"}\NormalTok{: }\StringTok{"c"}\NormalTok{, }\StringTok{"ę"}\NormalTok{: }\StringTok{"e"}\NormalTok{, }\StringTok{"ł"}\NormalTok{: }\StringTok{"l"}\NormalTok{, }\StringTok{"ń"}\NormalTok{: }\StringTok{"n"}\NormalTok{,}
+        \StringTok{"ó"}\NormalTok{: }\StringTok{"o"}\NormalTok{, }\StringTok{"ś"}\NormalTok{: }\StringTok{"s"}\NormalTok{, }\StringTok{"ź"}\NormalTok{: }\StringTok{"z"}\NormalTok{, }\StringTok{"ż"}\NormalTok{: }\StringTok{"z"}\NormalTok{,}
+        \StringTok{"Ą"}\NormalTok{: }\StringTok{"A"}\NormalTok{, }\StringTok{"Ć"}\NormalTok{: }\StringTok{"C"}\NormalTok{, }\StringTok{"Ę"}\NormalTok{: }\StringTok{"E"}\NormalTok{, }\StringTok{"Ł"}\NormalTok{: }\StringTok{"L"}\NormalTok{, }\StringTok{"Ń"}\NormalTok{: }\StringTok{"N"}\NormalTok{,}
+        \StringTok{"Ó"}\NormalTok{: }\StringTok{"O"}\NormalTok{, }\StringTok{"Ś"}\NormalTok{: }\StringTok{"S"}\NormalTok{, }\StringTok{"Ź"}\NormalTok{: }\StringTok{"Z"}\NormalTok{, }\StringTok{"Ż"}\NormalTok{: }\StringTok{"Z"}
+\NormalTok{    \}}
+\NormalTok{    pattern }\OperatorTok{=} \VerbatimStringTok{r\textquotesingle{}}\PreprocessorTok{[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]}\VerbatimStringTok{\textquotesingle{}}
+    \ControlFlowTok{return}\NormalTok{ re.sub(pattern, }\KeywordTok{lambda}\NormalTok{ m: mapping.get(m.group(), m.group()), text)}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Zażółć gęślą jaźń\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Łódź\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}żółć\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{df[}\StringTok{\textquotesingle{}ascii\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}text\textquotesingle{}}\NormalTok{].}\BuiltInTok{apply}\NormalTok{(replace\_polish)}
+\BuiltInTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                text              ascii
+0  Zażółć gęślą jaźń  Zazolc gesla jazn
+1               Łódź               Lodz
+2               żółć               zolc
+\end{verbatim}
 
 
 

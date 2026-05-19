@@ -37,6 +37,14 @@ book:
       - pandas-reading_files.qmd
       - pandas-sorting.qmd
       - pandas-timeseries.qmd
+      - pandas-re.qmd
+      - pandas-other.qmd
+    - part: "Structure Analysis"
+      chapters:
+      - structure_analysis.qmd
+    - part: "Matplotlib"
+      chapters:
+      - matplotlib-start.qmd
   downloads: [pdf, epub]
   repo-url: https://github.com/pjastr/dav-book
   repo-actions: [issue]
