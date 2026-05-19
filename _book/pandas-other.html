@@ -601,7 +601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="filling-missing-values" class="level2" data-number="24.1">
 <h2 data-number="24.1" class="anchored" data-anchor-id="filling-missing-values"><span class="header-section-number">24.1</span> Filling missing values</h2>
-<div id="bfdcd315" class="cell" data-execution_count="1">
+<div id="cb59a191" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>])</span>
@@ -634,7 +634,7 @@ dtype: float64</code></pre>
 </section>
 <section id="handling-missing-data" class="level2" data-number="24.2">
 <h2 data-number="24.2" class="anchored" data-anchor-id="handling-missing-data"><span class="header-section-number">24.2</span> Handling missing data</h2>
-<div id="21e70cea" class="cell" data-execution_count="2">
+<div id="1a4d3f05" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -660,7 +660,7 @@ dtype: str</code></pre>
 </div>
 </div>
 <hr>
-<div id="67654788" class="cell" data-execution_count="3">
+<div id="ff2c9f85" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> nan <span class="im">as</span> NA</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -706,7 +706,7 @@ dtype: str</code></pre>
 </section>
 <section id="removing-duplicates" class="level2" data-number="24.3">
 <h2 data-number="24.3" class="anchored" data-anchor-id="removing-duplicates"><span class="header-section-number">24.3</span> Removing duplicates</h2>
-<div id="c02f7559" class="cell" data-execution_count="4">
+<div id="62815d42" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({<span class="st">'k1'</span>: [<span class="st">'one'</span>, <span class="st">'two'</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="st">'two'</span>],</span>
@@ -743,7 +743,7 @@ dtype: bool
 </section>
 <section id="replacing-values" class="level2" data-number="24.4">
 <h2 data-number="24.4" class="anchored" data-anchor-id="replacing-values"><span class="header-section-number">24.4</span> Replacing values</h2>
-<div id="67dfcb91" class="cell" data-execution_count="5">
+<div id="9c8d4dc2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -794,7 +794,7 @@ dtype: float64</code></pre>
 </section>
 <section id="discretization-and-binning" class="level2" data-number="24.5">
 <h2 data-number="24.5" class="anchored" data-anchor-id="discretization-and-binning"><span class="header-section-number">24.5</span> Discretization and binning</h2>
-<div id="f6fd8964" class="cell" data-execution_count="6">
+<div id="b4f50caa" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">27</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">37</span>, <span class="dv">31</span>, <span class="dv">61</span>, <span class="dv">45</span>, <span class="dv">41</span>, <span class="dv">32</span>]</span>
@@ -818,7 +818,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <hr>
-<div id="6c09798e" class="cell" data-execution_count="7">
+<div id="a97899ce" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">27</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">37</span>, <span class="dv">31</span>, <span class="dv">61</span>, <span class="dv">45</span>, <span class="dv">41</span>, <span class="dv">32</span>]</span>
@@ -838,20 +838,20 @@ Categories (4, str): ['Youth' &lt; 'YoungAdult' &lt; 'MiddleAged' &lt; 'Senior']
 </div>
 </div>
 <hr>
-<div id="cb932de9" class="cell" data-execution_count="8">
+<div id="5d362914" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.random.rand(<span class="dv">20</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.cut(data, <span class="dv">4</span>, precision<span class="op">=</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(0.55, 0.75], (0.55, 0.75], (0.75, 0.96], (0.75, 0.96], (0.34, 0.55], ..., (0.75, 0.96], (0.14, 0.34], (0.34, 0.55], (0.14, 0.34], (0.34, 0.55]]
+<pre><code>[(0.77, 0.98], (0.13, 0.34], (0.55, 0.77], (0.34, 0.55], (0.77, 0.98], ..., (0.13, 0.34], (0.34, 0.55], (0.13, 0.34], (0.55, 0.77], (0.77, 0.98]]
 Length: 20
-Categories (4, interval[float64, right]): [(0.14, 0.34] &lt; (0.34, 0.55] &lt; (0.55, 0.75] &lt; (0.75, 0.96]]</code></pre>
+Categories (4, interval[float64, right]): [(0.13, 0.34] &lt; (0.34, 0.55] &lt; (0.55, 0.77] &lt; (0.77, 0.98]]</code></pre>
 </div>
 </div>
 <hr>
-<div id="f2ddf5ca" class="cell" data-execution_count="9">
+<div id="ec97add2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -860,20 +860,20 @@ Categories (4, interval[float64, right]): [(0.14, 0.34] &lt; (0.34, 0.55] &lt; (
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cats)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series(cats).value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(0.67, 3.164], (0.67, 3.164], (-3.1359999999999997, -0.642], (0.67, 3.164], (-3.1359999999999997, -0.642], ..., (0.67, 3.164], (0.0133, 0.67], (-0.642, 0.0133], (0.0133, 0.67], (0.0133, 0.67]]
+<pre><code>[(-0.0716, 0.665], (-0.736, -0.0716], (-0.0716, 0.665], (-3.127, -0.736], (-0.0716, 0.665], ..., (0.665, 3.166], (0.665, 3.166], (0.665, 3.166], (-0.736, -0.0716], (-0.0716, 0.665]]
 Length: 1000
-Categories (4, interval[float64, right]): [(-3.1359999999999997, -0.642] &lt; (-0.642, 0.0133] &lt; (0.0133, 0.67] &lt; (0.67, 3.164]]
-(-3.1359999999999997, -0.642]    250
-(-0.642, 0.0133]                 250
-(0.0133, 0.67]                   250
-(0.67, 3.164]                    250
+Categories (4, interval[float64, right]): [(-3.127, -0.736] &lt; (-0.736, -0.0716] &lt; (-0.0716, 0.665] &lt; (0.665, 3.166]]
+(-3.127, -0.736]     250
+(-0.736, -0.0716]    250
+(-0.0716, 0.665]     250
+(0.665, 3.166]       250
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </section>
 <section id="detecting-and-filtering-outliers" class="level2" data-number="24.6">
 <h2 data-number="24.6" class="anchored" data-anchor-id="detecting-and-filtering-outliers"><span class="header-section-number">24.6</span> Detecting and filtering outliers</h2>
-<div id="2336bd24" class="cell" data-execution_count="10">
+<div id="a3c51ad8" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -887,42 +887,47 @@ Name: count, dtype: int64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 0            1            2            3
 count  1000.000000  1000.000000  1000.000000  1000.000000
-mean     -0.027519     0.004393    -0.052121    -0.034006
-std       1.038145     1.019119     1.024592     1.056530
-min      -3.736029    -3.053659    -3.447909    -4.087859
-25%      -0.743297    -0.684219    -0.768123    -0.754514
-50%      -0.008498     0.004891    -0.049088    -0.019837
-75%       0.663770     0.712461     0.602023     0.727132
-max       3.339809     2.985752     3.133838     3.761102
+mean     -0.018679     0.056350     0.044208    -0.035649
+std       1.001884     0.952886     0.975258     1.015283
+min      -3.316553    -2.979827    -3.357544    -3.379555
+25%      -0.715881    -0.575959    -0.610975    -0.679643
+50%      -0.038455     0.022372     0.022119    -0.030437
+75%       0.658508     0.675238     0.693243     0.661597
+max       2.975429     3.736680     3.472886     2.831432
 ---
-468   -3.322985
-664   -3.447909
-720    3.133838
-884    3.037909
+184   -3.357544
+219    3.323689
+244    3.119243
+324    3.104213
+569    3.472886
+946    3.087419
 Name: 2, dtype: float64
 ---
             0         1         2         3
-47   3.339809  0.176250  1.691884  0.434249
-81  -3.180144  0.801413  0.069716  1.169214
-224 -3.140997 -1.475603 -1.632018  1.017472
-232  1.567046 -3.053659  0.695354 -0.907132
-400  0.216762 -2.821928  0.587398  3.761102
-468  0.996638 -0.946524 -3.322985  1.324030
-499 -0.747131  0.619325  2.081255 -4.087859
-531 -3.534106 -1.230524 -0.952707 -0.608651
-546 -3.736029 -0.756009  1.492438  0.632573
-599 -3.080394 -0.771831  0.000511 -1.225892
-664  0.663680 -0.022075 -3.447909  1.355193
-720 -0.814359 -0.151675  3.133838 -0.561214
-853  1.461269  0.356957  0.400154  3.126007
-860 -3.452065 -0.234821 -0.669044 -2.210814
-884  1.273336 -0.067934  3.037909 -0.284714</code></pre>
+87  -3.122816  1.168430  1.197042 -0.108855
+88   1.467481  3.558245 -0.210776 -1.460176
+173  0.322385 -0.482745  0.573465 -3.282770
+184 -0.956837  0.485354 -3.357544  0.215472
+219 -2.721878 -0.767034  3.323689 -0.829835
+223  0.925059  1.434496 -0.817908 -3.192528
+244 -1.721491  0.389238  3.119243 -1.501921
+324 -0.069703  0.235389  3.104213 -0.732092
+332  0.597512  1.005423 -0.540293 -3.379555
+472 -3.316553  0.859712  1.822329  0.116416
+478  0.591328  0.632644 -0.982190 -3.354956
+493 -0.001076 -1.652586 -0.170947 -3.061229
+519  0.616597  3.099464  1.444094  0.890214
+569  0.045343 -0.902546  3.472886 -0.880752
+884  0.507390  3.054430  0.113125  1.656305
+946  0.169054 -0.045785  3.087419  0.759799
+955  0.557463  3.736680  0.004691 -0.623841
+958  0.243951  3.178786  1.453970 -1.154076</code></pre>
 </div>
 </div>
 </section>
 <section id="changing-the-column-type" class="level2" data-number="24.7">
 <h2 data-number="24.7" class="anchored" data-anchor-id="changing-the-column-type"><span class="header-section-number">24.7</span> Changing the column type</h2>
-<div id="2ff70e51" class="cell" data-execution_count="11">
+<div id="8c2d2be3" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -966,7 +971,7 @@ DataFrame after type changes:
 5  6  6.0  z</code></pre>
 </div>
 </div>
-<div id="fa2271d2" class="cell" data-execution_count="12">
+<div id="fb249d9f" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1013,7 +1018,7 @@ DataFrame after type changes:
 </section>
 <section id="changing-characters-in-categories" class="level2" data-number="24.8">
 <h2 data-number="24.8" class="anchored" data-anchor-id="changing-characters-in-categories"><span class="header-section-number">24.8</span> Changing characters in categories</h2>
-<div id="5cd7f92a" class="cell" data-execution_count="13">
+<div id="019f809b" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a DataFrame</span></span>
@@ -1082,7 +1087,7 @@ DataFrame after modification:
 <li><code>indicator</code>: adds a column to the resulting DataFrame that shows the source of each row.</li>
 <li><code>validate</code>: checks whether specified join rules are met.</li>
 </ul>
-<div id="d8d6dbd5" class="cell" data-execution_count="14">
+<div id="7b526a11" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({</span>
@@ -1118,7 +1123,7 @@ K1  C1  D1
 </div>
 </div>
 <p><img src="merge.png" class="img-fluid"></p>
-<div id="a69cb4de" class="cell" data-execution_count="15">
+<div id="b1f1c287" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({</span>
@@ -1213,7 +1218,7 @@ Right join
 <li><code>lsuffix</code> and <code>rsuffix</code>: suffixes to be added to repeating columns. The default is empty.</li>
 <li><code>sort</code>: whether to sort the data by the key.</li>
 </ul>
-<div id="fafdc5fc" class="cell" data-execution_count="16">
+<div id="7ae97bb5" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({</span>
@@ -1272,7 +1277,7 @@ K2  A2  B2   C2   D2</code></pre>
 <li><code>sort</code>: whether to sort the non-concatenation axis (e.g., indexes if axis=0), regardless of the data.</li>
 <li><code>copy</code>: whether to always copy the data, even when not necessary.</li>
 </ul>
-<div id="bb42466a" class="cell" data-execution_count="17">
+<div id="e46df040" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({</span>
@@ -1310,7 +1315,7 @@ K2  A2  B2   C2   D2</code></pre>
 </div>
 </div>
 <p><img src="concat1.png" class="img-fluid"></p>
-<div id="43d8b034" class="cell" data-execution_count="18">
+<div id="277e54ba" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({</span>
@@ -1370,7 +1375,7 @@ df2 0  NaN  NaN   C0   D0
 <li><code>columns</code>: the name of a column whose unique values are to become columns in the new DataFrame.</li>
 <li><code>values</code>: the name of a column or a list of column names that are to become the values for the new columns in the new DataFrame.</li>
 </ul>
-<div id="2911c0bd" class="cell" data-execution_count="19">
+<div id="a35a7ea1" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
@@ -1411,7 +1416,7 @@ two  4  5  6</code></pre>
 <li><strong>j</strong>: The name of the new column where the various levels of variables will be stored (in our case, year).</li>
 <li><strong>sep</strong>: Optional separator (default <code>""</code>).</li>
 </ul>
-<div id="8cefe6d5" class="cell" data-execution_count="20">
+<div id="954c42e0" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data</span></span>
@@ -1458,7 +1463,7 @@ two  4  5  6</code></pre>
 <li><code>value_name</code>: the name of the new column that will contain the values of the columns transformed into key-value pairs. The default is ‘value’.</li>
 <li><code>col_level</code>: if the columns are multilevel, this is the level that will be used to transform the columns into key-value pairs.</li>
 </ul>
-<div id="1a967feb" class="cell" data-execution_count="21">
+<div id="d8c158b1" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>

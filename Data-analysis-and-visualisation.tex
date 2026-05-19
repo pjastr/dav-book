@@ -5362,6 +5362,1803 @@ patterns or using Unicode classes.
 2               żółć               zolc
 \end{verbatim}
 
+\chapter{Pandas - other}\label{pandas---other}
+
+\section{Filling missing values}\label{filling-missing-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{s }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{], index}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{])}
+\NormalTok{s2 }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{7}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], index}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(s }\OperatorTok{+}\NormalTok{ s2)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s.add(s2, fill\_value}\OperatorTok{=}\DecValTok{0}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(s.mul(s2, fill\_value}\OperatorTok{=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+a    10.0
+b     NaN
+c     5.0
+d     7.0
+dtype: float64
+--
+a    10.0
+b    -5.0
+c     5.0
+d     7.0
+dtype: float64
+--
+a    21.0
+b   -10.0
+c   -14.0
+d    12.0
+dtype: float64
+\end{verbatim}
+
+\section{Handling missing data}\label{handling-missing-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{string\_data }\OperatorTok{=}\NormalTok{ pd.Series([}\StringTok{\textquotesingle{}aardvark\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}artichoke\textquotesingle{}}\NormalTok{, np.nan, }\StringTok{\textquotesingle{}avocado\textquotesingle{}}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(string\_data)}
+\BuiltInTok{print}\NormalTok{(string\_data.isna())}
+\BuiltInTok{print}\NormalTok{(string\_data.dropna())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+0     aardvark
+1    artichoke
+2          NaN
+3      avocado
+dtype: str
+0    False
+1    False
+2     True
+3    False
+dtype: bool
+0     aardvark
+1    artichoke
+3      avocado
+dtype: str
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ numpy }\ImportTok{import}\NormalTok{ nan }\ImportTok{as}\NormalTok{ NA}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame([[}\FloatTok{1.}\NormalTok{, }\FloatTok{6.5}\NormalTok{, }\FloatTok{3.}\NormalTok{], [}\FloatTok{1.}\NormalTok{, NA, NA],}
+\NormalTok{                     [NA, NA, NA], [NA, }\FloatTok{6.5}\NormalTok{, }\FloatTok{3.}\NormalTok{]])}
+\NormalTok{cleaned }\OperatorTok{=}\NormalTok{ data.dropna()}
+\BuiltInTok{print}\NormalTok{(cleaned)}
+\BuiltInTok{print}\NormalTok{(data.dropna(how}\OperatorTok{=}\StringTok{\textquotesingle{}all\textquotesingle{}}\NormalTok{))}
+\NormalTok{data[}\DecValTok{4}\NormalTok{] }\OperatorTok{=}\NormalTok{ NA}
+\BuiltInTok{print}\NormalTok{(data.dropna(how}\OperatorTok{=}\StringTok{\textquotesingle{}all\textquotesingle{}}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(data)}
+\BuiltInTok{print}\NormalTok{(data.fillna(}\DecValTok{0}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(data.fillna(\{}\DecValTok{1}\NormalTok{: }\FloatTok{0.5}\NormalTok{, }\DecValTok{2}\NormalTok{: }\DecValTok{0}\NormalTok{\}))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     0    1    2
+0  1.0  6.5  3.0
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+3  NaN  6.5  3.0
+     0    1    2
+0  1.0  6.5  3.0
+1  1.0  NaN  NaN
+2  NaN  NaN  NaN
+3  NaN  6.5  3.0
+     0    1    2   4
+0  1.0  6.5  3.0 NaN
+1  1.0  NaN  NaN NaN
+2  NaN  NaN  NaN NaN
+3  NaN  6.5  3.0 NaN
+     0    1    2    4
+0  1.0  6.5  3.0  0.0
+1  1.0  0.0  0.0  0.0
+2  0.0  0.0  0.0  0.0
+3  0.0  6.5  3.0  0.0
+     0    1    2   4
+0  1.0  6.5  3.0 NaN
+1  1.0  0.5  0.0 NaN
+2  NaN  0.5  0.0 NaN
+3  NaN  6.5  3.0 NaN
+\end{verbatim}
+
+\section{Removing duplicates}\label{removing-duplicates}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{\textquotesingle{}k1\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}one\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}two\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{3} \OperatorTok{+}\NormalTok{ [}\StringTok{\textquotesingle{}two\textquotesingle{}}\NormalTok{],}
+                     \StringTok{\textquotesingle{}k2\textquotesingle{}}\NormalTok{: [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{]\})}
+\BuiltInTok{print}\NormalTok{(data)}
+\BuiltInTok{print}\NormalTok{(data.duplicated())}
+\BuiltInTok{print}\NormalTok{(data.drop\_duplicates())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    k1  k2
+0  one   1
+1  two   1
+2  one   2
+3  two   3
+4  one   3
+5  two   4
+6  two   4
+0    False
+1    False
+2    False
+3    False
+4    False
+5    False
+6     True
+dtype: bool
+    k1  k2
+0  one   1
+1  two   1
+2  one   2
+3  two   3
+4  one   3
+5  two   4
+\end{verbatim}
+
+\section{Replacing values}\label{replacing-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.Series([}\FloatTok{1.}\NormalTok{, }\OperatorTok{{-}}\FloatTok{999.}\NormalTok{, }\FloatTok{2.}\NormalTok{, }\OperatorTok{{-}}\FloatTok{999.}\NormalTok{, }\OperatorTok{{-}}\FloatTok{1000.}\NormalTok{, }\FloatTok{3.}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(data)}
+\BuiltInTok{print}\NormalTok{(data.replace(}\OperatorTok{{-}}\DecValTok{999}\NormalTok{, np.nan))}
+\BuiltInTok{print}\NormalTok{(data.replace([}\OperatorTok{{-}}\DecValTok{999}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1000}\NormalTok{], np.nan))}
+\BuiltInTok{print}\NormalTok{(data.replace([}\OperatorTok{{-}}\DecValTok{999}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1000}\NormalTok{], [np.nan, }\DecValTok{0}\NormalTok{]))}
+\BuiltInTok{print}\NormalTok{(data.replace(\{}\OperatorTok{{-}}\DecValTok{999}\NormalTok{: np.nan, }\OperatorTok{{-}}\DecValTok{1000}\NormalTok{: }\DecValTok{0}\NormalTok{\}))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+0       1.0
+1    -999.0
+2       2.0
+3    -999.0
+4   -1000.0
+5       3.0
+dtype: float64
+0       1.0
+1       NaN
+2       2.0
+3       NaN
+4   -1000.0
+5       3.0
+dtype: float64
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    NaN
+5    3.0
+dtype: float64
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    0.0
+5    3.0
+dtype: float64
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    0.0
+5    3.0
+dtype: float64
+\end{verbatim}
+
+\section{Discretization and binning}\label{discretization-and-binning}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{ages }\OperatorTok{=}\NormalTok{ [}\DecValTok{20}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{32}\NormalTok{]}
+\NormalTok{bins }\OperatorTok{=}\NormalTok{ [}\DecValTok{18}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{100}\NormalTok{]}
+\NormalTok{cats }\OperatorTok{=}\NormalTok{ pd.cut(ages, bins)}
+\BuiltInTok{print}\NormalTok{(cats)}
+\BuiltInTok{print}\NormalTok{(cats.codes)}
+\BuiltInTok{print}\NormalTok{(cats.categories)}
+\BuiltInTok{print}\NormalTok{(pd.Series(cats).value\_counts())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[(18, 25], (18, 25], (18, 25], (25, 35], (18, 25], ..., (25, 35], (60, 100], (35, 60], (35, 60], (25, 35]]
+Length: 12
+Categories (4, interval[int64, right]): [(18, 25] < (25, 35] < (35, 60] < (60, 100]]
+[0 0 0 1 0 0 2 1 3 2 2 1]
+IntervalIndex([(18, 25], (25, 35], (35, 60], (60, 100]], dtype='interval[int64, right]')
+(18, 25]     5
+(25, 35]     3
+(35, 60]     3
+(60, 100]    1
+Name: count, dtype: int64
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{ages }\OperatorTok{=}\NormalTok{ [}\DecValTok{20}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{32}\NormalTok{]}
+\NormalTok{bins }\OperatorTok{=}\NormalTok{ [}\DecValTok{18}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{100}\NormalTok{]}
+\NormalTok{cats2 }\OperatorTok{=}\NormalTok{ pd.cut(ages, [}\DecValTok{18}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{100}\NormalTok{], right}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(cats2)}
+\NormalTok{group\_names }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Youth\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}YoungAdult\textquotesingle{}}\NormalTok{,}
+               \StringTok{\textquotesingle{}MiddleAged\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Senior\textquotesingle{}}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(pd.cut(ages, bins, labels}\OperatorTok{=}\NormalTok{group\_names))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[18, 26), [18, 26), [18, 26), [26, 36), [18, 26), ..., [26, 36), [61, 100), [36, 61), [36, 61), [26, 36)]
+Length: 12
+Categories (4, interval[int64, left]): [[18, 26) < [26, 36) < [36, 61) < [61, 100)]
+['Youth', 'Youth', 'Youth', 'YoungAdult', 'Youth', ..., 'YoungAdult', 'Senior', 'MiddleAged', 'MiddleAged', 'YoungAdult']
+Length: 12
+Categories (4, str): ['Youth' < 'YoungAdult' < 'MiddleAged' < 'Senior']
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{20}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(pd.cut(data, }\DecValTok{4}\NormalTok{, precision}\OperatorTok{=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[(0.25, 0.48], (0.72, 0.95], (0.018, 0.25], (0.72, 0.95], (0.25, 0.48], ..., (0.25, 0.48], (0.018, 0.25], (0.25, 0.48], (0.48, 0.72], (0.48, 0.72]]
+Length: 20
+Categories (4, interval[float64, right]): [(0.018, 0.25] < (0.25, 0.48] < (0.48, 0.72] < (0.72, 0.95]]
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.random.randn(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{cats }\OperatorTok{=}\NormalTok{ pd.qcut(data, }\DecValTok{4}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(cats)}
+\BuiltInTok{print}\NormalTok{(pd.Series(cats).value\_counts())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[(-0.597, 0.0607], (-2.963, -0.597], (0.748, 3.801], (-2.963, -0.597], (-2.963, -0.597], ..., (0.748, 3.801], (-2.963, -0.597], (0.748, 3.801], (-0.597, 0.0607], (0.0607, 0.748]]
+Length: 1000
+Categories (4, interval[float64, right]): [(-2.963, -0.597] < (-0.597, 0.0607] < (0.0607, 0.748] < (0.748, 3.801]]
+(-2.963, -0.597]    250
+(-0.597, 0.0607]    250
+(0.0607, 0.748]     250
+(0.748, 3.801]      250
+Name: count, dtype: int64
+\end{verbatim}
+
+\section{Detecting and filtering
+outliers}\label{detecting-and-filtering-outliers}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(np.random.randn(}\DecValTok{1000}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(data.describe())}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}{-}"}\NormalTok{)}
+\NormalTok{col }\OperatorTok{=}\NormalTok{ data[}\DecValTok{2}\NormalTok{]}
+\BuiltInTok{print}\NormalTok{(col[np.}\BuiltInTok{abs}\NormalTok{(col) }\OperatorTok{\textgreater{}} \DecValTok{3}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"{-}{-}{-}"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data[(np.}\BuiltInTok{abs}\NormalTok{(data) }\OperatorTok{\textgreater{}} \DecValTok{3}\NormalTok{).}\BuiltInTok{any}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                 0            1            2            3
+count  1000.000000  1000.000000  1000.000000  1000.000000
+mean     -0.009741    -0.004792     0.010749    -0.000584
+std       0.979630     1.031484     1.029102     1.015369
+min      -4.014106    -3.741276    -2.917596    -3.191150
+25%      -0.640090    -0.670298    -0.668171    -0.665036
+50%       0.017729    -0.041524     0.051032     0.046523
+75%       0.617048     0.675106     0.683567     0.700587
+max       2.847210     3.457701     3.263269     3.143610
+---
+873    3.263269
+Name: 2, dtype: float64
+---
+            0         1         2         3
+23  -0.006278 -3.741276 -0.597937  0.091917
+156  0.996089  3.036908 -0.436185  0.239618
+222 -4.014106  1.002816 -1.522266  0.516670
+324  0.269773  3.457701  1.053668 -1.016401
+362 -0.555566 -1.357638  1.057790  3.143610
+723  1.602654  3.025094 -2.254967 -0.591341
+873  0.582272 -0.531854  3.263269 -0.604219
+881 -0.993190 -2.591012  0.569693 -3.191150
+956 -0.255577  0.127302  0.921399  3.118090
+\end{verbatim}
+
+\section{Changing the column type}\label{changing-the-column-type}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}6\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}7.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}8.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}9.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}10.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}11.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}12.5\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\CommentTok{\# Display the original DataFrame}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Original DataFrame:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2)}
+
+\CommentTok{\# Change the data type of column \textquotesingle{}A\textquotesingle{} to int}
+\NormalTok{data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.Series(data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{)}
+
+\CommentTok{\# Change the data type of column \textquotesingle{}B\textquotesingle{} to float}
+\NormalTok{data2[}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ pd.Series(data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{], dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+
+\CommentTok{\# Display the DataFrame after type changes}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{DataFrame after type changes:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Original DataFrame:
+   A     B  C
+0  1   7.5  x
+1  2   8.5  y
+2  3   9.5  z
+3  4  10.5  x
+4  5  11.5  y
+5  6  12.5  z
+
+DataFrame after type changes:
+   A    B  C
+0  1  1.0  x
+1  2  2.0  y
+2  3  3.0  z
+3  4  4.0  x
+4  5  5.0  y
+5  6  6.0  z
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}6\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}7.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}8.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}9.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}10.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}11.5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}12.5\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\CommentTok{\# Display the original DataFrame}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Original DataFrame:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2)}
+
+\CommentTok{\# Change the data type of column \textquotesingle{}A\textquotesingle{} to int}
+\NormalTok{data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{int}\NormalTok{)}
+
+\CommentTok{\# Change the data type of column \textquotesingle{}B\textquotesingle{} to float}
+\NormalTok{data2[}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ data2[}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{].astype(}\BuiltInTok{float}\NormalTok{)}
+
+\CommentTok{\# Display the DataFrame after type changes}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{DataFrame after type changes:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Original DataFrame:
+   A     B  C
+0  1   7.5  x
+1  2   8.5  y
+2  3   9.5  z
+3  4  10.5  x
+4  5  11.5  y
+5  6  12.5  z
+
+DataFrame after type changes:
+   A     B  C
+0  1   7.5  x
+1  2   8.5  y
+2  3   9.5  z
+3  4  10.5  x
+4  5  11.5  y
+5  6  12.5  z
+\end{verbatim}
+
+\section{Changing characters in
+categories}\label{changing-characters-in-categories}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Creating a DataFrame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}abc\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}def\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ghi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}jkl\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}mno\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}pqr\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}1.23\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}4.56\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}7.89\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}0.12\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}3.45\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}6.78\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}xyz\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}uvw\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rst\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}opq\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lmn\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ijk\textquotesingle{}}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\CommentTok{\# Display the original DataFrame}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Original DataFrame:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2)}
+
+\CommentTok{\# Change lowercase letters to uppercase in column \textquotesingle{}A\textquotesingle{}}
+\NormalTok{data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ data2[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.upper()}
+
+\CommentTok{\# Replace the dot with a comma in column \textquotesingle{}B\textquotesingle{}}
+\NormalTok{data2[}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ data2[}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{].}\BuiltInTok{str}\NormalTok{.replace(}\StringTok{\textquotesingle{}.\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{},\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Display the DataFrame after modification}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{DataFrame after modification:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(data2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Original DataFrame:
+     A     B    C
+0  abc  1.23  xyz
+1  def  4.56  uvw
+2  ghi  7.89  rst
+3  jkl  0.12  opq
+4  mno  3.45  lmn
+5  pqr  6.78  ijk
+
+DataFrame after modification:
+     A     B    C
+0  ABC  1,23  xyz
+1  DEF  4,56  uvw
+2  GHI  7,89  rst
+3  JKL  0,12  opq
+4  MNO  3,45  lmn
+5  PQR  6,78  ijk
+\end{verbatim}
+
+\section{Manipulation operations}\label{manipulation-operations}
+
+Cheat sheet \url{https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{merge}
+\end{itemize}
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html}
+
+The \texttt{merge} function is used to combine two DataFrames along a
+common column, similar to JOIN operations in SQL.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DataFrame.merge(right, how}\OperatorTok{=}\StringTok{\textquotesingle{}inner\textquotesingle{}}\NormalTok{, on}\OperatorTok{=}\VariableTok{None}\NormalTok{, left\_on}\OperatorTok{=}\VariableTok{None}\NormalTok{, right\_on}\OperatorTok{=}\VariableTok{None}\NormalTok{,}
+\NormalTok{                left\_index}\OperatorTok{=}\VariableTok{False}\NormalTok{, right\_index}\OperatorTok{=}\VariableTok{False}\NormalTok{, sort}\OperatorTok{=}\VariableTok{False}\NormalTok{,}
+\NormalTok{                suffixes}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}\_x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\_y\textquotesingle{}}\NormalTok{), copy}\OperatorTok{=}\VariableTok{True}\NormalTok{, indicator}\OperatorTok{=}\VariableTok{False}\NormalTok{, validate}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{right}: the DataFrame you want to join with the original
+  DataFrame.
+\item
+  \texttt{how}: specifies the type of join. Four types are available:
+  `inner', `outer', `left', and `right'. `inner' is the default value,
+  which returns only those rows that have matching keys in both
+  DataFrames.
+\item
+  \texttt{on}: the name or list of names to be used for joining. This
+  must be a name that occurs in both the original and the right
+  DataFrame.
+\item
+  \texttt{left\_on} and \texttt{right\_on}: names of columns in the left
+  and right DataFrames to be used for joining. This can be used if the
+  column names are not the same.
+\item
+  \texttt{left\_index} and \texttt{right\_index}: whether indexes from
+  the left and right DataFrames should be used for joining.
+\item
+  \texttt{sort}: whether the resulting DataFrame should be sorted by the
+  join keys.
+\item
+  \texttt{suffixes}: suffixes to be added to the names of overlapping
+  columns. The default is ('\_x', '\_y').
+\item
+  \texttt{copy}: whether to always copy the data, even when not
+  necessary.
+\item
+  \texttt{indicator}: adds a column to the resulting DataFrame that
+  shows the source of each row.
+\item
+  \texttt{validate}: checks whether specified join rules are met.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A3\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}B0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B3\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K1\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}C0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C1\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}D0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D1\textquotesingle{}}\NormalTok{]\},}
+\NormalTok{    index}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K1\textquotesingle{}}\NormalTok{]}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(df1)}
+\BuiltInTok{print}\NormalTok{(df2)}
+\NormalTok{merged\_df }\OperatorTok{=}\NormalTok{ df1.merge(df2, left\_on}\OperatorTok{=}\StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{, right\_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(merged\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    A   B key
+0  A0  B0  K0
+1  A1  B1  K1
+2  A2  B2  K0
+3  A3  B3  K1
+     C   D
+K0  C0  D0
+K1  C1  D1
+    A   B key   C   D
+0  A0  B0  K0  C0  D0
+1  A1  B1  K1  C1  D1
+2  A2  B2  K0  C0  D0
+3  A3  B3  K1  C1  D1
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{merge.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K3\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A3\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}B0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B3\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K5\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}C0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C3\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}D0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D3\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\BuiltInTok{print}\NormalTok{(df1)}
+
+\BuiltInTok{print}\NormalTok{(df2)}
+
+\NormalTok{inner\_merged\_df }\OperatorTok{=}\NormalTok{ df1.merge(df2, how}\OperatorTok{=}\StringTok{\textquotesingle{}inner\textquotesingle{}}\NormalTok{, on}\OperatorTok{=}\StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{, suffixes}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}\_left\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\_right\textquotesingle{}}\NormalTok{),}
+\NormalTok{                            indicator}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{outer\_merged\_df }\OperatorTok{=}\NormalTok{ df1.merge(df2, how}\OperatorTok{=}\StringTok{\textquotesingle{}outer\textquotesingle{}}\NormalTok{, on}\OperatorTok{=}\StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{, suffixes}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}\_left\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\_right\textquotesingle{}}\NormalTok{),}
+\NormalTok{                            indicator}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{left\_merged\_df }\OperatorTok{=}\NormalTok{ df1.merge(df2, how}\OperatorTok{=}\StringTok{\textquotesingle{}left\textquotesingle{}}\NormalTok{, on}\OperatorTok{=}\StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{, suffixes}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}\_left\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\_right\textquotesingle{}}\NormalTok{),}
+\NormalTok{                           indicator}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{right\_merged\_df }\OperatorTok{=}\NormalTok{ df1.merge(df2, how}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{, on}\OperatorTok{=}\StringTok{\textquotesingle{}key\textquotesingle{}}\NormalTok{, suffixes}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}\_left\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}\_right\textquotesingle{}}\NormalTok{),}
+\NormalTok{                            indicator}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Inner join"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(inner\_merged\_df)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Outer join"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(outer\_merged\_df)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Left join"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(left\_merged\_df)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Right join"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(right\_merged\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  key   A   B
+0  K0  A0  B0
+1  K1  A1  B1
+2  K2  A2  B2
+3  K3  A3  B3
+  key   C   D
+0  K0  C0  D0
+1  K1  C1  D1
+2  K4  C2  D2
+3  K5  C3  D3
+Inner join
+  key   A   B   C   D _merge
+0  K0  A0  B0  C0  D0   both
+1  K1  A1  B1  C1  D1   both
+Outer join
+  key    A    B    C    D      _merge
+0  K0   A0   B0   C0   D0        both
+1  K1   A1   B1   C1   D1        both
+2  K2   A2   B2  NaN  NaN   left_only
+3  K3   A3   B3  NaN  NaN   left_only
+4  K4  NaN  NaN   C2   D2  right_only
+5  K5  NaN  NaN   C3   D3  right_only
+Left join
+  key   A   B    C    D     _merge
+0  K0  A0  B0   C0   D0       both
+1  K1  A1  B1   C1   D1       both
+2  K2  A2  B2  NaN  NaN  left_only
+3  K3  A3  B3  NaN  NaN  left_only
+Right join
+  key    A    B   C   D      _merge
+0  K0   A0   B0  C0  D0        both
+1  K1   A1   B1  C1  D1        both
+2  K4  NaN  NaN  C2  D2  right_only
+3  K5  NaN  NaN  C3  D3  right_only
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{merge_inner.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{merge_outer.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{merge_left.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{merge_right.png}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{join}
+\end{itemize}
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html}
+
+The \texttt{join} method is used to combine two DataFrames along an
+axis.
+
+The basic usage of this method looks as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DataFrame.join(other, on}\OperatorTok{=}\VariableTok{None}\NormalTok{, how}\OperatorTok{=}\StringTok{\textquotesingle{}left\textquotesingle{}}\NormalTok{, lsuffix}\OperatorTok{=}\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, rsuffix}\OperatorTok{=}\StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, sort}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{other}: the DataFrame you want to join with the original
+  DataFrame.
+\item
+  \texttt{on}: the name or list of names of columns in the original
+  DataFrame on which you want to join.
+\item
+  \texttt{how}: specifies the type of join. Four types are available:
+  `inner', `outer', `left', and `right'. `left' is the default value,
+  which returns all rows from the original DataFrame and matching rows
+  from the second DataFrame. Values are filled with NaN if there is no
+  match.
+\item
+  \texttt{lsuffix} and \texttt{rsuffix}: suffixes to be added to
+  repeating columns. The default is empty.
+\item
+  \texttt{sort}: whether to sort the data by the key.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A2\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}B0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B2\textquotesingle{}}\NormalTok{]\},}
+\NormalTok{    index}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K2\textquotesingle{}}\NormalTok{]}
+\NormalTok{)}
+
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}C0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C3\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}D0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D3\textquotesingle{}}\NormalTok{]\},}
+\NormalTok{    index}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}K0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}K3\textquotesingle{}}\NormalTok{]}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(df1)}
+
+\BuiltInTok{print}\NormalTok{(df2)}
+
+\NormalTok{joined\_df }\OperatorTok{=}\NormalTok{ df1.join(df2)}
+\BuiltInTok{print}\NormalTok{(joined\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     A   B
+K0  A0  B0
+K1  A1  B1
+K2  A2  B2
+     C   D
+K0  C0  D0
+K2  C2  D2
+K3  C3  D3
+     A   B    C    D
+K0  A0  B0   C0   D0
+K1  A1  B1  NaN  NaN
+K2  A2  B2   C2   D2
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{join.png}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{concat}
+\end{itemize}
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.concat.html}
+
+The \texttt{concat} method is used to combine two or more DataFrames
+along a specified axis.
+
+The basic usage of this method looks as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pandas.concat(objs, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{, join}\OperatorTok{=}\StringTok{\textquotesingle{}outer\textquotesingle{}}\NormalTok{, ignore\_index}\OperatorTok{=}\VariableTok{False}\NormalTok{, keys}\OperatorTok{=}\VariableTok{None}\NormalTok{,}
+\NormalTok{              levels}\OperatorTok{=}\VariableTok{None}\NormalTok{, names}\OperatorTok{=}\VariableTok{None}\NormalTok{, verify\_integrity}\OperatorTok{=}\VariableTok{False}\NormalTok{, sort}\OperatorTok{=}\VariableTok{False}\NormalTok{,}
+\NormalTok{              copy}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{objs}: a sequence of DataFrames you want to combine.
+\item
+  \texttt{axis}: the axis along which you want to combine the
+  DataFrames. The default is 0 (combining rows, vertically), but it can
+  also be set to 1 (combining columns, horizontally).
+\item
+  \texttt{join}: specifies the type of join. Two types are available:
+  `outer' and `inner'. `outer' is the default value, which returns all
+  columns from each DataFrame. `inner' returns only those columns that
+  are common to all DataFrames.
+\item
+  \texttt{ignore\_index}: if set to True, does not use the indexes from
+  the DataFrames to create the index in the resulting DataFrame.
+  Instead, it creates a new index from 0 to n-1.
+\item
+  \texttt{keys}: values to associate with the objects.
+\item
+  \texttt{levels}: specified indexes for the new DataFrame.
+\item
+  \texttt{names}: names for the index levels (if multilevel).
+\item
+  \texttt{verify\_integrity}: checks whether the new, concatenated
+  DataFrame does not have duplicate indexes.
+\item
+  \texttt{sort}: whether to sort the non-concatenation axis (e.g.,
+  indexes if axis=0), regardless of the data.
+\item
+  \texttt{copy}: whether to always copy the data, even when not
+  necessary.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A2\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}B0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B2\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A5\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}B3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B5\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\BuiltInTok{print}\NormalTok{(df1)}
+
+\BuiltInTok{print}\NormalTok{(df2)}
+
+\NormalTok{concatenated\_df }\OperatorTok{=}\NormalTok{ pd.concat([df1, df2], ignore\_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(concatenated\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    A   B
+0  A0  B0
+1  A1  B1
+2  A2  B2
+    A   B
+0  A3  B3
+1  A4  B4
+2  A5  B5
+    A   B
+0  A0  B0
+1  A1  B1
+2  A2  B2
+3  A3  B3
+4  A4  B4
+5  A5  B5
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{concat1.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A2\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}B0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B2\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}C0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C2\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}D0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D2\textquotesingle{}}\NormalTok{]}
+\NormalTok{\})}
+
+\BuiltInTok{print}\NormalTok{(df1)}
+
+\BuiltInTok{print}\NormalTok{(df2)}
+
+\NormalTok{concatenated\_df\_axis1 }\OperatorTok{=}\NormalTok{ pd.concat([df1, df2], axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{concatenated\_df\_keys }\OperatorTok{=}\NormalTok{ pd.concat([df1, df2], keys}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}df1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}df2\textquotesingle{}}\NormalTok{])}
+
+\BuiltInTok{print}\NormalTok{(concatenated\_df\_axis1)}
+\BuiltInTok{print}\NormalTok{(concatenated\_df\_keys)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    A   B
+0  A0  B0
+1  A1  B1
+2  A2  B2
+    C   D
+0  C0  D0
+1  C1  D1
+2  C2  D2
+    A   B   C   D
+0  A0  B0  C0  D0
+1  A1  B1  C1  D1
+2  A2  B2  C2  D2
+         A    B    C    D
+df1 0   A0   B0  NaN  NaN
+    1   A1   B1  NaN  NaN
+    2   A2   B2  NaN  NaN
+df2 0  NaN  NaN   C0   D0
+    1  NaN  NaN   C1   D1
+    2  NaN  NaN   C2   D2
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{concat2.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{concat3.png}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{pivot}
+\end{itemize}
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html}
+
+\pandocbounded{\includegraphics[keepaspectratio]{62.png}}
+
+The \texttt{pivot} method is used to transform data from a ``long''
+format into a ``wide'' format.
+
+The basic usage of this method looks as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DataFrame.pivot(index}\OperatorTok{=}\VariableTok{None}\NormalTok{, columns}\OperatorTok{=}\VariableTok{None}\NormalTok{, values}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{index}: the name of a column or a list of column names that
+  are to become the index in the new DataFrame.
+\item
+  \texttt{columns}: the name of a column whose unique values are to
+  become columns in the new DataFrame.
+\item
+  \texttt{values}: the name of a column or a list of column names that
+  are to become the values for the new columns in the new DataFrame.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}one\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}one\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}one\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}two\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}two\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}two\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}baz\textquotesingle{}}\NormalTok{: [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{],}
+    \StringTok{\textquotesingle{}zoo\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}q\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}w\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}t\textquotesingle{}}\NormalTok{],}
+\NormalTok{\})}
+
+\BuiltInTok{print}\NormalTok{(df)}
+
+\NormalTok{pivot\_df }\OperatorTok{=}\NormalTok{ df.pivot(index}\OperatorTok{=}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, columns}\OperatorTok{=}\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, values}\OperatorTok{=}\StringTok{\textquotesingle{}baz\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(pivot\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   foo bar  baz zoo
+0  one   A    1   x
+1  one   B    2   y
+2  one   C    3   z
+3  two   A    4   q
+4  two   B    5   w
+5  two   C    6   t
+bar  A  B  C
+foo         
+one  1  2  3
+two  4  5  6
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{pivot.png}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{wide\_to\_long}
+\end{itemize}
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.wide_to_long.html}
+
+The \texttt{wide\_to\_long} method is used to transform data from a wide
+format (where each column contains multiple variables) into a long
+format (where each column contains a single variable with multiple
+measurements). This is useful when we have data spread across many
+columns with repeating or sequential names, and we want to transform
+this data in a way that facilitates analysis and visualization.
+
+Explanation of the \texttt{wide\_to\_long} parameters
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{stubnames}: A list of the initial parts of column names that
+  are to be transformed.
+\item
+  \textbf{i}: The name of a column or list of columns that identify
+  individual rows. In our example, this is \texttt{id}, which uniquely
+  identifies a person.
+\item
+  \textbf{j}: The name of the new column where the various levels of
+  variables will be stored (in our case, year).
+\item
+  \textbf{sep}: Optional separator (default \texttt{""}).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Sample data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}id\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}height\_2020\textquotesingle{}}\NormalTok{: [}\DecValTok{180}\NormalTok{, }\DecValTok{175}\NormalTok{, }\DecValTok{165}\NormalTok{],}
+    \StringTok{\textquotesingle{}weight\_2020\textquotesingle{}}\NormalTok{: [}\DecValTok{70}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{65}\NormalTok{],}
+    \StringTok{\textquotesingle{}height\_2021\textquotesingle{}}\NormalTok{: [}\DecValTok{181}\NormalTok{, }\DecValTok{176}\NormalTok{, }\DecValTok{166}\NormalTok{],}
+    \StringTok{\textquotesingle{}weight\_2021\textquotesingle{}}\NormalTok{: [}\DecValTok{71}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{66}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{data2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\CommentTok{\# Transformation to long format}
+\NormalTok{df\_long }\OperatorTok{=}\NormalTok{ pd.wide\_to\_long(data2, stubnames}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}height\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}weight\textquotesingle{}}\NormalTok{], i}\OperatorTok{=}\StringTok{\textquotesingle{}id\textquotesingle{}}\NormalTok{, j}\OperatorTok{=}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, sep}\OperatorTok{=}\StringTok{\textquotesingle{}\_\textquotesingle{}}\NormalTok{)}
+\NormalTok{df\_long }\OperatorTok{=}\NormalTok{ df\_long.reset\_index()}
+
+\BuiltInTok{print}\NormalTok{(df\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  id  year  height  weight
+0  A  2020     180      70
+1  B  2020     175      76
+2  C  2020     165      65
+3  A  2021     181      71
+4  B  2021     176      77
+5  C  2021     166      66
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{wide_to_long.png}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{melt}
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{61.png}}
+
+\url{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html}
+
+The \texttt{melt} function is used to transform data from a wide format
+into a long format.
+
+The basic usage of this method looks as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pandas.melt(frame, id\_vars}\OperatorTok{=}\VariableTok{None}\NormalTok{, value\_vars}\OperatorTok{=}\VariableTok{None}\NormalTok{, var\_name}\OperatorTok{=}\VariableTok{None}\NormalTok{, value\_name}\OperatorTok{=}\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{, col\_level}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{frame}: the DataFrame you want to process.
+\item
+  \texttt{id\_vars}: the column(s) you want to keep as identifiers.
+  These columns will not be changed.
+\item
+  \texttt{value\_vars}: the column(s) you want to transform into
+  key-value pairs. If not provided, all columns that are not
+  \texttt{id\_vars} will be used.
+\item
+  \texttt{var\_name}: the name of the new column that will contain the
+  names of the columns transformed into key-value pairs. The default is
+  `variable'.
+\item
+  \texttt{value\_name}: the name of the new column that will contain the
+  values of the columns transformed into key-value pairs. The default is
+  `value'.
+\item
+  \texttt{col\_level}: if the columns are multilevel, this is the level
+  that will be used to transform the columns into key-value pairs.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}baz\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}one\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}one\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}two\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{: [}\FloatTok{2.0}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{],}
+    \StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{: [}\FloatTok{3.0}\NormalTok{, }\FloatTok{2.0}\NormalTok{, }\FloatTok{1.0}\NormalTok{]}
+\NormalTok{\})}
+\BuiltInTok{print}\NormalTok{(data)}
+\NormalTok{melted\_df }\OperatorTok{=}\NormalTok{ data.melt(id\_vars}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{], value\_vars}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{], var\_name}\OperatorTok{=}\StringTok{\textquotesingle{}My\_Var\textquotesingle{}}\NormalTok{,}
+\NormalTok{                      value\_name}\OperatorTok{=}\StringTok{\textquotesingle{}My\_Val\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(melted\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     A    B    C    D
+0  foo  one  2.0  3.0
+1  bar  one  1.0  2.0
+2  baz  two  3.0  1.0
+     A    B My_Var  My_Val
+0  foo  one      C     2.0
+1  bar  one      C     1.0
+2  baz  two      C     3.0
+3  foo  one      D     3.0
+4  bar  one      D     2.0
+5  baz  two      D     1.0
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{melt.png}}
+
+\part{Structure Analysis}
+
+\chapter{Structure Analysis}\label{structure-analysis-1}
+
+Statistical measures
+
+\begin{itemize}
+\tightlist
+\item
+  are numerical characteristics that allow describing the properties of
+  the distribution of the studied feature.
+\item
+  other names:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    parameters - data analyzed from the entire population,
+  \item
+    sample statistics - data analyzed from a sample.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Classification of statistical measures:}
+
+\begin{itemize}
+\tightlist
+\item
+  measures of location (measures of level, measures of central tendency)
+  - allow determining where in the set of values the data from
+  observations are located,
+\item
+  measures of variability (measures of dispersion, variability, spread)
+  - allow determining the differentiation of units,
+\item
+  measures of asymmetry (measures of skewness) - allow determining
+  asymmetry (whether most units have values greater or smaller relative
+  to the average level),
+\item
+  measures of concentration - allow determining the concentration of
+  values relative to the mean.
+\end{itemize}
+
+\section{Measures of location}\label{measures-of-location}
+
+\begin{itemize}
+\tightlist
+\item
+  classical means:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    arithmetic mean,
+  \end{itemize}
+\item
+  positional means and quantiles:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    mode,
+  \item
+    median (second quartile),
+  \item
+    quantiles (quartiles, deciles, percentiles).
+  \end{itemize}
+\end{itemize}
+
+\subsection{Arithmetic mean}\label{arithmetic-mean}
+
+\[\overline{x} = \frac{1}{n} \sum_{i=1}^n x_i\]
+
+The interpretation of the arithmetic mean consists in understanding it
+as a representation of the ``middle'' or ``typical'' level of the
+feature of the studied population. The mean gives a general idea of the
+data, but can be misleading in the presence of extreme values
+(outliers), which can significantly affect its value. It is useful in
+many fields, from economics to social sciences, as a way to summarize
+data and compare different groups or data sets. It is worth remembering
+that the mean is not always the best choice for skewed distributions and
+may not adequately reflect the data distribution, especially in the
+presence of extreme values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data as a Pandas series}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{])}
+
+\CommentTok{\# Calculating the mean}
+\NormalTok{mean }\OperatorTok{=}\NormalTok{ data.mean()}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Mean: }\SpecialCharTok{\{}\NormalTok{mean}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Mean: 55.0
+\end{verbatim}
+
+\subsection{Mode}\label{mode}
+
+\begin{itemize}
+\tightlist
+\item
+  symbol: \(Do\)
+\item
+  also known as modal value.
+\item
+  for a discrete feature, it is the value of the feature that occurs
+  most frequently.
+\item
+  for a continuous feature, it is the value of the feature around which
+  most measurements oscillate (the argument for which the probability
+  density takes the largest value)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data for a discrete variable}
+\NormalTok{discrete\_data }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{])}
+
+\CommentTok{\# Calculating the mode}
+\NormalTok{discrete\_mode }\OperatorTok{=}\NormalTok{ discrete\_data.mode()}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Mode for the discrete variable: }\SpecialCharTok{\{}\NormalTok{discrete\_mode}\SpecialCharTok{.}\NormalTok{tolist()}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Mode for the discrete variable: [4]
+\end{verbatim}
+
+\textbf{Notes:}
+
+\begin{itemize}
+\tightlist
+\item
+  it cannot always be determined precisely.
+\item
+  determining the mode makes sense when the distribution is unimodal
+  (units have one point of concentration); in the case of multimodal
+  distributions, the mode loses its usefulness as a measure of central
+  tendency.
+\item
+  it is not sensitive to extreme values like the arithmetic mean.
+\item
+  in the case of a symmetric distribution, the mode equals the mean
+\end{itemize}
+
+\subsection{Median}\label{median}
+
+\begin{itemize}
+\tightlist
+\item
+  symbol: \(Me\)
+\item
+  it can be determined for features expressed on any scale except the
+  nominal scale.
+\item
+  the value of the feature that the unit in the middle of the ordered
+  sequence of observations has.
+\item
+  for an odd number of observations: the value at position
+  \(\frac{n+1}{2}\)
+\item
+  for an even number of observations:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    we determine the values at positions \(\frac{n}{2}\) and
+    \(\frac{n}{2}+1\)
+  \item
+    we calculate the mean of these values
+  \end{itemize}
+\end{itemize}
+
+Note: a common mistake is confusing the value of the feature with its
+position.
+
+\textbf{Code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data in a DataFrame}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Column1\textquotesingle{}}\NormalTok{: [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{],}
+    \StringTok{\textquotesingle{}Column2\textquotesingle{}}\NormalTok{: [}\DecValTok{15}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{55}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# Calculating the median for each column}
+\NormalTok{medians }\OperatorTok{=}\NormalTok{ df.median()}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Median for each column:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(medians)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Median for each column:
+Column1    30.0
+Column2    35.0
+dtype: float64
+\end{verbatim}
+
+\textbf{Interpretation of the median:}
+
+\begin{itemize}
+\tightlist
+\item
+  at least half of the units have a feature value less than or equal to
+  the median.
+\item
+  the median is insensitive to extreme values.
+\end{itemize}
+
+\subsection{Quantiles}\label{quantiles}
+
+\begin{itemize}
+\tightlist
+\item
+  values of a feature that divide the population into specific parts in
+  terms of the number of units.
+\item
+  most commonly used:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    quartiles - divide the population into 4 equal parts (the second
+    quartile is the median)
+  \item
+    deciles - divide the population into 10 equal parts
+  \item
+    percentiles (centiles) - divide the population into 100 equal parts.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Quartiles}
+
+\begin{itemize}
+\tightlist
+\item
+  symbols: \(Q_1, Q_2, Q_3\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data as a Pandas series}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{])}
+
+\CommentTok{\# Calculating quartiles}
+\NormalTok{quartile\_1 }\OperatorTok{=}\NormalTok{ data.quantile(}\FloatTok{0.25}\NormalTok{)  }\CommentTok{\# First quartile (Q1)}
+\NormalTok{median }\OperatorTok{=}\NormalTok{ data.quantile(}\FloatTok{0.50}\NormalTok{)      }\CommentTok{\# Median (Q2)}
+\NormalTok{quartile\_3 }\OperatorTok{=}\NormalTok{ data.quantile(}\FloatTok{0.75}\NormalTok{)  }\CommentTok{\# Third quartile (Q3)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"First quartile (Q1): }\SpecialCharTok{\{}\NormalTok{quartile\_1}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Median (Q2): }\SpecialCharTok{\{}\NormalTok{median}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Third quartile (Q3): }\SpecialCharTok{\{}\NormalTok{quartile\_3}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+First quartile (Q1): 32.5
+Median (Q2): 55.0
+Third quartile (Q3): 77.5
+\end{verbatim}
+
+\section{Measures of variability}\label{measures-of-variability}
+
+\begin{itemize}
+\tightlist
+\item
+  division:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    classical measures - based on all observations,
+
+    \begin{itemize}
+    \tightlist
+    \item
+      variance,
+    \item
+      standard deviation,
+    \end{itemize}
+  \item
+    positional measures - based on feature values occupying specific
+    positions,
+
+    \begin{itemize}
+    \tightlist
+    \item
+      range
+    \item
+      interquartile range,
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Range}\label{range}
+
+\begin{itemize}
+\tightlist
+\item
+  symbol \(R=\max-\min\)
+\item
+  also known as the empirical area of variability, amplitude of
+  fluctuations.
+\item
+  the difference between the maximum value and the minimum value.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data as a Pandas series}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{])}
+
+\CommentTok{\# Calculating the maximum and minimum}
+\NormalTok{maximum }\OperatorTok{=}\NormalTok{ data.}\BuiltInTok{max}\NormalTok{()}
+\NormalTok{minimum }\OperatorTok{=}\NormalTok{ data.}\BuiltInTok{min}\NormalTok{()}
+
+\CommentTok{\# Calculating the difference between maximum and minimum}
+\NormalTok{difference }\OperatorTok{=}\NormalTok{ maximum }\OperatorTok{{-}}\NormalTok{ minimum}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Maximum: }\SpecialCharTok{\{}\NormalTok{maximum}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Minimum: }\SpecialCharTok{\{}\NormalTok{minimum}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Difference between maximum and minimum: }\SpecialCharTok{\{}\NormalTok{difference}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Maximum: 100
+Minimum: 10
+Difference between maximum and minimum: 90
+\end{verbatim}
+
+\subsection{Interquartile range}\label{interquartile-range}
+
+\begin{itemize}
+\tightlist
+\item
+  symbol \(R_Q=Q_3-Q_1\)
+\item
+  the difference between the third quartile and the first quartile.
+\item
+  measures the range of the middle 50\% of units.
+\end{itemize}
+
+\subsection{Quartile deviation}\label{quartile-deviation}
+
+\begin{itemize}
+\tightlist
+\item
+  formula: \(Q=\frac{Q_3-Q_1}{2}\)
+\item
+  half of the interquartile range.
+\end{itemize}
+
+\subsection{Variance}\label{variance}
+
+Variance provides information about how large the variability of results
+is in a given set of feature values. In other words, whether the results
+are more concentrated around the mean, whether there are small
+differences between the mean and individual results, or perhaps the
+spread of results is large, with a large difference between individual
+results and the mean.
+
+\begin{itemize}
+\tightlist
+\item
+  formula: \(s^2=\frac{\sum\limits_{i=1}^n (x_i-\overline{x})^2}{n}\)
+  (population) or
+  \(s^2=\frac{\sum\limits_{i=1}^n (x_i-\overline{x})^2}{n-1}\) (sample)
+\end{itemize}
+
+\subsection{Standard deviation}\label{standard-deviation}
+
+The standard deviation measures variability with a unit consistent with
+the unit of the studied feature, giving the average differences of
+individual feature values from the arithmetic mean.
+
+\begin{itemize}
+\tightlist
+\item
+  formula: \(s=\sqrt{s^2}\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data as a Pandas series}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{])}
+
+\CommentTok{\# Calculating variance}
+\NormalTok{variance }\OperatorTok{=}\NormalTok{ data.var()  }\CommentTok{\# Note: Pandas divides by (n{-}1) by default, which corresponds to sample variance}
+
+\CommentTok{\# Calculating standard deviation}
+\NormalTok{standard\_deviation }\OperatorTok{=}\NormalTok{ data.std()  }\CommentTok{\# By default calculated from a sample (n{-}1)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Variance: }\SpecialCharTok{\{}\NormalTok{variance}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Standard deviation: }\SpecialCharTok{\{}\NormalTok{standard\_deviation}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Variance: 916.6666666666666
+Standard deviation: 30.276503540974915
+\end{verbatim}
+
+In practice, it is often assumed that the data have a normal
+distribution. This assumption is never completely fulfilled. The normal
+distribution has a non-zero probability density for every value from the
+set of real numbers, whereas in the real world the values of random
+variables are always limited - for example, there are no people with
+negative height. However, very often this assumption is fulfilled with
+sufficiently good approximation. The better it is justified, the closer
+to the truth the following statements may be:
+
+\begin{itemize}
+\tightlist
+\item
+  68\% of feature values lie within a distance \(\leqslant s\) from the
+  mean
+\item
+  95\% of feature values lie within a distance \(\leqslant 2s\) from the
+  mean
+\item
+  99.7\% of feature values lie within a distance \(\leqslant 3s\) from
+  the mean.
+\end{itemize}
+
+\url{https://en.wikipedia.org/wiki/68\%E2\%80\%9395\%E2\%80\%9399.7_rule}
+
+\section{Measures of asymmetry}\label{measures-of-asymmetry}
+
+\textbf{How to recognize the type of distribution?}
+
+\begin{itemize}
+\item
+  symmetric distribution \[\overline{x} =Me=Do\]
+\item
+  distribution with right-sided asymmetry \[\overline{x} >Me>Do\]
+\item
+  distribution with left-sided asymmetry \[\overline{x}<Me<Do\]
+\item
+  classical coefficient of asymmetry
+\item
+  formula: \[A_s=\frac{m_3}{(s^2)^{\frac{3}{2}}}\]
+\end{itemize}
+
+\section{Measures of concentration}\label{measures-of-concentration}
+
+Kurtosis coefficient
+
+\begin{itemize}
+\tightlist
+\item
+  also known as the coefficient of concentration, coefficient of
+  flatness.
+\item
+  formula:
+  \[K=\frac{m_4}{s^4} \qquad \qquad m_4=\frac{\sum\limits_{i=1}^n (x_i-\overline{x})^4}{n}\]
+\end{itemize}
+
+\textbf{Interpretation of kurtosis}
+
+\begin{itemize}
+\tightlist
+\item
+  \(K=3\) - the distribution has the same concentration as the normal
+  distribution
+\item
+  \(K>3\) - stronger concentration
+\item
+  \(K<3\) - weaker concentration
+\end{itemize}
+
+Sometimes the excess coefficient \(K'=K-3\) is examined.
+
+High kurtosis means a greater number of extreme values, while low
+kurtosis indicates a distribution that is flatter than normal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data in a series}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.Series([}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{])}
+
+\CommentTok{\# Calculating skewness}
+\NormalTok{skewness }\OperatorTok{=}\NormalTok{ data.skew()}
+
+\CommentTok{\# Calculating kurtosis}
+\NormalTok{kurtosis }\OperatorTok{=}\NormalTok{ data.kurt()}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Skewness: }\SpecialCharTok{\{}\NormalTok{skewness}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Kurtosis: }\SpecialCharTok{\{}\NormalTok{kurtosis}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Skewness: 0.0
+Kurtosis: -1.2000000000000002
+\end{verbatim}
+
+\section{Speeding up operations:}\label{speeding-up-operations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Creating a data frame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{"Product"}\NormalTok{: [}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{],}
+    \StringTok{"Sales"}\NormalTok{: [}\DecValTok{200}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{250}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{220}\NormalTok{, }\DecValTok{310}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{240}\NormalTok{, }\DecValTok{290}\NormalTok{],}
+    \StringTok{"Cost"}\NormalTok{: [}\DecValTok{120}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{190}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{125}\NormalTok{, }\DecValTok{170}\NormalTok{],}
+    \StringTok{"Margin"}\NormalTok{: [}\DecValTok{80}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{115}\NormalTok{, }\DecValTok{120}\NormalTok{],}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\BuiltInTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Data frame:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Product & Sales & Cost & Margin \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+A & 200 & 120 & 80 \\
+B & 150 & 100 & 50 \\
+A & 250 & 140 & 110 \\
+C & 300 & 180 & 120 \\
+B & 200 & 110 & 90 \\
+A & 220 & 130 & 90 \\
+C & 310 & 190 & 120 \\
+B & 180 & 105 & 75 \\
+A & 240 & 125 & 115 \\
+C & 290 & 170 & 120 \\
+\end{longtable}
+}
+
+Mean for two selected columns
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculating the mean for the "Sales" and "Cost" columns}
+\NormalTok{mean\_values }\OperatorTok{=}\NormalTok{ df[[}\StringTok{"Sales"}\NormalTok{, }\StringTok{"Cost"}\NormalTok{]].mean()}
+\BuiltInTok{print}\NormalTok{(mean\_values)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{describe()} function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Generating descriptive statistics for numerical data}
+\NormalTok{description }\OperatorTok{=}\NormalTok{ df.describe()}
+\BuiltInTok{print}\NormalTok{(description)}
+\end{Highlighting}
+\end{Shaded}
+
+How the \texttt{agg} function works
+
+The \texttt{agg} function allows applying different measures to multiple
+columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Applying aggregating functions}
+\NormalTok{agg\_results }\OperatorTok{=}\NormalTok{ df[[}\StringTok{"Sales"}\NormalTok{, }\StringTok{"Cost"}\NormalTok{]].agg([}\StringTok{"mean"}\NormalTok{, }\StringTok{"sum"}\NormalTok{, }\StringTok{"max"}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(agg\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+How \texttt{groupby} works
+
+Grouping data by a categorical column (e.g., ``Product'').
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Grouping and calculating the mean}
+\NormalTok{grouped }\OperatorTok{=}\NormalTok{ df.groupby(}\StringTok{"Product"}\NormalTok{)[[}\StringTok{"Sales"}\NormalTok{, }\StringTok{"Cost"}\NormalTok{]].mean()}
+\BuiltInTok{print}\NormalTok{(grouped)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{numeric\_only=True} option
+
+The \texttt{numeric\_only=True} option allows analyzing only numerical
+columns, omitting categorical ones.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculating the sum only for numerical columns}
+\NormalTok{numeric\_sum }\OperatorTok{=}\NormalTok{ df.}\BuiltInTok{sum}\NormalTok{(numeric\_only}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(numeric\_sum)}
+\end{Highlighting}
+\end{Shaded}
+
+\part{Matplotlib}
+
+\chapter{Matplotlib - start}\label{matplotlib---start}
+
+Loading the library:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\end{Highlighting}
+\end{Shaded}
+
+\url{https://matplotlib.org/}
+
+\pandocbounded{\includegraphics[keepaspectratio]{anatomy.png}}
+
+Chart galleries
+
+\url{https://matplotlib.org/gallery/index.html}
+
+\url{https://python-graph-gallery.com/}
+
+\url{https://github.com/rasbt/matplotlib-gallery}
+
+\url{https://seaborn.pydata.org/examples/index.html}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m1.jpg}}
+
 
 
 

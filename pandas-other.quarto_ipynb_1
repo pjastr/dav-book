@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "c26c5ded",
+   "id": "686168b5",
    "metadata": {},
    "source": [
     "# Pandas - other\n",
@@ -14,7 +14,7 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "bfdcd315",
+   "id": "cb59a191",
    "metadata": {},
    "outputs": [
     {
@@ -56,7 +56,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "029c3605",
+   "id": "1c367b0e",
    "metadata": {},
    "source": [
     "## Handling missing data"
@@ -65,7 +65,7 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "21e70cea",
+   "id": "1a4d3f05",
    "metadata": {},
    "outputs": [
     {
@@ -102,7 +102,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "852a3c5b",
+   "id": "24996c52",
    "metadata": {},
    "source": [
     "---"
@@ -111,7 +111,7 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "67654788",
+   "id": "ff2c9f85",
    "metadata": {},
    "outputs": [
     {
@@ -166,7 +166,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "3594e2c9",
+   "id": "e9944e98",
    "metadata": {},
    "source": [
     "## Removing duplicates"
@@ -175,7 +175,7 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "c02f7559",
+   "id": "62815d42",
    "metadata": {},
    "outputs": [
     {
@@ -221,7 +221,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "2bc33b44",
+   "id": "1c3c2b55",
    "metadata": {},
    "source": [
     "## Replacing values"
@@ -230,7 +230,7 @@
   {
    "cell_type": "code",
    "execution_count": 5,
-   "id": "67dfcb91",
+   "id": "9c8d4dc2",
    "metadata": {},
    "outputs": [
     {
@@ -290,7 +290,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "b7a443ff",
+   "id": "d2e19674",
    "metadata": {},
    "source": [
     "## Discretization and binning"
@@ -299,7 +299,7 @@
   {
    "cell_type": "code",
    "execution_count": 6,
-   "id": "f6fd8964",
+   "id": "b4f50caa",
    "metadata": {},
    "outputs": [
     {
@@ -334,7 +334,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "005dde54",
+   "id": "1ff5f992",
    "metadata": {},
    "source": [
     "---"
@@ -343,7 +343,7 @@
   {
    "cell_type": "code",
    "execution_count": 7,
-   "id": "6c09798e",
+   "id": "a97899ce",
    "metadata": {},
    "outputs": [
     {
@@ -374,7 +374,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "1d288cba",
+   "id": "a9dfb767",
    "metadata": {},
    "source": [
     "---"
@@ -383,16 +383,16 @@
   {
    "cell_type": "code",
    "execution_count": 8,
-   "id": "cb932de9",
+   "id": "5d362914",
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "[(0.55, 0.75], (0.55, 0.75], (0.75, 0.96], (0.75, 0.96], (0.34, 0.55], ..., (0.75, 0.96], (0.14, 0.34], (0.34, 0.55], (0.14, 0.34], (0.34, 0.55]]\n",
+      "[(0.77, 0.98], (0.13, 0.34], (0.55, 0.77], (0.34, 0.55], (0.77, 0.98], ..., (0.13, 0.34], (0.34, 0.55], (0.13, 0.34], (0.55, 0.77], (0.77, 0.98]]\n",
       "Length: 20\n",
-      "Categories (4, interval[float64, right]): [(0.14, 0.34] < (0.34, 0.55] < (0.55, 0.75] < (0.75, 0.96]]\n"
+      "Categories (4, interval[float64, right]): [(0.13, 0.34] < (0.34, 0.55] < (0.55, 0.77] < (0.77, 0.98]]\n"
      ]
     }
    ],
@@ -407,7 +407,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "fc56c56f",
+   "id": "2a90741b",
    "metadata": {},
    "source": [
     "---"
@@ -416,20 +416,20 @@
   {
    "cell_type": "code",
    "execution_count": 9,
-   "id": "f2ddf5ca",
+   "id": "ec97add2",
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "[(0.67, 3.164], (0.67, 3.164], (-3.1359999999999997, -0.642], (0.67, 3.164], (-3.1359999999999997, -0.642], ..., (0.67, 3.164], (0.0133, 0.67], (-0.642, 0.0133], (0.0133, 0.67], (0.0133, 0.67]]\n",
+      "[(-0.0716, 0.665], (-0.736, -0.0716], (-0.0716, 0.665], (-3.127, -0.736], (-0.0716, 0.665], ..., (0.665, 3.166], (0.665, 3.166], (0.665, 3.166], (-0.736, -0.0716], (-0.0716, 0.665]]\n",
       "Length: 1000\n",
-      "Categories (4, interval[float64, right]): [(-3.1359999999999997, -0.642] < (-0.642, 0.0133] < (0.0133, 0.67] < (0.67, 3.164]]\n",
-      "(-3.1359999999999997, -0.642]    250\n",
-      "(-0.642, 0.0133]                 250\n",
-      "(0.0133, 0.67]                   250\n",
-      "(0.67, 3.164]                    250\n",
+      "Categories (4, interval[float64, right]): [(-3.127, -0.736] < (-0.736, -0.0716] < (-0.0716, 0.665] < (0.665, 3.166]]\n",
+      "(-3.127, -0.736]     250\n",
+      "(-0.736, -0.0716]    250\n",
+      "(-0.0716, 0.665]     250\n",
+      "(0.665, 3.166]       250\n",
       "Name: count, dtype: int64\n"
      ]
     }
@@ -447,7 +447,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "810c448f",
+   "id": "fe382859",
    "metadata": {},
    "source": [
     "## Detecting and filtering outliers"
@@ -456,7 +456,7 @@
   {
    "cell_type": "code",
    "execution_count": 10,
-   "id": "2336bd24",
+   "id": "a3c51ad8",
    "metadata": {},
    "outputs": [
     {
@@ -465,36 +465,41 @@
      "text": [
       "                 0            1            2            3\n",
       "count  1000.000000  1000.000000  1000.000000  1000.000000\n",
-      "mean     -0.027519     0.004393    -0.052121    -0.034006\n",
-      "std       1.038145     1.019119     1.024592     1.056530\n",
-      "min      -3.736029    -3.053659    -3.447909    -4.087859\n",
-      "25%      -0.743297    -0.684219    -0.768123    -0.754514\n",
-      "50%      -0.008498     0.004891    -0.049088    -0.019837\n",
-      "75%       0.663770     0.712461     0.602023     0.727132\n",
-      "max       3.339809     2.985752     3.133838     3.761102\n",
+      "mean     -0.018679     0.056350     0.044208    -0.035649\n",
+      "std       1.001884     0.952886     0.975258     1.015283\n",
+      "min      -3.316553    -2.979827    -3.357544    -3.379555\n",
+      "25%      -0.715881    -0.575959    -0.610975    -0.679643\n",
+      "50%      -0.038455     0.022372     0.022119    -0.030437\n",
+      "75%       0.658508     0.675238     0.693243     0.661597\n",
+      "max       2.975429     3.736680     3.472886     2.831432\n",
       "---\n",
-      "468   -3.322985\n",
-      "664   -3.447909\n",
-      "720    3.133838\n",
-      "884    3.037909\n",
+      "184   -3.357544\n",
+      "219    3.323689\n",
+      "244    3.119243\n",
+      "324    3.104213\n",
+      "569    3.472886\n",
+      "946    3.087419\n",
       "Name: 2, dtype: float64\n",
       "---\n",
       "            0         1         2         3\n",
-      "47   3.339809  0.176250  1.691884  0.434249\n",
-      "81  -3.180144  0.801413  0.069716  1.169214\n",
-      "224 -3.140997 -1.475603 -1.632018  1.017472\n",
-      "232  1.567046 -3.053659  0.695354 -0.907132\n",
-      "400  0.216762 -2.821928  0.587398  3.761102\n",
-      "468  0.996638 -0.946524 -3.322985  1.324030\n",
-      "499 -0.747131  0.619325  2.081255 -4.087859\n",
-      "531 -3.534106 -1.230524 -0.952707 -0.608651\n",
-      "546 -3.736029 -0.756009  1.492438  0.632573\n",
-      "599 -3.080394 -0.771831  0.000511 -1.225892\n",
-      "664  0.663680 -0.022075 -3.447909  1.355193\n",
-      "720 -0.814359 -0.151675  3.133838 -0.561214\n",
-      "853  1.461269  0.356957  0.400154  3.126007\n",
-      "860 -3.452065 -0.234821 -0.669044 -2.210814\n",
-      "884  1.273336 -0.067934  3.037909 -0.284714\n"
+      "87  -3.122816  1.168430  1.197042 -0.108855\n",
+      "88   1.467481  3.558245 -0.210776 -1.460176\n",
+      "173  0.322385 -0.482745  0.573465 -3.282770\n",
+      "184 -0.956837  0.485354 -3.357544  0.215472\n",
+      "219 -2.721878 -0.767034  3.323689 -0.829835\n",
+      "223  0.925059  1.434496 -0.817908 -3.192528\n",
+      "244 -1.721491  0.389238  3.119243 -1.501921\n",
+      "324 -0.069703  0.235389  3.104213 -0.732092\n",
+      "332  0.597512  1.005423 -0.540293 -3.379555\n",
+      "472 -3.316553  0.859712  1.822329  0.116416\n",
+      "478  0.591328  0.632644 -0.982190 -3.354956\n",
+      "493 -0.001076 -1.652586 -0.170947 -3.061229\n",
+      "519  0.616597  3.099464  1.444094  0.890214\n",
+      "569  0.045343 -0.902546  3.472886 -0.880752\n",
+      "884  0.507390  3.054430  0.113125  1.656305\n",
+      "946  0.169054 -0.045785  3.087419  0.759799\n",
+      "955  0.557463  3.736680  0.004691 -0.623841\n",
+      "958  0.243951  3.178786  1.453970 -1.154076\n"
      ]
     }
    ],
@@ -514,7 +519,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "be7e839e",
+   "id": "3b911808",
    "metadata": {},
    "source": [
     "## Changing the column type"
@@ -523,7 +528,7 @@
   {
    "cell_type": "code",
    "execution_count": 11,
-   "id": "2ff70e51",
+   "id": "8c2d2be3",
    "metadata": {},
    "outputs": [
     {
@@ -580,7 +585,7 @@
   {
    "cell_type": "code",
    "execution_count": 12,
-   "id": "fa2271d2",
+   "id": "fb249d9f",
    "metadata": {},
    "outputs": [
     {
@@ -636,7 +641,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "92f3645c",
+   "id": "e404a7f6",
    "metadata": {},
    "source": [
     "## Changing characters in categories"
@@ -645,7 +650,7 @@
   {
    "cell_type": "code",
    "execution_count": 13,
-   "id": "5cd7f92a",
+   "id": "019f809b",
    "metadata": {},
    "outputs": [
     {
@@ -701,7 +706,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "57d0d127",
+   "id": "a799a12b",
    "metadata": {},
    "source": [
     "## Manipulation operations\n",
@@ -737,7 +742,7 @@
   {
    "cell_type": "code",
    "execution_count": 14,
-   "id": "d8d6dbd5",
+   "id": "7b526a11",
    "metadata": {},
    "outputs": [
     {
@@ -784,7 +789,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "7ade4e41",
+   "id": "8ab2c677",
    "metadata": {},
    "source": [
     "![](merge.png)"
@@ -793,7 +798,7 @@
   {
    "cell_type": "code",
    "execution_count": 15,
-   "id": "a69cb4de",
+   "id": "b1f1c287",
    "metadata": {},
    "outputs": [
     {
@@ -881,7 +886,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "ce51da38",
+   "id": "f7b29ab6",
    "metadata": {},
    "source": [
     "![](merge_inner.png)\n",
@@ -916,7 +921,7 @@
   {
    "cell_type": "code",
    "execution_count": 16,
-   "id": "fafdc5fc",
+   "id": "7ae97bb5",
    "metadata": {},
    "outputs": [
     {
@@ -964,7 +969,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "246965aa",
+   "id": "fe8b464f",
    "metadata": {},
    "source": [
     "![](join.png)\n",
@@ -1000,7 +1005,7 @@
   {
    "cell_type": "code",
    "execution_count": 17,
-   "id": "bb42466a",
+   "id": "e46df040",
    "metadata": {},
    "outputs": [
     {
@@ -1049,7 +1054,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "dcedfad0",
+   "id": "3670bd23",
    "metadata": {},
    "source": [
     "![](concat1.png)"
@@ -1058,7 +1063,7 @@
   {
    "cell_type": "code",
    "execution_count": 18,
-   "id": "43d8b034",
+   "id": "277e54ba",
    "metadata": {},
    "outputs": [
     {
@@ -1114,7 +1119,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "6c162d0f",
+   "id": "2fc5caaa",
    "metadata": {},
    "source": [
     "![](concat2.png)\n",
@@ -1145,7 +1150,7 @@
   {
    "cell_type": "code",
    "execution_count": 19,
-   "id": "2911c0bd",
+   "id": "a35a7ea1",
    "metadata": {},
    "outputs": [
     {
@@ -1185,7 +1190,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "21d8c374",
+   "id": "c0704a67",
    "metadata": {},
    "source": [
     "![](pivot.png)\n",
@@ -1208,7 +1213,7 @@
   {
    "cell_type": "code",
    "execution_count": 20,
-   "id": "8cefe6d5",
+   "id": "954c42e0",
    "metadata": {},
    "outputs": [
     {
@@ -1249,7 +1254,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "be070b5d",
+   "id": "10ec59c6",
    "metadata": {},
    "source": [
     "![](wide_to_long.png)\n",
@@ -1282,7 +1287,7 @@
   {
    "cell_type": "code",
    "execution_count": 21,
-   "id": "1a967feb",
+   "id": "d8c158b1",
    "metadata": {},
    "outputs": [
     {
@@ -1321,7 +1326,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "436bb92a",
+   "id": "6c4c649c",
    "metadata": {},
    "source": [
     "![](melt.png)\n"
@@ -1334,18 +1339,6 @@
    "language": "python",
    "name": "python3",
    "path": "C:\\Users\\Piotrek\\Documents\\aiwd-book\\env\\share\\jupyter\\kernels\\python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.13.9"
   }
  },
  "nbformat": 4,
