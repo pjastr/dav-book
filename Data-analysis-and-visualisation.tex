@@ -7159,6 +7159,615 @@ Chart galleries
 
 \pandocbounded{\includegraphics[keepaspectratio]{m1.jpg}}
 
+\chapter{Matplotlib - line chart}\label{matplotlib---line-chart}
+
+A line chart is one of the most powerful data visualization tools,
+allowing us to spot relationships and trends that might otherwise go
+unnoticed in raw data. Below is a detailed explanation of when and why
+it's worth reaching for this type of chart.
+
+A line chart works best when we want to show \textbf{changes in values
+over time} or as \textbf{a function of another continuous variable}. Its
+strength lies in its ability to reveal continuous relationships between
+data points, making it easy to track trends and patterns.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Analysis of changes over time
+\end{enumerate}
+
+A line chart perfectly illustrates how data changes across successive
+units of time. It is invaluable for presenting: - Economic trends (GDP
+growth, inflation, unemployment rates) - Changes in financial markets
+(exchange rates, stock prices, interest rates) - Climate and weather
+data (temperature changes, precipitation, pollution levels) - Health
+indicators (heart rate, blood sugar levels, blood pressure)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Showing relationships between variables
+\end{enumerate}
+
+When we want to examine how one variable influences another, a line
+chart allows for an intuitive representation of these relationships: -
+The relationship between level of education and average earnings - The
+correlation between age and specific skills - The dependence between
+advertising spending and sales results
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Comparing multiple trends simultaneously
+\end{enumerate}
+
+A line chart enables effective comparison of several data series on a
+single chart: - Analysis of sales of different products over time -
+Comparison of results across different regions, teams, or countries -
+Comparison of actual results with planned targets - Comparison of
+different economic indicators over the same period
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Analysis of correlation and causality
+\end{enumerate}
+
+Lines on a chart help to see how changes in one variable may influence
+others: - Examining the impact of fuel prices on sales of different
+types of vehicles - Analyzing the relationship between ambient
+temperature and energy consumption - Assessing the impact of marketing
+campaigns on brand awareness
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Identifying anomalies and turning points
+\end{enumerate}
+
+A line chart makes it easy to quickly notice outliers and moments of
+significant change: - Detecting unusual patterns in financial data -
+Identifying turning points in social trends - Recognizing seasonal
+fluctuations in data
+
+Although line charts are most suitable for continuous data, they can
+also be used to present discrete data, as long as there is a logical
+connection between successive points. For example, monthly sales results
+are discrete data, but presenting them as a line will help reveal the
+annual trend.
+
+It should be remembered, however, that connecting points with a line
+suggests continuity between them. If there is no logical continuity
+between data points (e.g., when comparing unrelated categories), a
+better choice will be a bar chart or scatter plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\OperatorTok{{-}}\DecValTok{9}\NormalTok{]}
+\NormalTok{plt.plot(x)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-linechart_files/figure-pdf/cell-2-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-163}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{100}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{plt.plot(x, x, label}\OperatorTok{=}\StringTok{\textquotesingle{}linear\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{plt.plot(x, x }\OperatorTok{**} \DecValTok{2}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}quadratic\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{3}}
+\NormalTok{plt.plot(x, x }\OperatorTok{**} \DecValTok{3}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}cubic\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{4}}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}x label\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}y label\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{6}}
+\NormalTok{plt.title(}\StringTok{"Simple Plot"}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{7}}
+\NormalTok{plt.legend() }\hspace*{\fill}\NormalTok{\circled{8}}
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{9}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{x\ =\ np.linspace(0,\ 2,\ 100)}: creates an array \texttt{x}
+with 100 evenly spaced values from 0 to 2 (inclusive), using the
+\texttt{linspace} function from the \texttt{numpy} library.
+\item[\circled{2}]
+\texttt{plt.plot(x,\ x,\ label=\textquotesingle{}linear\textquotesingle{})}:
+draws a linear chart (y = x) using the values from the \texttt{x} array.
+\item[\circled{3}]
+\texttt{plt.plot(x,\ x**2,\ label=\textquotesingle{}quadratic\textquotesingle{})}:
+draws a quadratic chart (y = x\^{}2) using the values from the
+\texttt{x} array.
+\item[\circled{4}]
+\texttt{plt.plot(x,\ x**3,\ label=\textquotesingle{}cubic\textquotesingle{})}:
+draws a cubic chart (y = x\^{}3) using the values from the \texttt{x}
+array.
+\item[\circled{5}]
+\texttt{plt.xlabel(\textquotesingle{}x\ label\textquotesingle{})}: adds
+a label to the X axis.
+\item[\circled{6}]
+\texttt{plt.ylabel(\textquotesingle{}y\ label\textquotesingle{})}: adds
+a label to the Y axis.
+\item[\circled{7}]
+\texttt{plt.title("Simple\ Plot")}: gives the chart the title ``Simple
+Plot''.
+\item[\circled{8}]
+\texttt{plt.legend()}: adds a legend to the chart, which shows the
+labels (label) for the individual lines.
+\item[\circled{9}]
+\texttt{plt.show()}: displays the chart.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-linechart_files/figure-pdf/cell-3-output-1.pdf}}
+
+Object-oriented version:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+
+\NormalTok{ax.plot(x, x, label}\OperatorTok{=}\StringTok{\textquotesingle{}linear\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot(x, x }\OperatorTok{**} \DecValTok{2}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}quadratic\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot(x, x }\OperatorTok{**} \DecValTok{3}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}cubic\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}x label\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}y label\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{"Simple Plot"}\NormalTok{)}
+
+\NormalTok{ax.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-linechart_files/figure-pdf/cell-4-output-1.pdf}}
+
+Version with dates:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{dates }\OperatorTok{=}\NormalTok{ np.arange(}\StringTok{\textquotesingle{}2024{-}01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2025{-}01\textquotesingle{}}\NormalTok{, dtype}\OperatorTok{=}\StringTok{\textquotesingle{}datetime64\textquotesingle{}}\NormalTok{) }
+
+\NormalTok{index }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(dates))}
+
+\NormalTok{y\_1 }\OperatorTok{=}\NormalTok{ index}
+\NormalTok{y\_2 }\OperatorTok{=}\NormalTok{ index }\OperatorTok{**} \DecValTok{2}
+\NormalTok{y\_3 }\OperatorTok{=}\NormalTok{ index }\OperatorTok{**} \DecValTok{3}
+
+\NormalTok{plt.plot(dates, y\_1, label}\OperatorTok{=}\StringTok{\textquotesingle{}Linear\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(dates, y\_2, label}\OperatorTok{=}\StringTok{\textquotesingle{}Quadratic\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(dates, y\_3, label}\OperatorTok{=}\StringTok{\textquotesingle{}Cubic\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Month (2024)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Functions in the year 2024"}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-linechart_files/figure-pdf/cell-5-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Creating the data}
+\NormalTok{dates }\OperatorTok{=}\NormalTok{ np.arange(}\StringTok{\textquotesingle{}2024{-}01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2025{-}01\textquotesingle{}}\NormalTok{, dtype}\OperatorTok{=}\StringTok{\textquotesingle{}datetime64\textquotesingle{}}\NormalTok{)}
+\NormalTok{index }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(dates))}
+\NormalTok{y\_1 }\OperatorTok{=}\NormalTok{ index}
+\NormalTok{y\_2 }\OperatorTok{=}\NormalTok{ index}\OperatorTok{**}\DecValTok{2}
+\NormalTok{y\_3 }\OperatorTok{=}\NormalTok{ index}\OperatorTok{**}\DecValTok{3}
+
+\CommentTok{\# Creating figure and axes in the object{-}oriented approach}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+
+\CommentTok{\# Drawing lines on the axes}
+\NormalTok{ax.plot(dates, y\_1, label}\OperatorTok{=}\StringTok{\textquotesingle{}Linear\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot(dates, y\_2, label}\OperatorTok{=}\StringTok{\textquotesingle{}Quadratic\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot(dates, y\_3, label}\OperatorTok{=}\StringTok{\textquotesingle{}Cubic\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Adding labels and title}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Month (2024)\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Functions in the year 2024\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Adding legend and grid}
+\NormalTok{ax.legend()}
+\NormalTok{ax.grid(}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{\# Adjusting appearance {-} optional improvements}
+\NormalTok{fig.autofmt\_xdate()  }\CommentTok{\# Automatic formatting of dates on the X axis for better readability}
+\NormalTok{plt.tight\_layout()   }\CommentTok{\# Automatic adjustment of chart size}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-linechart_files/figure-pdf/cell-6-output-1.pdf}}
+
+\chapter{Matplotlib - extras part 1}\label{matplotlib---extras-part-1}
+
+\section{Legend parameters}\label{legend-parameters}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m2.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{plt.plot(x, x, label}\OperatorTok{=}\StringTok{\textquotesingle{}linear\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(x, x }\OperatorTok{**} \DecValTok{2}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}quadratic\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(x, x }\OperatorTok{**} \DecValTok{3}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}cubic\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}x label\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}y label\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Simple Plot"}\NormalTok{)}
+\NormalTok{plt.legend(loc }\OperatorTok{=} \DecValTok{5}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras1_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# We create the Figure object and the axes (Axes)}
+\NormalTok{fig }\OperatorTok{=}\NormalTok{ plt.figure()}
+\NormalTok{ax }\OperatorTok{=}\NormalTok{ fig.add\_subplot(}\DecValTok{111}\NormalTok{)  }\CommentTok{\# 111 means: 1 row, 1 column, first chart}
+
+\CommentTok{\# We generate the data}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+
+\CommentTok{\# We draw the plots on the axis}
+\NormalTok{ax.plot(x, x, label}\OperatorTok{=}\StringTok{\textquotesingle{}linear\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot(x, x}\OperatorTok{**}\DecValTok{2}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}quadratic\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot(x, x}\OperatorTok{**}\DecValTok{3}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}cubic\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# We add labels and a title}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}x label\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}y label\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{"Simple Plot"}\NormalTok{)}
+
+\CommentTok{\# We add a legend}
+\NormalTok{ax.legend(loc}\OperatorTok{=}\DecValTok{5}\NormalTok{)  }\CommentTok{\# loc=5 means position "right"}
+
+\CommentTok{\# We display the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras1_files/figure-pdf/cell-3-output-1.pdf}}
+
+\section{Styles, line colors}\label{styles-line-colors}
+
+\protect\phantomsection\label{annotated-cell-169}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{14}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.cos(}\DecValTok{5} \OperatorTok{*}\NormalTok{ x) }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{plt.plot(x, y }\OperatorTok{+} \DecValTok{2}\NormalTok{, }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{"{-}"}\NormalTok{, label}\OperatorTok{=}\StringTok{"blue"}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{3}}
+\NormalTok{plt.plot(x, y }\OperatorTok{+} \DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{":"}\NormalTok{, label}\OperatorTok{=}\StringTok{"red"}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{4}}
+\NormalTok{plt.plot(x, y, }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{"{-}{-}"}\NormalTok{, label}\OperatorTok{=}\StringTok{"green"}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{plt.legend(title}\OperatorTok{=}\StringTok{\textquotesingle{}Legend:\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{x\ =\ np.arange(14)}: creates an array \texttt{x} with values
+from 0 to 13 (inclusive of 13), using the \texttt{arange} function from
+the \texttt{numpy} library.
+\item[\circled{2}]
+\texttt{y\ =\ np.cos(5\ *\ x)}: calculates the cosine function values
+for each value of \texttt{x}, multiplied by 5. The resulting values are
+stored in the array \texttt{y}.
+\item[\circled{3}]
+\texttt{plt.plot(x,\ y\ +\ 2,\ \textquotesingle{}blue\textquotesingle{},\ linestyle="-",\ label="blue")}:
+draws a blue chart with values from the array \texttt{x}, and the
+\texttt{y} values shifted upward by 2. The line is solid
+(\texttt{linestyle="-"}).
+\item[\circled{4}]
+\texttt{plt.plot(x,\ y\ +\ 1,\ \textquotesingle{}red\textquotesingle{},\ linestyle=":",\ label="red")}:
+draws a red chart with values from the array \texttt{x}, and the
+\texttt{y} values shifted upward by 1. The line is dotted
+(\texttt{linestyle=":"}).
+\item[\circled{5}]
+\texttt{plt.plot(x,\ y,\ \textquotesingle{}green\textquotesingle{},\ linestyle="-\/-",\ label="green")}:
+draws a green chart with values from the array \texttt{x} and the
+\texttt{y} values. The line is dashed (\texttt{linestyle="-\/-"}).
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras1_files/figure-pdf/cell-4-output-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m3.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m4.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m5.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig }\OperatorTok{=}\NormalTok{ plt.figure()}
+\NormalTok{ax }\OperatorTok{=}\NormalTok{ fig.add\_subplot(}\DecValTok{111}\NormalTok{)}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{14}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.cos(}\DecValTok{5} \OperatorTok{*}\NormalTok{ x)}
+
+\NormalTok{ax.plot(x, y }\OperatorTok{+} \DecValTok{2}\NormalTok{, }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{"{-}"}\NormalTok{, label}\OperatorTok{=}\StringTok{"blue"}\NormalTok{)}
+\NormalTok{ax.plot(x, y }\OperatorTok{+} \DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{":"}\NormalTok{, label}\OperatorTok{=}\StringTok{"red"}\NormalTok{)}
+\NormalTok{ax.plot(x, y, }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{"{-}{-}"}\NormalTok{, label}\OperatorTok{=}\StringTok{"green"}\NormalTok{)}
+
+\NormalTok{ax.legend(title}\OperatorTok{=}\StringTok{\textquotesingle{}Legend:\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras1_files/figure-pdf/cell-5-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{months }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Jan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Feb\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Mar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Apr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Jun\textquotesingle{}}\NormalTok{]}
+\NormalTok{sales }\OperatorTok{=}\NormalTok{ [}\DecValTok{12500}\NormalTok{, }\DecValTok{14000}\NormalTok{, }\DecValTok{16700}\NormalTok{, }\DecValTok{15400}\NormalTok{, }\DecValTok{18200}\NormalTok{, }\DecValTok{19500}\NormalTok{]}
+
+\NormalTok{plt.plot(months, sales, }\StringTok{\textquotesingle{}bo{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{8}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sales in the first half of 2025\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Sales (PLN)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylim([}\DecValTok{10000}\NormalTok{, }\DecValTok{21000}\NormalTok{])}
+\NormalTok{plt.fill\_between(months, sales, }\DecValTok{10000}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}skyblue\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\DecValTok{15000}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.text(}\DecValTok{0}\NormalTok{, }\DecValTok{15300}\NormalTok{, }\StringTok{\textquotesingle{}Monthly target\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras1_files/figure-pdf/cell-6-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{months }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Jan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Feb\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Mar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Apr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Jun\textquotesingle{}}\NormalTok{]}
+\NormalTok{sales }\OperatorTok{=}\NormalTok{ [}\DecValTok{12500}\NormalTok{, }\DecValTok{14000}\NormalTok{, }\DecValTok{16700}\NormalTok{, }\DecValTok{15400}\NormalTok{, }\DecValTok{18200}\NormalTok{, }\DecValTok{19500}\NormalTok{]}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.plot(months, sales, }\StringTok{\textquotesingle{}bo{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{8}\NormalTok{)}
+\NormalTok{ax.grid(}\VariableTok{True}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Sales in the first half of 2025\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Sales (PLN)\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylim([}\DecValTok{10000}\NormalTok{, }\DecValTok{21000}\NormalTok{])}
+\NormalTok{ax.fill\_between(months, sales, }\DecValTok{10000}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}skyblue\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.axhline(y}\OperatorTok{=}\DecValTok{15000}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.text(}\DecValTok{0}\NormalTok{, }\DecValTok{15300}\NormalTok{, }\StringTok{\textquotesingle{}Monthly target\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras1_files/figure-pdf/cell-7-output-1.pdf}}
+
+\chapter{Matplotlib - subplots}\label{matplotlib---subplots}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m8.png}}
+
+The \texttt{subplot} function allows you to create multiple plots within
+a single window or figure. This makes it possible to compare different
+plots that share a common context, or to present different aspects of
+the data.
+
+The function signature is
+\texttt{plt.subplot(nrows,\ ncols,\ index,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{nrows} - the number of rows in the plot grid.
+\item
+  \texttt{ncols} - the number of columns in the plot grid.
+\item
+  \texttt{index} - the index of the current plot to be created (indexing
+  starts at 1). Indices are numbered row by row, i.e.~the next plot in a
+  row will have an index one greater.
+\item
+  \texttt{**kwargs} - additional arguments related to plot formatting.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi, }\DecValTok{100}\NormalTok{)}
+
+\CommentTok{\# Creating a 2x2 grid of plots}
+\CommentTok{\# First plot (top{-}left corner)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{plt.plot(x, np.sin(x))}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}sin(x)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Second plot (top{-}right corner)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{plt.plot(x, np.cos(x))}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}cos(x)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Third plot (bottom{-}left corner)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{plt.plot(x, np.tan(x))}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}tan(x)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Fourth plot (bottom{-}right corner)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{plt.plot(x, }\OperatorTok{{-}}\NormalTok{np.sin(x))}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}{-}sin(x)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Adjusting the spacing between plots}
+\NormalTok{plt.tight\_layout()}
+
+\CommentTok{\# Displaying the plots}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-subplots_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{plt.plot(x, x)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{plt.plot(x, x }\OperatorTok{*} \DecValTok{2}\NormalTok{)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{plt.plot(x, x }\OperatorTok{*}\NormalTok{ x)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{plt.plot(x, x }\OperatorTok{**} \DecValTok{3}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-subplots_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{].plot(x, x)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{].plot(x, x }\OperatorTok{*} \DecValTok{2}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{].plot(x, x }\OperatorTok{*}\NormalTok{ x)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{].plot(x, x }\OperatorTok{**} \DecValTok{3}\NormalTok{)}
+
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-subplots_files/figure-pdf/cell-4-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Preparing data for visualization}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)  }\CommentTok{\# Create 100 points in the range from 0 to 10}
+\NormalTok{y1 }\OperatorTok{=}\NormalTok{ np.sin(x)               }\CommentTok{\# Sine function}
+\NormalTok{y2 }\OperatorTok{=}\NormalTok{ np.cos(x)               }\CommentTok{\# Cosine function}
+\NormalTok{y3 }\OperatorTok{=}\NormalTok{ np.exp(}\OperatorTok{{-}}\FloatTok{0.2}\OperatorTok{*}\NormalTok{x) }\OperatorTok{*}\NormalTok{ np.sin(x)  }\CommentTok{\# Damped sine function}
+\NormalTok{y4 }\OperatorTok{=}\NormalTok{ x}\OperatorTok{**}\DecValTok{2} \OperatorTok{/} \DecValTok{20}               \CommentTok{\# Quadratic function}
+
+\CommentTok{\# Creating the figure and subplots (2 rows, 2 columns)}
+\CommentTok{\# In the procedural approach we use pyplot directly}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{8}\NormalTok{))  }\CommentTok{\# Set the size of the entire figure (width, height in inches)}
+
+\CommentTok{\# First subplot (top{-}left)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)  }\CommentTok{\# 2 rows, 2 columns, position 1}
+\NormalTok{plt.plot(x, y1, }\StringTok{\textquotesingle{}r{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)  }\CommentTok{\# Red line}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sine function\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}sin(x)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)  }\CommentTok{\# Add a grid}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)  }\CommentTok{\# Horizontal line at y=0}
+
+\CommentTok{\# Second subplot (top{-}right)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)  }\CommentTok{\# 2 rows, 2 columns, position 2}
+\NormalTok{plt.plot(x, y2, }\StringTok{\textquotesingle{}b{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)  }\CommentTok{\# Blue line}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Cosine function\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}cos(x)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Third subplot (bottom{-}left)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)  }\CommentTok{\# 2 rows, 2 columns, position 3}
+\NormalTok{plt.plot(x, y3, }\StringTok{\textquotesingle{}g{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)  }\CommentTok{\# Green line}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Damped sine\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}exp({-}0.2x) * sin(x)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Fourth subplot (bottom{-}right)}
+\NormalTok{plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)  }\CommentTok{\# 2 rows, 2 columns, position 4}
+\NormalTok{plt.plot(x, y4, }\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, markevery}\OperatorTok{=}\DecValTok{10}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Quadratic function\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}x²/20\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{\# Adding an annotation on the last plot}
+\NormalTok{plt.annotate(}\StringTok{\textquotesingle{}Point (5, 1.25)\textquotesingle{}}\NormalTok{, xy}\OperatorTok{=}\NormalTok{(}\DecValTok{5}\NormalTok{, }\FloatTok{1.25}\NormalTok{), xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{6}\NormalTok{, }\FloatTok{1.8}\NormalTok{),}
+\NormalTok{             arrowprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(facecolor}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, shrink}\OperatorTok{=}\FloatTok{0.05}\NormalTok{, width}\OperatorTok{=}\FloatTok{1.5}\NormalTok{))}
+
+\CommentTok{\# Adjusting the layout {-} prevents overlapping}
+\NormalTok{plt.tight\_layout()}
+
+\CommentTok{\# Adding an overall title for the whole figure}
+\NormalTok{plt.suptitle(}\StringTok{\textquotesingle{}Example of plots with subplots {-} procedural approach\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{16}\NormalTok{)}
+\NormalTok{plt.subplots\_adjust(top}\OperatorTok{=}\FloatTok{0.9}\NormalTok{)  }\CommentTok{\# Add space for the main title}
+
+\CommentTok{\# Displaying the plot}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-subplots_files/figure-pdf/cell-5-output-1.pdf}}
+
 
 
 

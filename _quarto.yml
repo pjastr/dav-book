@@ -45,6 +45,9 @@ book:
     - part: "Matplotlib"
       chapters:
       - matplotlib-start.qmd
+      - matplotlib-linechart.qmd
+      - matplotlib-extras1.qmd
+      - matplotlib-subplots.qmd
   downloads: [pdf, epub]
   repo-url: https://github.com/pjastr/dav-book
   repo-actions: [issue]
