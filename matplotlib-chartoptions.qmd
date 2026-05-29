@@ -1,0 +1,105 @@
+# Matplotlib - chart options
+
+## `figure` arguments in Matplotlib
+
+In Matplotlib, a key role in managing chart properties is played by the **figure** object, which represents the "canvas" on which all graphical elements are drawn. The `plt.figure()` and `plt.subplots()` functions allow you to customize various aspects of the figure. 
+
+```python
+plt.figure(num=None, figsize=None, dpi=None, facecolor=None, edgecolor=None, frameon=None, tight_layout=None)
+```
+
+Arguments:
+
+| Argument       | Description                                                                                          | Default value     |
+|-----------------|-----------------------------------------------------------------------------------------------------|-----------------------|
+| **`num`**       | Identification number or name of the figure (can be a number or a string).                  | `None` (automatic) |
+| **`figsize`**   | Size of the figure in inches, given as a tuple `(width, height)`.                          | `(6.4, 4.8)`          |
+| **`dpi`**       | Resolution of the figure in dots per inch.                                       | `100`                 |
+| **`facecolor`** | Background color of the figure (the whole canvas).                                                              | `white`               |
+| **`edgecolor`** | Color of the figure's border.                                                                          | `white`               |
+| **`frameon`**   | Whether the figure should have a frame (`True` or `False`).                                           | `True`                |
+| **`tight_layout`** | Automatic adjustment of elements on the figure to avoid overlapping (`True` or `False`). | `False`               |
+
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+
+# Creating a figure with dimensions of 10x5 inches
+plt.figure(figsize=(10, 5))
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Chart with custom dimensions")
+plt.show(block=True)
+```
+
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+
+plt.figure(dpi=200)  # Higher resolution
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Chart with higher resolution")
+plt.show(block=True)
+```
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+
+plt.figure(facecolor='lightblue', edgecolor='gray')  # Background and border color
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Chart with a custom background")
+plt.show(block=True)
+```
+
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+
+plt.figure(tight_layout=True)  # Automatic adjustment
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Chart with automatic layout")
+plt.show(block=True)
+```
+
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+
+plt.figure(num="My Figure")  # Figure name
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Figure with a name")
+plt.show(block=True)
+plt.show()
+```
+
+## Styles
+
+Matplotlib offers built-in styles that allow for quick and easy customization of the appearance of charts. Using the `plt.style.use` function, you can load a ready-made style, so that the charts gain a consistent and aesthetic appearance without the need to manually set all the parameters.
+
+```python
+plt.style.use(style)
+```
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+
+# Using the 'ggplot' style
+plt.style.use('ggplot')
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Chart in the ggplot style")
+plt.show(block=True)
+
+```
+
+List of styles:
+
+```python
+print(plt.style.available)
+```
+
+Reference: <https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html>

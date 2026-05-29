@@ -1,0 +1,411 @@
+# Seaborn - basics
+
+<https://seaborn.pydata.org/>
+
+```python
+import seaborn as sns
+```
+
+The Seaborn library, which is a wrapper around Matplotlib, makes it easier to create "beautiful and readable" statistical charts in the Python language. 
+
+
+1. Exploratory data analysis (EDA): Seaborn is often used for data visualization during exploratory data analysis, which helps to understand the structure, trends, and relationships between variables in the data. This allows for the identification of patterns, the detection of outliers, and any potential problems with the data.
+
+2. Visualization of categorical data: Seaborn offers many types of categorical charts, such as bar plots, box plots, violin plots, and point plots. Thanks to this, it is easy to compare values between different categories, which helps to better understand the data.
+
+3. Visualization of multidimensional data: Seaborn allows you to create charts with many variables at once. Functions such as `pairplot` and `heatmap` are useful for analyzing multidimensional data and identifying correlations between variables.
+
+4. Visualization of statistical distributions: Seaborn enables the creation of histograms, kernel density estimation (KDE) plots, and the empirical cumulative distribution function. With these tools, you can understand the distribution of data, which is essential in statistical analysis and modeling.
+
+5. Regression visualization: Seaborn offers tools for regression analysis, such as `regplot` and `lmplot`. These functions allow for the visualization of the regression line, which makes it easier to understand the relationship between variables and to assess the fit of models.
+
+6. Creating grids of charts: Seaborn allows you to create grids of charts using functions such as `FacetGrid` and `PairGrid`. This makes it easier to analyze and compare data for different subgroups, layers, or combinations of variables.
+
+7. Customizing charts: Seaborn enables the customization of charts by changing styles, color palettes, and other chart parameters. Thanks to this, you can create attractive and professional-looking data visualizations.
+
+8. Presentations and reports: Seaborn can be used to create high-quality data visualizations for the purposes of presentations, reports, or scientific publications. The aesthetics and ease of customization of charts make the visualizations created in Seaborn readable and engaging for the audience.
+
+9. Time analysis: Seaborn can be used to analyze time data, such as time series or seasonal data. Functions such as `lineplot` or `relplot` allow for the visualization of trends and any changes in the data over time.
+
+10. Comparison of models and algorithms: Data visualizations created using Seaborn can be used to compare the results of different machine learning models or algorithms. In this way, you can present the results of an analysis, the quality of classification, estimation, or forecasting.
+
+11. Teaching and education: Seaborn is often used as a tool for teaching and education, especially in the context of learning statistics, data analysis, and machine learning. Data visualizations make it easier to understand complex concepts and relationships between variables.
+
+## Loading built-in datasets
+
+The `sns.load_dataset()` function allows you to load built-in datasets in the Seaborn library. All built-in datasets are stored as Pandas DataFrames.
+
+1. Loading the "iris" dataset:
+
+```{python}
+#| echo: true
+import seaborn as sns
+
+iris_data = sns.load_dataset('iris')
+print(iris_data.head())
+```
+
+
+
+2. Loading the "titanic" dataset:
+
+```{python}
+#| echo: true
+import seaborn as sns
+
+titanic_data = sns.load_dataset('titanic')
+print(titanic_data.head())
+```
+
+
+3. Loading the "tips" dataset:
+
+```{python}
+#| echo: true
+import seaborn as sns
+
+tips_data = sns.load_dataset('tips')
+print(tips_data.head())
+```
+
+
+## Scatter plot
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Loading the data
+iris_data = sns.load_dataset('iris')
+
+# Creating the scatter plot
+sns.scatterplot(x='sepal_length', y='sepal_width', data=iris_data)
+
+# Adding a title and axis labels
+plt.title('Scatter plot of sepal length and width')
+plt.xlabel('Sepal length (cm)')
+plt.ylabel('Sepal width (cm)')
+
+# Displaying the chart
+plt.show()
+```
+
+
+
+The `sns.scatterplot()` function offers additional parameters that allow for modifying the chart. Examples include:
+
+1. The `hue` parameter: allows you to add coloring of the points based on the values of a categorical variable. 
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Loading the data
+iris_data = sns.load_dataset('iris')
+
+# Creating a scatter plot with the 'hue' parameter
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+# Adding a title and axis labels
+plt.title('Scatter plot of sepal length and width with the hue parameter')
+plt.xlabel('Sepal length (cm)')
+plt.ylabel('Sepal width (cm)')
+
+# Displaying the chart
+plt.show()
+
+```
+
+2. The `size` parameter: allows you to change the size of the points based on the values of a numeric variable.
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Loading the data
+iris_data = sns.load_dataset('iris')
+
+# Creating a scatter plot with the 'size' parameter
+sns.scatterplot(x='sepal_length', y='sepal_width', size='petal_length', data=iris_data)
+
+# Adding a title and axis labels
+plt.title('Scatter plot of sepal length and width with the size parameter')
+plt.xlabel('Sepal length (cm)')
+plt.ylabel('Sepal width (cm)')
+
+# Displaying the chart
+plt.show()
+
+```
+
+3. The `style` parameter: allows you to change the style of the points based on the values of a categorical variable.
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Loading the data
+iris_data = sns.load_dataset('iris')
+
+# Creating a scatter plot with the 'size' parameter
+sns.scatterplot(x='sepal_length', y='sepal_width', size='petal_length', data=iris_data)
+
+# Adding a title and axis labels
+plt.title('Scatter plot of sepal length and width with the size parameter')
+plt.xlabel('Sepal length (cm)')
+plt.ylabel('Sepal width (cm)')
+
+# Displaying the chart
+plt.show()
+
+```
+
+## Line plot
+
+The `sns.lineplot()` function in the Seaborn library is used to create line plots, which allow for the visualization of the relationship between two variables, especially in the case of time data. A line plot is useful for presenting trends and changes in data over time or another continuous variable.
+
+Here is an example of using the `sns.lineplot()` function:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example data
+data = {
+    'year': [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
+    'value': [100, 110, 105, 120, 130, 140, 150, 170, 180, 200]
+}
+
+# Loading the data as a Pandas DataFrame
+import pandas as pd
+df = pd.DataFrame(data)
+
+# Creating the line plot
+sns.lineplot(x='year', y='value', data=df)
+
+# Adding a title and axis labels
+plt.title('Line plot example')
+plt.xlabel('Year')
+plt.ylabel('Value')
+
+# Displaying the chart
+plt.show()
+```
+
+In the example above, we create a line plot based on the DataFrame `df`. The `x` and `y` parameters specify the variables that are to be presented on the chart axes. The `data` parameter indicates the data source, in this case a Pandas DataFrame.
+
+The `sns.lineplot()` function offers additional parameters that allow for modifying the chart. Examples include:
+
+1. The `hue` parameter: allows you to add coloring of the lines based on the values of a categorical variable.
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Example data
+data = {
+    'year': [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019] * 2,
+    'value': [100, 110, 105, 120, 130, 140, 150, 170, 180, 200] +
+             [200, 180, 170, 160, 150, 140, 130, 120, 110, 100],
+    'category': ['A'] * 10 + ['B'] * 10
+}
+
+# Loading the data as a Pandas DataFrame
+df = pd.DataFrame(data)
+
+# Creating a line plot with the 'hue' parameter
+sns.lineplot(x='year', y='value', hue='category', data=df)
+
+# Adding a title and axis labels
+plt.title('Line plot example with the hue parameter')
+plt.xlabel('Year')
+plt.ylabel('Value')
+
+# Displaying the chart
+plt.show()
+
+```
+
+2. The `style` parameter: allows you to change the style of the line based on the values of a categorical variable.
+
+```python
+sns.lineplot(x='year', y='value', style='category', data=df)
+```
+
+3. The `markers` parameter: allows you to add markers to the data points.
+
+```python
+sns.lineplot(x='year', y='value', markers=True, data=df)
+```
+
+4. The `ci` parameter: allows you to add a confidence interval to the chart, which can be useful in the case of multiple measurements for the same values on the X axis.
+
+```python
+sns.lineplot(x='year', y='value', ci=95, data=df)
+```
+
+## Pie chart
+
+Not directly supported.
+
+## Bar chart
+
+
+```{python}
+#| echo: true
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example DataFrame
+data = {'Category': ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D'],
+        'Value': [10, 15, 8, 12, 11, 14, 9, 13],
+        'Group': ['X', 'X', 'X', 'X', 'Y', 'Y', 'Y', 'Y']}
+df = pd.DataFrame(data)
+```
+
+Basic bar chart:
+```{python}
+#| echo: true
+sns.barplot(x='Category', y='Value', data=df)
+plt.title('Basic bar chart')
+plt.show()
+```
+
+1. Example with `estimator`:
+```{python}
+#| echo: true
+sns.barplot(x='Category', y='Value', data=df, estimator=max)
+plt.title("Bar chart with 'estimator=max'")
+plt.show()
+```
+In this example, `estimator=max` causes the height of the bars to be the maximum value for each category.
+
+2. Example with `errorbar`:
+```{python}
+#| echo: true
+sns.barplot(x='Category', y='Value', data=df, errorbar=None)
+plt.title("Bar chart with 'errorbar=None'")
+plt.show()
+```
+Here, `errorbar=None` causes the confidence intervals not to be displayed on the chart.
+
+3. Example with `palette`:
+```{python}
+#| echo: true
+sns.barplot(x='Category', y='Value', data=df, palette='Greens', hue='Category')
+plt.title("Bar chart with 'palette=Greens'")
+plt.show()
+```
+The `palette='Greens'` argument sets the color palette to shades of green.
+
+4. Example with `hue`:
+```{python}
+#| echo: true
+sns.barplot(x='Category', y='Value', hue='Group', data=df)
+plt.title("Bar chart with 'hue=Group'")
+plt.show()
+```
+In this example, the `hue='Group'` argument splits the bars for each category according to the values in the 'Group' column.
+
+5. Example with `orient`:
+```{python}
+#| echo: true
+sns.barplot(x='Value', y='Category', data=df, orient='h')
+plt.title("Bar chart with 'orient=h'")
+plt.show()
+```
+Here, `orient='h'` changes the orientation of the chart to horizontal.
+
+6. Example with `order`:
+```{python}
+#| echo: true
+sns.barplot(x='Category', y='Value', data=df, order=['B', 'D', 'A', 'C'])
+plt.title("Bar chart with 'order=['B', 'D', 'A', 'C']'")
+plt.show()
+```
+The `order=['B', 'D', 'A', 'C']` argument specifies the order of the categories on the x axis.
+
+
+
+## Styles
+
+The Seaborn library allows you to customize the aesthetics of charts using color palettes and styles, which lets you obtain attractive and readable data visualizations. Here are a few examples of how we can customize the aesthetics of charts in Seaborn:
+
+1. Color palettes:
+
+Color palettes allow you to change the coloring of charts. Seaborn offers several built-in color palettes that can be easily applied to charts.
+
+Example of using the 'coolwarm' color palette in a scatter plot:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris_data = sns.load_dataset('iris')
+
+# Setting the 'coolwarm' color palette
+sns.set_palette('coolwarm')
+
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+plt.show()
+```
+
+To reset the color palette to the default, use `sns.set_palette('deep')`.
+
+2. Chart styles:
+
+Seaborn allows you to change the style of charts, which can affect the overall appearance and readability of the visualization. The library offers several built-in styles.
+
+Example of using the 'whitegrid' style in a scatter plot:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris_data = sns.load_dataset('iris')
+
+# Setting the 'whitegrid' style
+sns.set_style('whitegrid')
+
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+plt.show()
+```
+
+Other available styles are: 'darkgrid', 'white', 'ticks', and 'dark'. To reset the style to the default, use `sns.set_style('darkgrid')`.
+
+3. Scaling of graphical elements:
+
+Seaborn allows you to scale graphical elements, which can be useful in the case of different screen resolutions or the need to change the size of charts.
+
+Example of using the 'poster' context in a scatter plot:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris_data = sns.load_dataset('iris')
+
+# Setting the 'poster' context
+sns.set_context('poster')
+
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+plt.show()
+```
+
+Other available contexts are: 'paper', 'notebook', and 'talk'. To reset the context to the default, use `sns.set_context('notebook')`.
+
+By combining these methods, you can create varied, attractive, and readable data visualizations.

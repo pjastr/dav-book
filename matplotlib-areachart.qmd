@@ -1,0 +1,127 @@
+# Matplotlib - area chart
+
+An area chart is a type of visualization in which successive data series are presented as stacked areas/layers. The height of each layer corresponds to the value of a given category, and the sum of the heights of all layers shows the total value.
+
+## Main applications of area charts
+
+1. **Analysis of total composition over time**  
+   - It allows you to see how individual components (e.g. revenue sources, expenses, market segments) contribute to the total value at successive moments.  
+   - Useful for monitoring percentage shares and changes in proportions.
+
+2. **Comparison of multidimensional trends**  
+   - It enables the simultaneous tracking of many time series ("layers") in a single space, which makes it easier to detect mutual correlations and turning points.  
+   - Ideal for presenting multichannel data (e.g. website traffic from different sources).
+
+3. **Presentation of market shares or segments**  
+   - It shows how the shares of individual products, regions, or customer groups change over time.  
+   - It makes it easier to identify "growing" and "shrinking" segments.
+
+4. **Budgeting and accounting**  
+   - It visualizes the structure of costs or revenue by category over the course of the budget cycle.  
+   - It helps to quickly catch excessive expenses or sources of revenue growth.
+
+5. **Monitoring resources and workloads**  
+   - Tracking the use of resources (e.g. staff, machines) across different projects or departments.  
+   - It enables planning and balancing the workload.
+
+6. **Comparison of scenarios or variants**  
+   - Overlaying forecasted data alongside historical data makes it easier to compare the "expected" vs. the "actual" behavior of indicators.  
+   - It supports strategic decisions by illustrating deviations.
+   
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Month': ['January', 'February', 'March', 'April', 'May'],
+    'Sales': [1000, 1200, 900, 1100, 1300],
+    'Services': [200, 250, 230, 260, 300],
+    'Advertising': [150, 180, 170, 160, 190]
+}
+
+df = pd.DataFrame(data)
+
+x = df['Month']
+y1 = df['Sales']
+y2 = df['Services']
+y3 = df['Advertising']
+
+plt.figure(figsize=(10,6))
+plt.stackplot(x, y1, y2, y3, labels=['Sales', 'Services', 'Advertising'])
+plt.legend(loc='upper left')
+plt.title('Company revenue broken down by source')
+plt.xlabel('Month')
+plt.ylabel('Amount (PLN)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Month': ['January', 'February', 'March', 'April', 'May'],
+    'Sales': [1000, 1200, 900, 1100, 1300],
+    'Services': [200, 250, 230, 260, 300],
+    'Advertising': [150, 180, 170, 160, 190]
+}
+
+df = pd.DataFrame(data)
+
+x = df['Month']
+y1 = df['Sales']
+y2 = df['Services']
+y3 = df['Advertising']
+
+fig, ax = plt.subplots(figsize=(10,6))
+ax.stackplot(x, y1, y2, y3, labels=['Sales', 'Services', 'Advertising'])
+ax.legend(loc='upper left')
+ax.set_title('Company revenue broken down by source')
+ax.set_xlabel('Month')
+ax.set_ylabel('Amount (PLN)')
+plt.xticks(rotation=45)
+fig.tight_layout()
+plt.show()
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Day': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    'Mobile': [1500, 1800, 1600, 1700, 2000],
+    'Desktop': [1200, 1100, 1300, 1250, 1400],
+    'Tablet': [300, 350, 320, 310, 360]
+}
+
+df = pd.DataFrame(data)
+
+x = df['Day']
+y1 = df['Mobile']
+y2 = df['Desktop']
+y3 = df['Tablet']
+
+plt.figure(figsize=(10,6))
+plt.stackplot(
+    x, y1, y2, y3,
+    labels=['Mobile', 'Desktop', 'Tablet'],
+    colors=['SteelBlue', 'MediumSeaGreen', 'IndianRed'],
+    alpha=0.8
+)
+plt.title('Website traffic by device over the week')
+plt.xlabel('Day of the week')
+plt.ylabel('Number of visits')
+plt.legend(loc='upper left')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+```

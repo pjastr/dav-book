@@ -1,0 +1,190 @@
+# Matplotlib - heatmap
+
+A heatmap is a two-dimensional visualization in which numeric values are represented using colors. The intensity of the color corresponds to the magnitude (value) at a specific point on the grid.
+
+**Main applications of heatmaps**
+
+1. **Correlation matrices**  
+   - They allow you to quickly identify strong and weak relationships between variables in a dataset.  
+   - They facilitate the preliminary selection of features, e.g. in predictive modeling.
+
+2. **Spatio-temporal analysis**  
+   - Visualization of the intensity of events (e.g. sales, network traffic) along the time axis versus categories or zones.  
+   - It helps to detect seasonal, daily, or weekly patterns.
+
+3. **Geographic maps**  
+   - Presentation of the density of events or values (e.g. illnesses, accidents) across geographic areas.  
+   - They enable the quick identification of "hotspots".
+
+4. **User behavior analysis**  
+   - Tracking clicks, mouse movement, or scrolling on websites/applications.  
+   - Optimization of the layout of interface elements for usability.
+
+5. **Resource and performance monitoring**  
+   - Visualization of server load, memory usage, or production output in real time.  
+   - It helps to catch anomalies or overloads.
+
+6. **Detecting anomalies and deviations**  
+   - Identification of unusual readings, e.g. in medical, financial, or network data.  
+   - Quick indication of areas requiring further analysis.
+   
+   
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Day': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] * 3,
+    'Time of day': ['Morning']*5 + ['Afternoon']*5 + ['Evening']*5,
+    'Number of customers': [50, 60, 55, 65, 80,    # Morning
+                            120, 130, 125, 140, 160,  # Afternoon
+                            90, 100, 95, 110, 120]    # Evening
+}
+
+df = pd.DataFrame(data)
+
+
+heatmap_data = df.pivot(index='Day', columns='Time of day', values='Number of customers')
+
+plt.imshow(heatmap_data,
+           cmap='YlOrRd',      # palette from yellow (low) to red (high)
+           aspect='auto')      # automatic aspect ratio adjustment
+
+cbar = plt.colorbar()
+cbar.set_label('Number of customers', rotation=270, labelpad=15)
+
+plt.xticks(ticks=range(len(heatmap_data.columns)),
+           labels=heatmap_data.columns,
+           rotation=45,
+           ha='right')
+plt.yticks(ticks=range(len(heatmap_data.index)),
+           labels=heatmap_data.index)
+
+plt.xlabel('Time of day')
+plt.ylabel('Day of the week')
+plt.title('Average number of customers in the store')
+
+plt.tight_layout()
+plt.show()
+```
+
+
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Day': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] * 3,
+    'Time of day': ['Morning']*5 + ['Afternoon']*5 + ['Evening']*5,
+    'Number of customers': [50, 60, 55, 65, 80,    # Morning
+                            120, 130, 125, 140, 160,  # Afternoon
+                            90, 100, 95, 110, 120]    # Evening
+}
+
+df = pd.DataFrame(data)
+
+heatmap_data = df.pivot(index='Day', columns='Time of day', values='Number of customers')
+
+fig, ax = plt.subplots()
+
+im = ax.imshow(
+    heatmap_data,
+    cmap='YlOrRd',      # palette from yellow (low) to red (high)
+    aspect='auto'       # automatic aspect ratio adjustment
+)
+
+cbar = fig.colorbar(im, ax=ax)
+cbar.set_label('Number of customers', rotation=270, labelpad=15)
+
+ax.set_xticks(range(len(heatmap_data.columns)))
+ax.set_xticklabels(heatmap_data.columns, rotation=45, ha='right')
+ax.set_yticks(range(len(heatmap_data.index)))
+ax.set_yticklabels(heatmap_data.index)
+
+ax.set_xlabel('Time of day')
+ax.set_ylabel('Day of the week')
+ax.set_title('Average number of customers in the store')
+
+fig.tight_layout()
+plt.show()
+
+```
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Example data
+data = np.array([
+    [23, 45, 12, 34, 56],
+    [33, 54, 22, 43, 66],
+    [12, 34, 15, 28, 39],
+    [44, 55, 31, 47, 62]
+])
+
+# Axis labels
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday']
+hours = ['9–11', '11–13', '13–15', '15–17', '17–19']
+
+# Creating the heatmap
+plt.figure(figsize=(8, 6))
+cax = plt.imshow(data, cmap='Greens')
+
+# Axis labels
+plt.xticks(ticks=np.arange(len(hours)), labels=hours, rotation=45, ha='right')
+plt.yticks(ticks=np.arange(len(days)), labels=days)
+
+# Adding numeric values
+for i in range(data.shape[0]):
+    for j in range(data.shape[1]):
+        plt.text(j, i, str(data[i, j]), ha='center', va='center', color='black')
+
+# Colorbar
+plt.colorbar(cax, orientation='vertical', label='Number of customers')
+
+# Title and layout
+plt.title('Number of customers in the store by day and hour')
+plt.tight_layout()
+
+# Displaying the chart
+plt.show()
+```
+
+```{python}
+#| echo: true
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = np.array([
+    [23, 45, 12, 34, 56],
+    [33, 54, 22, 43, 66],
+    [12, 34, 15, 28, 39],
+    [44, 55, 31, 47, 62]
+])
+
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday']
+hours = ['9–11', '11–13', '13–15', '15–17', '17–19']
+
+fig, ax = plt.subplots(figsize=(8, 6))
+cax = ax.imshow(data, cmap='Greens')
+
+ax.set_xticks(np.arange(len(hours)))
+ax.set_xticklabels(hours, rotation=45, ha='right')
+ax.set_yticks(np.arange(len(days)))
+ax.set_yticklabels(days)
+
+for i in range(data.shape[0]):
+    for j in range(data.shape[1]):
+        ax.text(j, i, str(data[i, j]), ha='center', va='center', color='black')
+
+fig.colorbar(cax, ax=ax, orientation='vertical', label='Number of customers')
+
+ax.set_title('Number of customers in the store by day and hour')
+fig.tight_layout()
+
+plt.show()
+
+```

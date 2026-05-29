@@ -9082,6 +9082,2598 @@ where:
 
 \pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-13-output-1.pdf}}
 
+\chapter{Matplotlib - regression}\label{matplotlib---regression}
+
+The following section discusses an example of how polynomial regression
+works. Other types of regression can be obtained by choosing a different
+command to generate it.
+
+\textbf{Regression} - a statistical method that allows for examining the
+relationship between data quantities. The goal of multivariate
+regression is to quantitatively capture the relationships between many
+independent variables (explanatory variables, factors, predictors) and a
+dependent variable (criterion, explained variable, response).
+
+Examples of multivariate regression:
+
+\begin{itemize}
+\item
+  The strength of concrete depends on the components used in its
+  production. Question: In what proportion should these components be
+  used so that the strength is greatest?
+\item
+  The price of an apartment depends on\ldots. Question: how does the
+  share of individual elements affect the market price so that it is
+  highest?
+\item
+  Granting a loan depends on \ldots. Question: how does the share of
+  individual elements affect the decision to grant a loan or not?
+  \emph{is this really regression?}
+\end{itemize}
+
+In ``scientific'' terms, statistical research is generally meant to
+explain the relationships between different features of the studied
+population.
+
+The goals of research in regression analysis:
+
+\begin{itemize}
+\tightlist
+\item
+  Characterizing the relationship (among other things, its range,
+  direction, and strength).
+\item
+  Determining a mathematical model that most reliably reflects the
+  behavior of the response (in other words, finding an appropriate
+  function that can later be used for prediction).
+\item
+  Determining which of the explanatory variables are important in the
+  analysis of interdependence and ranking these variables according to
+  the strength of their influence on the explained variable.
+\item
+  Comparing different models for one explained variable, i.e.~comparing
+  models that consist of different sets of explanatory variables.
+\item
+  Determining the interaction of explanatory variables and (in the case
+  of a two-way relationship) determining the dependence of the
+  explanatory variables on the explained variable.
+\item
+  Point estimation of the values of the regression coefficients (the
+  direction and strength of interdependence as well as the statistical
+  significance of the parameters introduced into the model).
+\end{itemize}
+
+The obtained results should be verified against the following criteria:
+
+\begin{itemize}
+\tightlist
+\item
+  Determining a logical relationship between the variables,
+  i.e.~checking whether the obtained results do not conflict with the
+  nature of the phenomenon.
+\item
+  Checking whether the cause precedes the effect in time.
+\item
+  Analyzing the strength of the relationship between variables, e.g.~a
+  high correlation between variables that in reality do not affect each
+  other.
+\item
+  Checking whether the obtained model works in reality.
+\item
+  Consistency of the results.
+\item
+  Determining the agreement of the results with theoretical and
+  experimental knowledge.
+\item
+  Considering the possibility of obtaining the studied effect as a
+  manifestation of the action of different causes, as well as the
+  possibility of several effects arising from one cause.
+\end{itemize}
+
+The most commonly used functions in regression analysis:
+
+\begin{itemize}
+\tightlist
+\item
+  linear function \(f(x)=ax+b\),
+\item
+  polynomial function, e.g.~quadratic \(f(x)=ax^2+bx+c\),
+\item
+  logarithmic function \(f(x) = \ln x\),
+\item
+  exponential function \(f(x)=e^{-x}\),
+\item
+  logistic function \(f(x) = \frac{1}{1+e^{-x}}\).
+\end{itemize}
+
+\textbf{\emph{Choosing a method for the interdependence of many
+variables:}}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4194}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4194}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1613}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Analysis method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Explained variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Explanatory variables
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Multiple regression & continuous & continuous (discrete also allowed) \\
+Analysis of variance & continuous & qualitative \\
+Analysis of covariance & continuous & qualitative (symbolic) and
+continuous \\
+Poisson regression & discrete & various types \\
+Logistic regression & binary & various types \\
+\end{longtable}
+}
+
+Applications:
+
+\begin{itemize}
+\item
+  Econometrics: Multivariate regression can be used to analyze the
+  impact of various factors on economic growth, such as investment,
+  consumption, inflation, or the level of employment.
+\item
+  Medicine: In medical research, multivariate regression can help
+  identify factors influencing the development of diseases, such as age,
+  diet, lifestyle, or genetic predisposition.
+\item
+  Marketing: Multivariate regression can be used to analyze the impact
+  of various product features on sales, e.g.~prices, advertising, type
+  of packaging, or competition.
+\item
+  Finance: Multivariate regression can be used to analyze the impact of
+  various factors on return on investment, such as risk, interest rates,
+  economic growth, or fiscal policy.
+\item
+  Engineering: In engineering, multivariate regression can help analyze
+  the impact of various parameters on machine performance, such as
+  temperature, pressure, or speed.
+\item
+  Social sciences: In the social sciences, multivariate regression can
+  be used to analyze the impact of various factors on students'
+  educational outcomes, such as the parents' level of education, income,
+  or cultural environment.
+\end{itemize}
+
+We consider the influence of a set of \(k\) variables
+\(X_1, \ldots, X_k\) on the variable \(Y\). As many independent
+variables as possible should be introduced into the model, and it should
+include variables strongly correlated with the dependent variable while
+at the same time as weakly correlated with each other as possible.
+
+A linear multivariate regression model:
+
+\[Y=\beta_0 +\beta_1\cdot X_1+\beta_2\cdot X_2+\ldots+\beta_k\cdot X_k+\varepsilon.\]
+\(\beta_i\) - regression coefficients (model parameters) describing the
+influence of the \(i\)-th variable. \(\varepsilon\) - the random
+component.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Example data}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{])}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{2.1}\NormalTok{, }\FloatTok{2.9}\NormalTok{, }\FloatTok{4.2}\NormalTok{, }\FloatTok{6.1}\NormalTok{, }\FloatTok{8.1}\NormalTok{, }\FloatTok{9.9}\NormalTok{])}
+
+\CommentTok{\# Fitting a straight line (degree 1) with full results}
+\NormalTok{coefs, stats }\OperatorTok{=}\NormalTok{ np.polynomial.polynomial.polyfit(x, y, deg}\OperatorTok{=}\DecValTok{1}\NormalTok{, full}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{\# Displaying the results}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Fit coefficients:"}\NormalTok{, coefs)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Diagnostic information:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Residuals:"}\NormalTok{, stats[}\DecValTok{0}\NormalTok{])  }\CommentTok{\# Sum of squared residuals}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Rank of the system matrix:"}\NormalTok{, stats[}\DecValTok{1}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Singular values of the system matrix:"}\NormalTok{, stats[}\DecValTok{2}\NormalTok{])}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Estimated fit error:"}\NormalTok{, stats[}\DecValTok{3}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Fit coefficients: [1.51428571 1.61428571]
+
+Diagnostic information:
+Residuals: [0.87142857]
+Rank of the system matrix: 2
+Singular values of the system matrix: [1.35119311 0.41746518]
+Estimated fit error: 1.3322676295501878e-15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Example data}
+\NormalTok{np.random.seed(}\DecValTok{42}\NormalTok{)  }\CommentTok{\# Setting the random seed for reproducibility of results}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{)  }\CommentTok{\# 20 evenly spaced points between 0 and 10}
+\NormalTok{y }\OperatorTok{=} \DecValTok{3} \OperatorTok{*}\NormalTok{ x }\OperatorTok{+} \DecValTok{7} \OperatorTok{+}\NormalTok{ np.random.normal(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\BuiltInTok{len}\NormalTok{(x))  }\CommentTok{\# y data with random noise}
+
+\CommentTok{\# Fitting a straight line (linear regression)}
+\NormalTok{coefs }\OperatorTok{=}\NormalTok{ np.polynomial.polynomial.polyfit(x, y, deg}\OperatorTok{=}\DecValTok{1}\NormalTok{)  }\CommentTok{\# Regression coefficients (y = a + b*x)}
+
+\CommentTok{\# Determining the regression line}
+\NormalTok{x\_fit }\OperatorTok{=}\NormalTok{ np.linspace(}\BuiltInTok{min}\NormalTok{(x), }\BuiltInTok{max}\NormalTok{(x), }\DecValTok{100}\NormalTok{)  }\CommentTok{\# Additional points for a smooth regression line}
+\NormalTok{y\_fit }\OperatorTok{=}\NormalTok{ coefs[}\DecValTok{0}\NormalTok{] }\OperatorTok{+}\NormalTok{ coefs[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\NormalTok{ x\_fit}
+
+\CommentTok{\# Creating the chart}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{plt.scatter(x, y, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Data points\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)  }\CommentTok{\# Scatter plot}
+\NormalTok{plt.plot(x\_fit, y\_fit, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Regression line\textquotesingle{}}\NormalTok{)  }\CommentTok{\# Regression line}
+
+\CommentTok{\# Adjusting the appearance of the chart}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Linear regression using numpy.polyfit\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-regression_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Example data}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.array([}\OperatorTok{{-}}\DecValTok{10}\NormalTok{, }\OperatorTok{{-}}\DecValTok{8}\NormalTok{, }\OperatorTok{{-}}\DecValTok{6}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{])  }\CommentTok{\# x points}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{7}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{100}\NormalTok{])   }\CommentTok{\# y points with random noise (greater dispersion)}
+
+\CommentTok{\# Fitting a second{-}degree curve}
+\NormalTok{coefs }\OperatorTok{=}\NormalTok{ np.polynomial.polynomial.polyfit(x, y, deg}\OperatorTok{=}\DecValTok{2}\NormalTok{)  }\CommentTok{\# Regression coefficients (y = a + b*x + c*x\^{}2)}
+
+\CommentTok{\# Determining the regression curve}
+\NormalTok{x\_fit }\OperatorTok{=}\NormalTok{ np.linspace(}\BuiltInTok{min}\NormalTok{(x), }\BuiltInTok{max}\NormalTok{(x), }\DecValTok{100}\NormalTok{)  }\CommentTok{\# Additional points for a smooth regression curve}
+\NormalTok{y\_fit }\OperatorTok{=}\NormalTok{ coefs[}\DecValTok{0}\NormalTok{] }\OperatorTok{+}\NormalTok{ coefs[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\NormalTok{ x\_fit }\OperatorTok{+}\NormalTok{ coefs[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\NormalTok{ x\_fit}\OperatorTok{**}\DecValTok{2}
+
+\CommentTok{\# Creating the chart}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{plt.scatter(x, y, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Data points\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)  }\CommentTok{\# Scatter plot}
+\NormalTok{plt.plot(x\_fit, y\_fit, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Regression curve\textquotesingle{}}\NormalTok{)  }\CommentTok{\# Regression curve}
+
+\CommentTok{\# Adjusting the appearance of the chart}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Quadratic regression using numpy.polyfit\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-regression_files/figure-pdf/cell-4-output-1.pdf}}
+
+\chapter{Matplotlib - colors}\label{matplotlib---colors}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://matplotlib.org/stable/gallery/color/named_colors.html}
+\item
+  \url{https://pl.wikipedia.org/wiki/Lista_kolor\%C3\%B3w}
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{k1.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{k2.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{k3.png}}
+
+\protect\phantomsection\label{annotated-cell-210}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{50}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{50}\NormalTok{)}
+\NormalTok{z }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{50}\NormalTok{)}
+\NormalTok{plt.scatter(x, y, c}\OperatorTok{=}\NormalTok{z, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}viridis\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{plt.colorbar() }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X axis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Y axis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Color map for a scatter plot\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{plt.scatter(x,\ y,\ c=z,\ cmap=\textquotesingle{}viridis\textquotesingle{})}:
+this line creates a scatter plot with the data \texttt{x}, \texttt{y}
+and \texttt{z}. \texttt{x} and \texttt{y} are the data that will be
+displayed on the X and Y axes, while \texttt{z} is the data that will be
+used to create the color map. The
+\texttt{cmap=\textquotesingle{}viridis\textquotesingle{}} argument
+specifies the color map that will be used to assign colors to the
+numeric values.
+\item[\circled{2}]
+\texttt{plt.colorbar()}: this line adds a colorbar to the scatter plot.
+The colorbar indicates which colors correspond to the numeric values on
+the color map.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-colors_files/figure-pdf/cell-2-output-1.pdf}}
+
+Color maps
+
+A list of built-in color maps:
+\url{https://matplotlib.org/stable/tutorials/colors/colormaps.html}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km1.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km2.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km3.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km4.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km5.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km6.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{km7.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ matplotlib.colors }\ImportTok{import}\NormalTok{ Normalize}
+
+\CommentTok{\# Example data}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{50}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{50}\NormalTok{)}
+\NormalTok{z }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{50}\NormalTok{) }\OperatorTok{*} \DecValTok{100}
+
+\CommentTok{\# Creating the color map}
+\NormalTok{norm }\OperatorTok{=}\NormalTok{ Normalize(vmin}\OperatorTok{=}\DecValTok{0}\NormalTok{, vmax}\OperatorTok{=}\DecValTok{100}\NormalTok{)}
+\NormalTok{cmap }\OperatorTok{=}\NormalTok{ plt.cm.viridis}
+
+\CommentTok{\# Creating a scatter plot with a color map}
+\NormalTok{plt.scatter(x, y, c}\OperatorTok{=}\NormalTok{z, cmap}\OperatorTok{=}\NormalTok{cmap, norm}\OperatorTok{=}\NormalTok{norm)}
+\NormalTok{plt.colorbar()}
+
+\CommentTok{\# Adding axis labels}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X axis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Y axis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Color map for a scatter plot\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-colors_files/figure-pdf/cell-3-output-1.pdf}}
+
+\chapter{Matplotlib - chart options}\label{matplotlib---chart-options}
+
+\section{\texorpdfstring{\texttt{figure} arguments in
+Matplotlib}{figure arguments in Matplotlib}}\label{figure-arguments-in-matplotlib}
+
+In Matplotlib, a key role in managing chart properties is played by the
+\textbf{figure} object, which represents the ``canvas'' on which all
+graphical elements are drawn. The \texttt{plt.figure()} and
+\texttt{plt.subplots()} functions allow you to customize various aspects
+of the figure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.figure(num}\OperatorTok{=}\VariableTok{None}\NormalTok{, figsize}\OperatorTok{=}\VariableTok{None}\NormalTok{, dpi}\OperatorTok{=}\VariableTok{None}\NormalTok{, facecolor}\OperatorTok{=}\VariableTok{None}\NormalTok{, edgecolor}\OperatorTok{=}\VariableTok{None}\NormalTok{, frameon}\OperatorTok{=}\VariableTok{None}\NormalTok{, tight\_layout}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Arguments:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1206}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.7163}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1631}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Argument
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Default value
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{\texttt{num}} & Identification number or name of the figure (can
+be a number or a string). & \texttt{None} (automatic) \\
+\textbf{\texttt{figsize}} & Size of the figure in inches, given as a
+tuple \texttt{(width,\ height)}. & \texttt{(6.4,\ 4.8)} \\
+\textbf{\texttt{dpi}} & Resolution of the figure in dots per inch. &
+\texttt{100} \\
+\textbf{\texttt{facecolor}} & Background color of the figure (the whole
+canvas). & \texttt{white} \\
+\textbf{\texttt{edgecolor}} & Color of the figure's border. &
+\texttt{white} \\
+\textbf{\texttt{frameon}} & Whether the figure should have a frame
+(\texttt{True} or \texttt{False}). & \texttt{True} \\
+\textbf{\texttt{tight\_layout}} & Automatic adjustment of elements on
+the figure to avoid overlapping (\texttt{True} or \texttt{False}). &
+\texttt{False} \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Creating a figure with dimensions of 10x5 inches}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Chart with custom dimensions"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-chartoptions_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.figure(dpi}\OperatorTok{=}\DecValTok{200}\NormalTok{)  }\CommentTok{\# Higher resolution}
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Chart with higher resolution"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-chartoptions_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.figure(facecolor}\OperatorTok{=}\StringTok{\textquotesingle{}lightblue\textquotesingle{}}\NormalTok{, edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{)  }\CommentTok{\# Background and border color}
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Chart with a custom background"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-chartoptions_files/figure-pdf/cell-4-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.figure(tight\_layout}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }\CommentTok{\# Automatic adjustment}
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Chart with automatic layout"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-chartoptions_files/figure-pdf/cell-5-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.figure(num}\OperatorTok{=}\StringTok{"My Figure"}\NormalTok{)  }\CommentTok{\# Figure name}
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Figure with a name"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-chartoptions_files/figure-pdf/cell-6-output-1.pdf}}
+
+\section{Styles}\label{styles}
+
+Matplotlib offers built-in styles that allow for quick and easy
+customization of the appearance of charts. Using the
+\texttt{plt.style.use} function, you can load a ready-made style, so
+that the charts gain a consistent and aesthetic appearance without the
+need to manually set all the parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.style.use(style)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Using the \textquotesingle{}ggplot\textquotesingle{} style}
+\NormalTok{plt.style.use(}\StringTok{\textquotesingle{}ggplot\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Chart in the ggplot style"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-chartoptions_files/figure-pdf/cell-7-output-1.pdf}}
+
+List of styles:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(plt.style.available)}
+\end{Highlighting}
+\end{Shaded}
+
+Reference:
+\url{https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html}
+
+\chapter{Matplotlib - extras part 2.}\label{matplotlib---extras-part-2.}
+
+\section{Horizontal and vertical
+lines}\label{horizontal-and-vertical-lines}
+
+The functions \texttt{axhline} and \texttt{axvline} are used to add
+horizontal and vertical lines to a chart, respectively.
+
+\texttt{axhline} draws a horizontal line passing through a specified
+value on the Y axis, regardless of the value on the X axis. The function
+syntax is \texttt{axhline(y,\ xmin,\ xmax,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{y} - the value on the Y axis through which the line passes
+  (default 0)
+\item
+  \texttt{xmin}, \texttt{xmax} - values in the range 0-1 specifying the
+  start and end of the line on the X axis (default 0 and 1)
+\item
+  \texttt{**kwargs} - additional arguments, such as \texttt{color},
+  \texttt{linewidth}, or \texttt{linestyle}, used to control the
+  appearance of the line
+\end{itemize}
+
+\texttt{axvline} draws a vertical line passing through a specified value
+on the X axis, regardless of the value on the Y axis. The function
+syntax is \texttt{axvline(x,\ ymin,\ ymax,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} - the value on the X axis through which the line passes
+  (default 0)
+\item
+  \texttt{ymin}, \texttt{ymax} - values in the range 0-1 specifying the
+  start and end of the line on the Y axis (default 0 and 1)
+\item
+  \texttt{**kwargs} - additional arguments, such as \texttt{color},
+  \texttt{linewidth}, or \texttt{linestyle}, used to control the
+  appearance of the line
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.plot([}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{], [}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{], color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axhline(}\DecValTok{2}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)  }\CommentTok{\# Horizontal line passing through Y=2}
+\NormalTok{plt.axvline(}\DecValTok{3}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)  }\CommentTok{\# Vertical line passing through X=3, dashed line style}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-2-output-1.pdf}}
+
+In the example above, \texttt{axhline} draws a red horizontal line
+passing through the value 2 on the Y axis, while \texttt{axvline} draws
+a green dashed vertical line passing through the value 3 on the X axis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\OperatorTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{x1 }\OperatorTok{=}\NormalTok{ x[x }\OperatorTok{\textless{}} \DecValTok{0}\NormalTok{]}
+\NormalTok{y1 }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ x1}
+\NormalTok{plt.plot(x1, y1)}
+\NormalTok{x2 }\OperatorTok{=}\NormalTok{ x[x }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{]}
+\NormalTok{y2 }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ x2}
+\NormalTok{plt.plot(x2, y2)}
+\NormalTok{plt.ylim(}\OperatorTok{{-}}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\DecValTok{0}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{"{-}{-}"}\NormalTok{)}
+\NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{0}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{":"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-3-output-1.pdf}}
+
+\section{Annotations (text) on a
+chart}\label{annotations-text-on-a-chart}
+
+The \texttt{annotate} function is used to add annotations (text and
+arrows) to a chart in order to highlight or mark specific points or
+areas.
+
+The function syntax is
+\texttt{annotate(text,\ xy,\ xytext,\ arrowprops,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{text} - a string representing the annotation text.
+\item
+  \texttt{xy} - a tuple (x, y) specifying the coordinates of the point
+  referred to in the annotation.
+\item
+  \texttt{xytext} - a tuple (x, y) specifying the coordinates at which
+  the annotation text should begin. If not provided, the text will be
+  displayed directly at the \texttt{xy} coordinates.
+\item
+  \texttt{arrowprops} - a dictionary containing options for drawing the
+  arrow, such as \texttt{arrowstyle}, \texttt{color}, or
+  \texttt{linewidth}. If not provided, the arrow will not be drawn.
+\item
+  \texttt{**kwargs} - additional arguments for text formatting, such as
+  \texttt{fontsize}, \texttt{color}, or \texttt{fontweight}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{16}\NormalTok{], marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X{-}axis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Y{-}axis\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.annotate(}\StringTok{\textquotesingle{}Important point (2, 4)\textquotesingle{}}\NormalTok{,}
+\NormalTok{             xy}\OperatorTok{=}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{),                           }\CommentTok{\# Coordinates of the point to mark}
+\NormalTok{             xytext}\OperatorTok{=}\NormalTok{(}\FloatTok{2.5}\NormalTok{, }\DecValTok{6}\NormalTok{),                     }\CommentTok{\# Coordinates of the start of the text}
+\NormalTok{             arrowprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(facecolor}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{),    }\CommentTok{\# Arrow properties (color)}
+\NormalTok{             fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{,                         }\CommentTok{\# Font size}
+\NormalTok{             color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{,                        }\CommentTok{\# Text color}
+\NormalTok{             fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{)                   }\CommentTok{\# Font weight}
+
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-4-output-1.pdf}}
+
+If you want to add an annotation with text only, the function syntax is
+\texttt{annotate(text,\ xy,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{text} - a string representing the annotation text.
+\item
+  \texttt{xy} - a tuple (x, y) specifying the coordinates at which the
+  annotation text should begin.
+\item
+  \texttt{**kwargs} - additional arguments for text formatting, such as
+  \texttt{fontsize}, \texttt{color}, \texttt{fontweight}, or
+  \texttt{horizontalalignment}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{16}\NormalTok{], marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X{-}axis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Y{-}axis\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.annotate(}\StringTok{\textquotesingle{}Important point (2, 4)\textquotesingle{}}\NormalTok{,}
+\NormalTok{             xy}\OperatorTok{=}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{),                           }\CommentTok{\# Coordinates of the start of the text}
+\NormalTok{             fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{,                         }\CommentTok{\# Font size}
+\NormalTok{             color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{,                        }\CommentTok{\# Text color}
+\NormalTok{             fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{,                   }\CommentTok{\# Font weight}
+\NormalTok{             horizontalalignment}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)         }\CommentTok{\# Right{-}align the text}
+
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-5-output-1.pdf}}
+
+\section{Axis labels}\label{axis-labels}
+
+The functions \texttt{xlabel} and \texttt{ylabel} are used to add labels
+to the X and Y axes on a chart, respectively. Axis labels help to better
+understand the presented data by indicating what values are represented
+on each axis.
+
+The function syntax is \texttt{xlabel(label,\ **kwargs)} or
+\texttt{ylabel(label,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{label} - a string representing the axis label text.
+\item
+  \texttt{**kwargs} - additional arguments for label formatting, such as
+  \texttt{fontsize}, \texttt{color}, \texttt{fontweight}, or
+  \texttt{horizontalalignment}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{]}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ [}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{]}
+
+\NormalTok{plt.plot(x, y, marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}X axis\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Y axis\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-6-output-1.pdf}}
+
+The \texttt{annotate} function allows the use of LaTeX syntax in the
+annotation text, which is especially useful when we want to add
+mathematical equations or symbols to a chart. To use LaTeX syntax, the
+text must be placed between dollar signs (\texttt{\$}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi, }\DecValTok{100}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.sin(x)}
+
+\NormalTok{plt.plot(x, y)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}sin(x)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Annotation with text in LaTeX syntax}
+\NormalTok{plt.annotate(}\VerbatimStringTok{r\textquotesingle{}}\DecValTok{$\textbackslash{}s}\VerbatimStringTok{in}\KeywordTok{(}\CharTok{\textbackslash{}f}\VerbatimStringTok{rac\{2}\ErrorTok{\textbackslash{}}\VerbatimStringTok{pi\}}\OperatorTok{\{3\}}\KeywordTok{)}\VerbatimStringTok{=}\CharTok{\textbackslash{}f}\VerbatimStringTok{rac\{}\DecValTok{\textbackslash{}s}\VerbatimStringTok{qrt}\OperatorTok{\{3\}}\VerbatimStringTok{\}}\OperatorTok{\{2\}}\DecValTok{$}\VerbatimStringTok{\textquotesingle{}}\NormalTok{,}
+\NormalTok{             xy}\OperatorTok{=}\NormalTok{(}\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi }\OperatorTok{/} \DecValTok{3}\NormalTok{, np.sqrt(}\DecValTok{3}\NormalTok{) }\OperatorTok{/} \DecValTok{2}\NormalTok{),  }\CommentTok{\# Coordinates of the point to mark}
+\NormalTok{             xytext}\OperatorTok{=}\NormalTok{(}\DecValTok{3}\NormalTok{, }\FloatTok{1.0}\NormalTok{),                     }\CommentTok{\# Coordinates of the start of the text}
+\NormalTok{             fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{,                         }\CommentTok{\# Font size}
+\NormalTok{             arrowprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(facecolor}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{),    }\CommentTok{\# Arrow properties (color)}
+\NormalTok{             bbox}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(facecolor}\OperatorTok{=}\StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{))        }\CommentTok{\# Box around the text (background color)}
+
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-7-output-1.pdf}}
+
+\section{Axis tick labels}\label{axis-tick-labels}
+
+The functions \texttt{xticks} and \texttt{yticks} are used to manipulate
+the labels of the X and Y axes and the values on the axis, respectively.
+They allow you to control the display of labels, the spacing between
+them, and the formatting.
+
+\texttt{xticks} manipulates the labels and values on the X axis, and
+\texttt{yticks} on the Y axis. The function syntax is
+\texttt{xticks(ticks,\ labels,\ **kwargs)} or
+\texttt{yticks(ticks,\ labels,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{ticks} - a list of values for which labels are to be placed on
+  the axis. If not provided, the current values remain.
+\item
+  \texttt{labels} - a list of strings to be used as labels for the
+  values from the \texttt{ticks} list. If not provided, the default
+  labels will be used.
+\item
+  \texttt{**kwargs} - additional arguments for label formatting, such as
+  \texttt{fontsize}, \texttt{color}, \texttt{fontweight}, or
+  \texttt{rotation}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.sin(x)}
+
+\NormalTok{plt.plot(x, y)}
+
+\NormalTok{xtick\_vals }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{, np.pi, }\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi, }\DecValTok{3} \OperatorTok{*}\NormalTok{ np.pi]}
+\NormalTok{xtick\_labels }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}0\textquotesingle{}}\NormalTok{, }\VerbatimStringTok{r\textquotesingle{}}\DecValTok{$}\ErrorTok{\textbackslash{}}\VerbatimStringTok{pi}\DecValTok{$}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, }\VerbatimStringTok{r\textquotesingle{}}\DecValTok{$}\VerbatimStringTok{2}\ErrorTok{\textbackslash{}}\VerbatimStringTok{pi}\DecValTok{$}\VerbatimStringTok{\textquotesingle{}}\NormalTok{, }\VerbatimStringTok{r\textquotesingle{}}\DecValTok{$}\VerbatimStringTok{3}\ErrorTok{\textbackslash{}}\VerbatimStringTok{pi}\DecValTok{$}\VerbatimStringTok{\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{ytick\_vals }\OperatorTok{=}\NormalTok{ [}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\NormalTok{ytick\_labels }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}{-}1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}{-}1/2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}0\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}1/2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}1\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{plt.xticks(xtick\_vals, xtick\_labels, fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.yticks(ytick\_vals, ytick\_labels, fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{, rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{)}
+
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-8-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ x }\OperatorTok{**} \DecValTok{2} \OperatorTok{+} \DecValTok{2} \OperatorTok{*}\NormalTok{ x}
+\NormalTok{plt.plot(x, y)}
+\NormalTok{plt.annotate(xy}\OperatorTok{=}\NormalTok{(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{), text}\OperatorTok{=}\StringTok{"something"}\NormalTok{)}
+\NormalTok{plt.xticks([}\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{], color}\OperatorTok{=}\StringTok{"red"}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"abc"}\NormalTok{, color}\OperatorTok{=}\StringTok{"green"}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-9-output-1.pdf}}
+
+\section{Grid}\label{grid}
+
+The \texttt{grid} function allows you to add a grid to a chart, which
+makes it easier to assess values on the axes and compare them. You can
+control the color, width, and style of the grid lines, as well as
+specify which axes should have a grid.
+
+The function syntax is
+\texttt{plt.grid(b=None,\ which=\textquotesingle{}major\textquotesingle{},\ axis=\textquotesingle{}both\textquotesingle{},\ **kwargs)},
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{b} - a boolean value (True/False) that determines whether the
+  grid is to be displayed. Set to \texttt{None} by default, which means
+  that Matplotlib automatically determines whether the grid should be
+  displayed based on the configuration.
+\item
+  \texttt{which} - specifies which grid lines are to be displayed:
+  `major' (only grid lines for major ticks), `minor' (grid lines for
+  minor ticks), or `both' (default - grid lines for both types of
+  ticks).
+\item
+  \texttt{axis} - specifies which axes should have a grid: `both' (both
+  axes), `x' (only the X axis), or `y' (only the Y axis).
+\item
+  \texttt{**kwargs} - additional arguments for grid formatting.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi, }\DecValTok{100}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.sin(x)}
+
+\CommentTok{\# Creating the chart}
+\NormalTok{plt.plot(x, y, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Adding the grid}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, which}\OperatorTok{=}\StringTok{\textquotesingle{}both\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\FloatTok{0.5}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Plot of the function sin(x)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}sin(x)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-10-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, np.pi }\OperatorTok{*} \DecValTok{2}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{plt.subplot(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{plt.plot(x, np.sin(x), }\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.xlim(}\DecValTok{0}\NormalTok{, np.pi }\OperatorTok{*} \DecValTok{2}\NormalTok{)}
+\NormalTok{plt.subplot(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{plt.plot(x, np.cos(x), }\StringTok{\textquotesingle{}g\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.xlim(}\DecValTok{0}\NormalTok{, np.pi }\OperatorTok{*} \DecValTok{2}\NormalTok{)}
+\NormalTok{plt.subplot(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{plt.plot(x, np.sin(x), }\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, x, np.cos(x), }\StringTok{\textquotesingle{}g\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.xlim(}\DecValTok{0}\NormalTok{, np.pi }\OperatorTok{*} \DecValTok{2}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.savefig(}\StringTok{"fig3.png"}\NormalTok{, dpi}\OperatorTok{=}\DecValTok{72}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-extras2_files/figure-pdf/cell-11-output-1.pdf}}
+
+\chapter{Matplotlib - other charts}\label{matplotlib---other-charts}
+
+\section{Dual-axis chart}\label{dual-axis-chart}
+
+The \texttt{twinx} function in the Matplotlib library allows you to
+create a second Y axis that will share the X axis with the first Y axis.
+Thanks to this, you can easily present two data series that are measured
+in different units but have a common independent variable.
+
+The function syntax is \texttt{twinx(ax=None,\ **kwargs)}, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{ax} - the Axes object to be used to create the new Y axis. Set
+  to \texttt{None} by default, which means a new Y axis will be created.
+\item
+  \texttt{**kwargs} - additional arguments for formatting the new Y
+  axis.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig, ax1 }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\FloatTok{0.01}\NormalTok{, }\FloatTok{10.0}\NormalTok{, }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ x }\OperatorTok{**} \DecValTok{2}
+\NormalTok{ax1.plot(x, y, }\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax2 }\OperatorTok{=}\NormalTok{ ax1.twinx()}
+\NormalTok{y2 }\OperatorTok{=}\NormalTok{ np.sin(x)}
+\NormalTok{ax2.plot(x, y2)}
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig, ax1 }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{t }\OperatorTok{=}\NormalTok{ np.arange(}\FloatTok{0.01}\NormalTok{, }\FloatTok{10.0}\NormalTok{, }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{s1 }\OperatorTok{=}\NormalTok{ np.exp(t)}
+\NormalTok{ax1.plot(t, s1, }\StringTok{\textquotesingle{}b{-}\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax1.set\_xlabel(}\StringTok{\textquotesingle{}time (s)\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{ax1.set\_ylabel(}\StringTok{\textquotesingle{}exp\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax1.tick\_params(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, colors}\OperatorTok{=}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{ax2 }\OperatorTok{=}\NormalTok{ ax1.twinx()}
+\NormalTok{s2 }\OperatorTok{=}\NormalTok{ np.sin(}\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi }\OperatorTok{*}\NormalTok{ t)}
+\NormalTok{ax2.plot(t, s2, }\StringTok{\textquotesingle{}r.\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax2.set\_ylabel(}\StringTok{\textquotesingle{}sin\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax2.tick\_params(}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, colors}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-3-output-1.pdf}}
+
+\section{Box plot}\label{box-plot}
+
+A box plot is used to present information about the distribution of
+numeric data and to identify outliers. It is particularly useful when
+analyzing continuous data that have different values and distributions.
+Here are a few types of data for which a box plot can be used:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Comparing groups: A box plot is used to compare the distribution of
+  data between different groups. For example, it can be used to compare
+  the test results of students from different schools, salaries in
+  different sectors, or the sales values of different products.
+\item
+  Identifying outliers: A box plot is used to identify outliers in the
+  data, which may indicate measurement errors, unusual observations, or
+  extreme values. For example, it can be used to detect anomalies in
+  meteorological data, stock market values, or medical data.
+\item
+  Distribution analysis: A box plot helps to understand the distribution
+  of data, such as the median, quartiles, range of values, and potential
+  outliers. It can be used in the analysis of data such as grades,
+  population growth, stock value, or real estate prices.
+\item
+  Visualization of multidimensional data: A box plot can be used to
+  visualize multidimensional data, presenting the distribution of many
+  variables on a single chart. For example, you can compare variables
+  such as age, earnings, and education in a demographic study.
+\end{enumerate}
+
+It is worth noting that a box plot is particularly useful when we want
+to understand the distribution of data, but it does not show the
+specific number of observations or the values of individual data points.
+In such cases, other types of charts, such as a scatter plot, may be
+more appropriate.
+
+A box plot shows five descriptive statistics of the data: the minimum,
+the first quartile (Q1), the median, the third quartile (Q3), and the
+maximum.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Example data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{100}\NormalTok{)}
+
+\CommentTok{\# Creating the chart}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+
+\CommentTok{\# Drawing the boxplot}
+\NormalTok{ax.boxplot(data)}
+
+\CommentTok{\# Adding labels}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Boxplot\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Values\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xticklabels([}\StringTok{\textquotesingle{}Example data\textquotesingle{}}\NormalTok{])}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-4-output-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m10.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Creating dataset}
+\NormalTok{np.random.seed(}\DecValTok{10}\NormalTok{)}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.random.normal(}\DecValTok{100}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{200}\NormalTok{)}
+
+\CommentTok{\# Creating plot}
+\NormalTok{plt.boxplot(data)}
+
+\CommentTok{\# show plot}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-5-output-1.pdf}}
+
+\textbf{\texttt{patch\_artist=True,\ \ \ \ \#\ colored\ boxes}} --
+enables the use of ``Patch'' objects to draw the boxes themselves, so
+that we can fill them with color (further controlled by
+\texttt{boxprops}).
+
+\textbf{\texttt{notch=True,\ \ \ \ \ \ \ \ \ \ \ \#\ notches\ at\ the\ median}}
+-- draws a notch around the median line, which helps to visually assess
+the significance of differences between medians.
+
+\textbf{\texttt{boxprops=dict(facecolor=\textquotesingle{}lightblue\textquotesingle{},\ edgecolor=\textquotesingle{}navy\textquotesingle{}),}}
+-- styling of the boxes themselves:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{facecolor=\textquotesingle{}lightblue\textquotesingle{}} --
+  fills the box with a light blue color,
+\item
+  \texttt{edgecolor=\textquotesingle{}navy\textquotesingle{}} --
+  outlines the box in dark navy.
+\end{itemize}
+
+\textbf{\texttt{medianprops=dict(color=\textquotesingle{}darkred\textquotesingle{}),}}
+-- properties of the median line: only the dark red color
+(\texttt{darkred}).
+
+\textbf{\texttt{whiskerprops=dict(color=\textquotesingle{}navy\textquotesingle{}),}}
+-- style of the whiskers: the ``navy'' color for the lines that connect
+the box with the ends of the data range (without taking outliers into
+account).
+
+\textbf{\texttt{capprops=dict(color=\textquotesingle{}navy\textquotesingle{}),}}
+-- style of the ``caps'' at the ends of the whiskers: also the navy
+color.
+
+\textbf{\texttt{flierprops=dict(}} -- style of the outlier points
+(``fliers'', values beyond the reach of the whiskers):
+
+\begin{verbatim}
+* `marker='o'` – a circle as the marker,
+* `markerfacecolor='gray'` – gray fill of the circle,
+* `markersize=5` – the size of the marker,
+* `linestyle='none'` – no line connecting these points.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Preparing the data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Mode of transport\textquotesingle{}}\NormalTok{: [}
+        \StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{,}
+        \StringTok{\textquotesingle{}Bicycle\textquotesingle{}}\NormalTok{,    }\StringTok{\textquotesingle{}Bicycle\textquotesingle{}}\NormalTok{,    }\StringTok{\textquotesingle{}Bicycle\textquotesingle{}}\NormalTok{,    }\StringTok{\textquotesingle{}Bicycle\textquotesingle{}}\NormalTok{,    }\StringTok{\textquotesingle{}Bicycle\textquotesingle{}}\NormalTok{,}
+        \StringTok{\textquotesingle{}Public transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Public transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Public transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Public transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Public transport\textquotesingle{}}
+\NormalTok{    ],}
+    \StringTok{\textquotesingle{}Commute time (minutes)\textquotesingle{}}\NormalTok{: [}
+        \DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{32}\NormalTok{,}
+        \DecValTok{20}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{21}\NormalTok{,}
+        \DecValTok{40}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{44}
+\NormalTok{    ]}
+\NormalTok{\})}
+
+\CommentTok{\# Preparing the data for the box plot}
+\NormalTok{groups }\OperatorTok{=}\NormalTok{ data[}\StringTok{\textquotesingle{}Mode of transport\textquotesingle{}}\NormalTok{].unique()}
+\NormalTok{times\_list }\OperatorTok{=}\NormalTok{ [data.loc[data[}\StringTok{\textquotesingle{}Mode of transport\textquotesingle{}}\NormalTok{] }\OperatorTok{==}\NormalTok{ s, }\StringTok{\textquotesingle{}Commute time (minutes)\textquotesingle{}}\NormalTok{]}
+              \ControlFlowTok{for}\NormalTok{ s }\KeywordTok{in}\NormalTok{ groups]}
+
+\CommentTok{\# Drawing the chart}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{plt.boxplot(}
+\NormalTok{    times\_list,}
+\NormalTok{    tick\_labels}\OperatorTok{=}\NormalTok{groups,}
+\NormalTok{    patch\_artist}\OperatorTok{=}\VariableTok{True}\NormalTok{,    }\CommentTok{\# colored boxes}
+\NormalTok{    notch}\OperatorTok{=}\VariableTok{True}\NormalTok{,           }\CommentTok{\# notches at the median}
+\NormalTok{    boxprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(facecolor}\OperatorTok{=}\StringTok{\textquotesingle{}lightblue\textquotesingle{}}\NormalTok{, edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}navy\textquotesingle{}}\NormalTok{),}
+\NormalTok{    medianprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(color}\OperatorTok{=}\StringTok{\textquotesingle{}darkred\textquotesingle{}}\NormalTok{),}
+\NormalTok{    whiskerprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(color}\OperatorTok{=}\StringTok{\textquotesingle{}navy\textquotesingle{}}\NormalTok{),}
+\NormalTok{    capprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(color}\OperatorTok{=}\StringTok{\textquotesingle{}navy\textquotesingle{}}\NormalTok{),}
+\NormalTok{    flierprops}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, markerfacecolor}\OperatorTok{=}\StringTok{\textquotesingle{}gray\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{5}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}none\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Axis labels and title}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Commute time [minutes]\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{12}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Comparison of commute times to work}\CharTok{\textbackslash{}n}\StringTok{by mode of transport\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{14}\NormalTok{)}
+
+\CommentTok{\# Grid and aesthetics}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+
+\CommentTok{\# Displaying}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-6-output-1.pdf}}
+
+\section{Histogram}\label{histogram}
+
+A histogram is used to present the distribution of numeric data, both
+continuous and discrete. A histogram shows the frequency of occurrence
+of data in specific intervals (bins), which allows for the analysis of
+the distribution and the identification of patterns. Here are a few
+types of data for which a histogram can be used:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Distribution analysis: A histogram can be used to analyze the
+  distribution of data, such as grades, prices, stock values, population
+  growth, or meteorological data. This allows you to understand how the
+  data is distributed, whether it is concentrated around certain values,
+  or whether it has a long tail (i.e.~whether there are outliers).
+\item
+  Identifying trends: A histogram can help identify trends or patterns
+  in data. For example, you can use a histogram to identify seasonal
+  sales patterns, changes in stock market values, or population
+  migration patterns.
+\item
+  Comparing groups: A histogram can also be used to compare the
+  distribution of data between different groups. For example, it can be
+  used to compare the test results of students from different schools,
+  salaries in different sectors, or the sales values of different
+  products.
+\item
+  Estimating parameters: A histogram can help estimate distribution
+  parameters, such as the mean, median, or variance, which can be useful
+  in statistical analysis.
+\end{enumerate}
+
+It is worth noting that a histogram is suitable for numeric data, but it
+is not intended for presenting categorical data. In such cases, other
+types of charts, such as a bar chart, may be more appropriate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{,}
+     \DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{18}\NormalTok{]}
+
+\NormalTok{plt.hist(x, bins}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-7-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{ages }\OperatorTok{=}\NormalTok{ [}\DecValTok{20}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{32}\NormalTok{]}
+\NormalTok{bins }\OperatorTok{=}\NormalTok{ [}\DecValTok{18}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{100}\NormalTok{]}
+\NormalTok{cats2 }\OperatorTok{=}\NormalTok{ pd.cut(ages, [}\DecValTok{18}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{100}\NormalTok{], right}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(cats2)}
+\NormalTok{group\_names }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Youth\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}YoungAdult\textquotesingle{}}\NormalTok{,}
+               \StringTok{\textquotesingle{}MiddleAged\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Senior\textquotesingle{}}\NormalTok{]}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.cut(ages, bins, labels}\OperatorTok{=}\NormalTok{group\_names)}
+\NormalTok{plt.hist(data)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[18, 26), [18, 26), [18, 26), [26, 36), [18, 26), ..., [26, 36), [61, 100), [36, 61), [36, 61), [26, 36)]
+Length: 12
+Categories (4, interval[int64, left]): [[18, 26) < [26, 36) < [36, 61) < [61, 100)]
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-8-output-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{ages }\OperatorTok{=}\NormalTok{ [}\DecValTok{20}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{32}\NormalTok{]}
+\NormalTok{bins }\OperatorTok{=}\NormalTok{ [}\DecValTok{18}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{100}\NormalTok{]}
+\NormalTok{plt.hist(ages, bins}\OperatorTok{=}\NormalTok{bins)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-9-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{,}
+     \DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{18}\NormalTok{]}
+
+\NormalTok{plt.hist(x, bins}\OperatorTok{=}\NormalTok{[}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{])}
+\NormalTok{plt.xticks([}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{])}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-10-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{,}
+     \DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{18}\NormalTok{]}
+
+\NormalTok{plt.hist(x, bins}\OperatorTok{=}\NormalTok{[}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{], cumulative}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.xticks([}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{])}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-11-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{,}
+     \DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{18}\NormalTok{]}
+
+\NormalTok{plt.hist(x, bins}\OperatorTok{=}\NormalTok{[}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{], density}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.xticks([}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{])}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-12-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# 1. We create a data frame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{: }\BuiltInTok{list}\NormalTok{(}\BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{17}\NormalTok{)),}
+    \StringTok{\textquotesingle{}Commute time (min)\textquotesingle{}}\NormalTok{: [}\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{33}\NormalTok{,}
+                           \DecValTok{27}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{36}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# 2. We draw the histogram}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+
+\NormalTok{plt.hist(}
+\NormalTok{    data[}\StringTok{\textquotesingle{}Commute time (min)\textquotesingle{}}\NormalTok{],}
+\NormalTok{    bins}\OperatorTok{=}\DecValTok{8}\NormalTok{,                    }\CommentTok{\# number of bars}
+\NormalTok{    edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{,         }\CommentTok{\# bar borders}
+\NormalTok{    alpha}\OperatorTok{=}\FloatTok{0.7}                  \CommentTok{\# transparency for better aesthetics}
+\NormalTok{)}
+
+\CommentTok{\# 3. Labels and aesthetics}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Histogram of commute time to work\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Commute time (minutes)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Number of days\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xticks(}\BuiltInTok{range}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{5}\NormalTok{))  }\CommentTok{\# adjusted ticks on the X axis}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.75}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-13-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# 1. Data frame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{: }\BuiltInTok{list}\NormalTok{(}\BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{15}\NormalTok{)),}
+    \StringTok{\textquotesingle{}Number of coffees per day\textquotesingle{}}\NormalTok{: [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{]}
+\NormalTok{\})}
+
+\CommentTok{\# 2. We draw the histogram with new arguments:}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+
+\NormalTok{plt.hist(}
+\NormalTok{    data[}\StringTok{\textquotesingle{}Number of coffees per day\textquotesingle{}}\NormalTok{],}
+\NormalTok{    bins}\OperatorTok{=}\NormalTok{[}\FloatTok{0.5}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\FloatTok{2.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\FloatTok{5.5}\NormalTok{],  }\CommentTok{\# precise intervals around values 1{-}5}
+\NormalTok{    color}\OperatorTok{=}\StringTok{\textquotesingle{}lightblue\textquotesingle{}}\NormalTok{,                     }\CommentTok{\# bar color}
+\NormalTok{    edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{,                    }\CommentTok{\# border of each bar}
+\NormalTok{    alpha}\OperatorTok{=}\FloatTok{0.7}                             \CommentTok{\# transparency}
+\NormalTok{)}
+
+\CommentTok{\# 3. Labels and aesthetics}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Histogram: number of coffees drunk per day\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Number of coffees\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Number of days\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xticks(}\BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{))                  }\CommentTok{\# from 1 to 5 coffees}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-14-output-1.pdf}}
+
+\section{3D plots}\label{d-plots}
+
+\subsection{Helix}\label{helix}
+
+\[\begin{cases}
+x=a\cos (t) \\
+y=a\sin(t) \\
+z=at
+\end{cases}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig }\OperatorTok{=}\NormalTok{ plt.figure()}
+\NormalTok{ax }\OperatorTok{=}\NormalTok{ plt.axes(projection}\OperatorTok{=}\StringTok{\textquotesingle{}3d\textquotesingle{}}\NormalTok{)}
+\NormalTok{t }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{a }\OperatorTok{=} \DecValTok{3}
+\NormalTok{xline }\OperatorTok{=}\NormalTok{ a }\OperatorTok{*}\NormalTok{ np.sin(t)}
+\NormalTok{yline }\OperatorTok{=}\NormalTok{ a }\OperatorTok{*}\NormalTok{ np.cos(t)}
+\NormalTok{zline }\OperatorTok{=}\NormalTok{ a }\OperatorTok{*}\NormalTok{ t}
+\NormalTok{ax.plot3D(xline, yline, zline)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-15-output-1.pdf}}
+
+\subsection{Torus}\label{torus}
+
+\[p(\alpha,\ \beta)=\Big((R+r\cos \alpha)\cos \beta,\ (R+r\cos \alpha)\sin \beta,\ r\sin \alpha\Big)\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig }\OperatorTok{=}\NormalTok{ plt.figure()}
+\NormalTok{ax }\OperatorTok{=}\NormalTok{ plt.axes(projection}\OperatorTok{=}\StringTok{\textquotesingle{}3d\textquotesingle{}}\NormalTok{)}
+\NormalTok{r }\OperatorTok{=} \DecValTok{1}
+\NormalTok{R }\OperatorTok{=} \DecValTok{5}
+\NormalTok{alpha }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{beta }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{alpha, beta }\OperatorTok{=}\NormalTok{ np.meshgrid(alpha, beta)}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ (R }\OperatorTok{+}\NormalTok{ r }\OperatorTok{*}\NormalTok{ np.cos(alpha)) }\OperatorTok{*}\NormalTok{ np.cos(beta)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ (R }\OperatorTok{+}\NormalTok{ r }\OperatorTok{*}\NormalTok{ np.cos(alpha)) }\OperatorTok{*}\NormalTok{ np.sin(beta)}
+\NormalTok{z }\OperatorTok{=}\NormalTok{ r }\OperatorTok{*}\NormalTok{ np.sin(alpha)}
+\NormalTok{ax.plot\_wireframe(x, y, z)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-othercharts_files/figure-pdf/cell-16-output-1.pdf}}
+
+\chapter{Matplotlib - heatmap}\label{matplotlib---heatmap}
+
+A heatmap is a two-dimensional visualization in which numeric values are
+represented using colors. The intensity of the color corresponds to the
+magnitude (value) at a specific point on the grid.
+
+\textbf{Main applications of heatmaps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Correlation matrices}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    They allow you to quickly identify strong and weak relationships
+    between variables in a dataset.\\
+  \item
+    They facilitate the preliminary selection of features, e.g.~in
+    predictive modeling.
+  \end{itemize}
+\item
+  \textbf{Spatio-temporal analysis}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Visualization of the intensity of events (e.g.~sales, network
+    traffic) along the time axis versus categories or zones.\\
+  \item
+    It helps to detect seasonal, daily, or weekly patterns.
+  \end{itemize}
+\item
+  \textbf{Geographic maps}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Presentation of the density of events or values (e.g.~illnesses,
+    accidents) across geographic areas.\\
+  \item
+    They enable the quick identification of ``hotspots''.
+  \end{itemize}
+\item
+  \textbf{User behavior analysis}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tracking clicks, mouse movement, or scrolling on
+    websites/applications.\\
+  \item
+    Optimization of the layout of interface elements for usability.
+  \end{itemize}
+\item
+  \textbf{Resource and performance monitoring}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Visualization of server load, memory usage, or production output in
+    real time.\\
+  \item
+    It helps to catch anomalies or overloads.
+  \end{itemize}
+\item
+  \textbf{Detecting anomalies and deviations}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Identification of unusual readings, e.g.~in medical, financial, or
+    network data.\\
+  \item
+    Quick indication of areas requiring further analysis.
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Monday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tuesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Wednesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thursday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Friday\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{3}\NormalTok{,}
+    \StringTok{\textquotesingle{}Time of day\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Morning\textquotesingle{}}\NormalTok{]}\OperatorTok{*}\DecValTok{5} \OperatorTok{+}\NormalTok{ [}\StringTok{\textquotesingle{}Afternoon\textquotesingle{}}\NormalTok{]}\OperatorTok{*}\DecValTok{5} \OperatorTok{+}\NormalTok{ [}\StringTok{\textquotesingle{}Evening\textquotesingle{}}\NormalTok{]}\OperatorTok{*}\DecValTok{5}\NormalTok{,}
+    \StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{: [}\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{80}\NormalTok{,    }\CommentTok{\# Morning}
+                            \DecValTok{120}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{125}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{160}\NormalTok{,  }\CommentTok{\# Afternoon}
+                            \DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{120}\NormalTok{]    }\CommentTok{\# Evening}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+
+\NormalTok{heatmap\_data }\OperatorTok{=}\NormalTok{ df.pivot(index}\OperatorTok{=}\StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{, columns}\OperatorTok{=}\StringTok{\textquotesingle{}Time of day\textquotesingle{}}\NormalTok{, values}\OperatorTok{=}\StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.imshow(heatmap\_data,}
+\NormalTok{           cmap}\OperatorTok{=}\StringTok{\textquotesingle{}YlOrRd\textquotesingle{}}\NormalTok{,      }\CommentTok{\# palette from yellow (low) to red (high)}
+\NormalTok{           aspect}\OperatorTok{=}\StringTok{\textquotesingle{}auto\textquotesingle{}}\NormalTok{)      }\CommentTok{\# automatic aspect ratio adjustment}
+
+\NormalTok{cbar }\OperatorTok{=}\NormalTok{ plt.colorbar()}
+\NormalTok{cbar.set\_label(}\StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{, rotation}\OperatorTok{=}\DecValTok{270}\NormalTok{, labelpad}\OperatorTok{=}\DecValTok{15}\NormalTok{)}
+
+\NormalTok{plt.xticks(ticks}\OperatorTok{=}\BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(heatmap\_data.columns)),}
+\NormalTok{           labels}\OperatorTok{=}\NormalTok{heatmap\_data.columns,}
+\NormalTok{           rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{,}
+\NormalTok{           ha}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.yticks(ticks}\OperatorTok{=}\BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(heatmap\_data.index)),}
+\NormalTok{           labels}\OperatorTok{=}\NormalTok{heatmap\_data.index)}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Time of day\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Day of the week\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Average number of customers in the store\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-heatmap_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Monday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tuesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Wednesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thursday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Friday\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{3}\NormalTok{,}
+    \StringTok{\textquotesingle{}Time of day\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Morning\textquotesingle{}}\NormalTok{]}\OperatorTok{*}\DecValTok{5} \OperatorTok{+}\NormalTok{ [}\StringTok{\textquotesingle{}Afternoon\textquotesingle{}}\NormalTok{]}\OperatorTok{*}\DecValTok{5} \OperatorTok{+}\NormalTok{ [}\StringTok{\textquotesingle{}Evening\textquotesingle{}}\NormalTok{]}\OperatorTok{*}\DecValTok{5}\NormalTok{,}
+    \StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{: [}\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{80}\NormalTok{,    }\CommentTok{\# Morning}
+                            \DecValTok{120}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{125}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{160}\NormalTok{,  }\CommentTok{\# Afternoon}
+                            \DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{120}\NormalTok{]    }\CommentTok{\# Evening}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\NormalTok{heatmap\_data }\OperatorTok{=}\NormalTok{ df.pivot(index}\OperatorTok{=}\StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{, columns}\OperatorTok{=}\StringTok{\textquotesingle{}Time of day\textquotesingle{}}\NormalTok{, values}\OperatorTok{=}\StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+
+\NormalTok{im }\OperatorTok{=}\NormalTok{ ax.imshow(}
+\NormalTok{    heatmap\_data,}
+\NormalTok{    cmap}\OperatorTok{=}\StringTok{\textquotesingle{}YlOrRd\textquotesingle{}}\NormalTok{,      }\CommentTok{\# palette from yellow (low) to red (high)}
+\NormalTok{    aspect}\OperatorTok{=}\StringTok{\textquotesingle{}auto\textquotesingle{}}       \CommentTok{\# automatic aspect ratio adjustment}
+\NormalTok{)}
+
+\NormalTok{cbar }\OperatorTok{=}\NormalTok{ fig.colorbar(im, ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{cbar.set\_label(}\StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{, rotation}\OperatorTok{=}\DecValTok{270}\NormalTok{, labelpad}\OperatorTok{=}\DecValTok{15}\NormalTok{)}
+
+\NormalTok{ax.set\_xticks(}\BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(heatmap\_data.columns)))}
+\NormalTok{ax.set\_xticklabels(heatmap\_data.columns, rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{, ha}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_yticks(}\BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(heatmap\_data.index)))}
+\NormalTok{ax.set\_yticklabels(heatmap\_data.index)}
+
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Time of day\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Day of the week\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Average number of customers in the store\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-heatmap_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Example data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.array([}
+\NormalTok{    [}\DecValTok{23}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{56}\NormalTok{],}
+\NormalTok{    [}\DecValTok{33}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{66}\NormalTok{],}
+\NormalTok{    [}\DecValTok{12}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{39}\NormalTok{],}
+\NormalTok{    [}\DecValTok{44}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{62}\NormalTok{]}
+\NormalTok{])}
+
+\CommentTok{\# Axis labels}
+\NormalTok{days }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Monday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tuesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Wednesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thursday\textquotesingle{}}\NormalTok{]}
+\NormalTok{hours }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}9–11\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}11–13\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}13–15\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}15–17\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}17–19\textquotesingle{}}\NormalTok{]}
+
+\CommentTok{\# Creating the heatmap}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{cax }\OperatorTok{=}\NormalTok{ plt.imshow(data, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}Greens\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Axis labels}
+\NormalTok{plt.xticks(ticks}\OperatorTok{=}\NormalTok{np.arange(}\BuiltInTok{len}\NormalTok{(hours)), labels}\OperatorTok{=}\NormalTok{hours, rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{, ha}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.yticks(ticks}\OperatorTok{=}\NormalTok{np.arange(}\BuiltInTok{len}\NormalTok{(days)), labels}\OperatorTok{=}\NormalTok{days)}
+
+\CommentTok{\# Adding numeric values}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(data.shape[}\DecValTok{0}\NormalTok{]):}
+    \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(data.shape[}\DecValTok{1}\NormalTok{]):}
+\NormalTok{        plt.text(j, i, }\BuiltInTok{str}\NormalTok{(data[i, j]), ha}\OperatorTok{=}\StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{, va}\OperatorTok{=}\StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Colorbar}
+\NormalTok{plt.colorbar(cax, orientation}\OperatorTok{=}\StringTok{\textquotesingle{}vertical\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Title and layout}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Number of customers in the store by day and hour\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-heatmap_files/figure-pdf/cell-4-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.array([}
+\NormalTok{    [}\DecValTok{23}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{56}\NormalTok{],}
+\NormalTok{    [}\DecValTok{33}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{66}\NormalTok{],}
+\NormalTok{    [}\DecValTok{12}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{39}\NormalTok{],}
+\NormalTok{    [}\DecValTok{44}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{62}\NormalTok{]}
+\NormalTok{])}
+
+\NormalTok{days }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Monday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tuesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Wednesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thursday\textquotesingle{}}\NormalTok{]}
+\NormalTok{hours }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}9–11\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}11–13\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}13–15\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}15–17\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}17–19\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{cax }\OperatorTok{=}\NormalTok{ ax.imshow(data, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}Greens\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{ax.set\_xticks(np.arange(}\BuiltInTok{len}\NormalTok{(hours)))}
+\NormalTok{ax.set\_xticklabels(hours, rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{, ha}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_yticks(np.arange(}\BuiltInTok{len}\NormalTok{(days)))}
+\NormalTok{ax.set\_yticklabels(days)}
+
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(data.shape[}\DecValTok{0}\NormalTok{]):}
+    \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(data.shape[}\DecValTok{1}\NormalTok{]):}
+\NormalTok{        ax.text(j, i, }\BuiltInTok{str}\NormalTok{(data[i, j]), ha}\OperatorTok{=}\StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{, va}\OperatorTok{=}\StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{fig.colorbar(cax, ax}\OperatorTok{=}\NormalTok{ax, orientation}\OperatorTok{=}\StringTok{\textquotesingle{}vertical\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Number of customers\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Number of customers in the store by day and hour\textquotesingle{}}\NormalTok{)}
+\NormalTok{fig.tight\_layout()}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-heatmap_files/figure-pdf/cell-5-output-1.pdf}}
+
+\chapter{Matplotlib - area chart}\label{matplotlib---area-chart}
+
+An area chart is a type of visualization in which successive data series
+are presented as stacked areas/layers. The height of each layer
+corresponds to the value of a given category, and the sum of the heights
+of all layers shows the total value.
+
+\section{Main applications of area
+charts}\label{main-applications-of-area-charts}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Analysis of total composition over time}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It allows you to see how individual components (e.g.~revenue
+    sources, expenses, market segments) contribute to the total value at
+    successive moments.\\
+  \item
+    Useful for monitoring percentage shares and changes in proportions.
+  \end{itemize}
+\item
+  \textbf{Comparison of multidimensional trends}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It enables the simultaneous tracking of many time series
+    (``layers'') in a single space, which makes it easier to detect
+    mutual correlations and turning points.\\
+  \item
+    Ideal for presenting multichannel data (e.g.~website traffic from
+    different sources).
+  \end{itemize}
+\item
+  \textbf{Presentation of market shares or segments}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It shows how the shares of individual products, regions, or customer
+    groups change over time.\\
+  \item
+    It makes it easier to identify ``growing'' and ``shrinking''
+    segments.
+  \end{itemize}
+\item
+  \textbf{Budgeting and accounting}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It visualizes the structure of costs or revenue by category over the
+    course of the budget cycle.\\
+  \item
+    It helps to quickly catch excessive expenses or sources of revenue
+    growth.
+  \end{itemize}
+\item
+  \textbf{Monitoring resources and workloads}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tracking the use of resources (e.g.~staff, machines) across
+    different projects or departments.\\
+  \item
+    It enables planning and balancing the workload.
+  \end{itemize}
+\item
+  \textbf{Comparison of scenarios or variants}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Overlaying forecasted data alongside historical data makes it easier
+    to compare the ``expected'' vs.~the ``actual'' behavior of
+    indicators.\\
+  \item
+    It supports strategic decisions by illustrating deviations.
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}January\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}February\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}March\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}April\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Sales\textquotesingle{}}\NormalTok{: [}\DecValTok{1000}\NormalTok{, }\DecValTok{1200}\NormalTok{, }\DecValTok{900}\NormalTok{, }\DecValTok{1100}\NormalTok{, }\DecValTok{1300}\NormalTok{],}
+    \StringTok{\textquotesingle{}Services\textquotesingle{}}\NormalTok{: [}\DecValTok{200}\NormalTok{, }\DecValTok{250}\NormalTok{, }\DecValTok{230}\NormalTok{, }\DecValTok{260}\NormalTok{, }\DecValTok{300}\NormalTok{],}
+    \StringTok{\textquotesingle{}Advertising\textquotesingle{}}\NormalTok{: [}\DecValTok{150}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{160}\NormalTok{, }\DecValTok{190}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{]}
+\NormalTok{y1 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Sales\textquotesingle{}}\NormalTok{]}
+\NormalTok{y2 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Services\textquotesingle{}}\NormalTok{]}
+\NormalTok{y3 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Advertising\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{plt.stackplot(x, y1, y2, y3, labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Sales\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Services\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Advertising\textquotesingle{}}\NormalTok{])}
+\NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}upper left\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Company revenue broken down by source\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Amount (PLN)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xticks(rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-areachart_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}January\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}February\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}March\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}April\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Sales\textquotesingle{}}\NormalTok{: [}\DecValTok{1000}\NormalTok{, }\DecValTok{1200}\NormalTok{, }\DecValTok{900}\NormalTok{, }\DecValTok{1100}\NormalTok{, }\DecValTok{1300}\NormalTok{],}
+    \StringTok{\textquotesingle{}Services\textquotesingle{}}\NormalTok{: [}\DecValTok{200}\NormalTok{, }\DecValTok{250}\NormalTok{, }\DecValTok{230}\NormalTok{, }\DecValTok{260}\NormalTok{, }\DecValTok{300}\NormalTok{],}
+    \StringTok{\textquotesingle{}Advertising\textquotesingle{}}\NormalTok{: [}\DecValTok{150}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{160}\NormalTok{, }\DecValTok{190}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{]}
+\NormalTok{y1 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Sales\textquotesingle{}}\NormalTok{]}
+\NormalTok{y2 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Services\textquotesingle{}}\NormalTok{]}
+\NormalTok{y3 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Advertising\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{ax.stackplot(x, y1, y2, y3, labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Sales\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Services\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Advertising\textquotesingle{}}\NormalTok{])}
+\NormalTok{ax.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}upper left\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Company revenue broken down by source\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Amount (PLN)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xticks(rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{)}
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-areachart_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Monday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tuesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Wednesday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thursday\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Friday\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Mobile\textquotesingle{}}\NormalTok{: [}\DecValTok{1500}\NormalTok{, }\DecValTok{1800}\NormalTok{, }\DecValTok{1600}\NormalTok{, }\DecValTok{1700}\NormalTok{, }\DecValTok{2000}\NormalTok{],}
+    \StringTok{\textquotesingle{}Desktop\textquotesingle{}}\NormalTok{: [}\DecValTok{1200}\NormalTok{, }\DecValTok{1100}\NormalTok{, }\DecValTok{1300}\NormalTok{, }\DecValTok{1250}\NormalTok{, }\DecValTok{1400}\NormalTok{],}
+    \StringTok{\textquotesingle{}Tablet\textquotesingle{}}\NormalTok{: [}\DecValTok{300}\NormalTok{, }\DecValTok{350}\NormalTok{, }\DecValTok{320}\NormalTok{, }\DecValTok{310}\NormalTok{, }\DecValTok{360}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Day\textquotesingle{}}\NormalTok{]}
+\NormalTok{y1 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Mobile\textquotesingle{}}\NormalTok{]}
+\NormalTok{y2 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Desktop\textquotesingle{}}\NormalTok{]}
+\NormalTok{y3 }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Tablet\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{plt.stackplot(}
+\NormalTok{    x, y1, y2, y3,}
+\NormalTok{    labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Mobile\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Desktop\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tablet\textquotesingle{}}\NormalTok{],}
+\NormalTok{    colors}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}SteelBlue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}MediumSeaGreen\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}IndianRed\textquotesingle{}}\NormalTok{],}
+\NormalTok{    alpha}\OperatorTok{=}\FloatTok{0.8}
+\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Website traffic by device over the week\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Day of the week\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Number of visits\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}upper left\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{plt.xticks(rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-areachart_files/figure-pdf/cell-4-output-1.pdf}}
+
+\part{Seaborn}
+
+\chapter{Seaborn - basics}\label{seaborn---basics}
+
+\url{https://seaborn.pydata.org/}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\end{Highlighting}
+\end{Shaded}
+
+The Seaborn library, which is a wrapper around Matplotlib, makes it
+easier to create ``beautiful and readable'' statistical charts in the
+Python language.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Exploratory data analysis (EDA): Seaborn is often used for data
+  visualization during exploratory data analysis, which helps to
+  understand the structure, trends, and relationships between variables
+  in the data. This allows for the identification of patterns, the
+  detection of outliers, and any potential problems with the data.
+\item
+  Visualization of categorical data: Seaborn offers many types of
+  categorical charts, such as bar plots, box plots, violin plots, and
+  point plots. Thanks to this, it is easy to compare values between
+  different categories, which helps to better understand the data.
+\item
+  Visualization of multidimensional data: Seaborn allows you to create
+  charts with many variables at once. Functions such as
+  \texttt{pairplot} and \texttt{heatmap} are useful for analyzing
+  multidimensional data and identifying correlations between variables.
+\item
+  Visualization of statistical distributions: Seaborn enables the
+  creation of histograms, kernel density estimation (KDE) plots, and the
+  empirical cumulative distribution function. With these tools, you can
+  understand the distribution of data, which is essential in statistical
+  analysis and modeling.
+\item
+  Regression visualization: Seaborn offers tools for regression
+  analysis, such as \texttt{regplot} and \texttt{lmplot}. These
+  functions allow for the visualization of the regression line, which
+  makes it easier to understand the relationship between variables and
+  to assess the fit of models.
+\item
+  Creating grids of charts: Seaborn allows you to create grids of charts
+  using functions such as \texttt{FacetGrid} and \texttt{PairGrid}. This
+  makes it easier to analyze and compare data for different subgroups,
+  layers, or combinations of variables.
+\item
+  Customizing charts: Seaborn enables the customization of charts by
+  changing styles, color palettes, and other chart parameters. Thanks to
+  this, you can create attractive and professional-looking data
+  visualizations.
+\item
+  Presentations and reports: Seaborn can be used to create high-quality
+  data visualizations for the purposes of presentations, reports, or
+  scientific publications. The aesthetics and ease of customization of
+  charts make the visualizations created in Seaborn readable and
+  engaging for the audience.
+\item
+  Time analysis: Seaborn can be used to analyze time data, such as time
+  series or seasonal data. Functions such as \texttt{lineplot} or
+  \texttt{relplot} allow for the visualization of trends and any changes
+  in the data over time.
+\item
+  Comparison of models and algorithms: Data visualizations created using
+  Seaborn can be used to compare the results of different machine
+  learning models or algorithms. In this way, you can present the
+  results of an analysis, the quality of classification, estimation, or
+  forecasting.
+\item
+  Teaching and education: Seaborn is often used as a tool for teaching
+  and education, especially in the context of learning statistics, data
+  analysis, and machine learning. Data visualizations make it easier to
+  understand complex concepts and relationships between variables.
+\end{enumerate}
+
+\section{Loading built-in datasets}\label{loading-built-in-datasets}
+
+The \texttt{sns.load\_dataset()} function allows you to load built-in
+datasets in the Seaborn library. All built-in datasets are stored as
+Pandas DataFrames.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Loading the ``iris'' dataset:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(iris\_data.head())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   sepal_length  sepal_width  petal_length  petal_width species
+0           5.1          3.5           1.4          0.2  setosa
+1           4.9          3.0           1.4          0.2  setosa
+2           4.7          3.2           1.3          0.2  setosa
+3           4.6          3.1           1.5          0.2  setosa
+4           5.0          3.6           1.4          0.2  setosa
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Loading the ``titanic'' dataset:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+
+\NormalTok{titanic\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}titanic\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(titanic\_data.head())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   survived  pclass     sex   age  sibsp  parch     fare embarked  class  \
+0         0       3    male  22.0      1      0   7.2500        S  Third   
+1         1       1  female  38.0      1      0  71.2833        C  First   
+2         1       3  female  26.0      0      0   7.9250        S  Third   
+3         1       1  female  35.0      1      0  53.1000        S  First   
+4         0       3    male  35.0      0      0   8.0500        S  Third   
+
+     who  adult_male deck  embark_town alive  alone  
+0    man        True  NaN  Southampton    no  False  
+1  woman       False    C    Cherbourg   yes  False  
+2  woman       False  NaN  Southampton   yes   True  
+3  woman       False    C  Southampton   yes  False  
+4    man        True  NaN  Southampton    no   True  
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Loading the ``tips'' dataset:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+
+\NormalTok{tips\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}tips\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(tips\_data.head())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   total_bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+\end{verbatim}
+
+\section{Scatter plot}\label{scatter-plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Loading the data}
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Creating the scatter plot}
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Scatter plot of sepal length and width\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Sepal length (cm)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Sepal width (cm)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-5-output-1.pdf}}
+
+The \texttt{sns.scatterplot()} function offers additional parameters
+that allow for modifying the chart. Examples include:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The \texttt{hue} parameter: allows you to add coloring of the points
+  based on the values of a categorical variable.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Loading the data}
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Creating a scatter plot with the \textquotesingle{}hue\textquotesingle{} parameter}
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}species\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Scatter plot of sepal length and width with the hue parameter\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Sepal length (cm)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Sepal width (cm)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-6-output-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The \texttt{size} parameter: allows you to change the size of the
+  points based on the values of a numeric variable.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Loading the data}
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Creating a scatter plot with the \textquotesingle{}size\textquotesingle{} parameter}
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, size}\OperatorTok{=}\StringTok{\textquotesingle{}petal\_length\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Scatter plot of sepal length and width with the size parameter\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Sepal length (cm)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Sepal width (cm)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-7-output-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The \texttt{style} parameter: allows you to change the style of the
+  points based on the values of a categorical variable.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Loading the data}
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Creating a scatter plot with the \textquotesingle{}size\textquotesingle{} parameter}
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, size}\OperatorTok{=}\StringTok{\textquotesingle{}petal\_length\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Scatter plot of sepal length and width with the size parameter\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Sepal length (cm)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Sepal width (cm)\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-8-output-1.pdf}}
+
+\section{Line plot}\label{line-plot}
+
+The \texttt{sns.lineplot()} function in the Seaborn library is used to
+create line plots, which allow for the visualization of the relationship
+between two variables, especially in the case of time data. A line plot
+is useful for presenting trends and changes in data over time or another
+continuous variable.
+
+Here is an example of using the \texttt{sns.lineplot()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Example data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{: [}\DecValTok{2010}\NormalTok{, }\DecValTok{2011}\NormalTok{, }\DecValTok{2012}\NormalTok{, }\DecValTok{2013}\NormalTok{, }\DecValTok{2014}\NormalTok{, }\DecValTok{2015}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2017}\NormalTok{, }\DecValTok{2018}\NormalTok{, }\DecValTok{2019}\NormalTok{],}
+    \StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{: [}\DecValTok{100}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{200}\NormalTok{]}
+\NormalTok{\}}
+
+\CommentTok{\# Loading the data as a Pandas DataFrame}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\CommentTok{\# Creating the line plot}
+\NormalTok{sns.lineplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Line plot example\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Year\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-9-output-1.pdf}}
+
+In the example above, we create a line plot based on the DataFrame
+\texttt{df}. The \texttt{x} and \texttt{y} parameters specify the
+variables that are to be presented on the chart axes. The \texttt{data}
+parameter indicates the data source, in this case a Pandas DataFrame.
+
+The \texttt{sns.lineplot()} function offers additional parameters that
+allow for modifying the chart. Examples include:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The \texttt{hue} parameter: allows you to add coloring of the lines
+  based on the values of a categorical variable.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# Example data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{: [}\DecValTok{2010}\NormalTok{, }\DecValTok{2011}\NormalTok{, }\DecValTok{2012}\NormalTok{, }\DecValTok{2013}\NormalTok{, }\DecValTok{2014}\NormalTok{, }\DecValTok{2015}\NormalTok{, }\DecValTok{2016}\NormalTok{, }\DecValTok{2017}\NormalTok{, }\DecValTok{2018}\NormalTok{, }\DecValTok{2019}\NormalTok{] }\OperatorTok{*} \DecValTok{2}\NormalTok{,}
+    \StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{: [}\DecValTok{100}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{200}\NormalTok{] }\OperatorTok{+}
+\NormalTok{             [}\DecValTok{200}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{160}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{110}\NormalTok{, }\DecValTok{100}\NormalTok{],}
+    \StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{10} \OperatorTok{+}\NormalTok{ [}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{10}
+\NormalTok{\}}
+
+\CommentTok{\# Loading the data as a Pandas DataFrame}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+
+\CommentTok{\# Creating a line plot with the \textquotesingle{}hue\textquotesingle{} parameter}
+\NormalTok{sns.lineplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Line plot example with the hue parameter\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Year\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-10-output-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The \texttt{style} parameter: allows you to change the style of the
+  line based on the values of a categorical variable.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.lineplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{, style}\OperatorTok{=}\StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The \texttt{markers} parameter: allows you to add markers to the data
+  points.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.lineplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{, markers}\OperatorTok{=}\VariableTok{True}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  The \texttt{ci} parameter: allows you to add a confidence interval to
+  the chart, which can be useful in the case of multiple measurements
+  for the same values on the X axis.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.lineplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}value\textquotesingle{}}\NormalTok{, ci}\OperatorTok{=}\DecValTok{95}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Pie chart}\label{pie-chart}
+
+Not directly supported.
+
+\section{Bar chart}\label{bar-chart}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Example DataFrame}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{],}
+        \StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{: [}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{13}\NormalTok{],}
+        \StringTok{\textquotesingle{}Group\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{]\}}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\end{Highlighting}
+\end{Shaded}
+
+Basic bar chart:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Basic bar chart\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-12-output-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Example with \texttt{estimator}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df, estimator}\OperatorTok{=}\BuiltInTok{max}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Bar chart with \textquotesingle{}estimator=max\textquotesingle{}"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-13-output-1.pdf}}
+
+In this example, \texttt{estimator=max} causes the height of the bars to
+be the maximum value for each category.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Example with \texttt{errorbar}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df, errorbar}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Bar chart with \textquotesingle{}errorbar=None\textquotesingle{}"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-14-output-1.pdf}}
+
+Here, \texttt{errorbar=None} causes the confidence intervals not to be
+displayed on the chart.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Example with \texttt{palette}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df, palette}\OperatorTok{=}\StringTok{\textquotesingle{}Greens\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Bar chart with \textquotesingle{}palette=Greens\textquotesingle{}"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-15-output-1.pdf}}
+
+The \texttt{palette=\textquotesingle{}Greens\textquotesingle{}} argument
+sets the color palette to shades of green.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Example with \texttt{hue}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}Group\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\NormalTok{plt.title(}\StringTok{"Bar chart with \textquotesingle{}hue=Group\textquotesingle{}"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-16-output-1.pdf}}
+
+In this example, the
+\texttt{hue=\textquotesingle{}Group\textquotesingle{}} argument splits
+the bars for each category according to the values in the `Group'
+column.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Example with \texttt{orient}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df, orient}\OperatorTok{=}\StringTok{\textquotesingle{}h\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Bar chart with \textquotesingle{}orient=h\textquotesingle{}"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-17-output-1.pdf}}
+
+Here, \texttt{orient=\textquotesingle{}h\textquotesingle{}} changes the
+orientation of the chart to horizontal.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Example with \texttt{order}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.barplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}Category\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}Value\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{df, order}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}D\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}C\textquotesingle{}}\NormalTok{])}
+\NormalTok{plt.title(}\StringTok{"Bar chart with \textquotesingle{}order=[\textquotesingle{}B\textquotesingle{}, \textquotesingle{}D\textquotesingle{}, \textquotesingle{}A\textquotesingle{}, \textquotesingle{}C\textquotesingle{}]\textquotesingle{}"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-18-output-1.pdf}}
+
+The
+\texttt{order={[}\textquotesingle{}B\textquotesingle{},\ \textquotesingle{}D\textquotesingle{},\ \textquotesingle{}A\textquotesingle{},\ \textquotesingle{}C\textquotesingle{}{]}}
+argument specifies the order of the categories on the x axis.
+
+\section{Styles}\label{styles-1}
+
+The Seaborn library allows you to customize the aesthetics of charts
+using color palettes and styles, which lets you obtain attractive and
+readable data visualizations. Here are a few examples of how we can
+customize the aesthetics of charts in Seaborn:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Color palettes:
+\end{enumerate}
+
+Color palettes allow you to change the coloring of charts. Seaborn
+offers several built-in color palettes that can be easily applied to
+charts.
+
+Example of using the `coolwarm' color palette in a scatter plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Setting the \textquotesingle{}coolwarm\textquotesingle{} color palette}
+\NormalTok{sns.set\_palette(}\StringTok{\textquotesingle{}coolwarm\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}species\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-19-output-1.pdf}}
+
+To reset the color palette to the default, use
+\texttt{sns.set\_palette(\textquotesingle{}deep\textquotesingle{})}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Chart styles:
+\end{enumerate}
+
+Seaborn allows you to change the style of charts, which can affect the
+overall appearance and readability of the visualization. The library
+offers several built-in styles.
+
+Example of using the `whitegrid' style in a scatter plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Setting the \textquotesingle{}whitegrid\textquotesingle{} style}
+\NormalTok{sns.set\_style(}\StringTok{\textquotesingle{}whitegrid\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}species\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-20-output-1.pdf}}
+
+Other available styles are: `darkgrid', `white', `ticks', and `dark'. To
+reset the style to the default, use
+\texttt{sns.set\_style(\textquotesingle{}darkgrid\textquotesingle{})}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Scaling of graphical elements:
+\end{enumerate}
+
+Seaborn allows you to scale graphical elements, which can be useful in
+the case of different screen resolutions or the need to change the size
+of charts.
+
+Example of using the `poster' context in a scatter plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{iris\_data }\OperatorTok{=}\NormalTok{ sns.load\_dataset(}\StringTok{\textquotesingle{}iris\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Setting the \textquotesingle{}poster\textquotesingle{} context}
+\NormalTok{sns.set\_context(}\StringTok{\textquotesingle{}poster\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{sns.scatterplot(x}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_length\textquotesingle{}}\NormalTok{, y}\OperatorTok{=}\StringTok{\textquotesingle{}sepal\_width\textquotesingle{}}\NormalTok{, hue}\OperatorTok{=}\StringTok{\textquotesingle{}species\textquotesingle{}}\NormalTok{, data}\OperatorTok{=}\NormalTok{iris\_data)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{seaborn-basics_files/figure-pdf/cell-21-output-1.pdf}}
+
+Other available contexts are: `paper', `notebook', and `talk'. To reset
+the context to the default, use
+\texttt{sns.set\_context(\textquotesingle{}notebook\textquotesingle{})}.
+
+By combining these methods, you can create varied, attractive, and
+readable data visualizations.
+
 
 
 

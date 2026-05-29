@@ -52,6 +52,16 @@ book:
       - matplotlib-scatterplot.qmd
       - matplotlib-piechart.qmd
       - matplotlib-barchart.qmd
+      - matplotlib-regression.qmd
+      - matplotlib-colors.qmd
+      - matplotlib-chartoptions.qmd
+      - matplotlib-extras2.qmd
+      - matplotlib-othercharts.qmd
+      - matplotlib-heatmap.qmd
+      - matplotlib-areachart.qmd
+    - part: "Seaborn"
+      chapters:
+      - seaborn-basics.qmd
   downloads: [pdf, epub]
   repo-url: https://github.com/pjastr/dav-book
   repo-actions: [issue]
