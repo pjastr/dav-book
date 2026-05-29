@@ -222,7 +222,7 @@
 
 \title{Data analysis and visualisation}
 \author{Piotr Jastrzębski}
-\date{2026-05-19}
+\date{2026-05-29}
 \begin{document}
 \maketitle
 
@@ -7767,6 +7767,1320 @@ The function signature is
 \end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{matplotlib-subplots_files/figure-pdf/cell-5-output-1.pdf}}
+
+\chapter{Matplotlib - saving}\label{matplotlib---saving}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  PNG (Portable Network Graphics) - a raster file, a popular format for
+  saving images on the Internet.
+\item
+  JPEG (Joint Photographic Experts Group) - a raster file, a popular
+  format for saving photographic images.
+\item
+  SVG (Scalable Vector Graphics) - a vector file that scales well and
+  preserves quality across different resolutions.
+\item
+  PDF (Portable Document Format) - a vector document format, popular for
+  printing and viewing documents.
+\item
+  EPS (Encapsulated PostScript) - a vector file, often used in
+  scientific publications and printed materials.
+\item
+  TIFF (Tagged Image File Format) - a raster file, popular in
+  professional printing and graphics.
+\item
+  WebP is a modern image format developed by Google that offers better
+  compression and lower quality loss compared to the popular JPEG and
+  PNG formats, which contributes to faster loading of web pages and
+  savings in data transfer.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ x }\OperatorTok{\^{}} \DecValTok{2}
+\CommentTok{\# Labeling the Axes and Title}
+\NormalTok{plt.title(}\StringTok{"Graph Drawing"}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{"Time"}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"Distance"}\NormalTok{)}
+
+\CommentTok{\# Formatting the line colors}
+\NormalTok{plt.plot(x, y, }\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Formatting the line type}
+\NormalTok{plt.plot(x, y, }\StringTok{\textquotesingle{}\textgreater{}\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# save in pdf formats}
+\NormalTok{plt.savefig(}\StringTok{\textquotesingle{}timevsdist.pdf\textquotesingle{}}\NormalTok{, }\BuiltInTok{format}\OperatorTok{=}\StringTok{\textquotesingle{}pdf\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-saving_files/figure-pdf/cell-2-output-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m6.png}}
+
+\chapter{Matplotlib - scatter plot}\label{matplotlib---scatter-plot}
+
+A scatter plot is used when we want to present the relationship between
+two variables or the distribution of data points in a two-dimensional
+space. A scatter plot is suitable for both continuous and discrete data,
+when we want to illustrate patterns, correlation, or relationships
+between variables.
+
+Here are some situations in which scatter plots are used:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Analyzing the correlation between two variables, for example the
+  relationship between age and income.
+\item
+  Presenting the distribution of data points, for example showing the
+  geographic distribution of stores in a city.
+\item
+  Exploring data in order to understand its structure and find patterns,
+  groups, or anomalies, for example to identify data clusters in cluster
+  analysis (clustering).
+\item
+  Detecting outliers in the data, for example for detecting unusual
+  observations in a dataset.
+\item
+  Comparing different groups or categories of data, for example
+  comparing the economic growth of different countries relative to their
+  public debt.
+\end{enumerate}
+
+Scatter plots are particularly useful when dealing with data of a
+different nature (continuous or discrete) and when we want to
+investigate correlation, groups, patterns, or outliers.
+
+\protect\phantomsection\label{annotated-cell-178}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{plt.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{], color}\OperatorTok{=}\StringTok{\textquotesingle{}lightblue\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{3}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{plt.scatter([}\FloatTok{0.3}\NormalTok{, }\FloatTok{3.8}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{2.5}\NormalTok{], [}\DecValTok{11}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{26}\NormalTok{], color}\OperatorTok{=}\StringTok{\textquotesingle{}darkgreen\textquotesingle{}}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}\^{}\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{plt.xlim(}\FloatTok{0.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{3}}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{plt.plot({[}1,\ 2,\ 3,\ 4{]},\ {[}10,\ 20,\ 25,\ 30{]},\ color=\textquotesingle{}lightblue\textquotesingle{},\ linewidth=3)}
+- Creates a line chart with the given point coordinates (1, 10), (2,
+20), (3, 25) and (4, 30). The line color is light blue (lightblue) and
+its width is 3.
+\item[\circled{2}]
+\texttt{plt.scatter({[}0.3,\ 3.8,\ 1.2,\ 2.5{]},\ {[}11,\ 25,\ 9,\ 26{]},\ color=\textquotesingle{}darkgreen\textquotesingle{},\ marker=\textquotesingle{}\^{}\textquotesingle{})}
+- Creates a scatter plot with the given point coordinates (0.3, 11),
+(3.8, 25), (1.2, 9) and (2.5, 26). - The color of the points is dark
+green (darkgreen) and their shape is upward-filled triangles (\^{}).
+\item[\circled{3}]
+\texttt{plt.xlim(0.5,\ 4.5)} - Sets the range of values on the X axis,
+starting from 0.5 to 4.5.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.plot([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{], [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{], color}\OperatorTok{=}\StringTok{\textquotesingle{}lightblue\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{3}\NormalTok{)}
+\NormalTok{ax.scatter([}\FloatTok{0.3}\NormalTok{, }\FloatTok{3.8}\NormalTok{, }\FloatTok{1.2}\NormalTok{, }\FloatTok{2.5}\NormalTok{], [}\DecValTok{11}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{26}\NormalTok{], color}\OperatorTok{=}\StringTok{\textquotesingle{}darkgreen\textquotesingle{}}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}\^{}\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlim(}\FloatTok{0.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-3-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-180}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{house\_prices }\OperatorTok{=}\NormalTok{ [}\DecValTok{230000}\NormalTok{, }\DecValTok{350000}\NormalTok{, }\DecValTok{480000}\NormalTok{, }\DecValTok{280000}\NormalTok{, }\DecValTok{420000}\NormalTok{, }\DecValTok{610000}\NormalTok{, }\DecValTok{390000}\NormalTok{, }\DecValTok{580000}\NormalTok{]}
+\NormalTok{square\_meters }\OperatorTok{=}\NormalTok{ [}\DecValTok{90}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{210}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{260}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{240}\NormalTok{]}
+\NormalTok{plt.scatter(square\_meters, house\_prices, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Area [m2]\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}House price [PLN]\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Relationship between area and house price\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{plt.scatter(square\_meters,\ house\_prices,\ color=\textquotesingle{}blue\textquotesingle{},\ marker=\textquotesingle{}o\textquotesingle{})}:
+creates a scatter plot with the house areas on the X axis
+(\texttt{square\_meters}) and the house prices on the Y axis
+(\texttt{house\_prices}). The points are blue
+(\texttt{color=\textquotesingle{}blue\textquotesingle{}}) and have a
+circle shape (\texttt{marker=\textquotesingle{}o\textquotesingle{}}).
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-4-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{house\_prices }\OperatorTok{=}\NormalTok{ [}\DecValTok{230000}\NormalTok{, }\DecValTok{350000}\NormalTok{, }\DecValTok{480000}\NormalTok{, }\DecValTok{280000}\NormalTok{, }\DecValTok{420000}\NormalTok{, }\DecValTok{610000}\NormalTok{, }\DecValTok{390000}\NormalTok{, }\DecValTok{580000}\NormalTok{]}
+\NormalTok{square\_meters }\OperatorTok{=}\NormalTok{ [}\DecValTok{90}\NormalTok{, }\DecValTok{140}\NormalTok{, }\DecValTok{210}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{260}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{240}\NormalTok{]}
+\NormalTok{ax.scatter(square\_meters, house\_prices, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Area [m2]\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}House price [PLN]\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Relationship between area and house price\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-5-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-182}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ matplotlib }\ImportTok{import}\NormalTok{ pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ [}\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{]}
+\NormalTok{area }\OperatorTok{=}\NormalTok{ [}\DecValTok{70}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{2}\NormalTok{]}
+\NormalTok{plt.scatter(x, y, marker}\OperatorTok{=}\StringTok{"\textgreater{}"}\NormalTok{, color}\OperatorTok{=}\StringTok{"brown"}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{, s}\OperatorTok{=}\NormalTok{area) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{plt.show(block}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+The code
+\texttt{plt.scatter(x,\ y,\ marker="\textgreater{}",\ color="brown",\ alpha=0.5,\ s=area)}
+creates a scatter plot. \texttt{x}: a list or array of the x coordinates
+of the points on the chart. \texttt{y}: a list or array of the y
+coordinates of the points on the chart. The \texttt{x} and \texttt{y}
+values must have the same length in order to represent each point on the
+chart. \texttt{marker}: the symbol representing the shape of the points
+on the chart. In this case, we use \texttt{"\textgreater{}"} which means
+a right-pointing arrow. \texttt{color}: the color of the points on the
+chart. In this case, we use the color ``brown''. \texttt{alpha}: the
+transparency of the points on the chart, where a value of \texttt{1}
+means fully opaque and \texttt{0} means fully transparent. In this case,
+we use a value of \texttt{0.5} which means the points are
+semi-transparent. \texttt{s}: the size of the points on the chart, which
+can be a single value or a list/array of values with the same length as
+the \texttt{x} and \texttt{y} coordinates.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-6-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-183}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{ }\hspace*{\fill}\NormalTok{\circled{1}}
+    \StringTok{\textquotesingle{}product\_id\textquotesingle{}}\NormalTok{: [}\DecValTok{101}\NormalTok{, }\DecValTok{102}\NormalTok{, }\DecValTok{103}\NormalTok{, }\DecValTok{104}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{106}\NormalTok{, }\DecValTok{107}\NormalTok{, }\DecValTok{108}\NormalTok{, }\DecValTok{109}\NormalTok{, }\DecValTok{110}\NormalTok{],}
+    \StringTok{\textquotesingle{}price\textquotesingle{}}\NormalTok{: [}\FloatTok{19.99}\NormalTok{, }\FloatTok{29.99}\NormalTok{, }\FloatTok{14.99}\NormalTok{, }\FloatTok{49.99}\NormalTok{, }\FloatTok{9.99}\NormalTok{, }\FloatTok{39.99}\NormalTok{, }\FloatTok{24.99}\NormalTok{, }\FloatTok{34.99}\NormalTok{, }\FloatTok{44.99}\NormalTok{, }\FloatTok{15.99}\NormalTok{],}
+    \StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{: [}\DecValTok{150}\NormalTok{, }\DecValTok{85}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{180}\NormalTok{],}
+    \StringTok{\textquotesingle{}rating\textquotesingle{}}\NormalTok{: [}\FloatTok{4.5}\NormalTok{, }\FloatTok{4.2}\NormalTok{, }\FloatTok{4.8}\NormalTok{, }\FloatTok{3.9}\NormalTok{, }\FloatTok{4.6}\NormalTok{, }\FloatTok{4.1}\NormalTok{, }\FloatTok{4.3}\NormalTok{, }\FloatTok{4.0}\NormalTok{, }\FloatTok{3.8}\NormalTok{, }\FloatTok{4.7}\NormalTok{],}
+    \StringTok{\textquotesingle{}discount\textquotesingle{}}\NormalTok{: [}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.0}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\FloatTok{0.0}\NormalTok{, }\FloatTok{0.12}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data) }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{x\_values }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}price\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{3}}
+\NormalTok{y\_values }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{4}}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}rating\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{sizes }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}discount\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{1000} \OperatorTok{+} \DecValTok{50} \hspace*{\fill}\NormalTok{\circled{6}}
+
+\NormalTok{plt.scatter(x\_values, y\_values, s}\OperatorTok{=}\NormalTok{sizes, c}\OperatorTok{=}\NormalTok{colors, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}viridis\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{7}}
+
+\NormalTok{plt.colorbar(label}\OperatorTok{=}\StringTok{\textquotesingle{}Product rating\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{8}}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Product price (PLN)\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{9}}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{10}}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sales analysis\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{11}}
+
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{12}}
+
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{13}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{data\ =\ \{...\}}: creates a dictionary containing data about
+products, where each key corresponds to a column name and the values are
+lists containing data for 10 products (product id, price, number of
+units sold, rating, and discount).
+\item[\circled{2}]
+\texttt{df\ =\ pd.DataFrame(data)}: converts the \texttt{data}
+dictionary into a pandas DataFrame, which creates an organized data
+table with named columns.
+\item[\circled{3}]
+\texttt{x\_values\ =\ df{[}\textquotesingle{}price\textquotesingle{}{]}}:
+extracts the column with product prices and assigns it to the variable
+\texttt{x\_values}, which will be used as the X coordinates on the
+chart.
+\item[\circled{4}]
+\texttt{y\_values\ =\ df{[}\textquotesingle{}units\_sold\textquotesingle{}{]}}:
+extracts the column with the number of units sold and assigns it to the
+variable \texttt{y\_values}, which will be used as the Y coordinates on
+the chart.
+\item[\circled{5}]
+\texttt{colors\ =\ df{[}\textquotesingle{}rating\textquotesingle{}{]}}:
+extracts the column with product ratings and assigns it to the variable
+\texttt{colors}, which will be used to assign colors to the points on
+the chart.
+\item[\circled{6}]
+\texttt{sizes\ =\ df{[}\textquotesingle{}discount\textquotesingle{}{]}\ *\ 1000\ +\ 50}:
+creates the variable \texttt{sizes} defining the size of the points by
+multiplying the discount value by 1000 and adding 50, which ensures the
+visibility of all points (minimum size of 50 units).
+\item[\circled{7}]
+\texttt{plt.scatter(x\_values,\ y\_values,\ s=sizes,\ c=colors,\ alpha=0.7,\ cmap=\textquotesingle{}viridis\textquotesingle{})}:
+creates a scatter plot using prices as the X coordinates, sales as Y,
+point sizes determined by the discounts, colors based on the ratings,
+with a transparency of 0.7 and the `viridis' color palette.
+\item[\circled{8}]
+\texttt{plt.colorbar(label=\textquotesingle{}Product\ rating\textquotesingle{})}:
+adds a colorbar to the chart, which shows the scale of product ratings
+and their corresponding colors.
+\item[\circled{9}]
+\texttt{plt.xlabel(\textquotesingle{}Product\ price\ (PLN)\textquotesingle{})}:
+sets the X axis label, describing that it shows the product price in
+zlotys.
+\item[\circled{10}]
+\texttt{plt.ylabel(\textquotesingle{}Number\ of\ units\ sold\textquotesingle{})}:
+sets the Y axis label, describing that it shows the number of units sold
+of the product.
+\item[\circled{11}]
+\texttt{plt.title(\textquotesingle{}Sales\ analysis\textquotesingle{})}:
+gives the chart the title ``Sales analysis''.
+\item[\circled{12}]
+\texttt{plt.grid(True,\ alpha=0.3)}: enables the grid on the chart with
+a transparency of 0.3, which improves the readability of the data.
+\item[\circled{13}]
+\texttt{plt.show()}: displays the prepared chart.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-7-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}product\_id\textquotesingle{}}\NormalTok{: [}\DecValTok{101}\NormalTok{, }\DecValTok{102}\NormalTok{, }\DecValTok{103}\NormalTok{, }\DecValTok{104}\NormalTok{, }\DecValTok{105}\NormalTok{, }\DecValTok{106}\NormalTok{, }\DecValTok{107}\NormalTok{, }\DecValTok{108}\NormalTok{, }\DecValTok{109}\NormalTok{, }\DecValTok{110}\NormalTok{],}
+    \StringTok{\textquotesingle{}price\textquotesingle{}}\NormalTok{: [}\FloatTok{19.99}\NormalTok{, }\FloatTok{29.99}\NormalTok{, }\FloatTok{14.99}\NormalTok{, }\FloatTok{49.99}\NormalTok{, }\FloatTok{9.99}\NormalTok{, }\FloatTok{39.99}\NormalTok{, }\FloatTok{24.99}\NormalTok{, }\FloatTok{34.99}\NormalTok{, }\FloatTok{44.99}\NormalTok{, }\FloatTok{15.99}\NormalTok{],}
+    \StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{: [}\DecValTok{150}\NormalTok{, }\DecValTok{85}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{120}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{180}\NormalTok{],}
+    \StringTok{\textquotesingle{}rating\textquotesingle{}}\NormalTok{: [}\FloatTok{4.5}\NormalTok{, }\FloatTok{4.2}\NormalTok{, }\FloatTok{4.8}\NormalTok{, }\FloatTok{3.9}\NormalTok{, }\FloatTok{4.6}\NormalTok{, }\FloatTok{4.1}\NormalTok{, }\FloatTok{4.3}\NormalTok{, }\FloatTok{4.0}\NormalTok{, }\FloatTok{3.8}\NormalTok{, }\FloatTok{4.7}\NormalTok{],}
+    \StringTok{\textquotesingle{}discount\textquotesingle{}}\NormalTok{: [}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.0}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.08}\NormalTok{, }\FloatTok{0.0}\NormalTok{, }\FloatTok{0.12}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(data)}
+\NormalTok{x\_values }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}price\textquotesingle{}}\NormalTok{]}
+\NormalTok{y\_values }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}rating\textquotesingle{}}\NormalTok{]}
+\NormalTok{sizes }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}discount\textquotesingle{}}\NormalTok{] }\OperatorTok{*} \DecValTok{1000} \OperatorTok{+} \DecValTok{50}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{scatter }\OperatorTok{=}\NormalTok{ ax.scatter(x\_values, y\_values, s}\OperatorTok{=}\NormalTok{sizes, c}\OperatorTok{=}\NormalTok{colors, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}viridis\textquotesingle{}}\NormalTok{)}
+\NormalTok{cbar }\OperatorTok{=}\NormalTok{ fig.colorbar(scatter, ax}\OperatorTok{=}\NormalTok{ax)}
+\NormalTok{cbar.set\_label(}\StringTok{\textquotesingle{}Product rating\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Product price (PLN)\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Sales analysis\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-scatterplot_files/figure-pdf/cell-8-output-1.pdf}}
+
+\url{https://matplotlib.org/stable/api/markers_api.html}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m21.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m22.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m23.png}}
+
+\chapter{Matplotlib - pie chart}\label{matplotlib---pie-chart}
+
+A pie chart is used when we want to present the proportions of different
+categories or segments relative to the whole. It is particularly useful
+when we have a small number of categories (usually no more than 5-7) and
+when the data is qualitative (categorical). A pie chart allows for a
+visual understanding of the percentage shares of individual categories
+within the entire dataset.
+
+Examples of data for which a pie chart is used:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The structure of household expenses, where the categories are:
+  housing, food, transport, entertainment, other.
+\item
+  The percentage market share of different companies in a given
+  industry.
+\item
+  The distribution of votes for political parties in an election.
+\item
+  The percentage share of different types of energy in electricity
+  production (coal, gas, renewable energy, nuclear energy, etc.).
+\end{enumerate}
+
+Although pie charts have their uses, they are also criticized for
+limited precision in assessing proportions. Therefore, it is often
+recommended to use other types of charts, such as bar charts or stacked
+bar charts, which can be clearer and more precise in comparing values
+between categories.
+
+The \texttt{pie} function is used to create pie charts. It allows for a
+visual representation of the proportions of different segments relative
+to the whole.
+
+The function syntax is
+\texttt{plt.pie(x,\ explode=None,\ labels=None,\ colors=None,\ autopct=None,\ shadow=False,\ startangle=0,\ counterclock=True)},
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} - a list of numeric values, representing the data for each
+  segment. The \texttt{pie} function will automatically calculate the
+  percentage shares of each value relative to the sum of all values.
+\item
+  \texttt{explode} - a list of values that determine whether (and how
+  much) each segment is to be separated from the center of the chart. A
+  value of 0 means no separation, and larger values mean greater
+  separation.
+\item
+  \texttt{labels} - a list of strings that will be used as segment
+  labels.
+\item
+  \texttt{colors} - a list of colors for the individual segments.
+\item
+  \texttt{autopct} - the formatting of the percentages to be displayed
+  on the chart
+  (e.g.~\texttt{\textquotesingle{}\%1.1f\%\%\textquotesingle{}}).
+\item
+  \texttt{shadow} - a boolean value (True/False) that determines whether
+  the chart should have a shadow. Set to \texttt{False} by default.
+\item
+  \texttt{startangle} - the starting angle of the pie chart, measured in
+  degrees counterclockwise from the X axis.
+\item
+  \texttt{counterclock} - a boolean value (True/False) that determines
+  whether the segments are to be drawn clockwise. Set to \texttt{True}
+  by default.
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m7.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Data}
+\NormalTok{sizes }\OperatorTok{=}\NormalTok{ [}\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{10}\NormalTok{]}
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Category A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category C\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category D\textquotesingle{}}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}yellow\textquotesingle{}}\NormalTok{]}
+\NormalTok{explode }\OperatorTok{=}\NormalTok{ (}\DecValTok{0}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)  }\CommentTok{\# Highlighting the Category B segment}
+
+\CommentTok{\# Creating the pie chart}
+\NormalTok{plt.pie(sizes, explode}\OperatorTok{=}\NormalTok{explode, labels}\OperatorTok{=}\NormalTok{labels, colors}\OperatorTok{=}\NormalTok{colors, autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{, shadow}\OperatorTok{=}\VariableTok{True}\NormalTok{, startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+
+\CommentTok{\# Adding a title}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Pie chart example\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Equal scaling of the X and Y axes so the circle is round}
+\NormalTok{plt.axis(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{sizes }\OperatorTok{=}\NormalTok{ [}\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{10}\NormalTok{]}
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Category A\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category B\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category C\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category D\textquotesingle{}}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}yellow\textquotesingle{}}\NormalTok{]}
+\NormalTok{explode }\OperatorTok{=}\NormalTok{ (}\DecValTok{0}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.pie(sizes, explode}\OperatorTok{=}\NormalTok{explode, labels}\OperatorTok{=}\NormalTok{labels, colors}\OperatorTok{=}\NormalTok{colors, autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{, shadow}\OperatorTok{=}\VariableTok{True}\NormalTok{, startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Pie chart example\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_aspect(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Pie chart, where the slices will be ordered and plotted counter{-}clockwise:}
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Frogs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Hogs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Dogs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Logs\textquotesingle{}}\NormalTok{]}
+\NormalTok{sizes }\OperatorTok{=}\NormalTok{ [}\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{10}\NormalTok{]}
+\NormalTok{explode }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{]  }\CommentTok{\# only "explode" the 2nd slice (i.e. \textquotesingle{}Hogs\textquotesingle{})}
+
+\NormalTok{plt.pie(sizes, explode}\OperatorTok{=}\NormalTok{explode, labels}\OperatorTok{=}\NormalTok{labels, autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{,}
+\NormalTok{        shadow}\OperatorTok{=}\VariableTok{True}\NormalTok{, startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+\NormalTok{plt.axis(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-4-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Frogs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Hogs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Dogs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Logs\textquotesingle{}}\NormalTok{]}
+\NormalTok{sizes }\OperatorTok{=}\NormalTok{ [}\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{10}\NormalTok{]}
+\NormalTok{explode }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{]}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.pie(sizes, explode}\OperatorTok{=}\NormalTok{explode, labels}\OperatorTok{=}\NormalTok{labels, autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{, shadow}\OperatorTok{=}\VariableTok{True}\NormalTok{, startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+\NormalTok{ax.set\_aspect(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-5-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-189}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Rent\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Food\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Entertainment\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Savings\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Other\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{expenses }\OperatorTok{=}\NormalTok{ [}\DecValTok{1500}\NormalTok{, }\DecValTok{800}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{250}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{3}}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}lightcoral\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}skyblue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}palegreen\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}khaki\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plum\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lightsteelblue\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{4}}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{8}\NormalTok{)) }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{plt.pie(expenses,}
+\NormalTok{        labels}\OperatorTok{=}\NormalTok{categories,}
+\NormalTok{        colors}\OperatorTok{=}\NormalTok{colors,}
+\NormalTok{        autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{,}
+\NormalTok{        startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{6}}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Breakdown of expenses in the household budget\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{16}\NormalTok{, fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{7}}
+\NormalTok{plt.axis(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{8}}
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{9}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{import\ matplotlib.pyplot\ as\ plt}: imports the
+matplotlib.pyplot library under the shortened name plt, which allows for
+convenient use of the functions for creating charts.
+\item[\circled{2}]
+\texttt{categories\ =\ {[}\textquotesingle{}Rent\textquotesingle{},\ \textquotesingle{}Food\textquotesingle{},\ \textquotesingle{}Transport\textquotesingle{},\ \textquotesingle{}Entertainment\textquotesingle{},\ \textquotesingle{}Savings\textquotesingle{},\ \textquotesingle{}Other\textquotesingle{}{]}}:
+creates a list of strings representing the categories of household
+budget expenses.
+\item[\circled{3}]
+\texttt{expenses\ =\ {[}1500,\ 800,\ 400,\ 300,\ 500,\ 250{]}}: creates
+a list of numbers representing the expense amounts (in zlotys) for each
+corresponding category.
+\item[\circled{4}]
+\texttt{colors\ =\ {[}\textquotesingle{}lightcoral\textquotesingle{},\ \textquotesingle{}skyblue\textquotesingle{},\ \textquotesingle{}palegreen\textquotesingle{},\ \textquotesingle{}khaki\textquotesingle{},\ \textquotesingle{}plum\textquotesingle{},\ \textquotesingle{}lightsteelblue\textquotesingle{}{]}}:
+creates a list of color names that will be used for each slice of the
+pie chart.
+\item[\circled{5}]
+\texttt{plt.figure(figsize=(10,\ 8))}: creates a new figure (drawing
+area) with dimensions of 10 inches wide by 8 inches high.
+\item[\circled{6}]
+\texttt{plt.pie(expenses,\ labels=categories,\ colors=colors,\ autopct=\textquotesingle{}\%1.1f\%\%\textquotesingle{},\ startangle=90)}:
+draws a pie chart with the values from the \texttt{expenses} list,
+labels from the \texttt{categories} list, colors from the
+\texttt{colors} list. The
+\texttt{autopct=\textquotesingle{}\%1.1f\%\%\textquotesingle{}}
+parameter formats the displayed percentage values to one decimal place
+and adds a percent sign. The \texttt{startangle=90} parameter specifies
+that the chart will start at an angle of 90 degrees (top).
+\item[\circled{7}]
+\texttt{plt.title(\textquotesingle{}Breakdown\ of\ expenses\ in\ the\ household\ budget\textquotesingle{},\ fontsize=16,\ fontweight=\textquotesingle{}bold\textquotesingle{})}:
+adds a title to the chart with a font size of 16 and bold text.
+\item[\circled{8}]
+\texttt{plt.axis(\textquotesingle{}equal\textquotesingle{})}: sets equal
+proportions of the X and Y axes, which ensures that the pie chart will
+be perfectly round rather than elliptical.
+\item[\circled{9}]
+\texttt{plt.show()}: displays the created chart in a graphics window.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-6-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Rent\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Food\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Entertainment\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Savings\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Other\textquotesingle{}}\NormalTok{]}
+\NormalTok{expenses }\OperatorTok{=}\NormalTok{ [}\DecValTok{1500}\NormalTok{, }\DecValTok{800}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{250}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}lightcoral\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}skyblue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}palegreen\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}khaki\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plum\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lightsteelblue\textquotesingle{}}\NormalTok{]}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{8}\NormalTok{))}
+\NormalTok{ax.pie(expenses,}
+\NormalTok{       labels}\OperatorTok{=}\NormalTok{categories,}
+\NormalTok{       colors}\OperatorTok{=}\NormalTok{colors,}
+\NormalTok{       autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{,}
+\NormalTok{       startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Breakdown of expenses in the household budget\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{16}\NormalTok{, fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_aspect(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-7-output-1.pdf}}
+
+Switching to a color map:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ matplotlib.cm }\ImportTok{as}\NormalTok{ cm  }\CommentTok{\# We add the import of the cm module (color maps)}
+
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Rent\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Food\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Entertainment\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Savings\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Other\textquotesingle{}}\NormalTok{]}
+\NormalTok{expenses }\OperatorTok{=}\NormalTok{ [}\DecValTok{1500}\NormalTok{, }\DecValTok{800}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{250}\NormalTok{]}
+
+\CommentTok{\# We use the qualitative color map \textquotesingle{}Set3\textquotesingle{}}
+\NormalTok{cmap }\OperatorTok{=}\NormalTok{ plt.colormaps[}\StringTok{\textquotesingle{}Set3\textquotesingle{}}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [cmap(i) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(categories))]}
+
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{8}\NormalTok{))}
+\NormalTok{plt.pie(expenses, labels}\OperatorTok{=}\NormalTok{categories, colors}\OperatorTok{=}\NormalTok{colors, autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{, startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Breakdown of expenses in the household budget\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{16}\NormalTok{, fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axis(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-8-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ matplotlib.cm }\ImportTok{as}\NormalTok{ cm  }
+
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Rent\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Food\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Transport\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Entertainment\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Savings\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Other\textquotesingle{}}\NormalTok{]}
+\NormalTok{expenses }\OperatorTok{=}\NormalTok{ [}\DecValTok{1500}\NormalTok{, }\DecValTok{800}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{250}\NormalTok{]}
+
+\NormalTok{cmap }\OperatorTok{=}\NormalTok{ plt.colormaps[}\StringTok{\textquotesingle{}Set3\textquotesingle{}}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [cmap(i) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(categories))]}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{8}\NormalTok{))}
+
+\NormalTok{ax.pie(expenses, labels}\OperatorTok{=}\NormalTok{categories, colors}\OperatorTok{=}\NormalTok{colors, autopct}\OperatorTok{=}\StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{, startangle}\OperatorTok{=}\DecValTok{90}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Breakdown of expenses in the household budget\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{16}\NormalTok{, fontweight}\OperatorTok{=}\StringTok{\textquotesingle{}bold\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.axis(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-9-output-1.pdf}}
+
+\section{Donut chart}\label{donut-chart}
+
+\protect\phantomsection\label{annotated-cell-193}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{np.random.seed(}\DecValTok{345}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{1}}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.random.randint(}\DecValTok{20}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{6}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{total }\OperatorTok{=} \BuiltInTok{sum}\NormalTok{(data) }\hspace*{\fill}\NormalTok{\circled{3}}
+\NormalTok{data\_per }\OperatorTok{=}\NormalTok{ data }\OperatorTok{/}\NormalTok{ total }\OperatorTok{*} \DecValTok{100} \hspace*{\fill}\NormalTok{\circled{4}}
+\NormalTok{explode }\OperatorTok{=}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{plt.pie(data\_per, explode}\OperatorTok{=}\NormalTok{explode, labels}\OperatorTok{=}\NormalTok{[}\BuiltInTok{round}\NormalTok{(i, }\DecValTok{2}\NormalTok{) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{list}\NormalTok{(data\_per)]) }\hspace*{\fill}\NormalTok{\circled{6}}
+\NormalTok{circle }\OperatorTok{=}\NormalTok{ plt.Circle((}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\FloatTok{0.7}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{7}}
+\NormalTok{p }\OperatorTok{=}\NormalTok{ plt.gcf() }\hspace*{\fill}\NormalTok{\circled{8}}
+\NormalTok{p.gca().add\_artist(circle) }\hspace*{\fill}\NormalTok{\circled{9}}
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{10}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{np.random.seed(345)}: sets the seed of the random number
+generator to the value 345, which ensures the reproducibility of the
+results.
+\item[\circled{2}]
+\texttt{data\ =\ np.random.randint(20,\ 100,\ 6)}: generates an array of
+6 random integers in the range from 20 to 99 (inclusive).
+\item[\circled{3}]
+\texttt{total\ =\ sum(data)}: calculates the sum of all the generated
+numbers.
+\item[\circled{4}]
+\texttt{data\_per\ =\ data\ /\ total\ *\ 100}: calculates the percentage
+values of each number relative to the total sum.
+\item[\circled{5}]
+\texttt{explode\ =\ (0.2,\ 0,\ 0,\ 0,\ 0,\ 0)}: creates a tuple defining
+the slice offset for each element (the first slice will be offset by
+0.2).
+\item[\circled{6}]
+\texttt{plt.pie(data\_per,\ explode=explode,\ labels={[}round(i,\ 2)\ for\ i\ in\ list(data\_per){]})}:
+creates a pie chart with the percentage values, with the specified
+offset and labels rounded to 2 decimal places.
+\item[\circled{7}]
+\texttt{circle\ =\ plt.Circle((0,\ 0),\ 0.7,\ color=\textquotesingle{}white\textquotesingle{})}:
+creates a white circle centered at the point (0, 0) with a radius of
+0.7.
+\item[\circled{8}]
+\texttt{p\ =\ plt.gcf()}: gets the current figure object (get current
+figure).
+\item[\circled{9}]
+\texttt{p.gca().add\_artist(circle)}: adds the created white circle to
+the current chart axes, creating a ``donut chart'' effect.
+\item[\circled{10}]
+\texttt{plt.show()}: displays the chart.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-10-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{np.random.seed(}\DecValTok{345}\NormalTok{)}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ np.random.randint(}\DecValTok{20}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{total }\OperatorTok{=} \BuiltInTok{sum}\NormalTok{(data)}
+\NormalTok{data\_per }\OperatorTok{=}\NormalTok{ data }\OperatorTok{/}\NormalTok{ total }\OperatorTok{*} \DecValTok{100}
+\NormalTok{explode }\OperatorTok{=}\NormalTok{ (}\FloatTok{0.2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.pie(data\_per, explode}\OperatorTok{=}\NormalTok{explode, labels}\OperatorTok{=}\NormalTok{[}\BuiltInTok{round}\NormalTok{(i, }\DecValTok{2}\NormalTok{) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{list}\NormalTok{(data\_per)])}
+\NormalTok{circle }\OperatorTok{=}\NormalTok{ plt.Circle((}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\FloatTok{0.7}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.add\_artist(circle)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-piechart_files/figure-pdf/cell-11-output-1.pdf}}
+
+\chapter{Matplotlib - bar chart}\label{matplotlib---bar-chart}
+
+A bar chart is used to present categorical or discrete data. It is a
+commonly used type of chart that helps to visually compare values or
+quantities for different categories. Here are a few types of data for
+which a bar chart can be used:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Frequencies: A bar chart is used to present the number of occurrences
+  of different categories, such as survey results, consumer preferences,
+  or different population groups.
+\item
+  Proportions: It can be used to present the percentage share of
+  individual categories in the whole, e.g.~the market share of different
+  companies, percentage test results, or the percentage distribution of
+  the population by age.
+\item
+  Numeric values: A bar chart can present numeric values associated with
+  different categories, e.g.~product sales, revenue from different
+  sources, or the average temperature in different cities.
+\item
+  Time series data: A bar chart can also be used to present time series
+  data when changes occur at regular time intervals, e.g.~annual sales,
+  monthly rainfall, or weekly revenue.
+\end{enumerate}
+
+It is worth noting that bar charts are appropriate when dealing with a
+small number of categories, because too many bars on a chart can make it
+difficult to interpret. In such cases, it is worth considering other
+types of charts, such as a pie chart or a proportional chart.
+
+The \texttt{bar} function in the Matplotlib library is used to create
+bar charts. Bar charts are often used when we want to compare values of
+different categories.
+
+The function syntax is
+\texttt{plt.bar(x,\ height,\ width=0.8,\ bottom=None,\ align=\textquotesingle{}center\textquotesingle{},\ data=None,\ **kwargs)},
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} - positions of the bars on the X axis. This can be a
+  sequence of numeric values or a list of labels that will be placed on
+  the X axis.
+\item
+  \texttt{height} - the height of the bars.
+\item
+  \texttt{width} - the width of the bars.
+\item
+  \texttt{bottom} - the position of the bottom edge of the bars. Set to
+  \texttt{None} by default, which means the bars start from zero.
+\item
+  \texttt{align} - how the bars are centered along the X axis. Set to
+  `center' by default.
+\item
+  \texttt{data} - a DataFrame object that contains the data for the
+  chart.
+\item
+  \texttt{**kwargs} - additional arguments for chart formatting, such as
+  color, transparency, axis labels, title, and legend.
+\end{itemize}
+
+\protect\phantomsection\label{annotated-cell-195}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt }\hspace*{\fill}\NormalTok{\circled{1}}
+
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Category 1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category 2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category 3\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{2}}
+\NormalTok{values }\OperatorTok{=}\NormalTok{ [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{15}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{3}}
+
+\NormalTok{plt.bar(categories, values, color}\OperatorTok{=}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{4}}
+
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Bar chart\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Categories\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{6}}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Values\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{7}}
+
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{8}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{import\ matplotlib.pyplot\ as\ plt}: imports the
+matplotlib.pyplot library as \texttt{plt}, which is needed to create
+charts.
+\item[\circled{2}]
+\texttt{categories\ =\ {[}\textquotesingle{}Category\ 1\textquotesingle{},\ \textquotesingle{}Category\ 2\textquotesingle{},\ \textquotesingle{}Category\ 3\textquotesingle{}{]}}:
+creates a list \texttt{categories} containing the names of three
+categories that will be used on the X axis of the bar chart.
+\item[\circled{3}]
+\texttt{values\ =\ {[}10,\ 20,\ 15{]}}: creates a list \texttt{values}
+containing the numeric values corresponding to each category - these
+values determine the height of the individual bars.
+\item[\circled{4}]
+\texttt{plt.bar(categories,\ values,\ color=\textquotesingle{}green\textquotesingle{},\ alpha=0.5)}:
+creates a bar chart, where:
+\item[\circled{5}]
+\texttt{plt.title(\textquotesingle{}Bar\ chart\textquotesingle{})}:
+gives the chart the title ``Bar chart''.
+\item[\circled{6}]
+\texttt{plt.xlabel(\textquotesingle{}Categories\textquotesingle{})}:
+adds an X axis label with the text ``Categories''.
+\item[\circled{7}]
+\texttt{plt.ylabel(\textquotesingle{}Values\textquotesingle{})}: adds a
+Y axis label with the text ``Values''.
+\item[\circled{8}]
+\texttt{plt.show()}: displays the prepared chart.
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-2-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Category 1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category 2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category 3\textquotesingle{}}\NormalTok{]}
+\NormalTok{values }\OperatorTok{=}\NormalTok{ [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{15}\NormalTok{]}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.bar(categories, values, color}\OperatorTok{=}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Bar chart\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Categories\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Values\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-3-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{sales\_data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}product\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Smartphone\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tablet\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Laptop\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Headphones\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Smartwatch\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{: [}\DecValTok{156}\NormalTok{, }\DecValTok{89}\NormalTok{, }\DecValTok{234}\NormalTok{, }\DecValTok{312}\NormalTok{, }\DecValTok{178}\NormalTok{],}
+    \StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}phones\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tablets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}computers\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}accessories\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}watch\textquotesingle{}}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(sales\_data)}
+
+\NormalTok{y\_pos }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(df))}
+
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}phones\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tablets\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}computers\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, }
+          \StringTok{\textquotesingle{}accessories\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}purple\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}watch\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{\}}
+
+\NormalTok{colors\_list }\OperatorTok{=}\NormalTok{ [colors[cat] }\ControlFlowTok{for}\NormalTok{ cat }\KeywordTok{in}\NormalTok{ df[}\StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{]]}
+
+\NormalTok{plt.bar(y\_pos, df[}\StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{], color}\OperatorTok{=}\NormalTok{colors\_list, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{plt.xticks(y\_pos, df[}\StringTok{\textquotesingle{}product\textquotesingle{}}\NormalTok{], rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{, ha}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Products\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sales of electronic products in the last month\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-4-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\NormalTok{sales\_data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}product\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Smartphone\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tablet\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Laptop\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Headphones\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Smartwatch\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{: [}\DecValTok{156}\NormalTok{, }\DecValTok{89}\NormalTok{, }\DecValTok{234}\NormalTok{, }\DecValTok{312}\NormalTok{, }\DecValTok{178}\NormalTok{],}
+    \StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}phones\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tablets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}computers\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}accessories\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}watch\textquotesingle{}}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(sales\_data)}
+\NormalTok{y\_pos }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(df))}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}phones\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tablets\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}computers\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, }
+          \StringTok{\textquotesingle{}accessories\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}purple\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}watch\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{\}}
+\NormalTok{colors\_list }\OperatorTok{=}\NormalTok{ [colors[cat] }\ControlFlowTok{for}\NormalTok{ cat }\KeywordTok{in}\NormalTok{ df[}\StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{]]}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.bar(y\_pos, df[}\StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{], color}\OperatorTok{=}\NormalTok{colors\_list, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{ax.set\_xticks(y\_pos)}
+\NormalTok{ax.set\_xticklabels(df[}\StringTok{\textquotesingle{}product\textquotesingle{}}\NormalTok{], rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{, ha}\OperatorTok{=}\StringTok{\textquotesingle{}right\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Products\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Sales of electronic products in the last month\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-5-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-199}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }\hspace*{\fill}\NormalTok{\circled{1}}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt }\hspace*{\fill}\NormalTok{\circled{2}}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd }\hspace*{\fill}\NormalTok{\circled{3}}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{ }\hspace*{\fill}\NormalTok{\circled{4}}
+    \StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Q1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q4\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{: [}\DecValTok{30}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{20}\NormalTok{],}
+    \StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{: [}\DecValTok{40}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{17}\NormalTok{],}
+    \StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{: [}\DecValTok{35}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{19}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{phones }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{laptops }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{6}}
+\NormalTok{tablets }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{7}}
+\NormalTok{quarters }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{] }\hspace*{\fill}\NormalTok{\circled{8}}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(quarters)) }\hspace*{\fill}\NormalTok{\circled{9}}
+\NormalTok{plt.bar(X }\OperatorTok{{-}} \FloatTok{0.25}\NormalTok{, phones, color}\OperatorTok{=}\StringTok{\textquotesingle{}dodgerblue\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{10}}
+\NormalTok{plt.bar(X, laptops, color}\OperatorTok{=}\StringTok{\textquotesingle{}mediumseagreen\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{11}}
+\NormalTok{plt.bar(X }\OperatorTok{+} \FloatTok{0.25}\NormalTok{, tablets, color}\OperatorTok{=}\StringTok{\textquotesingle{}tomato\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{12}}
+\NormalTok{plt.xticks(X, quarters) }\hspace*{\fill}\NormalTok{\circled{13}}
+\NormalTok{plt.legend() }\hspace*{\fill}\NormalTok{\circled{14}}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sales of electronic products in individual quarters\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{14}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{15}}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{16}}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{17}}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{18}}
+\NormalTok{plt.tight\_layout() }\hspace*{\fill}\NormalTok{\circled{19}}
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{20}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{import\ numpy\ as\ np}: imports the NumPy library for numerical
+operations and assigns it the alias \texttt{np}.
+\item[\circled{2}]
+\texttt{import\ matplotlib.pyplot\ as\ plt}: imports the pyplot module
+from the Matplotlib library for creating charts and assigns it the alias
+\texttt{plt}.
+\item[\circled{3}]
+\texttt{import\ pandas\ as\ pd}: imports the Pandas library for working
+with data and assigns it the alias \texttt{pd}.
+\item[\circled{4}]
+\texttt{df\ =\ pd.DataFrame(\{...\})}: creates a DataFrame with data on
+the sales of electronic products in individual quarters.
+\item[\circled{5}]
+\texttt{phones\ =\ df{[}\textquotesingle{}Phones\textquotesingle{}{]}}:
+extracts the `Phones' column from the DataFrame and assigns it to the
+variable \texttt{phones}.
+\item[\circled{6}]
+\texttt{laptops\ =\ df{[}\textquotesingle{}Laptops\textquotesingle{}{]}}:
+extracts the `Laptops' column from the DataFrame and assigns it to the
+variable \texttt{laptops}.
+\item[\circled{7}]
+\texttt{tablets\ =\ df{[}\textquotesingle{}Tablets\textquotesingle{}{]}}:
+extracts the `Tablets' column from the DataFrame and assigns it to the
+variable \texttt{tablets}.
+\item[\circled{8}]
+\texttt{quarters\ =\ df{[}\textquotesingle{}Quarter\textquotesingle{}{]}}:
+extracts the `Quarter' column from the DataFrame and assigns it to the
+variable \texttt{quarters}.
+\item[\circled{9}]
+\texttt{X\ =\ np.arange(len(quarters))}: creates an array of indices
+from 0 to the length of the quarters list (0, 1, 2, 3), which will be
+used to position the bars.
+\item[\circled{10}]
+\texttt{plt.bar(X\ -\ 0.25,\ phones,\ color=\textquotesingle{}dodgerblue\textquotesingle{},\ width=0.25,\ label=\textquotesingle{}Phones\textquotesingle{})}:
+draws the bars for phones shifted to the left (-0.25), in blue and with
+a width of 0.25.
+\item[\circled{11}]
+\texttt{plt.bar(X,\ laptops,\ color=\textquotesingle{}mediumseagreen\textquotesingle{},\ width=0.25,\ label=\textquotesingle{}Laptops\textquotesingle{})}:
+draws the bars for laptops in the center (no shift), in green and with a
+width of 0.25.
+\item[\circled{12}]
+\texttt{plt.bar(X\ +\ 0.25,\ tablets,\ color=\textquotesingle{}tomato\textquotesingle{},\ width=0.25,\ label=\textquotesingle{}Tablets\textquotesingle{})}:
+draws the bars for tablets shifted to the right (+0.25), in red and with
+a width of 0.25.
+\item[\circled{13}]
+\texttt{plt.xticks(X,\ quarters)}: sets the X axis labels to the names
+of the quarters (Q1, Q2, Q3, Q4) at the positions defined by the array
+X.
+\item[\circled{14}]
+\texttt{plt.legend()}: adds a legend to the chart that shows the colors
+and names of the individual product categories.
+\item[\circled{15}]
+\texttt{plt.title(\textquotesingle{}Sales\ of\ electronic\ products\ in\ individual\ quarters\textquotesingle{},\ fontsize=14)}:
+sets the chart title with a font size of 14.
+\item[\circled{16}]
+\texttt{plt.ylabel(\textquotesingle{}Number\ of\ units\ sold\textquotesingle{})}:
+adds a Y axis label describing what the values on the vertical axis
+represent.
+\item[\circled{17}]
+\texttt{plt.xlabel(\textquotesingle{}Quarter\textquotesingle{})}: adds
+an X axis label describing what the values on the horizontal axis
+represent.
+\item[\circled{18}]
+\texttt{plt.grid(axis=\textquotesingle{}y\textquotesingle{},\ alpha=0.3)}:
+adds horizontal grid lines (only on the Y axis) with a transparency of
+0.3.
+\item[\circled{19}]
+\texttt{plt.tight\_layout()}: automatically adjusts the chart margins so
+that all elements are clearly visible and do not overlap.
+\item[\circled{20}]
+\texttt{plt.show()}: displays the chart
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-6-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Q1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q4\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{: [}\DecValTok{30}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{20}\NormalTok{],}
+    \StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{: [}\DecValTok{40}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{17}\NormalTok{],}
+    \StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{: [}\DecValTok{35}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{19}\NormalTok{]}
+\NormalTok{\})}
+\NormalTok{phones }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{]}
+\NormalTok{laptops }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{]}
+\NormalTok{tablets }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{]}
+\NormalTok{quarters }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{]}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(quarters))}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.bar(X }\OperatorTok{{-}} \FloatTok{0.25}\NormalTok{, phones, color}\OperatorTok{=}\StringTok{\textquotesingle{}dodgerblue\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.bar(X, laptops, color}\OperatorTok{=}\StringTok{\textquotesingle{}mediumseagreen\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.bar(X }\OperatorTok{+} \FloatTok{0.25}\NormalTok{, tablets, color}\OperatorTok{=}\StringTok{\textquotesingle{}tomato\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xticks(X)}
+\NormalTok{ax.set\_xticklabels(quarters)}
+\NormalTok{ax.legend()}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Sales of electronic products in individual quarters\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{14}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xlabel(}\StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{fig.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-7-output-1.pdf}}
+
+\protect\phantomsection\label{annotated-cell-201}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }\hspace*{\fill}\NormalTok{\circled{1}}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt }\hspace*{\fill}\NormalTok{\circled{2}}
+
+\NormalTok{N }\OperatorTok{=} \DecValTok{5} \hspace*{\fill}\NormalTok{\circled{3}}
+
+\NormalTok{boys }\OperatorTok{=}\NormalTok{ (}\DecValTok{20}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{27}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{4}}
+\NormalTok{girls }\OperatorTok{=}\NormalTok{ (}\DecValTok{25}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{5}}
+\NormalTok{ind }\OperatorTok{=}\NormalTok{ np.arange(N) }\hspace*{\fill}\NormalTok{\circled{6}}
+\NormalTok{width }\OperatorTok{=} \FloatTok{0.35} \hspace*{\fill}\NormalTok{\circled{7}}
+
+\NormalTok{plt.bar(ind, boys, width, label}\OperatorTok{=}\StringTok{"boys"}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{8}}
+\NormalTok{plt.bar(ind, girls, width, bottom}\OperatorTok{=}\NormalTok{boys, label}\OperatorTok{=}\StringTok{"girls"}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{9}}
+
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Contribution\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{10}}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Contribution by the teams\textquotesingle{}}\NormalTok{) }\hspace*{\fill}\NormalTok{\circled{11}}
+\NormalTok{plt.xticks(ind, (}\StringTok{\textquotesingle{}T1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T5\textquotesingle{}}\NormalTok{)) }\hspace*{\fill}\NormalTok{\circled{12}}
+\NormalTok{plt.yticks(np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{10}\NormalTok{)) }\hspace*{\fill}\NormalTok{\circled{13}}
+\NormalTok{plt.legend() }\hspace*{\fill}\NormalTok{\circled{14}}
+\NormalTok{plt.show() }\hspace*{\fill}\NormalTok{\circled{15}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{description}
+\tightlist
+\item[\circled{1}]
+\texttt{import\ numpy\ as\ np}: imports the NumPy library for numerical
+operations and assigns it the alias \texttt{np}.
+\item[\circled{2}]
+\texttt{import\ matplotlib.pyplot\ as\ plt}: imports the pyplot module
+from the Matplotlib library for creating charts and assigns it the alias
+\texttt{plt}.
+\item[\circled{3}]
+\texttt{N\ =\ 5}: defines a constant N equal to 5, which represents the
+number of teams/data groups.
+\item[\circled{4}]
+\texttt{boys\ =\ (20,\ 35,\ 30,\ 35,\ 27)}: creates a tuple containing
+the contribution values of the boys for each of the 5 teams.
+\item[\circled{5}]
+\texttt{girls\ =\ (25,\ 32,\ 34,\ 20,\ 25)}: creates a tuple containing
+the contribution values of the girls for each of the 5 teams.
+\item[\circled{6}]
+\texttt{ind\ =\ np.arange(N)}: creates an array of indices {[}0, 1, 2,
+3, 4{]}, which defines the positions of the bars on the X axis.
+\item[\circled{7}]
+\texttt{width\ =\ 0.35}: sets the width of the bars to 0.35 units.
+\item[\circled{8}]
+\texttt{plt.bar(ind,\ boys,\ width,\ label="boys")}: draws the bars for
+the boys at the positions defined by \texttt{ind}, with heights from
+\texttt{boys}, a width of \texttt{width} and the label ``boys''.
+\item[\circled{9}]
+\texttt{plt.bar(ind,\ girls,\ width,\ bottom=boys,\ label="girls")}:
+draws the bars for the girls at the same positions, but using the
+\texttt{bottom=boys} parameter, which places the girls' bars on top of
+the boys' bars, creating a stacked bar chart.
+\item[\circled{10}]
+\texttt{plt.ylabel(\textquotesingle{}Contribution\textquotesingle{})}:
+adds a Y axis label describing that the values represent contribution.
+\item[\circled{11}]
+\texttt{plt.title(\textquotesingle{}Contribution\ by\ the\ teams\textquotesingle{})}:
+gives the chart the title ``Contribution by the teams''.
+\item[\circled{12}]
+\texttt{plt.xticks(ind,\ (\textquotesingle{}T1\textquotesingle{},\ \textquotesingle{}T2\textquotesingle{},\ \textquotesingle{}T3\textquotesingle{},\ \textquotesingle{}T4\textquotesingle{},\ \textquotesingle{}T5\textquotesingle{}))}:
+sets the X axis labels to the team names (T1, T2, T3, T4, T5) at the
+positions defined by the array \texttt{ind}.
+\item[\circled{13}]
+\texttt{plt.yticks(np.arange(0,\ 81,\ 10))}: sets the ticks on the Y
+axis every 10 units, from 0 to 80.
+\item[\circled{14}]
+\texttt{plt.legend()}: adds a legend to the chart that shows the colors
+and labels for the boys and girls.
+\item[\circled{15}]
+\texttt{plt.show()}: displays the chart
+\end{description}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-8-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\NormalTok{N }\OperatorTok{=} \DecValTok{5}
+\NormalTok{boys }\OperatorTok{=}\NormalTok{ (}\DecValTok{20}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{27}\NormalTok{)}
+\NormalTok{girls }\OperatorTok{=}\NormalTok{ (}\DecValTok{25}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{)}
+\NormalTok{ind }\OperatorTok{=}\NormalTok{ np.arange(N)}
+\NormalTok{width }\OperatorTok{=} \FloatTok{0.35}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax.bar(ind, boys, width, label}\OperatorTok{=}\StringTok{"boys"}\NormalTok{)}
+\NormalTok{ax.bar(ind, girls, width, bottom}\OperatorTok{=}\NormalTok{boys, label}\OperatorTok{=}\StringTok{"girls"}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{\textquotesingle{}Contribution\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}Contribution by the teams\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_xticks(ind)}
+\NormalTok{ax.set\_xticklabels((}\StringTok{\textquotesingle{}T1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T5\textquotesingle{}}\NormalTok{))}
+\NormalTok{ax.set\_yticks(np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\NormalTok{ax.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-9-output-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{m9.png}}
+
+The \texttt{barh} function is used to create horizontal bar charts.
+Horizontal bar charts are often used when we want to compare values of
+different categories and the labels on the X axis are long or very
+numerous.
+
+The function syntax is
+\texttt{plt.barh(y,\ width,\ height=0.8,\ left=None,\ align=\textquotesingle{}center\textquotesingle{},\ data=None,\ **kwargs)},
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{y} - positions of the bars on the Y axis. This can be a
+  sequence of numeric values or a list of labels that will be placed on
+  the Y axis.
+\item
+  \texttt{width} - the width of the bars.
+\item
+  \texttt{height} - the height of the bars.
+\item
+  \texttt{left} - the position of the left edge of the bars. Set to
+  \texttt{None} by default, which means the bars start from zero.
+\item
+  \texttt{align} - how the bars are centered along the Y axis. Set to
+  `center' by default.
+\item
+  \texttt{data} - a DataFrame object that contains the data for the
+  chart.
+\item
+  \texttt{**kwargs} - additional arguments for chart formatting, such as
+  color, transparency, axis labels, title, and legend.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\CommentTok{\# Data}
+\NormalTok{categories }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Category 1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category 2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Category 3\textquotesingle{}}\NormalTok{]}
+\NormalTok{values }\OperatorTok{=}\NormalTok{ [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{15}\NormalTok{]}
+
+\CommentTok{\# Creating a horizontal bar chart}
+\NormalTok{plt.barh(categories, values, color}\OperatorTok{=}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{)}
+
+\CommentTok{\# Adding a title and axis labels}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Horizontal bar chart\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Values\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Categories\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Displaying the chart}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-10-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\NormalTok{sales\_data }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}product\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Smartphone\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Tablet\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Laptop\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Headphones\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Smartwatch\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{: [}\DecValTok{156}\NormalTok{, }\DecValTok{89}\NormalTok{, }\DecValTok{234}\NormalTok{, }\DecValTok{312}\NormalTok{, }\DecValTok{178}\NormalTok{],}
+    \StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}phones\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tablets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}computers\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}accessories\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}watch\textquotesingle{}}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(sales\_data)}
+\NormalTok{y\_pos }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(df))}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}phones\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tablets\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}computers\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{, }
+          \StringTok{\textquotesingle{}accessories\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}purple\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}watch\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{\}}
+\NormalTok{colors\_list }\OperatorTok{=}\NormalTok{ [colors[cat] }\ControlFlowTok{for}\NormalTok{ cat }\KeywordTok{in}\NormalTok{ df[}\StringTok{\textquotesingle{}category\textquotesingle{}}\NormalTok{]]}
+\NormalTok{plt.barh(y\_pos, df[}\StringTok{\textquotesingle{}units\_sold\textquotesingle{}}\NormalTok{], color}\OperatorTok{=}\NormalTok{colors\_list, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{plt.yticks(y\_pos, df[}\StringTok{\textquotesingle{}product\textquotesingle{}}\NormalTok{])}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Products\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sales of electronic products in the last month\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-11-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}Q1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Q4\textquotesingle{}}\NormalTok{],}
+    \StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{: [}\DecValTok{30}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{20}\NormalTok{],}
+    \StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{: [}\DecValTok{40}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{17}\NormalTok{],}
+    \StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{: [}\DecValTok{35}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{19}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{phones }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{]}
+\NormalTok{laptops }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{]}
+\NormalTok{tablets }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{]}
+\NormalTok{quarters }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{]}
+\NormalTok{Y }\OperatorTok{=}\NormalTok{ np.arange(}\BuiltInTok{len}\NormalTok{(quarters))}
+\NormalTok{plt.barh(Y, phones, color}\OperatorTok{=}\StringTok{\textquotesingle{}dodgerblue\textquotesingle{}}\NormalTok{, height}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Phones\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.barh(Y }\OperatorTok{+} \FloatTok{0.25}\NormalTok{, laptops, color}\OperatorTok{=}\StringTok{\textquotesingle{}mediumseagreen\textquotesingle{}}\NormalTok{, height}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Laptops\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.barh(Y }\OperatorTok{+} \FloatTok{0.50}\NormalTok{, tablets, color}\OperatorTok{=}\StringTok{\textquotesingle{}tomato\textquotesingle{}}\NormalTok{, height}\OperatorTok{=}\FloatTok{0.25}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Tablets\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.yticks(Y }\OperatorTok{+} \FloatTok{0.25}\NormalTok{, quarters)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Sales of electronic products in individual quarters\textquotesingle{}}\NormalTok{, fontsize}\OperatorTok{=}\DecValTok{14}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Number of units sold\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Quarter\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid(axis}\OperatorTok{=}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-12-output-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{N }\OperatorTok{=} \DecValTok{5}
+
+\NormalTok{boys }\OperatorTok{=}\NormalTok{ (}\DecValTok{20}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{27}\NormalTok{)}
+\NormalTok{girls }\OperatorTok{=}\NormalTok{ (}\DecValTok{25}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{)}
+\NormalTok{ind }\OperatorTok{=}\NormalTok{ np.arange(N)}
+\NormalTok{height }\OperatorTok{=} \FloatTok{0.35}
+
+\NormalTok{plt.barh(ind, boys, height, label}\OperatorTok{=}\StringTok{"boys"}\NormalTok{)}
+\NormalTok{plt.barh(ind, girls, height, left}\OperatorTok{=}\NormalTok{boys, label}\OperatorTok{=}\StringTok{"girls"}\NormalTok{)}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Contribution\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Contribution by the teams\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.yticks(ind, (}\StringTok{\textquotesingle{}T1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}T5\textquotesingle{}}\NormalTok{))}
+\NormalTok{plt.xticks(np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\NormalTok{plt.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{matplotlib-barchart_files/figure-pdf/cell-13-output-1.pdf}}
 
 
 
